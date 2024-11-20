@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8b88e8628fe4cf4da7c1457fd1be9ae, type: 3}
+  m_Name: Warrior
+  m_EditorClassIdentifier: 
+  id: Warrior
+  statusOriginal:
+    healthMaximum: 120
+    attack: 10
+    shield: 10
+    dodge: 0.05
+    critical: 0.25
+    criticalDamage: 1.5
+  mesh: {fileID: 17106975043345648, guid: 45c3848418decf7449815f900620c8c2, type: 3}
+  avatar: {fileID: 9000000, guid: 45c3848418decf7449815f900620c8c2, type: 3}
+  rac_act: {fileID: 9100000, guid: 676baee5d0d0c7344962d3733b81b021, type: 2}
+  rac_showcase: {fileID: 9100000, guid: ef09384fa5322b64fa0ed6fdd209c6a2, type: 2}
+  weaponData:
+  - socketType: 1
+    mesh: {fileID: 4300000, guid: e6dbb48741371da40b628388e2f108d2, type: 3}
+    offsetPosition: {x: 0.139, y: 0.047, z: 0.147}
+    offsetRotation: {x: 90, y: 0, z: 90}
+  - socketType: 2
+    mesh: {fileID: 4300000, guid: f10cd5c2e676b4d4e94fcb7a9079e6bd, type: 3}
+    offsetPosition: {x: -0.081, y: 0.041, z: 0.167}
+    offsetRotation: {x: 90, y: 0, z: 90}

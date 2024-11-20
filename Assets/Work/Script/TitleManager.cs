@@ -8,10 +8,19 @@ using UnityEngine.Playables;
 public class TitleManager : Processor<TitleManager, TitleState>
 {
     [SerializeField] private PlayableDirector pd_tapToStart;
-
+    [SerializeField] private CharacterPreview characterPreview;
+    
     void DeActivate_Intro()
     {
-        
+        characterPreview.Initialize();
+        pd_tapToStart.Play();
+    }
+
+    protected override void Initialization()
+    {
+        base.Initialization();
+
+        State = TitleState.Intro;
     }
 }
 
