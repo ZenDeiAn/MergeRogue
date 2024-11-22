@@ -522,7 +522,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1986768978622391477}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -898,6 +898,12 @@ MonoBehaviour:
   animator: {fileID: 2808394749742773559}
   footIK: {fileID: 8750824541458362024}
   meshRenderer: {fileID: 9175288685970604507}
+  weaponSocket:
+    keys: 000000000100000002000000
+    values:
+    - {fileID: 4142620005226834542}
+    - {fileID: 5284403174067384605}
+    - {fileID: 3080248873460928489}
 --- !u!1 &2918728684707260173
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,7 +1272,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4107469396535317834}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1637,7 +1643,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8623350485644148664}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

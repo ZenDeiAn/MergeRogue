@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "CharacterData", menuName = "Create/CharacterData")]
 public class CharacterData : ActorData
@@ -9,5 +10,5 @@ public class CharacterData : ActorData
     public Avatar avatar;
     public RuntimeAnimatorController rac_act;
     public RuntimeAnimatorController rac_showcase;
-    public List<WeaponData> weaponData;
+    [FormerlySerializedAs("weaponData")] public List<WeaponData> weaponDataList;
 }
