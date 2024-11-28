@@ -27,8 +27,8 @@ MonoBehaviour:
   weaponDataList:
   - socketType: 1
     mesh: {fileID: 4300000, guid: e6dbb48741371da40b628388e2f108d2, type: 3}
-    offsetPosition: {x: 0.139, y: 0.047, z: 0.147}
-    offsetRotation: {x: 90, y: 0, z: 90}
+    offsetPosition: {x: 0.071, y: 0.063, z: 0.13}
+    offsetRotation: {x: 57.845, y: -371.922, z: -449.683}
   - socketType: 2
     mesh: {fileID: 4300000, guid: f10cd5c2e676b4d4e94fcb7a9079e6bd, type: 3}
     offsetPosition: {x: -0.1482557, y: -0.00837177, z: 0.4428653}
