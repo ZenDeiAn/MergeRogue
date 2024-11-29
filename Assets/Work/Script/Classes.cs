@@ -72,3 +72,10 @@ public class ActorData : ScriptableObject
     public string id;
     public Status statusOriginal;
 }
+
+[Serializable]
+public struct UIData
+{
+    public string id;
+    public Sprite sprite;
+}

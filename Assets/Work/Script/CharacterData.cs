@@ -8,6 +8,8 @@ public class CharacterData : ActorData
 {
     public Mesh mesh;
     public Avatar avatar;
+    public Sprite icon;
+    public CharacterRank rank;
     public RuntimeAnimatorController rac_act;
     public RuntimeAnimatorController rac_showcase;
     [FormerlySerializedAs("weaponData")] public List<WeaponData> weaponDataList;

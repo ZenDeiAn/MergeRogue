@@ -1,17 +1,19 @@
 ManifestFileVersion: 0
-CRC: 2831632904
+CRC: 1590557340
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3ec81013434271bd74bc31b8c5fc868f
+    Hash: 74422e53ee6168db157ec80b74e1aaf0
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 5de3dda6b0bcea03bc0caf3b4678ddd9
+    Hash: c7d81a7b071f4aa9da3d853ce0dc3aa5
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 3ec81013434271bd74bc31b8c5fc868f
+    Hash: 74422e53ee6168db157ec80b74e1aaf0
 HashAppended: 0
 ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
 - Class: 43
   Script: {instanceID: 0}
 - Class: 74
@@ -24,7 +26,11 @@ ClassTypes:
   Script: {fileID: 11500000, guid: f8b88e8628fe4cf4da7c1457fd1be9ae, type: 3}
 - Class: 115
   Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: CharacterRank
 - AssemblyName: Assembly-CSharp
   ClassName: Status
 - AssemblyName: Assembly-CSharp
@@ -32,5 +38,6 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: Assembly-CSharp
   ClassName: WeaponSocketType
 Assets:
-- Assets/Resources/CharacterData/Warrior.asset
+- Assets/Resources/AB/CharacterData/Warhammer.asset
+- Assets/Resources/AB/CharacterData/Warrior.asset
 Dependencies: []

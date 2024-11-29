@@ -9,17 +9,37 @@ using UnityEngine;
 public class GameManager : SingletonUnityEternal<GameManager>
 {
     public const string PP_CHARACTER_ID = "CharacterID";
+    
+    public static event Action<string> CharacterChangedEvent;
 
     public Dictionary<string, CharacterData> characterData = new Dictionary<string, CharacterData>();
+    public Dictionary<string, Sprite> uiData = new Dictionary<string, Sprite>();
 
-    public string characterID;
+    private string _characterID;
+    
+    public string CharacterID => _characterID;
+    public CharacterData CurrentCharacterData => characterData[_characterID];
 
-    public CharacterData CurrentCharacterData => characterData[characterID];
+    public void ChangeCharacter(string id)
+    {
+        PlayerPrefs.SetString(PP_CHARACTER_ID, _characterID = id);
+        CharacterChangedEvent?.Invoke(_characterID);
+    }
     
     public void LoadData()
     {
         AssetBundle characterAB = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "character"));
+        AssetBundle uiAB = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "ui"));
         CharacterData[] characterDataList = characterAB.LoadAllAssets<CharacterData>();
+        UIDataList uiDataList = uiAB.LoadAsset<UIDataList>("UIDataList");
+        if (uiDataList != null)
+        {
+            foreach (var data in uiDataList.UIData)
+            {
+                uiData[data.id] = data.sprite;
+            }
+        }
+
         if (characterDataList.Length > 0)
         {
             string initialCharacterID = characterDataList[0].id;
@@ -28,22 +48,18 @@ public class GameManager : SingletonUnityEternal<GameManager>
                 characterData.Add(cd.id, cd);
             }
         
-            if (PlayerPrefs.HasKey(PP_CHARACTER_ID))
+            if (!PlayerPrefs.HasKey(PP_CHARACTER_ID) || string.IsNullOrWhiteSpace(PlayerPrefs.GetString(PP_CHARACTER_ID)))
             {
-                characterID = PlayerPrefs.GetString(PP_CHARACTER_ID);
+                PlayerPrefs.SetString(PP_CHARACTER_ID, _characterID = initialCharacterID);
             }
-            else
-            {
-                PlayerPrefs.SetString(PP_CHARACTER_ID, characterID = initialCharacterID);
-            }
+            ChangeCharacter(PlayerPrefs.GetString(PP_CHARACTER_ID));
         }
     }
 
-    protected override void Awake()
+    protected override void Initialization()
     {
-        base.Awake();
+        base.Initialization();
         
         LoadData();
     }
-    
 }

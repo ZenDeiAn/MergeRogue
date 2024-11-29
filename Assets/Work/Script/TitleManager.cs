@@ -9,18 +9,28 @@ public class TitleManager : Processor<TitleManager, TitleState>
 {
     [SerializeField] private PlayableDirector pd_tapToStart;
     [SerializeField] private CharacterPreview characterPreview;
-    
-    void DeActivate_Intro()
+
+    private void OnCharacterChangedEvent(string id)
     {
         characterPreview.Initialize();
+    }
+
+    void DeActivate_Intro()
+    {
         pd_tapToStart.Play();
     }
 
     protected override void Initialization()
     {
         base.Initialization();
-
+        
         State = TitleState.Intro;
+        GameManager.CharacterChangedEvent += OnCharacterChangedEvent;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.CharacterChangedEvent -= OnCharacterChangedEvent;
     }
 }
 

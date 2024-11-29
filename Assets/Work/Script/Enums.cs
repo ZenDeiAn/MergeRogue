@@ -9,6 +9,21 @@ public enum WeaponSocketType
 }
 
 [Serializable]
+public enum CharacterRank
+{
+    A,
+    S
+}
+
+[Serializable]
+public enum CardRank
+{
+    B,
+    A,
+    S
+}
+
+[Serializable]
 public enum ActType
 {
     Attack,
