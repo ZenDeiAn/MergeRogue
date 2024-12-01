@@ -6,7 +6,7 @@ using System.Linq;
 using RaindowStudio.DesignPattern;
 using UnityEngine;
 
-public class GameManager : SingletonUnityEternal<GameManager>
+public class GameManager : ProcessorEternal<GameManager, GameState>
 {
     public const string PP_CHARACTER_ID = "CharacterID";
     
@@ -62,4 +62,13 @@ public class GameManager : SingletonUnityEternal<GameManager>
         
         LoadData();
     }
+}
+
+[Serializable]
+public enum GameState
+{
+    Title,
+    Campaign,
+    Map,
+    Battle,
 }

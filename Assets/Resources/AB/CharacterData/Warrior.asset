@@ -21,6 +21,7 @@ MonoBehaviour:
     critical: 0.25
     criticalDamage: 1.5
   mesh: {fileID: 17106975043345648, guid: 45c3848418decf7449815f900620c8c2, type: 3}
+  material: {fileID: 2100000, guid: 5ec5815f62a0d37488d95601e3f0129f, type: 2}
   avatar: {fileID: 9000000, guid: 45c3848418decf7449815f900620c8c2, type: 3}
   icon: {fileID: 21300000, guid: 96bfef6ab087d104abd91300244d66e5, type: 3}
   rank: 0

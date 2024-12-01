@@ -82,3 +82,83 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+  - key: Title_Main_Campaign
+    dataType: 0
+    textData:
+    - text: "\uCEA0\uD398\uC778"
+      font: {fileID: 0}
+    - text: Campaign
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    spriteData:
+    - {fileID: 21300000, guid: b9f6fa43e48fc604a904864246991650, type: 3}
+    - {fileID: 21300000, guid: 9fab26000a4b4b64eb0e1223fd9f50a3, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - key: Title_Main_Adventure
+    dataType: 0
+    textData:
+    - text: "\uBAA8\uD5D8"
+      font: {fileID: 0}
+    - text: Adventure
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    spriteData:
+    - {fileID: 21300000, guid: b9f6fa43e48fc604a904864246991650, type: 3}
+    - {fileID: 21300000, guid: 9fab26000a4b4b64eb0e1223fd9f50a3, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
