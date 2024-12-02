@@ -1,0 +1,54 @@
+ManifestFileVersion: 0
+CRC: 3879368277
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: e3519dc6877b69ae21428fe8881c300e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: a3e83e58256bcf6ce06cb0813a269a55
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: e3519dc6877b69ae21428fe8881c300e
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0a73779bca6f5ea4eb61afed811f2fdc, type: 3}
+- Class: 114
+  Script: {fileID: -1896211682, guid: b4f53cca559264c45a840238069c8ca6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 24a543a10c7ada6458ce689546867019, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: MapBlockEventType
+- AssemblyName: Assembly-CSharp
+  ClassName: MapBlockProbability
+- AssemblyName: RaindowStudioFramework
+  ClassName: RaindowStudio.Utility.EnumPairList`2[MapBlockEventType,System.Int32]
+Assets:
+- Assets/Resources/AB/MapData.asset
+Dependencies: []

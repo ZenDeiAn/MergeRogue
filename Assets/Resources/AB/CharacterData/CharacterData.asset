@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: CharacterData
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterData
+  id: Warhammer
+  statusOriginal:
+    healthMaximum: 0
+    attack: 0
+    shield: 0
+    dodge: 0
+    critical: 0
+    criticalDamage: 0
+  mesh: {fileID: 9093503826260832301, guid: 45c3848418decf7449815f900620c8c2, type: 3}
+  material: {fileID: 2100000, guid: 5ec5815f62a0d37488d95601e3f0129f, type: 2}
+  avatar: {fileID: 9000000, guid: 45c3848418decf7449815f900620c8c2, type: 3}
+  icon: {fileID: 21300000, guid: f4958bca08852064eb394bb7b3374476, type: 3}
+  rank: 0
+  rac_act: {fileID: 9100000, guid: 6b4aeaf74af1cfb4bbff42efd4bd2f76, type: 2}
+  rac_showcase: {fileID: 9100000, guid: c46b3c4e975fd984e8cca6ab3a443083, type: 2}
+  weaponDataList:
+  - socketType: 1
+    mesh: {fileID: 4300000, guid: c40a754f65969584ebd98a7be70c374f, type: 3}
+    offsetPosition: {x: 0.071, y: 0.063, z: 0.13}
+    offsetRotation: {x: 57.845, y: -371.922, z: -449.683}

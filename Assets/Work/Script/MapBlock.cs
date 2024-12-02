@@ -6,28 +6,15 @@ using UnityEngine;
 
 public class MapBlock : MonoBehaviour
 {
+    public int deep;
+    public bool interactable = true;
+    public bool interacted = false;
     public MapBlockEventType eventType;
-    [SerializeField] private MeshFilter meshFilter;
-    [SerializeField] private MeshRenderer meshRenderer;
-    [SerializeField] private ObjectPool obp_decorate;
 
-    public void Initialize(Vector3 position, Quaternion rotation, MapBlockEventType type, Mesh mesh, Material material, List<MapBlockDecorateData> decorates)
+    public void Initialize(Vector3 position, Quaternion rotation)
     {
         transform.position = position;
         transform.rotation = rotation;
-        eventType = type;
-        meshFilter.mesh = mesh;
-        meshRenderer.material = material;
-        obp_decorate.RecycleAll();
-        foreach (var decorate in decorates)
-        {
-            Transform dt = obp_decorate.GetObject().transform;
-            dt.localPosition = decorate.position;
-            dt.localEulerAngles = decorate.rotation;
-            dt.localScale = decorate.scale;
-            dt.GetComponent<MeshFilter>().mesh = decorate.mesh;
-            dt.GetComponent<MeshRenderer>().material = decorate.material;
-        }
     }
 }
 

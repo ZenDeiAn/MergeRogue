@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using RaindowStudio.Attribute;
 using RaindowStudio.DesignPattern;
 using UnityEngine;
 
@@ -12,9 +13,11 @@ public class GameManager : ProcessorEternal<GameManager, GameState>
     
     public static event Action<string> CharacterChangedEvent;
 
-    public Dictionary<string, CharacterData> characterData = new Dictionary<string, CharacterData>();
-    public Dictionary<string, Sprite> uiData = new Dictionary<string, Sprite>();
-
+    [UneditableField] public Dictionary<string, CharacterData> characterData = new Dictionary<string, CharacterData>();
+    [UneditableField] public Dictionary<string, Sprite> uiData = new Dictionary<string, Sprite>();
+    [UneditableField] public List<MapBlockProbability> mapBlockProbabilities = new List<MapBlockProbability>();
+    [UneditableField] public Dictionary<MapBlockEventType, GameObject> mapBlockPrefabs = new Dictionary<MapBlockEventType, GameObject>();
+    
     private string _characterID;
     
     public string CharacterID => _characterID;
@@ -28,18 +31,23 @@ public class GameManager : ProcessorEternal<GameManager, GameState>
     
     public void LoadData()
     {
-        AssetBundle characterAB = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "character"));
-        AssetBundle uiAB = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "ui"));
-        CharacterData[] characterDataList = characterAB.LoadAllAssets<CharacterData>();
-        UIDataList uiDataList = uiAB.LoadAsset<UIDataList>("UIDataList");
-        if (uiDataList != null)
+        var mapData = Resources.Load("MapData") as MapData;
+        if (mapData != null)
         {
-            foreach (var data in uiDataList.UIData)
+            mapBlockProbabilities = mapData.MapBlockProbabilities.OrderBy(t => t.deep).GroupBy(item => item.deep)
+                .Select(group => group.First()).ToList();
+            mapBlockPrefabs.Clear();
+            foreach (var prefab in mapData.MapBlockPrefabs)
             {
-                uiData[data.id] = data.sprite;
+                if (prefab.TryGetComponent(out MapBlock block))
+                {
+                    mapBlockPrefabs[block.eventType] = prefab;
+                }
             }
         }
 
+        AssetBundle characterAB = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "character"));
+        CharacterData[] characterDataList = characterAB.LoadAllAssets<CharacterData>();
         if (characterDataList.Length > 0)
         {
             string initialCharacterID = characterDataList[0].id;
@@ -53,6 +61,16 @@ public class GameManager : ProcessorEternal<GameManager, GameState>
                 PlayerPrefs.SetString(PP_CHARACTER_ID, _characterID = initialCharacterID);
             }
             ChangeCharacter(PlayerPrefs.GetString(PP_CHARACTER_ID));
+        }
+        
+        AssetBundle uiAB = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "ui"));
+        UIDataList uiDataList = uiAB.LoadAsset<UIDataList>("UIDataList");
+        if (uiDataList != null)
+        {
+            foreach (var data in uiDataList.UIData)
+            {
+                uiData[data.id] = data.sprite;
+            }
         }
     }
 
