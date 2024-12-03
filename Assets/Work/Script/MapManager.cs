@@ -3,16 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using RaindowStudio.Attribute;
 using RaindowStudio.DesignPattern;
+using RaindowStudio.Utility;
 using UnityEngine;
 
 public class MapManager : SingletonUnity<MapManager>
 {
     public const int MAP_BLOCK_FIXED_PROBABILITY = -1;
+    public const int DISCONTINUE_ADD_AMOUNT = 2;
+    public readonly MapBlockEventType[] DISCONTINUE_MAP_BLOCK_EVENT = new MapBlockEventType[] {
+        MapBlockEventType.Elite,
+        MapBlockEventType.RandomEvent,
+        MapBlockEventType.Rest,
+        MapBlockEventType.Store
+    };
 
     [UneditableField] public int randomSeed = 0;
+    [SerializeField] private GameObject chessBoardObject;
+
+    public Dictionary<Vector2Int, MapBlock> mapBlocks = new Dictionary<Vector2Int, MapBlock>();
     
     public void InitializeMap()
     {
+        mapBlocks.Clear();
+        
         randomSeed = System.Guid.NewGuid().GetHashCode();
         Random.InitState(randomSeed);
         
@@ -29,7 +42,9 @@ public class MapManager : SingletonUnity<MapManager>
         if (totalDeep % 2 == 1)     // Ensure the deep before boss is two blocks. Odd : 2, Even : 3
             totalDeep++;
         int index = 0;
-        
+
+        Dictionary<MapBlockEventType, int> randomEventCount = new Dictionary<MapBlockEventType, int>();
+        List<MapBlockEventType> previousRandomEvents = new List<MapBlockEventType>();
         for (int deep = 0; deep <= totalDeep; ++deep)
         {
             int spawnAmount = deep switch
@@ -40,22 +55,43 @@ public class MapManager : SingletonUnity<MapManager>
                 _ when deep % 2 == 0 => 3,                  // 3 block
                 _ => 2                                      // 2 block
             };
+            
+            // Get probability list.
+            var probability = new EnumPairList<MapBlockEventType, int>(mapBlockProbabilities[index].probability);
+            
+            // Limit probability by already random before.
+            foreach (var eventType in previousRandomEvents)
+            {
+                probability[eventType] = 0;
+            }
+            foreach (var key in randomEventCount.Keys)
+            {
+                if (probability[key] > 0)
+                {
+                    probability[key] =
+                        Mathf.Clamp(probability[key] - randomEventCount[key], 1, probability[key]);
+                }
+            }
+            // Reset before list. 
+            previousRandomEvents.Clear();
+            
+            // Start random event.
+            MapBlockEventType randomEventType = MapBlockEventType.None;
             while (spawnAmount-- > 0)
             {
                 // Get prefab.
-                GameObject prefab = null;
                 switch (deep)
                 {
-                    case 0: // Start block.
-                        prefab = mapBlockPrefabs[MapBlockEventType.None];
+                    case 0:
+                        randomEventType = MapBlockEventType.None;
                         break;
-
+                    
                     case var _ when deep == totalDeep: //Boss block.
-                        prefab = mapBlockPrefabs[MapBlockEventType.Boss];
+                        randomEventType = MapBlockEventType.Boss;
                         break;
                     
                     case var _ when deep == totalDeep - 1:
-                        prefab = mapBlockPrefabs[MapBlockEventType.Rest];
+                        randomEventType = MapBlockEventType.Rest;
                         break;
 
                     default:
@@ -64,11 +100,9 @@ public class MapManager : SingletonUnity<MapManager>
                             index++;
                         }
 
-                        var probability = mapBlockProbabilities[index].probability;
                         if (probability.values.Contains(MAP_BLOCK_FIXED_PROBABILITY)) // Fixed block.
                         {
-                            prefab = mapBlockPrefabs[
-                                probability.keys[probability.values.IndexOf(MAP_BLOCK_FIXED_PROBABILITY)]];
+                            randomEventType = probability.keys[probability.values.IndexOf(MAP_BLOCK_FIXED_PROBABILITY)];
                         }
                         else // Random block.
                         {
@@ -85,25 +119,36 @@ public class MapManager : SingletonUnity<MapManager>
                                 cumulativeWeight += probability.values[j];
                                 if (randomWeight < cumulativeWeight)
                                 {
-                                    prefab = mapBlockPrefabs[(MapBlockEventType)j];
+                                    randomEventType = (MapBlockEventType)j;
                                     break;
                                 }
                             }
                         }
-
-                        prefab ??= mapBlockPrefabs[MapBlockEventType.None];
                         break;
                 }
 
                 // Get position.
                 Vector3 position = Vector3.zero;
-                position.z = deep * offsetZ;
                 position.x = deep % 2 == 0 ? 
                     spawnAmount > 0 ? (spawnAmount % 2 == 0 ? +offsetX : -offsetX) * 2 : 0 :
                     spawnAmount % 2 == 0 ? +offsetX : -offsetX;
+                position.y = deep % 3 == 0 ? 0 : deep % 2 == 0 ? .5f : 1;
+                position.z = deep * offsetZ;
                 
                 // Instantiate.
-                Instantiate(prefab, position, Quaternion.identity);
+                MapBlock block =
+                    Instantiate(mapBlockPrefabs[randomEventType], position, Quaternion.identity, transform).GetComponent<MapBlock>();
+                block.Initialize(deep, new Vector2Int(spawnAmount, deep));
+                mapBlocks.Add(block.index, block);
+                
+                // Update limit random list.
+                randomEventCount.TryAdd(randomEventType, 0);
+                randomEventCount[randomEventType] += DISCONTINUE_ADD_AMOUNT;
+                
+                if (DISCONTINUE_MAP_BLOCK_EVENT.Contains(randomEventType))
+                {
+                    previousRandomEvents.Add(randomEventType);
+                }
             }
         }
     }
@@ -117,6 +162,13 @@ public class MapManager : SingletonUnity<MapManager>
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            foreach (Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
+            InitializeMap();
+        }
     }
 }
