@@ -16,7 +16,7 @@ MonoBehaviour:
   statusOriginal:
     healthMaximum: 120
     attack: 10
-    shield: 10
+    shield: 5
     dodge: 0.05
     critical: 0.25
     criticalDamage: 1.5

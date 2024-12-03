@@ -239,8 +239,8 @@ Material:
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
-    - Color_3ECE37A8: {r: 0.41037738, g: 0.8132252, b: 1, a: 0}
-    - Color_AE0D83D3: {r: 0.9622641, g: 0.46751517, b: 0.46751517, a: 0}
+    - Color_3ECE37A8: {r: 0.2396226, g: 0.90052557, b: 1, a: 0}
+    - Color_AE0D83D3: {r: 1, g: 0.3075471, b: 0.903826, a: 0}
     - EmberColorTint: {r: 0.9926471, g: 0.6777384, b: 0, a: 1}
     - _ASEOutlineColor: {r: 0, g: 0, b: 0, a: 0}
     - _Bot_XZ: {r: 0.7058823, g: 0.2024221, b: 0.2024221, a: 0}

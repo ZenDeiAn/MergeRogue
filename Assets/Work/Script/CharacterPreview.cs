@@ -25,7 +25,7 @@ public class CharacterPreview : MonoBehaviour
         CharacterData data = GameManager.Instance.CurrentCharacterData;
         animator.avatar = data.avatar;
         meshRenderer.sharedMesh = data.mesh;
-        meshRenderer.material = data.material;
+        //meshRenderer.material = data.material;
         animator.runtimeAnimatorController = data.rac_showcase;
 
         if (_initPosition == Vector3.zero)

@@ -261,7 +261,7 @@ Material:
     - _HatchingMapScale: 1
     - _IndirectFade: 0.8
     - _Initialized: 0
-    - _InputTab: 0
+    - _InputTab: 1
     - _Iridescence: 0
     - _IridescenceSize: 5
     - _IridescenceSmoothness: 0.5
@@ -280,7 +280,7 @@ Material:
     - _NormalMapIntensity: 1
     - _OcclusionMapIntensity: 1
     - _OcclusionStrength: 1
-    - _OptionsTab: 0
+    - _OptionsTab: 1
     - _Outline: 1
     - _OutlineData: 0
     - _OutlineFadeMax: 2

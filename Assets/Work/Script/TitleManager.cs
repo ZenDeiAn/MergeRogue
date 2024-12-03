@@ -10,6 +10,11 @@ public class TitleManager : Processor<TitleManager, TitleState>
     [SerializeField] private PlayableDirector pd_tapToStart;
     [SerializeField] private CharacterPreview characterPreview;
 
+    public void ChangeGameManagerState(string state)
+    {        
+        GameManager.Instance.ChangeStateByString(state);
+    }
+
     private void OnCharacterChangedEvent(string id)
     {
         characterPreview.Initialize();

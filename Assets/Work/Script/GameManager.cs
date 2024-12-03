@@ -6,6 +6,7 @@ using System.Linq;
 using RaindowStudio.Attribute;
 using RaindowStudio.DesignPattern;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : ProcessorEternal<GameManager, GameState>
 {
@@ -74,6 +75,11 @@ public class GameManager : ProcessorEternal<GameManager, GameState>
         }
     }
 
+    void Activate_Adventure()
+    {
+        SceneManager.LoadScene("Map");
+    }
+
     protected override void Initialization()
     {
         base.Initialization();
@@ -87,6 +93,5 @@ public enum GameState
 {
     Title,
     Campaign,
-    Map,
-    Battle,
+    Adventure
 }

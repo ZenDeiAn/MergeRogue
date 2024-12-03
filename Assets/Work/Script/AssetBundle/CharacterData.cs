@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "CharacterData", menuName = "Create/CharacterData")]
+[CreateAssetMenu(fileName = "CharacterData", menuName = "CharacterData")]
 public class CharacterData : ActorData
 {
     public Mesh mesh;

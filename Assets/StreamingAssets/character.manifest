@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3285757797
+CRC: 888396478
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6c24e1b0ca5e828bd2e2e5af5b2fb977
+    Hash: eedb4b6411402fbcb816ea7fc4aa4d02
   TypeTreeHash:
     serializedVersion: 2
     Hash: b34b293376067a6da287a877c83405d5
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 6c24e1b0ca5e828bd2e2e5af5b2fb977
+    Hash: eedb4b6411402fbcb816ea7fc4aa4d02
 HashAppended: 0
 ClassTypes:
 - Class: 21
@@ -42,6 +42,8 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: Assembly-CSharp
   ClassName: WeaponSocketType
 Assets:
-- Assets/Resources/AB/CharacterData/Warhammer.asset
+- Assets/_MK/MKToon/Shader/URP/Standard/StandardPBSOutline.shader
+- Assets/PolygonMiniFantasyCharacters/Materials/PolygonMiniFantasyCharacters_01_A.mat
 - Assets/Resources/AB/CharacterData/Warrior.asset
+- Assets/Resources/AB/CharacterData/Warhammer.asset
 Dependencies: []
