@@ -10,6 +10,8 @@ Right now still working on it...
 > - - Random rogue like map generation.
 > - - Basic Data Structure.
 > - Progressing :
+> - - Map Scene get into Scenario and camera movement.
+> - - Map Block interaction.
 > - - Game Battle Logic.
 > - - Monster data structure.  
 
