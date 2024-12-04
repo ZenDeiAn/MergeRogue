@@ -22,10 +22,10 @@ public class CharacterPreview : MonoBehaviour
     
     public void Initialize()
     {
-        CharacterData data = GameManager.Instance.CurrentCharacterData;
+        CharacterDataSet data = AddressableManager.Instance.CurrentCharacterData;
         animator.avatar = data.avatar;
         meshRenderer.sharedMesh = data.mesh;
-        //meshRenderer.material = data.material;
+        meshRenderer.material = data.material;
         animator.runtimeAnimatorController = data.rac_showcase;
 
         if (_initPosition == Vector3.zero)

@@ -7,6 +7,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using FancyScrollView;
+using UnityEngine.AddressableAssets;
 
 class FSC_CharacterSelection : FancyCell<FSD_CharacterSelection>
 {
@@ -21,7 +22,7 @@ class FSC_CharacterSelection : FancyCell<FSD_CharacterSelection>
 
     public override void UpdateContent(FSD_CharacterSelection itemData)
     {
-        rank.sprite = GameManager.Instance.uiData[$"CharacterRank_{itemData.characterData.rank}"];
+        rank.sprite = AddressableManager.Instance.UI[$"CharacterRank_{itemData.characterData.rank}"];
         icon.sprite = itemData.characterData.icon;
     }
 

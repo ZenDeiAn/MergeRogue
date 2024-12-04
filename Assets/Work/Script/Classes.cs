@@ -67,14 +67,14 @@ public abstract class Buff
     }
 }
 
-public class ActorData : ScriptableObject
+public interface IActor
 {
-    public string id;
-    public Status statusOriginal;
+    public string ID { get; set; }
+    public Status Status { get; set; }
 }
 
 [Serializable]
-public struct UIData
+public struct UIDataSet
 {
     public string id;
     public Sprite sprite;

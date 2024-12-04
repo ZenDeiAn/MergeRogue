@@ -898,6 +898,7 @@ MonoBehaviour:
   animator: {fileID: 2808394749742773559}
   footIK: {fileID: 8750824541458362024}
   meshRenderer: {fileID: 9175288685970604507}
+  characterPreviewTransform: {fileID: 0}
   weaponSocket:
     keys: 000000000100000002000000
     values:

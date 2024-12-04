@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Character : Actor
 {
-    public CharacterData data;
+    public CharacterDataSet data;
     public Status statusAdditional;
 
     public override void Initialize()
     {
-        InitializeStatus(data.statusOriginal);
+        InitializeStatus(data.Status);
     }
 }

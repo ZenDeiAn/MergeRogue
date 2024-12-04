@@ -20,8 +20,8 @@ class FSV_CharacterSelection : FancyScrollView<FSD_CharacterSelection>
     {
         base.Initialize();
         scroller.OnValueChanged(UpdatePosition);
-        GameManager gm = GameManager.Instance;
-        scroller.OnSelectionChanged(index => gm.ChangeCharacter(gm.characterData.Keys.ToList()[index]));
+        scroller.OnSelectionChanged(index =>
+            GameManager.Instance.ChangeCharacter(AddressableManager.Instance.Character.Keys.ToList()[index]));
     }
 
     public void UpdateData(IList<FSD_CharacterSelection> items)
@@ -32,12 +32,12 @@ class FSV_CharacterSelection : FancyScrollView<FSD_CharacterSelection>
     
     void Start()
     {
-        GameManager gm = GameManager.Instance;
-        var list = gm.characterData.Values.ToList();
+        AddressableManager am = AddressableManager.Instance;
+        var list = am.Character.Values.ToList();
         var items = Enumerable.Range(0, list.Count)
             .Select(i => new FSD_CharacterSelection(list[i]))
             .ToArray();
         UpdateData(items);
-        scroller.JumpTo(gm.characterData.Keys.ToList().IndexOf(gm.CharacterID));
+        scroller.JumpTo(am.Character.Keys.ToList().IndexOf(GameManager.Instance.CharacterID));
     }
 }
