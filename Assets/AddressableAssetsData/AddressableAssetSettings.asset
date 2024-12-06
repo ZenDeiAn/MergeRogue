@@ -66,7 +66,7 @@ MonoBehaviour:
       - m_Id: 1de12019f83bc6742b25be64bc34360e
         m_Value: ServerData/[BuildTarget]
       - m_Id: 77ce89be8f81a064ab1a97359c42dd32
-        m_Value: https://f530ad17-e82c-416b-8a37-1d23eab5c7e8.client-api.unity3dusercontent.com/client_api/v1/environments/production/buckets/f483c0b7-1e4c-4b86-a386-6c409cad40d3/release_by_badge/latest/entry_by_path/content/?path=
+        m_Value: https://f530ad17-e82c-416b-8a37-1d23eab5c7e8.client-api.unity3dusercontent.com/client_api/v1/environments/raindowstudio/buckets/09b2d34a-0477-4f20-ad41-5ad3e000a6be/release_by_badge/latest/entry_by_path/content/?path=
     m_ProfileEntryNames:
     - m_Id: beb2e9460e95a9c478f27a8fa4610317
       m_Name: BuildTarget
@@ -108,5 +108,6 @@ MonoBehaviour:
     m_HostingServiceInfos: []
     m_Settings: {fileID: 11400000}
     m_NextInstanceId: 0
-    m_RegisteredServiceTypeRefs: []
+    m_RegisteredServiceTypeRefs:
+    - UnityEditor.AddressableAssets.HostingServices.HttpHostingService, Unity.Addressables.Editor
     m_PingTimeoutInMilliseconds: 5000

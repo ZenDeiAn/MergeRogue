@@ -17,3 +17,23 @@ public struct MapBlockProbability
     public int deep;
     public EnumPairList<MapBlockEventType, int> probability;
 }
+
+/*
+[Serializable]
+public struct MapBlockDecorateData
+{
+    public Vector3 position;
+    public Vector3 rotation;
+    public Vector3 scale;
+    public Mesh mesh;
+    public Material material;
+}
+
+[Serializable]
+public struct MapBlockData
+{
+    public MapBlockEventType eventType;
+    public Material material;
+    public List<MapBlockDecorateData> decorateData;
+}*/
+
