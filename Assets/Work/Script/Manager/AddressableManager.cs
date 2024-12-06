@@ -21,9 +21,6 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
     public Dictionary<MapBlockEventType, GameObject> MapBlockPrefabs { get; set; }
     public List<MapBlockProbability> MapBlockProbabilities { get; set; }
     
-    [SerializeField] private AssetReferenceT<MapData> ar_mapData;
-    [SerializeField] private AssetReferenceT<UIData> ar_ui;
-    
     private bool _initialized;
 
     public bool Initialized => _initialized;
