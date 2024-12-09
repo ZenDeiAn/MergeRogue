@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using RaindowStudio.Utility;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MapData", menuName = "MapBlockDataList")]
+[CreateAssetMenu(fileName = "MapData", menuName = "MapData")]
 public class MapData : ScriptableObject
 {
     public List<GameObject> MapBlockPrefabs = new List<GameObject>();

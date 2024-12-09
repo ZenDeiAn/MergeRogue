@@ -1,10 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using RaindowStudio.Attribute;
 using RaindowStudio.DesignPattern;
 using RaindowStudio.Utility;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class MapManager : SingletonUnity<MapManager>
 {
@@ -17,16 +18,16 @@ public class MapManager : SingletonUnity<MapManager>
         MapBlockEventType.Store
     };
 
-    [UneditableField] public int randomSeed = 0;
-    [SerializeField] private GameObject chessBoardObject;
+    [UneditableField] public int randomSeed = -1;
 
     public Dictionary<Vector2Int, MapBlock> mapBlocks = new Dictionary<Vector2Int, MapBlock>();
+    public LayerMask layer;
     
-    public void InitializeMap()
+    public void InitializeMap(int randomSeed = -1)
     {
         mapBlocks.Clear();
         
-        randomSeed = System.Guid.NewGuid().GetHashCode();
+        randomSeed = randomSeed == -1 ? System.Guid.NewGuid().GetHashCode() : randomSeed;
         Random.InitState(randomSeed);
         AddressableManager am = AddressableManager.Instance;
         var mapBlockProbabilities = am.MapBlockProbabilities;
@@ -162,6 +163,22 @@ public class MapManager : SingletonUnity<MapManager>
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0)) // Left mouse button
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit[] hits = Physics.RaycastAll(ray, 100, layer);
+            if (hits.Length > 0)
+            {
+                foreach (RaycastHit hit in hits)
+                {
+                    if (hit.collider.gameObject.TryGetComponent(out MapBlock block))
+                    {
+                        block.Interact();
+                    }
+                }
+            }
+        }
+        
         if (Input.GetKeyDown(KeyCode.T))
         {
             foreach (Transform child in transform)

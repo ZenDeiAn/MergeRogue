@@ -53,6 +53,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Global
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6c6a121967e7e064f92145af92a06598
+    m_Address: Assets/Work/Addressable/LanguageData/Title.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Global
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d41d78f70b6c27546891ece3b0e453c3, type: 2}
   m_SchemaSet:

@@ -562,8 +562,8 @@ Material:
     - _WorldTilingPixelsPerUnit: 100
     - _ZWrite: 1
     m_Colors:
-    - _AddColorColor: {r: 2.996078, g: 0, b: 0, a: 0}
-    - _AlphaTintColor: {r: 95.87451, g: 5.019608, b: 95.87451, a: 0}
+    - _AddColorColor: {r: 0.03396219, g: 0.02039064, b: 0.0086507425, a: 0}
+    - _AlphaTintColor: {r: 127.03396, g: 49.89047, b: 5.51278, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BlackTintColor: {r: 0, g: 0, b: 1, a: 0}
     - _BurnEdgeColor: {r: 11.98431, g: 1.129412, b: 0.1254902, a: 0}
@@ -654,17 +654,17 @@ Material:
     - _RainbowNoiseScale: {r: 0.2, g: 0.2, b: 0, a: 0}
     - _RecolorRGBBlueTint: {r: 1, g: 1, b: 1, a: 0.5019608}
     - _RecolorRGBGreenTint: {r: 1, g: 1, b: 1, a: 0.5019608}
-    - _RecolorRGBRedTint: {r: 1, g: 1, b: 1, a: 0.5019608}
-    - _RecolorRGBYCPBlueTint: {r: 1, g: 1, b: 1, a: 0.5019608}
-    - _RecolorRGBYCPCyanTint: {r: 1, g: 1, b: 1, a: 0.5019608}
-    - _RecolorRGBYCPGreenTint: {r: 1, g: 1, b: 1, a: 0.5019608}
-    - _RecolorRGBYCPPurpleTint: {r: 1, g: 1, b: 1, a: 0.5019608}
-    - _RecolorRGBYCPRedTint: {r: 1, g: 1, b: 1, a: 0.5019608}
-    - _RecolorRGBYCPYellowTint: {r: 1, g: 1, b: 1, a: 0.5019608}
+    - _RecolorRGBRedTint: {r: 1, g: 0.39879936, b: 0, a: 0.5019608}
+    - _RecolorRGBYCPBlueTint: {r: 1, g: 0.2471698, b: 0.39061287, a: 0.5019608}
+    - _RecolorRGBYCPCyanTint: {r: 0.26189387, g: 0.7584905, b: 0.6801747, a: 0.5019608}
+    - _RecolorRGBYCPGreenTint: {r: 0.89433956, g: 0.14005688, b: 0.18412976, a: 0.5019608}
+    - _RecolorRGBYCPPurpleTint: {r: 1, g: 0.33018857, b: 0.33018857, a: 0.5019608}
+    - _RecolorRGBYCPRedTint: {r: 0.90188676, g: 0.90188676, b: 0.90188676, a: 1}
+    - _RecolorRGBYCPYellowTint: {r: 1, g: 0.58954066, b: 0.2999999, a: 1}
     - _ScreenTilingOffset: {r: 0, g: 0, b: 0, a: 0}
     - _ScreenTilingScale: {r: 1, g: 1, b: 0, a: 0}
-    - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}
-    - _ShadowOffset: {r: 0.05, g: -0.05, b: 0, a: 0}
+    - _ShadowColor: {r: 0.03071345, g: 0.03071345, b: 0.03071345, a: 1}
+    - _ShadowOffset: {r: 0, g: -0.3, b: 0, a: 0}
     - _ShiftingColorA: {r: 1.498039, g: 0, b: 0, a: 0}
     - _ShiftingColorB: {r: 1.498039, g: 0.7490196, b: 0, a: 0}
     - _ShineColor: {r: 11.98431, g: 11.98431, b: 11.98431, a: 0}

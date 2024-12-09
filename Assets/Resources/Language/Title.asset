@@ -25,31 +25,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  languageDatas:
-  - key: Title_Logo
-    dataType: 1
-    textData: []
-    spriteData:
-    - {fileID: 21300000, guid: b9f6fa43e48fc604a904864246991650, type: 3}
-    - {fileID: 21300000, guid: 9fab26000a4b4b64eb0e1223fd9f50a3, type: 3}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  - key: Title_Tap
+  languageData:
+  - key: Title_Intro_TapToStart
     dataType: 0
     textData:
-    - text: "\uD654\uBA74\uC744 \uD074\uB9AD \uD558\uC138\uC694"
+    - text: "\uD0ED\uD558\uC5EC \uC2DC\uC791\uD558\uAE30"
       font: {fileID: 0}
-    - text: TAP TO START
-      font: {fileID: 0}
-    - text: 
+    - text: Tap to Start
       font: {fileID: 0}
     - text: 
       font: {fileID: 0}
@@ -69,25 +51,15 @@ MonoBehaviour:
       font: {fileID: 0}
     - text: 
       font: {fileID: 0}
-    spriteData:
-    - {fileID: 21300000, guid: b9f6fa43e48fc604a904864246991650, type: 3}
-    - {fileID: 21300000, guid: 9fab26000a4b4b64eb0e1223fd9f50a3, type: 3}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  - key: Title_Main_Campaign
+    - text: 
+      font: {fileID: 0}
+    spriteData: []
+  - key: Title_Mode_Campaign
     dataType: 0
     textData:
     - text: "\uCEA0\uD398\uC778"
       font: {fileID: 0}
-    - text: Campaign
+    - text: Campagin
       font: {fileID: 0}
     - text: 
       font: {fileID: 0}
@@ -109,20 +81,8 @@ MonoBehaviour:
       font: {fileID: 0}
     - text: 
       font: {fileID: 0}
-    spriteData:
-    - {fileID: 21300000, guid: b9f6fa43e48fc604a904864246991650, type: 3}
-    - {fileID: 21300000, guid: 9fab26000a4b4b64eb0e1223fd9f50a3, type: 3}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  - key: Title_Main_Adventure
+    spriteData: []
+  - key: Title_Mode_Adventure
     dataType: 0
     textData:
     - text: "\uBAA8\uD5D8"
@@ -149,16 +109,4 @@ MonoBehaviour:
       font: {fileID: 0}
     - text: 
       font: {fileID: 0}
-    spriteData:
-    - {fileID: 21300000, guid: b9f6fa43e48fc604a904864246991650, type: 3}
-    - {fileID: 21300000, guid: 9fab26000a4b4b64eb0e1223fd9f50a3, type: 3}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    spriteData: []

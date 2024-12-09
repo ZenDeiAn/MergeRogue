@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using RaindowStudio.Attribute;
 using RaindowStudio.DesignPattern;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapBlock : MonoBehaviour
 {
@@ -27,6 +28,34 @@ public class MapBlock : MonoBehaviour
         {
             interactable = value;
         }
+    }
+
+    public void Interact()
+    {
+        if (!Interactable)
+            return;
+        
+        GameManager.Instance.adventurePosition = index;
+        GameManager.Instance.deep = deep;
+
+        switch (eventType)
+        {
+            case MapBlockEventType.Monster:
+            case MapBlockEventType.Elite:
+            case MapBlockEventType.Boss:
+                LoadingManager.Instance.LoadScene("Battle");
+                break;
+            
+            case MapBlockEventType.Rest:
+                break;
+            
+            case MapBlockEventType.Store:
+                break;
+            
+            case MapBlockEventType.Treasure:
+                break;
+        }
+
     }
 
     public void ActiveNextDeepNearestBlock()

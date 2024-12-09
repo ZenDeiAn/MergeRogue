@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using RaindowStudio.DesignPattern;
+using RaindowStudio.Language;
 using RaindowStudio.Utility;
 using TMPro;
 using UnityEngine;
@@ -34,6 +36,14 @@ public class TitleManager : Processor<TitleManager, TitleState>
         characterPreview.Initialize();
     }
 
+    private void OnPatchOver()
+    {
+        sld_titlePatch.value = 1;
+        titlePatch.GetComponent<CanvasGroup>().DOFade(0, .5f);
+        this.DelayToDo(.5f, () => titlePatch.SetActive(false));
+        tapToStart.SetActive(true);
+    }
+
     void DeActivate_Intro()
     {
         pd_tapToStart.Play();
@@ -50,6 +60,7 @@ public class TitleManager : Processor<TitleManager, TitleState>
         AddressableManager am = AddressableManager.Instance;
         this.WaitUntilToDo(() => am.Initialized, () =>
         {
+            // Download Character Resources.
             InitializePatchUI("Character Resources");
             am.LoadAssetsByLabel<CharacterDataSet>(AddressableManager.LABEL_GLOBAL,
                 a => am.Character.Add(a.ID, a),
@@ -57,18 +68,43 @@ public class TitleManager : Processor<TitleManager, TitleState>
                 c =>
                 {
                     GameManager.Instance.LoadSaveData();
-
+                    
+                    // Download UI Resources.
                     InitializePatchUI("UI Resources");
-
                     am.LoadAssetsByLabel<UIData>(AddressableManager.LABEL_GLOBAL,
                         aa => aa.UIDataList.ForEach(ds => am.UI[ds.id] = ds.sprite),
                         dd => sld_titlePatch.value = dd.PercentComplete,
                         _ =>
                         {
-                            sld_titlePatch.value = 1;
-                            titlePatch.GetComponent<CanvasGroup>().DOFade(0, .5f);
-                            this.DelayToDo(.5f, () => titlePatch.SetActive(false));
-                            tapToStart.SetActive(true);
+                            // Download Language Resources.
+                            InitializePatchUI("Language Resources");
+                            List<LanguageDataObject> languageDataObjects = new List<LanguageDataObject>();
+                            am.LoadAssetsByLabel<LanguageDataObject>(AddressableManager.LABEL_GLOBAL, 
+                                aaa => languageDataObjects.Add(aaa),
+                                ddd => sld_titlePatch.value = ddd.PercentComplete,
+                                _ =>
+                                {
+                                    LanguageManager.ReloadResourceData(languageDataObjects.ToArray());
+                                    LanguageManager.ChangeLanguage(LanguageManager.language);
+                                    
+                                    // Download Map Resources.
+                                    InitializePatchUI("Map Resources");
+                                    am.LoadAssetsByLabel<MapData>(AddressableManager.LABEL_MAP_SCENE, a =>
+                                    {
+                                        am.MapBlockProbabilities = a.MapBlockProbabilities.OrderBy(t => t.deep).GroupBy(item => item.deep)
+                                            .Select(group => group.First()).ToList();
+                                        am.MapBlockPrefabs.Clear();
+                                        foreach (var prefab in a.MapBlockPrefabs)
+                                        {
+                                            if (prefab.TryGetComponent(out MapBlock block))
+                                            {
+                                                am.MapBlockPrefabs[block.eventType] = prefab;
+                                            }
+                                        }
+                                        
+                                        OnPatchOver();
+                                    });
+                                });
                         });
                 });
         });

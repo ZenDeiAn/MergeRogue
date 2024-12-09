@@ -44,7 +44,7 @@ namespace RaindowStudio.Language
                 }
             }
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("languageDatas"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("languageData"));
 
             serializedObject.ApplyModifiedProperties();
         }

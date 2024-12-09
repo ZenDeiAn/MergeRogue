@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 8480676856915076024}
   - component: {fileID: 2854489932962808420}
   - component: {fileID: 1788562644778359553}
-  m_Layer: 0
+  - component: {fileID: 5578008362974268044}
+  m_Layer: 7
   m_Name: MapBlockBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,3 +102,25 @@ MonoBehaviour:
   interactable: 0
   interacted: 0
   eventType: 0
+--- !u!64 &5578008362974268044
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5941805312079148782}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: d1f031baa9f9ef3418243cd32f35cd2a, type: 3}

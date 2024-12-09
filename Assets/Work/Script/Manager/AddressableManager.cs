@@ -9,6 +9,7 @@ using RaindowStudio.Utility;
 using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
+using Object = UnityEngine.Object;
 
 public class AddressableManager : SingletonUnityEternal<AddressableManager>
 {
@@ -31,7 +32,14 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
         Action<AsyncOperationHandle> downloading = null,
         Action<AsyncOperationHandle> completed = null)
     {
-        return StartCoroutine(LoadAssetsByLabelIE<T>(label, assetLoaded, downloading, completed));
+        return StartCoroutine(LoadAssetsByLabelIE(label, assetLoaded, downloading, completed));
+    }
+    
+    public Coroutine LoadAssetsByLabel(string label,
+        Action<AsyncOperationHandle> downloading = null,
+        Action<AsyncOperationHandle> completed = null)
+    {
+        return StartCoroutine(LoadAssetsByLabelIE<Object>(label, null, downloading, completed));
     }
 
     private IEnumerator LoadAssetsByLabelIE<T>(string label,
@@ -46,7 +54,7 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
         }
         catch (Exception e)
         {
-            Debug.Log($"Download bundle '{label}' failed : {e.Message}");
+            Debug.LogWarning($"Download bundle '{label}' failed : {e.Message}");
         }
 
         yield return aoh_size;
