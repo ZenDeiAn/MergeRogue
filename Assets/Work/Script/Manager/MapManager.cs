@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Serialization;
 
-public class MapManager : SingletonUnity<MapManager>
+public class MapManager : Processor<MapManager, MapState>
 {
     public const int MAP_BLOCK_FIXED_PROBABILITY = -1;
     public const int DISCONTINUE_ADD_AMOUNT = 2;
@@ -40,11 +40,13 @@ public class MapManager : SingletonUnity<MapManager>
                     ? new Vector2Int(2, index.y + 1)
                     : new Vector2Int(1, index.y + 1));
                 break;
+            
             case 1 : 
                 returnList.Add(new Vector2Int(1, index.y + 1));
                 if (index.y % 2 == 1)
                     returnList.Add(new Vector2Int(0, index.y + 1));
                 break;
+            
             case 2 : 
                 returnList.Add(new Vector2Int(0, index.y + 1));
                 break;
@@ -56,7 +58,11 @@ public class MapManager : SingletonUnity<MapManager>
     public List<MapBlock> GetNextDeepNearestBlocks(Vector2Int index) =>
         GetNextDeepNearestBlockIndexes(index).Select(t => mapBlocks[t]).ToList();
 
-    public void InitializeMap(Dictionary<Vector2Int, MapBlockEventType> adventureMap)
+    public List<MapBlock> GetSameDeepBlocks(Vector2Int index) =>
+        mapBlocks.Where(t => t.Key.y == index.y && t.Key.x != index.x).
+            Select(p=> p.Value).ToList();
+    
+    public void InitializeMap(Dictionary<Vector2Int, MapBlockData> adventureMap)
     {
         mapBlocks.Clear();
         
@@ -82,16 +88,67 @@ public class MapManager : SingletonUnity<MapManager>
                 
             // Instantiate.
             MapBlock block =
-                Instantiate(mapBlockPrefabs[mapBlock.Value], position, Quaternion.identity, transform).
+                Instantiate(mapBlockPrefabs[mapBlock.Value.EventType], position, Quaternion.identity, transform).
                     GetComponent<MapBlock>();
-            List<Vector2Int> nextBlocks = GetNextDeepNearestBlockIndexes(_gm.AdventurePosition);
-            block.Initialize(mapBlock.Key, nextBlocks.Contains(mapBlock.Key), block.index.y == _gm.AdventurePosition.y - 1);
+            block.Initialize(mapBlock.Key, mapBlock.Value.State);
             mapBlocks.Add(block.index, block);
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void LocationMarkIdleAnimation()
+    {
+        // Make Location Mark Idle Animation Sequence.
+        _locateMark.transform.DOLocalRotate(new Vector3(0, 360, 0), 2f).SetLoops(-1, LoopType.Yoyo)
+            .SetEase(Ease.InOutQuint).SetRelative();
+        _locateMark.transform.DOMoveY(-2.5f, 2f).
+            SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetRelative();
+    }
+
+    void Activate_Event()
+    {
+        MapBlock block = mapBlocks[_gm.AdventurePosition];
+        Debug.Log($"Active Event : {block.eventType}");
+        switch (block.eventType)
+        {
+            case MapBlockEventType.Monster:
+            case MapBlockEventType.Elite:
+            case MapBlockEventType.Boss:
+                LoadingManager.Instance.LoadScene("Battle");
+                break;
+
+            case MapBlockEventType.Rest:
+                break;
+
+            case MapBlockEventType.Store:
+                break;
+
+            case MapBlockEventType.Treasure:
+                break;
+        }
+    }
+    
+    void Activate_Move()
+    {
+        _locateMark.DOKill();
+        Vector3 position = mapBlocks[_gm.AdventurePosition].transform.position;
+        position.y = LOCATE_MARK_POSITION_Y;
+        _locateMark.transform.DOMove(position, 2.5f).SetEase(Ease.InOutQuint).OnComplete(() =>
+        {
+            LocationMarkIdleAnimation();
+            State = MapState.Event;
+        });
+    }
+    
+    void Activate_Select()
+    {
+        List<MapBlock> nextBlocks = GetNextDeepNearestBlocks(_gm.AdventurePosition);
+        foreach (var block in nextBlocks)
+        {
+            block.State = MapBlockState.Selectable;
+        }
+    }
+    
+    void Update_Select()
     {
         // Ray casting map block.
         if (Input.GetMouseButtonDown(0))
@@ -104,7 +161,11 @@ public class MapManager : SingletonUnity<MapManager>
                 {
                     if (hit.collider.gameObject.TryGetComponent(out MapBlock block))
                     {
-                        block.Interact();
+                        if (block.State == MapBlockState.Selectable)
+                        {
+                            mapBlocks[_gm.AdventurePosition].State = MapBlockState.Interacted;
+                            block.Interact();
+                        }
                     }
                 }
             }
@@ -122,8 +183,7 @@ public class MapManager : SingletonUnity<MapManager>
         }*/
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void Activate_Initialize()
     {
         InitializeMap(_gm.AdventureMap);
         
@@ -133,10 +193,8 @@ public class MapManager : SingletonUnity<MapManager>
         Vector3 position = block.transform.position;
         position.y = LOCATE_MARK_POSITION_Y;
         _locateMark.transform.position = position;
-        _locateMark.transform.DOLocalRotate(new Vector3(0, 180, 0), 2f).
-            SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuint);
-        _locateMark.transform.DOMoveY(-.01f, 2f).
-            SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+        LocationMarkIdleAnimation();
+        State = MapState.Select;
     }
 
     protected override void Initialization()
@@ -145,5 +203,15 @@ public class MapManager : SingletonUnity<MapManager>
         
         _am = AddressableManager.Instance;
         _gm = GameManager.Instance;
+
+        State = MapState.Initialize;
     }
+}
+
+public enum MapState
+{
+    Initialize,
+    Select,
+    Move,
+    Event
 }

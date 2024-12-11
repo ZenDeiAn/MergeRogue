@@ -19,11 +19,12 @@ public class GameManager : ProcessorEternal<GameManager, GameState>
     public string CharacterID => _characterID;
     public int RandomSeed { get; set; }
     public Vector2Int AdventurePosition { get; set; } 
+    public PlayerStatus PlayerStatus { get; set; }
 
-    public Dictionary<Vector2Int, MapBlockEventType> AdventureMap { get; set; } =
-        new Dictionary<Vector2Int, MapBlockEventType>();
-
-    public void GenerateAdventureMap(int randomSeed = -1)
+    public Dictionary<Vector2Int, MapBlockData> AdventureMap { get; set; } =
+        new Dictionary<Vector2Int, MapBlockData>();
+    
+    public void GenerateRandomAdventureMap(int randomSeed = -1)
     {
         RandomSeed = randomSeed == -1 ? Guid.NewGuid().GetHashCode() : randomSeed;
         Random.InitState(RandomSeed);
@@ -73,12 +74,14 @@ public class GameManager : ProcessorEternal<GameManager, GameState>
             
             // Start random event.
             MapBlockEventType randomEventType = MapBlockEventType.None;
+            MapBlockState blockState = MapBlockState.Idle;
             while (spawnAmount-- > 0)
             {
                 // Get prefab.
                 switch (deep)
                 {
                     case 0:
+                        blockState = MapBlockState.Interacted;
                         randomEventType = MapBlockEventType.None;
                         break;
                     
@@ -123,7 +126,7 @@ public class GameManager : ProcessorEternal<GameManager, GameState>
                         break;
                 }
 
-                AdventureMap[new Vector2Int(spawnAmount, deep)] = randomEventType;
+                AdventureMap[new Vector2Int(spawnAmount, deep)] = new MapBlockData(randomEventType, blockState);
                 
                 // Update limit random list.
                 randomEventCount.TryAdd(randomEventType, 0);
@@ -155,7 +158,7 @@ public class GameManager : ProcessorEternal<GameManager, GameState>
 
     void Activate_Adventure()
     {
-        GenerateAdventureMap();
+        GenerateRandomAdventureMap();
         LoadingManager.Instance.LoadScene("Map");
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Character : Actor
 {
     public CharacterDataSet data;
-    public Status statusAdditional;
 
     public override void Initialize()
     {

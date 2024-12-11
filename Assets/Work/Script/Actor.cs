@@ -15,6 +15,6 @@ public abstract class Actor : MonoBehaviour
 
     public void InitializeStatus(Status statusOriginal)
     {
-        Status.Initialize(statusOriginal);
+        Status = new ActorStatus(statusOriginal);
     }
 }

@@ -13,22 +13,39 @@ public class Status
     [Range(0, 1)]
     public float critical;
     public float criticalDamage;
+    
+    public Status() { }
+
+    public Status(Status statusOriginal)
+    {
+        healthMaximum = statusOriginal.healthMaximum;
+        attack = statusOriginal.attack;
+        shield = statusOriginal.shield;
+        dodge = statusOriginal.dodge;
+        critical = statusOriginal.critical;
+        criticalDamage = statusOriginal.criticalDamage;
+    }
 }
 
 [Serializable]
 public class ActorStatus : Status
 {
-    public int healthCurrent;
-    public Dictionary<string, int> buff = new Dictionary<string, int>();
+    public int HealthCurrent { get; set; }
+    public Dictionary<string, int> Buff { get; set; } = new Dictionary<string, int>();
+    
+    public ActorStatus() { }
 
-    public void Initialize(Status statusOriginal)
-    {
-        buff.Clear();
-        healthCurrent = healthMaximum = statusOriginal.healthMaximum;
-        dodge = statusOriginal.dodge;
-        critical = statusOriginal.critical;
-        criticalDamage = statusOriginal.criticalDamage;
+    public ActorStatus(Status status) : base(status)
+    { 
+        Buff.Clear();
+        HealthCurrent = status.healthMaximum;
     }
+}
+
+[Serializable]
+public class PlayerStatus : ActorStatus
+{
+    public List<int> Items { get; set; } = new List<int>();
 }
 
 [Serializable]
