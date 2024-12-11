@@ -1,32 +1,44 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using EPOOutline;
 using RaindowStudio.Attribute;
-using RaindowStudio.DesignPattern;
+using RaindowStudio.Utility;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class MapBlock : MonoBehaviour
 {
-    [UneditableField] public int deep;
     [UneditableField] public Vector2Int index;
-    [SerializeField, UneditableField] private bool interactable;
-    [UneditableField] public bool interacted;
+    
     public MapBlockEventType eventType;
+    public Outlinable outline;
 
-    public void Initialize(int deep, Vector2Int index)
-    {
-        this.deep = deep;
-        this.index = index;
-        interactable = interacted = false;
-    }
-
+    [SerializeField, UneditableField] private bool _interactable;
+    [SerializeField, UneditableField] private bool _interacted;
+    
     public bool Interactable
     {
-        get => interactable;
+        get => _interactable;
         set
         {
-            interactable = value;
+            if (_interactable = value)
+            {
+                Animation_Interactable();
+            }
+        }
+    }
+
+    public bool Interacted
+    {
+        get => _interacted;
+        set
+        {
+            if (_interacted = value)
+            {
+                Animation_Interacted();
+            }
         }
     }
 
@@ -35,10 +47,9 @@ public class MapBlock : MonoBehaviour
         if (!Interactable)
             return;
         
-        GameManager.Instance.adventurePosition = index;
-        GameManager.Instance.deep = deep;
+        GameManager.Instance.AdventurePosition = index;
 
-        switch (eventType)
+        /*switch (eventType)
         {
             case MapBlockEventType.Monster:
             case MapBlockEventType.Elite:
@@ -54,44 +65,48 @@ public class MapBlock : MonoBehaviour
             
             case MapBlockEventType.Treasure:
                 break;
-        }
-
+        }*/
     }
 
     public void ActiveNextDeepNearestBlock()
     {
         //MapManager.Instance.mapBlocks[]
-        foreach (var block in GetNextDeepNearestBlock(index))
+        foreach (var block in MapManager.Instance.GetNextDeepNearestBlocks(index))
         {
             block.Interactable = true;
         }
     }
 
-    public static List<MapBlock> GetNextDeepNearestBlock(Vector2Int index)
+    private void Animation_Interactable()
     {
-        List<MapBlock> returnList = new List<MapBlock>();
+        transform.DOLocalMoveY(3f, 2f).SetEase(Ease.InOutQuart);
+        outline.enabled = true;
+    }
 
-        var mapBlocks = MapManager.Instance.mapBlocks;
-        
-        switch (index.x)
+    private void Animation_Interacted()
+    {
+        transform.DOShakePosition(1, new Vector3(0.5f, 0.5f, 0.5f), 25);
+        transform.DOLocalMoveY(-2f, 1.75f).SetEase(Ease.InQuint).SetDelay(.25f);
+        Color color = new Color(.25f, .25f, .25f);
+        if (TryGetComponent(out MeshRenderer meshRenderer))
         {
-            case 0 : 
-                returnList.Add(mapBlocks[new Vector2Int(0, index.y + 1)]);
-                returnList.Add(index.y % 2 == 1
-                    ? mapBlocks[new Vector2Int(2, index.y + 1)]
-                    : mapBlocks[new Vector2Int(1, index.y + 1)]);
-                break;
-            case 1 : 
-                returnList.Add(mapBlocks[new Vector2Int(1, index.y + 1)]);
-                if (index.y % 2 == 1)
-                    returnList.Add(mapBlocks[new Vector2Int(0, index.y + 1)]);
-                break;
-            case 2 : 
-                returnList.Add(mapBlocks[new Vector2Int(0, index.y + 1)]);
-                break;
+            meshRenderer.material.DOColor(color, 1).SetDelay(.25f);
         }
+        foreach (Transform child in transform)
+        {
+            if (child.TryGetComponent(out meshRenderer))
+            {
+                meshRenderer.material.DOColor(color, 1).SetDelay(.25f);
+            }
+        }
+        outline.enabled = false;
+    }
 
-        return returnList;
+    public void Initialize(Vector2Int columnRow, bool interactable = false, bool interacted = false)
+    {
+        index = columnRow;
+        Interactable = interactable;
+        Interacted = interacted;
     }
 }
 

@@ -32,7 +32,7 @@ MonoBehaviour:
   defaultEaseOvershootOrAmplitude: 1.70158
   defaultEasePeriod: 0
   defaultAutoKill: 1
-  defaultLoopType: 0
+  defaultLoopType: 1
   debugMode: 0
   debugStoreTargetId: 1
   showPreviewPanel: 1
@@ -49,6 +49,6 @@ MonoBehaviour:
     deAudioEnabled: 0
     deUnityExtendedEnabled: 0
     epoOutlineEnabled: 0
-  createASMDEF: 0
+  createASMDEF: 1
   showPlayingTweens: 0
   showPausedTweens: 0
