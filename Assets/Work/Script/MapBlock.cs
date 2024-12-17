@@ -69,7 +69,7 @@ public class MapBlock : MonoBehaviour
         outlineInteracted.gameObject.SetActive(true);
     }
 
-    private void Animation_Selectable()
+    private void Animation_Selectable() 
     {
         transform.DOLocalMoveY(3f, 2f).SetEase(Ease.InOutQuart);
         outlineSelectable.gameObject.SetActive(true);
