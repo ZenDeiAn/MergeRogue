@@ -39,7 +39,7 @@ public class TEST : MonoBehaviour
                 if (transform.GetChild(index - indexOffset).TryGetComponent(out SpriteRenderer spriteRenderer))
                 {
                     spriteRenderer.transform.localScale = Vector3.one * anchorSize;
-                    spriteRenderer.transform.position =
+                    spriteRenderer.transform.localPosition =
                         new Vector3((anchorSize + anchorSpace) * j, (anchorSize + anchorSpace) * i, 0) -
                         original +
                         offset;

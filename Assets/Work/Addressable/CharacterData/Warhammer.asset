@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Warhammer
   _status:
+    speed: 5
     healthMaximum: 150
     attack: 15
     shield: 2
+    healthSteal: 0
     dodge: 0.01
     critical: 0.05
     criticalDamage: 150

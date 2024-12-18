@@ -15,8 +15,8 @@ Material:
   - _BACKGROUNDMODE_COLORS
   - _ENABLECLOUDSROTATION_ON
   - _ENABLECLOUDS_ON
-  - _ENABLEMOON_ON
   - _ENABLEPATTERNOVERLAY_ON
+  - _ENABLESTARSROTATION_ON
   - _ENABLESTARSTWINKLING_ON
   - _ENABLESTARS_ON
   m_InvalidKeywords:
@@ -211,7 +211,7 @@ Material:
     - _Clouds: 1
     - _CloudsAlpha: 0
     - _CloudsCat: 1
-    - _CloudsHeight: -0.16
+    - _CloudsHeight: -0.5
     - _CloudsIntensity: 1
     - _CloudsLitbySun: 0
     - _CloudsRotation: 0
@@ -232,13 +232,13 @@ Material:
     - _EnableCloudsRotation: 1
     - _EnableDirectionLight: 0
     - _EnableFogMessage: 0
-    - _EnableMoon: 1
+    - _EnableMoon: 0
     - _EnablePattern: 1
     - _EnablePatternOverlay: 1
     - _EnableSkyPatternOverlay: 1
     - _EnableStars: 1
     - _EnableStarsHeightMask: 0
-    - _EnableStarsRotation: 0
+    - _EnableStarsRotation: 1
     - _EnableStarsSunMask: 1
     - _EnableStarsTwinkling: 1
     - _EnableSun: 0
@@ -247,8 +247,8 @@ Material:
     - _EnableSunMoonMask: 1
     - _EnableTwinkling: 1
     - _EqHeight: 0.419
-    - _EquatorHeight: 0.5
-    - _EquatorSmoothness: 0.7
+    - _EquatorHeight: 0.162
+    - _EquatorSmoothness: 0.421
     - _Exposure: 0
     - _Fade: 0
     - _Float0: -1
@@ -295,16 +295,16 @@ Material:
     - _StarsBottomMask: 1
     - _StarsCat: 1
     - _StarsFlikerContrast: 1
-    - _StarsHeightMask: 0.2
+    - _StarsHeightMask: 0
     - _StarsHeigntMask: 1
     - _StarsHorizonMask: 1
-    - _StarsIntensity: 3
-    - _StarsLayer: 3
+    - _StarsIntensity: 5
+    - _StarsLayer: 2
     - _StarsMaskPower: 1
-    - _StarsRotation: 0
-    - _StarsRotationSpeed: 0.5
-    - _StarsSize: 0.6
-    - _StarsSunMask: 0.02
+    - _StarsRotation: 90
+    - _StarsRotationSpeed: 1
+    - _StarsSize: 0.937
+    - _StarsSunMask: 0
     - _SunCat: 1
     - _SunIntensity: 2
     - _SunRadiusB: 0
@@ -313,7 +313,7 @@ Material:
     - _SunorMoon: 1
     - _TITLE: 1
     - _ToggleSwitch0: 0
-    - _TwinklingContrast: 1
+    - _TwinklingContrast: 1.03
     - _TwinklingScale: 0.2
     - _TwinklingSpeed: 0.05
     - _TwinklingTextureContrast: 1
@@ -346,13 +346,13 @@ Material:
     - _Eq: {r: 1, g: 0.6769777, b: 0.330882, a: 0}
     - _EquatorColor: {r: 0.6301887, g: 0.1082022, b: 0.31853682, a: 1}
     - _Ground: {r: 0.4779411, g: 0.43111518, b: 0.23545504, a: 0}
-    - _GroundColor: {r: 0.2905661, g: 0.23433149, b: 0.22532576, a: 1}
+    - _GroundColor: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
     - _MoonColor: {r: 1, g: 0.2245282, b: 0.2245282, a: 1}
     - _Sky: {r: 0.6691177, g: 0.29519898, b: 0.29519898, a: 0}
-    - _SkyColor: {r: 0.30517134, g: 0.13132781, b: 0.5849056, a: 1}
+    - _SkyColor: {r: 0.21022052, g: 0.13768245, b: 0.3207547, a: 1}
     - _SkyboxRotationAxis: {r: 0, g: 1, b: 0, a: 0}
     - _Skycol: {r: 0.27941146, g: 0.64219046, b: 1, a: 0}
-    - _StarsRotationAxis: {r: 0, g: 1, b: 0, a: 0}
+    - _StarsRotationAxis: {r: 1, g: 1, b: 0, a: 0}
     - _SunColor: {r: 0.78133863, g: 0.6764706, b: 1, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 0}
     - _Vector1: {r: 0, g: 1, b: 1, a: 0}

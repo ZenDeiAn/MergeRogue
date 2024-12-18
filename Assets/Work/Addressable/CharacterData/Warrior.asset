@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Warrior
   _status:
+    speed: 10
     healthMaximum: 120
     attack: 12
     shield: 5
+    healthSteal: 0
     dodge: 0.1
     critical: 0.2
     criticalDamage: 120

@@ -5,9 +5,11 @@ using UnityEngine;
 [Serializable]
 public class Status
 {
+    public int speed;
     public int healthMaximum;
     public int attack;
     public int shield;
+    public float healthSteal; 
     [Range(0, 1)]
     public float dodge;
     [Range(0, 1)]
