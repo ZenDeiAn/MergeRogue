@@ -1,20 +1,38 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Actor : MonoBehaviour
+public interface IActor
 {
     public ActorStatus Status { get; set; }
 
-    public abstract void Initialize();
+    public void Initialize();
+}
 
-    public void Act(Actor target, ActType type, object data)
+public static class ActorUtility
+{
+    public static void InitializeStatus(this IActor self,Status statusOriginal)
+    {
+        self.Status = new ActorStatus(statusOriginal);
+    }
+
+    public static void Act(this IActor self, IActor target, object data)
     {
         
     }
+}
 
-    public void InitializeStatus(Status statusOriginal)
-    {
-        Status = new ActorStatus(statusOriginal);
-    }
+[Serializable]
+public enum ActType
+{
+    Attack,
+    Buff,
+    DeBuff
+}
+
+public interface IActorData
+{
+    public string ID { get; set; }
+    public Status Status { get; set; }
 }

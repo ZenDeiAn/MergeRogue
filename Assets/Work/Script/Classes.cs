@@ -65,31 +65,25 @@ public abstract class Buff
     public abstract string ID { get; }
     public abstract bool IsDeBuff { get; }
 
-    public virtual void AddedAction(Actor target)
+    public virtual void AddedAction(IActor target)
     {
         
     }
 
-    public virtual void RoundStartAction(Actor target)
+    public virtual void RoundStartAction(IActor target)
     {
         
     }
 
-    public virtual void RoundEndAction(Actor target)
+    public virtual void RoundEndAction(IActor target)
     {
         
     }
 
-    public virtual void RemoveAction(Actor target)
+    public virtual void RemoveAction(IActor target)
     {
         
     }
-}
-
-public interface IActor
-{
-    public string ID { get; set; }
-    public Status Status { get; set; }
 }
 
 [Serializable]

@@ -895,11 +895,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10f7b3312da28c547afb2e3e5b9eb633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 2808394749742773559}
-  footIK: {fileID: 8750824541458362024}
-  meshRenderer: {fileID: 9175288685970604507}
-  characterPreviewTransform: {fileID: 0}
-  weaponSocket:
+  _footIK: {fileID: 8750824541458362024}
+  _characterPreviewTransform: {fileID: 2948949333631755717}
+  _animator: {fileID: 2808394749742773559}
+  _meshRenderer: {fileID: 9175288685970604507}
+  _weaponSockets:
     keys: 000000000100000002000000
     values:
     - {fileID: 4142620005226834542}

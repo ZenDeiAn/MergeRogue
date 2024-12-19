@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "CharacterDataSet", menuName = "CharacterDataSet")]
-public class CharacterDataSet : ScriptableObject, IActor
+public class CharacterDataSet : ScriptableObject, IActorData
 {
     [SerializeField] private string _id;
     [SerializeField] private Status _status;
@@ -18,5 +18,4 @@ public class CharacterDataSet : ScriptableObject, IActor
     public List<WeaponData> weaponDataList;
     public string ID { get => _id; set => _id = value; } 
     public Status Status { get => _status; set => _status = value; } 
-    
 }

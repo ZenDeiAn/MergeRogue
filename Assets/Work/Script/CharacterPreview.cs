@@ -5,62 +5,44 @@ using System.Linq;
 using HoaxGames;
 using RaindowStudio.Utility;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class CharacterPreview : MonoBehaviour
+public class CharacterPreview : MonoBehaviour, ICharacterDataInstance
 {
-    [SerializeField] private Animator animator;
-    [SerializeField] private FootIK footIK;
-    [SerializeField] private SkinnedMeshRenderer meshRenderer;
-    [SerializeField] private Transform characterPreviewTransform;
+    [FormerlySerializedAs("footIK")] [SerializeField] private FootIK _footIK;
+    [FormerlySerializedAs("characterPreviewTransform")] [SerializeField] private Transform _characterPreviewTransform;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private SkinnedMeshRenderer _meshRenderer;
+    [SerializeField] private EnumPairList<WeaponSocketType, MeshFilter> _weaponSockets =
+        new EnumPairList<WeaponSocketType, MeshFilter>();
+
+    public EnumPairList<WeaponSocketType, MeshFilter> WeaponSockets => _weaponSockets;
+    public Animator Animator => _animator;
+    public SkinnedMeshRenderer MeshRenderer => _meshRenderer;
+    public CharacterDataSet CharacterDataSet { get; set; }
 
     private Vector3 _initPosition = Vector3.zero;
     private Quaternion _initRotation;
-
-    [SerializeField]
-    private EnumPairList<WeaponSocketType, MeshFilter> weaponSocket =
-        new EnumPairList<WeaponSocketType, MeshFilter>(); 
     
     public void Initialize()
     {
-        CharacterDataSet data = AddressableManager.Instance.CurrentCharacterData;
-        animator.avatar = data.avatar;
-        meshRenderer.sharedMesh = data.mesh;
-        meshRenderer.material = data.material;
-        animator.runtimeAnimatorController = data.rac_showcase;
-
+        this.InitializeCharacterData(AddressableManager.Instance.CurrentCharacterData);
+        Animator.runtimeAnimatorController = CharacterDataSet.rac_showcase;
+        
         if (_initPosition == Vector3.zero)
         {
-            _initPosition = characterPreviewTransform.position;
-            _initRotation = characterPreviewTransform.rotation;
+            _initPosition = _characterPreviewTransform.position;
+            _initRotation = _characterPreviewTransform.rotation;
         }
         else
         {
-            characterPreviewTransform.position = _initPosition;
-            characterPreviewTransform.rotation = _initRotation;
-        }
-
-        List<WeaponSocketType> weaponSocketTypes = Enum.GetValues(typeof(WeaponSocketType)).Cast<WeaponSocketType>().ToList();
-        for (int i = 0; i < weaponSocketTypes.Count; ++i)
-        {
-            if (i < data.weaponDataList.Count)
-            {
-                var weaponData = data.weaponDataList[i];
-                WeaponSocketType type = weaponData.socketType;
-                weaponSocket[type].gameObject.SetActive(true);
-                weaponSocket[type].mesh = weaponData.mesh;
-                weaponSocket[type].transform.localPosition = weaponData.offsetPosition;
-                weaponSocket[type].transform.localEulerAngles = weaponData.offsetRotation;
-                weaponSocketTypes.Remove(type);
-            }
-            else
-            {
-                weaponSocket[weaponSocketTypes[i]].gameObject.SetActive(false);
-            }
+            _characterPreviewTransform.position = _initPosition;
+            _characterPreviewTransform.rotation = _initRotation;
         }
     }
     
     public void SetFootIKEnable(int enableNumber)
     {
-        footIK.enabled = enableNumber == 1;
+        _footIK.enabled = enableNumber == 1;
     }
 }
