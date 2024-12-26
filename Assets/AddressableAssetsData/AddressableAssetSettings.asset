@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 48b8cae93ce7fb543a3349f23f05f47b
   m_currentHash:
     serializedVersion: 2
-    Hash: 21a6b7766d5af09b5b465e381b329a57
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: 38b59e5ab3e71e742b44fc1a7d373b29, type: 2}
   - {fileID: 11400000, guid: e57caa3b704b25a4d9a81c7963d48b07, type: 2}
+  - {fileID: 11400000, guid: b8633751131fe2b4bb672e87c5668479, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -90,6 +91,7 @@ MonoBehaviour:
     - MapScene
     - TitleScene
     - Global
+    - BattleScene
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: d432307675e01434889971a462edea14, type: 2}

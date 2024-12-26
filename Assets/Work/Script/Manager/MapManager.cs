@@ -110,7 +110,7 @@ public class MapManager : Processor<MapManager, MapState>
         Debug.Log($"Active Event : {block.eventType}");
         switch (block.eventType)
         {
-            case MapBlockEventType.Monster:
+            case MapBlockEventType.Minion:
             case MapBlockEventType.Elite:
             case MapBlockEventType.Boss:
                 LoadingManager.Instance.LoadScene("Battle");

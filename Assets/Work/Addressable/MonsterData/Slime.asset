@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e748c5f4441efde48a39150f9734c377, type: 3}
+  m_Name: Slime
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 489858457050510664, guid: 757e27379d412ab479898cb668a9d2e6, type: 3}
+  _type: 0
+  _status:
+    speed: 1
+    healthMaximum: 50
+    attack: 5
+    shield: 0
+    healthSteal: 0
+    dodge: 0
+    critical: 0.01
+    criticalDamage: 1.2
+  _skillData:
+    name: 
+    description: 
+    targetHostile: 0
+    number: 0
+    multiply: 0
+    buffType: 0
+    buffRound: 0

@@ -16,11 +16,13 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
     public const string LABEL_GLOBAL = "Global";
     public const string LABEL_TITLE_SCENE = "TitleScene";
     public const string LABEL_MAP_SCENE = "MapScene";
+    public const string LABEL_BATTLE_SCENE = "BattleScene";
 
     public Dictionary<string, CharacterDataSet> Character { get; set; }
     public Dictionary<string, Sprite> UI { get; set; }
     public Dictionary<MapBlockEventType, GameObject> MapBlockPrefabs { get; set; }
     public List<MapBlockProbability> MapBlockProbabilities { get; set; }
+    public Dictionary<MonsterType, List<MonsterProbabilityData>> MonsterProbabilities { get; set; }
     
     private bool _initialized;
 
@@ -105,6 +107,7 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
         UI = new Dictionary<string, Sprite>();
         MapBlockProbabilities = new List<MapBlockProbability>();
         MapBlockPrefabs = new Dictionary<MapBlockEventType, GameObject>();
+        MonsterProbabilities = new Dictionary<MonsterType, List<MonsterProbabilityData>>();
         StartCoroutine(InitializeIE(t => _initialized = true));
     }
 }

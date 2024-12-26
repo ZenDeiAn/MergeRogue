@@ -20,9 +20,9 @@ public class GameManager : ProcessorEternal<GameManager, GameState>
     public int RandomSeed { get; set; }
     public Vector2Int AdventurePosition { get; set; } 
     public PlayerStatus PlayerStatus { get; set; }
-
     public Dictionary<Vector2Int, MapBlockData> AdventureMap { get; set; } =
         new Dictionary<Vector2Int, MapBlockData>();
+    public MapBlockData AdventrueCurrentMapData => AdventureMap[AdventurePosition];    
     
     public void GenerateRandomAdventureMap(int randomSeed = -1)
     {

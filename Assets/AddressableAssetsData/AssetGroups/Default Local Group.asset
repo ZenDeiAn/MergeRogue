@@ -23,38 +23,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - Global
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5ec5815f62a0d37488d95601e3f0129f
-    m_Address: Assets/PolygonMiniFantasyCharacters/Materials/PolygonMiniFantasyCharacters_01_A.mat
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Global
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 16ae9ce34cfa5234a9cb42ecbcea6424
-    m_Address: Assets/Work/Addressable/CharacterData/Warrior.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Global
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cc4b62dfbe1092a4c861cc46f4168380
-    m_Address: Assets/Work/Addressable/CharacterData/Warhammer.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Global
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 13fc610c57bdacb4a9c6925d238bf637
-    m_Address: MapData
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - MapScene
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a02be0c241ebcb142b6dedf3ac7cb68b
     m_Address: Assets/Work/Addressables/UIData.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Global
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6c6a121967e7e064f92145af92a06598
-    m_Address: Assets/Work/Addressable/LanguageData/Title.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Global

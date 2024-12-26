@@ -102,7 +102,18 @@ public class TitleManager : Processor<TitleManager, TitleState>
                                             }
                                         }
                                         
-                                        OnPatchOver();
+                                        // Download Map Resources.
+                                        InitializePatchUI("Monster Resources");
+                                        am.MonsterProbabilities.Clear();
+                                        am.LoadAssetsByLabel<MonsterProbability>(AddressableManager.LABEL_BATTLE_SCENE, aa =>
+                                        {
+                                            if (Enum.TryParse(aa.name, out MonsterType type))
+                                            {
+                                                am.MonsterProbabilities[type] = aa.MonsterProbabilities;
+                                            }
+                                            
+                                            OnPatchOver();
+                                        });
                                     });
                                 });
                         });

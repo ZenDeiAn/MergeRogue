@@ -32,7 +32,7 @@ Material:
     IGNOREPROJECTOR: False
     RenderType: Opaque
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _ColorGrading
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -263,7 +263,7 @@ Material:
     - _RimSize: 1
     - _RimSmoothness: 0.5
     - _RimThresholdOffset: 0.25
-    - _Roughness: 1
+    - _Roughness: 0.9
     - _Saturation: 1
     - _SketchMapScale: 50
     - _Smoothness: 1

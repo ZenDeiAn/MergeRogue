@@ -105,7 +105,7 @@ public class MapBlock : MonoBehaviour
 public enum MapBlockEventType
 {
     None,   // Not reachable.
-    Monster,
+    Minion,
     Elite,
     RandomEvent,
     Rest,
@@ -140,5 +140,29 @@ public class MapBlockData
     {
         EventType = eventType;
         State = state;
+    }
+
+    public bool TryParseMonsterType(out MonsterType type)
+    {
+        type = global::MonsterType.Minion;
+        switch (EventType)
+        {
+            case MapBlockEventType.Minion:
+                type = global::MonsterType.Minion;
+                break;
+
+            case MapBlockEventType.Elite:
+                type = global::MonsterType.Elite;
+                break;
+            
+            case MapBlockEventType.Boss:
+                type = global::MonsterType.Boss;
+                break;
+            
+            default:
+                return false;
+        }
+
+        return true;
     }
 }

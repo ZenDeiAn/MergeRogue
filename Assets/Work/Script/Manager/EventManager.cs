@@ -15,12 +15,8 @@ public class EventManager : SingletonUnityEternal<EventManager>
             case ActType.Attack:
 
                 break;
-
-            case ActType.Buff:
-
-                break;
-
-            case ActType.DeBuff:
+            
+            case ActType.Skill:
 
                 break;
         }

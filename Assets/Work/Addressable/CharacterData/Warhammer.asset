@@ -12,16 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b88e8628fe4cf4da7c1457fd1be9ae, type: 3}
   m_Name: Warhammer
   m_EditorClassIdentifier: 
-  _id: Warhammer
   _status:
     speed: 5
     healthMaximum: 150
     attack: 15
     shield: 2
-    healthSteal: 0
+    healthStealth: 0
     dodge: 0.01
     critical: 0.05
-    criticalDamage: 150
+    criticalDamage: 1.5
+  _attackData:
+    name: 
+    description: 
+    icon: {fileID: 0}
+    effectPrefab: {fileID: 0}
+    multiply: 1
+  _skillData:
+    name: 
+    description: 
+    icon: {fileID: 0}
+    effectPrefab: {fileID: 0}
+    targetHostile: 1
+    number: 0
+    multiply: 0
+    buffType: 0
+    buffRound: 0
   mesh: {fileID: 9093503826260832301, guid: 45c3848418decf7449815f900620c8c2, type: 3}
   material: {fileID: 2100000, guid: 5ec5815f62a0d37488d95601e3f0129f, type: 2}
   avatar: {fileID: 9000000, guid: 45c3848418decf7449815f900620c8c2, type: 3}
@@ -32,5 +47,5 @@ MonoBehaviour:
   weaponDataList:
   - socketType: 1
     mesh: {fileID: 4300000, guid: c40a754f65969584ebd98a7be70c374f, type: 3}
-    offsetPosition: {x: 0.071, y: 0.063, z: 0.13}
-    offsetRotation: {x: 57.845, y: -371.922, z: -449.683}
+    offsetPosition: {x: -0.146, y: 0.049, z: 0.112}
+    offsetRotation: {x: 57.845, y: -11.922, z: -89.683}
