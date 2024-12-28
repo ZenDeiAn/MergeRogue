@@ -19,10 +19,10 @@ public class GameManager : ProcessorEternal<GameManager, GameState>
     public string CharacterID => _characterID;
     public int RandomSeed { get; set; }
     public Vector2Int AdventurePosition { get; set; } 
-    public PlayerStatus PlayerStatus { get; set; }
+    public ActorStatus AdventurePlayerStatus { get; set; }
     public Dictionary<Vector2Int, MapBlockData> AdventureMap { get; set; } =
         new Dictionary<Vector2Int, MapBlockData>();
-    public MapBlockData AdventrueCurrentMapData => AdventureMap[AdventurePosition];    
+    public MapBlockData AdventureCurrentMapData => AdventureMap[AdventurePosition];    
     
     public void GenerateRandomAdventureMap(int randomSeed = -1)
     {
@@ -160,6 +160,7 @@ public class GameManager : ProcessorEternal<GameManager, GameState>
     {
         GenerateRandomAdventureMap();
         LoadingManager.Instance.LoadScene("Map");
+        AdventurePlayerStatus = new ActorStatus(AddressableManager.Instance.CurrentCharacterData.Status);
     }
 }
 

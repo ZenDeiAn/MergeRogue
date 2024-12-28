@@ -18,22 +18,26 @@ public class Character : MonoBehaviour, ICharacterDataInstance, IActor
     public CharacterDataSet DataSet { get; set; }
 
     public ActorStatus Status { get; set; }
+    public ActorStatus InBattleStatus { get; set; }
+    public ActorAttackData AttackData => DataSet.AttackData;
+    public ActorSkillData SkillData => DataSet.SkillData;
+    public ActionType CurrentAction { get; set; }
 
-    public void Attack(IActor target)
+    public void Attack(List<IActor> target)
     {
-        this.Act(target, ActType.Attack);
+        this.Act(target, ActionType.Attack);
     }
 
-    public void Skill(IActor target)
+    public void Skill(List<IActor> target)
     {
-        this.Act(target, ActType.Skill);
+        this.Act(target, ActionType.Skill);
     }
 
     public void Initialize()
     {
         this.InitializeCharacterData(AddressableManager.Instance.CurrentCharacterData);
         Animator.runtimeAnimatorController = DataSet.rac_act;
-        this.InitializeStatus(DataSet.Status);
+        this.InitializeStatus(GameManager.Instance.AdventurePlayerStatus);
     }
 }
 

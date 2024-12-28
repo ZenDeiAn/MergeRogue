@@ -2,75 +2,72 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using XLua;
 
-[Serializable]
+[Serializable, LuaCallCSharp]
 public class Status
 {
     [SerializeField] private int speed;
     [SerializeField] private int healthMaximum;
     [SerializeField] private int attack;
     [SerializeField] private int shield;
-    [SerializeField] private float healthStealth; 
+    [FormerlySerializedAs("healthStealth")] [SerializeField] private float getHealthStealth; 
     [SerializeField, Range(0, 1)] private float dodge;
-    [SerializeField, Range(0, 1)] private float critical;
-    [SerializeField] private float criticalDamage;
+    [FormerlySerializedAs("critical")] [SerializeField, Range(0, 1)] private float getCritical;
+    [FormerlySerializedAs("criticalDamage")] [SerializeField] private float getCriticalDamage;
     
-    public int Speed => speed;
-    public int HealthMaximum => healthMaximum;
-    public int Attack => attack;
-    public int Shield => shield;
-    public float HealthStealth => healthStealth;
-    public float Dodge => dodge;
-    public float Critical => critical;
-    public float CriticalDamage => criticalDamage;
+    public int GetSpeed => speed;
+    public int GetHealthMaximum => healthMaximum;
+    public int GetAttack => attack;
+    public int GetShield => shield;
+    public float GetHealthStealth => getHealthStealth;
+    public float GetDodge => dodge;
+    public float GetCritical => getCritical;
+    public float GetCriticalDamage => getCriticalDamage;
     
     
     public Status() { }
 
-    public Status(Status statusOriginal)
+    public Status(Status status)
     {
-        healthMaximum = statusOriginal.healthMaximum;
-        attack = statusOriginal.attack;
-        shield = statusOriginal.shield;
-        dodge = statusOriginal.dodge;
-        critical = statusOriginal.critical;
-        criticalDamage = statusOriginal.criticalDamage;
+        healthMaximum = status.healthMaximum;
+        attack = status.attack;
+        shield = status.shield;
+        dodge = status.dodge;
+        getCritical = status.getCritical;
+        getCriticalDamage = status.getCriticalDamage;
     }
 }
 
-[Serializable]
+[Serializable, LuaCallCSharp]
 public class ActorStatus : Status
 {
-    public int CurrentSpeed { get; set; }
-    public int CurrentHealth { get; set; }
-    public int CurrentHealthMaximum { get; set; }
-    public int CurrentAttack { get; set; }
-    public int CurrentShield { get; set; }
-    public float CurrentDodge { get; set; }
-    public float CurrentCritical { get; set; }
-    public float CurrentCriticalDamage { get; set; }
-
-    public Queue<BuffData> Buff { get; set; } = new Queue<BuffData>();
+    public int Speed { get; set; }
+    public int Health { get; set; }
+    public int HealthMaximum { get; set; }
+    public int Attack { get; set; }
+    public int Shield { get; set; }
+    public int ArmedShield { get; set; }
+    public float HealthStealth  { get; set; }
+    public float Dodge { get; set; }
+    public float Critical { get; set; }
+    public float CriticalDamage { get; set; }
+    public Dictionary<BuffType, BuffData> Buff { get; set; } = new Dictionary<BuffType, BuffData>();
     
     public ActorStatus() { }
 
     public ActorStatus(Status status) : base(status)
     { 
         Buff.Clear();
-        CurrentSpeed = status.Speed;
-        CurrentHealthMaximum = CurrentHealth = status.HealthMaximum;
-        CurrentAttack = status.Attack;
-        CurrentShield = status.Shield;
-        CurrentDodge = status.Dodge;
-        CurrentCritical = status.Critical;
-        CurrentCriticalDamage = status.CriticalDamage;
+        Speed = status.GetSpeed;
+        HealthMaximum = Health = status.GetHealthMaximum;
+        HealthStealth = status.GetHealthStealth;
+        Attack = status.GetAttack;
+        Shield = status.GetShield;
+        Dodge = status.GetDodge;
+        Critical = status.GetCritical;
+        CriticalDamage = status.GetCriticalDamage;
     }
-}
-
-[Serializable]
-public class PlayerStatus : ActorStatus
-{
-    public List<int> Items { get; set; } = new List<int>();
 }
 
 [Serializable]
@@ -89,10 +86,11 @@ public struct UIDataSet
     public Sprite sprite;
 }
 
+[Serializable, LuaCallCSharp]
 public class BuffData
 {
     public BuffType type;
-    public int aliveRound;
+    public int duration;
     public IActor source;
-    public int number;
+    public int strength;
 }

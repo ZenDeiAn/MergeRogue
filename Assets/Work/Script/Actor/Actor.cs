@@ -2,36 +2,58 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+using XLua;
 
+[LuaCallCSharp]
 public interface IActor
 {
     public ActorStatus Status { get; set; }
-    
-    public void Attack(IActor target);
-    public void Skill(IActor target);
+    public ActorStatus InBattleStatus { get; set; }
+    public ActorAttackData AttackData { get; }
+    public ActorSkillData SkillData { get; }
+    public ActionType CurrentAction { get; set; }
+    public void Attack(List<IActor> target);
+    public void Skill(List<IActor> target);
     public void Initialize();
 }
 
+[LuaCallCSharp]
 public static class ActorUtility
 {
-    public static void InitializeStatus(this IActor self,Status statusOriginal)
+    public static void InitializeStatus(this IActor self, Status status)
     {
-        self.Status = new ActorStatus(statusOriginal);
+        self.Status = new ActorStatus(status);
+        self.InBattleStatus = new ActorStatus(status);
     }
 
-    public static void Act(this IActor self, IActor target, ActType type)
+    public static void Act(this IActor self, List<IActor> target, ActionType type)
     {
+        self.CurrentAction = type;
         EventManager.Instance.ActorActing(self, target, type);
+    }
+
+    public static void AddBuffToActor(IActor caster, IActor target, BuffType buffType, int duration, int strength)
+    {
+        BuffData buffData = new BuffData()
+        {
+            source = caster,
+            type = buffType,
+            duration = duration,
+            strength = strength
+        };
+        target.InBattleStatus.Buff[buffType] = buffData;
     }
 }
 
-[Serializable]
-public enum ActType
+[Serializable, LuaCallCSharp]
+public enum ActionType
 {
     Attack,
     Skill
 }
 
+[LuaCallCSharp]
 public interface IActorData
 {
     public string ID { get; }
@@ -40,7 +62,7 @@ public interface IActorData
     public ActorSkillData SkillData { get; }
 }
 
-[Serializable]
+[Serializable, LuaCallCSharp]
 public struct ActorAttackData
 {
     public string name;
@@ -50,16 +72,18 @@ public struct ActorAttackData
     public float multiply;
 }
 
-[Serializable]
+[Serializable, LuaCallCSharp]
 public struct ActorSkillData
 {
     public string name;
     public string description;
     public Sprite icon;
     public GameObject effectPrefab;
+    public bool isEffectSpawnAtSelf;
     public bool targetHostile;      // Enemy targeting or not
-    public int number;
+    public int strength;
     public float multiply;
     public BuffType buffType;
-    public int buffRound;
+    public int buffDuration;
+    public int buffStrength;
 }

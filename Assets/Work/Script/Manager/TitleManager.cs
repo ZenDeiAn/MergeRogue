@@ -10,6 +10,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
+using XLua;
 
 public class TitleManager : Processor<TitleManager, TitleState>
 {
@@ -19,7 +20,8 @@ public class TitleManager : Processor<TitleManager, TitleState>
     [SerializeField] private TextMeshProUGUI txt_titlePatch;
     [SerializeField] private GameObject tapToStart;
     [SerializeField] private GameObject titlePatch;
-
+    private AddressableManager am;
+    
     public void ChangeGameManagerState(string state)
     {        
         GameManager.Instance.ChangeStateByString(state);
@@ -44,6 +46,100 @@ public class TitleManager : Processor<TitleManager, TitleState>
         tapToStart.SetActive(true);
     }
 
+    private IEnumerator Patch()
+    {
+        // Download Character Resources after AddressableManager Initialized.
+        yield return new WaitUntil(() => am.Initialized);
+        bool previousPatchOver = false;
+        InitializePatchUI("Character Resources");
+        am.LoadAssetsByLabel<CharacterDataSet>(AddressableManager.LABEL_GLOBAL,
+            a => am.Character.Add(a.ID, a),
+            d => sld_titlePatch.value = d.PercentComplete,
+            _ =>
+            {
+                GameManager.Instance.LoadSaveData();
+                previousPatchOver = true;
+            });
+        yield return new WaitUntil(() => previousPatchOver);
+        
+        // Download UI Resources.
+        previousPatchOver = false;
+        InitializePatchUI("UI Resources");
+        am.LoadAssetsByLabel<UIData>(AddressableManager.LABEL_GLOBAL,
+            a => a.UIDataList.ForEach(ds => am.UI[ds.id] = ds.sprite),
+            d => sld_titlePatch.value = d.PercentComplete,
+            _ => previousPatchOver = true);
+        yield return new WaitUntil(() => previousPatchOver);
+        
+        // Download Language Resources.
+        previousPatchOver = false;
+        InitializePatchUI("Language Resources");
+        List<LanguageDataObject> languageDataObjects = new List<LanguageDataObject>();
+        am.LoadAssetsByLabel<LanguageDataObject>(AddressableManager.LABEL_GLOBAL,
+            a => languageDataObjects.Add(a),
+            d => sld_titlePatch.value = d.PercentComplete,
+            _ =>
+            {
+                LanguageManager.ReloadResourceData(languageDataObjects.ToArray());
+                LanguageManager.ChangeLanguage(LanguageManager.language);
+                previousPatchOver = true;
+            });
+        yield return new WaitUntil(() => previousPatchOver);
+        
+        // Download Map Resources.
+        previousPatchOver = false;
+        InitializePatchUI("Map Resources");
+        am.LoadAssetsByLabel<MapData>(AddressableManager.LABEL_SCENE_MAP, a =>
+            {
+                am.MapBlockProbabilities = a.MapBlockProbabilities.OrderBy(t => t.deep)
+                    .GroupBy(item => item.deep)
+                    .Select(group => group.First()).ToList();
+                am.MapBlockPrefabs.Clear();
+                foreach (var prefab in a.MapBlockPrefabs)
+                {
+                    if (prefab.TryGetComponent(out MapBlock block))
+                    {
+                        am.MapBlockPrefabs[block.eventType] = prefab;
+                    }
+                }
+            },
+            d => sld_titlePatch.value = d.PercentComplete,
+            _ => previousPatchOver = true);
+        yield return new WaitUntil(() => previousPatchOver);
+        
+        // Download Monster Resources.
+        previousPatchOver = false;
+        InitializePatchUI("Monster Resources");
+        am.MonsterProbabilities.Clear();
+        am.LoadAssetsByLabel<MonsterProbability>(
+            AddressableManager.LABEL_SCENE_BATTLE, a =>
+            {
+                if (Enum.TryParse(a.name, out MonsterType type))
+                {
+                    am.MonsterProbabilities[type] = a.MonsterProbabilities;
+                }                                                },
+            d => sld_titlePatch.value = d.PercentComplete,
+            _ => previousPatchOver = true);
+        yield return new WaitUntil(() => previousPatchOver);
+        
+        // Download Lua Script Resources.
+        am.LuaEnv = new LuaEnv();
+        previousPatchOver = false;
+        InitializePatchUI("Script Resources");
+        am.LoadAssetsByLabel<TextAsset>(
+            AddressableManager.LABEL_SCENE_BATTLE,
+            a =>
+            {
+                Debug.Log($"{a.name.Split('.')[0]} : {a}");
+                am.LuaEnv.DoString(a.ToString(), a.name.Split('.')[0]);
+            },
+            d => sld_titlePatch.value = d.PercentComplete,
+            _ =>  previousPatchOver = true);
+        yield return new WaitUntil(() => previousPatchOver);
+        
+        OnPatchOver();
+    }
+
     void DeActivate_Intro()
     {
         pd_tapToStart.Play();
@@ -57,68 +153,8 @@ public class TitleManager : Processor<TitleManager, TitleState>
         GameManager.CharacterChangedEvent += OnCharacterChangedEvent;
         
         // Start patching for basic data.
-        AddressableManager am = AddressableManager.Instance;
-        this.WaitUntilToDo(() => am.Initialized, () =>
-        {
-            // Download Character Resources.
-            InitializePatchUI("Character Resources");
-            am.LoadAssetsByLabel<CharacterDataSet>(AddressableManager.LABEL_GLOBAL,
-                a => am.Character.Add(a.ID, a),
-                d => sld_titlePatch.value = d.PercentComplete,
-                c =>
-                {
-                    GameManager.Instance.LoadSaveData();
-                    
-                    // Download UI Resources.
-                    InitializePatchUI("UI Resources");
-                    am.LoadAssetsByLabel<UIData>(AddressableManager.LABEL_GLOBAL,
-                        aa => aa.UIDataList.ForEach(ds => am.UI[ds.id] = ds.sprite),
-                        dd => sld_titlePatch.value = dd.PercentComplete,
-                        _ =>
-                        {
-                            // Download Language Resources.
-                            InitializePatchUI("Language Resources");
-                            List<LanguageDataObject> languageDataObjects = new List<LanguageDataObject>();
-                            am.LoadAssetsByLabel<LanguageDataObject>(AddressableManager.LABEL_GLOBAL, 
-                                aaa => languageDataObjects.Add(aaa),
-                                ddd => sld_titlePatch.value = ddd.PercentComplete,
-                                _ =>
-                                {
-                                    LanguageManager.ReloadResourceData(languageDataObjects.ToArray());
-                                    LanguageManager.ChangeLanguage(LanguageManager.language);
-                                    
-                                    // Download Map Resources.
-                                    InitializePatchUI("Map Resources");
-                                    am.LoadAssetsByLabel<MapData>(AddressableManager.LABEL_MAP_SCENE, a =>
-                                    {
-                                        am.MapBlockProbabilities = a.MapBlockProbabilities.OrderBy(t => t.deep).GroupBy(item => item.deep)
-                                            .Select(group => group.First()).ToList();
-                                        am.MapBlockPrefabs.Clear();
-                                        foreach (var prefab in a.MapBlockPrefabs)
-                                        {
-                                            if (prefab.TryGetComponent(out MapBlock block))
-                                            {
-                                                am.MapBlockPrefabs[block.eventType] = prefab;
-                                            }
-                                        }
-                                        
-                                        // Download Map Resources.
-                                        InitializePatchUI("Monster Resources");
-                                        am.MonsterProbabilities.Clear();
-                                        am.LoadAssetsByLabel<MonsterProbability>(AddressableManager.LABEL_BATTLE_SCENE, aa =>
-                                        {
-                                            if (Enum.TryParse(aa.name, out MonsterType type))
-                                            {
-                                                am.MonsterProbabilities[type] = aa.MonsterProbabilities;
-                                            }
-                                            
-                                            OnPatchOver();
-                                        });
-                                    });
-                                });
-                        });
-                });
-        });
+        am = AddressableManager.Instance;
+        StartCoroutine(Patch());
     }
 
     private void OnDestroy()
