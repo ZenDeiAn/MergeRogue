@@ -11,7 +11,8 @@ Right now still working on it...
 > - - Basic Data Structure.
 > - - Map Block interaction.  
 > - - Monster data structure.  
-> - - Skill data structure.  
+> - - Skill data structure.
+> - - XLua script hotupdate for buff, skill, damage calculate.
 
 > - Progressing :
 > - - Map Scene get into Scenario and camera movement.
