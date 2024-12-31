@@ -5,7 +5,7 @@ Right now still working on it...
 > - Target Platform : Android(Google App Store)
 > - Progress : 
 > - - Addressable bundle(CharacterData, MapData, UI) connect with Unity Cloud Content Delivery.
-> - - XLua script hotupdate for buff, skill, damage calculate.
+> - - XLua script hotfix for buff, skill, damage calculate.
 > - - Multi Language supporting. 
 > - - Title Scene demo.
 > - - Random rogue like map generation.
