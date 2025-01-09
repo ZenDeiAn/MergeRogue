@@ -1,5 +1,4 @@
 -- Actions ============================================================================================
-
 function CheckActionLegalAndApplyBuff(caster, target)
     print("LuaLibrary.Action.CheckActionLegalAndApplyBuff")
     return BuffCheck(caster)

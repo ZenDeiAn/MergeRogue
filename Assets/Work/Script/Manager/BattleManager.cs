@@ -11,8 +11,9 @@ public class BattleManager : Processor<BattleManager, BattleState>
     public List<Transform> monsterAnchors;
     public VirtualCameraRotateController vcrc;
    
-    [CSharpCallLua]
-    public delegate void CalculateNormalDamage(IActor source, IActor target);
+    [CSharpCallLua] public delegate void BattleActionDelegate(IActor source, IActor target);
+    private BattleActionDelegate _calculateNormalDamage;
+    private BattleActionDelegate _checkActionLegalAndApplyBuff;
     
     void Activate_Intro()
     {
@@ -74,29 +75,16 @@ public class BattleManager : Processor<BattleManager, BattleState>
     {
         base.Initialization();
         
-        LuaEnv luaEnv = new LuaEnv();
-        luaEnv.DoString("math.randomseed(os.time())");
-        luaEnv.Dispose();
-
+        // Random seed initialize for lua.
+        AddressableManager.Instance.LuaEnv.DoString("math.randomseed(os.time())");
+        // Get Battle Action function.
+        _calculateNormalDamage = AddressableManager.Instance.LuaEnv.Global.
+            Get<BattleActionDelegate>("CalculateNormalDamage");
+        _checkActionLegalAndApplyBuff = AddressableManager.Instance.LuaEnv.Global.
+            Get<BattleActionDelegate>("CheckActionLegalAndApplyBuff");
+        
         vcrc.enabled = false;
         State = BattleState.Intro;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log(monsters[0].InBattleStatus.Health);
-            CalculateNormalDamage calculateNormalDamage = AddressableManager.Instance.LuaEnv.Global.Get<CalculateNormalDamage>("CalculateNormalDamage");
-            calculateNormalDamage.Invoke(characters[0], monsters[0]);
-
-            Debug.Log(monsters[0].InBattleStatus.Health);
-            foreach (var VARIABLE in monsters[0].InBattleStatus.Buff)
-            {
-                Debug.Log($"{VARIABLE.Key} : {VARIABLE.Value}");
-            }
-        }
     }
 }
 

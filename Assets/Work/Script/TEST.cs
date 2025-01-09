@@ -15,7 +15,7 @@ public class TEST : MonoBehaviour
     [ContextMenu("Anchor Merge Tool Table Sockets")]
     public void AnchorMergeToolTableSockets()
     {
-        //float anchorSize = (1f - (rowColumn - 1) * anchorSpace) / rowColumn;
+        anchorSize = (1f - (rowColumn - 1) * anchorSpace) / rowColumn;
         int indexOffset = 0;
         float totalSize = rowColumn * anchorSize + (rowColumn - 1) * anchorSpace;
         Vector3 original = new Vector3(totalSize / 2 - anchorSize / 2, totalSize / 2 - anchorSize / 2, 0);
@@ -36,22 +36,22 @@ public class TEST : MonoBehaviour
                     continue;
                 }
                 //Debug.Log($"i : {i} | j : {j} | childCount : {transform.childCount} | index : {index - indexOffset}");
-                if (transform.GetChild(index - indexOffset).TryGetComponent(out SpriteRenderer spriteRenderer))
+                if (transform.GetChild(index - indexOffset).TryGetComponent(out RectTransform rectTransform))
                 {
-                    spriteRenderer.transform.localScale = Vector3.one * anchorSize;
+                    /*spriteRenderer.transform.localScale = Vector3.one * anchorSize;
                     spriteRenderer.transform.localPosition =
                         new Vector3((anchorSize + anchorSpace) * j, (anchorSize + anchorSpace) * i, 0) -
                         original +
                         offset;
                     spriteRenderer.sprite = targetSprite;
                     spriteRenderer.color = targetColor;
-                    spriteRenderer.material = targetMaterial;
-                    /*rectTransform.anchorMin =
+                    spriteRenderer.material = targetMaterial;*/
+                    rectTransform.anchorMin =
                         new Vector2((anchorSize + anchorSpace) * j, (anchorSize + anchorSpace) * i);
                     rectTransform.anchorMax =
                         new Vector2(anchorSize * (j + 1) + anchorSpace * j, anchorSize * (i + 1) + anchorSpace * i);
                     rectTransform.offsetMin = Vector2.zero;
-                    rectTransform.offsetMax = Vector2.zero;*/
+                    rectTransform.offsetMax = Vector2.zero;
                 }
                 else
                 {

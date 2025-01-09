@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Battle_MergeSocket
-  m_Shader: {fileID: 4800000, guid: da8efd605fdd20949a21be6242000625, type: 3}
+  m_Shader: {fileID: 4800000, guid: bb134d7d4389e3a45a6c49e898a344a4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -366,9 +366,9 @@ Material:
     - _HologramDistortionSpeed: 2
     - _HologramFade: 1
     - _HologramLineFrequency: 500
-    - _HologramLineGap: 3
+    - _HologramLineGap: 4
     - _HologramLineSpeed: 0.01
-    - _HologramMinAlpha: 0.2
+    - _HologramMinAlpha: 0.71
     - _Hue: 0
     - _InkSpreadContrast: 2
     - _InkSpreadDistance: 3
@@ -379,7 +379,7 @@ Material:
     - _InnerOutlineFade: 1
     - _InnerOutlineOutlineOnlyToggle: 0
     - _InnerOutlineTextureToggle: 0
-    - _InnerOutlineWidth: 0.05
+    - _InnerOutlineWidth: 0.03
     - _IsText: 0
     - _IsTextMeshPro: 0
     - _MetalContrast: 2.1
@@ -632,7 +632,7 @@ Material:
     - _GlitchNoiseScale: {r: 0, g: 3, b: 0, a: 0}
     - _GlitchNoiseSpeed: {r: 0, g: 1, b: 0, a: 0}
     - _HalftonePosition: {r: 0, g: 0, b: 0, a: 0}
-    - _HologramTint: {r: 1.4943391, g: 1.4943391, b: 1.4943391, a: 1}
+    - _HologramTint: {r: 0.10531621, g: 0.29896304, b: 0.4716981, a: 1}
     - _InkSpreadColor: {r: 1.9214058, g: 0.08873514, b: 8.47419, a: 0}
     - _InkSpreadNoiseScale: {r: 0.4, g: 0.4, b: 0, a: 0}
     - _InkSpreadPosition: {r: 0.5, g: -1, b: 0, a: 0}
