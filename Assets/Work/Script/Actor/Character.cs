@@ -37,7 +37,7 @@ public class Character : MonoBehaviour, ICharacterDataInstance, IActor
     {
         this.InitializeCharacterData(AddressableManager.Instance.CurrentCharacterData);
         Animator.runtimeAnimatorController = DataSet.rac_act;
-        this.InitializeStatus(GameManager.Instance.AdventurePlayerStatus);
+        this.InitializeStatus(AdventureManager.Instance.PlayerStatus);
     }
 }
 

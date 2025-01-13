@@ -50,7 +50,7 @@ public class MapBlock : MonoBehaviour
         if (State != MapBlockState.Selectable)
             return;
         
-        GameManager.Instance.AdventurePosition = index;
+        AdventureManager.Instance.Position = index;
         State = MapBlockState.Interacted;
         _particle.Play();
 
@@ -126,8 +126,8 @@ public enum MapBlockState
 [Serializable]
 public class MapBlockData
 {
-    public MapBlockEventType EventType { get; set; }
-    public MapBlockState State { get; set; }
+    public MapBlockEventType EventType;
+    public MapBlockState State;
     
     public MapBlockData() { }
 

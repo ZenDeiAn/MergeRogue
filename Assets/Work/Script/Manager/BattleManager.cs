@@ -28,12 +28,12 @@ public class BattleManager : Processor<BattleManager, BattleState>
         }
 
         monsters = new List<Monster>();
-        if (GameManager.Instance.AdventureCurrentMapData.TryParseMonsterType(out MonsterType monsterType))
+        if (AdventureManager.Instance.CurrentMapData.TryParseMonsterType(out MonsterType monsterType))
         {
             List<MonsterGroup> monsterGroup = new List<MonsterGroup>();
             foreach (var list in AddressableManager.Instance.MonsterProbabilities[monsterType])
             {
-                if (list.deep > GameManager.Instance.AdventurePosition.y)
+                if (list.deep > AdventureManager.Instance.Position.y)
                 {
                     break;
                 }

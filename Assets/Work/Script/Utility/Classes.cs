@@ -7,24 +7,23 @@ using XLua;
 [Serializable, LuaCallCSharp]
 public class Status
 {
-    [SerializeField] private int speed;
-    [SerializeField] private int healthMaximum;
-    [SerializeField] private int attack;
-    [SerializeField] private int shield;
-    [FormerlySerializedAs("healthStealth")] [SerializeField] private float getHealthStealth; 
-    [SerializeField, Range(0, 1)] private float dodge;
-    [FormerlySerializedAs("critical")] [SerializeField, Range(0, 1)] private float getCritical;
-    [FormerlySerializedAs("criticalDamage")] [SerializeField] private float getCriticalDamage;
+    [SerializeField] protected int speed;
+    [SerializeField] protected int healthMaximum;
+    [SerializeField] protected int attack;
+    [SerializeField] protected int shield;
+    [SerializeField] protected float healthStealth; 
+    [SerializeField, Range(0, 1)] protected float dodge;
+    [SerializeField, Range(0, 1)] protected float critical;
+    [SerializeField] protected float criticalDamage;
     
-    public int GetSpeed => speed;
-    public int GetHealthMaximum => healthMaximum;
-    public int GetAttack => attack;
-    public int GetShield => shield;
-    public float GetHealthStealth => getHealthStealth;
-    public float GetDodge => dodge;
-    public float GetCritical => getCritical;
-    public float GetCriticalDamage => getCriticalDamage;
-    
+    public int SpeedRoot => speed;
+    public int HealthMaximumRoot => healthMaximum;
+    public int AttackOriginalRoot => attack;
+    public int ShieldOriginalRoot => shield;
+    public float HealthStealthRoot => healthStealth;
+    public float DodgeRoot => dodge;
+    public float CriticalRoot => critical;
+    public float CriticalDamageRoot => criticalDamage;
     
     public Status() { }
 
@@ -34,39 +33,42 @@ public class Status
         attack = status.attack;
         shield = status.shield;
         dodge = status.dodge;
-        getCritical = status.getCritical;
-        getCriticalDamage = status.getCriticalDamage;
+        critical = status.critical;
+        criticalDamage = status.criticalDamage;
     }
 }
 
 [Serializable, LuaCallCSharp]
 public class ActorStatus : Status
 {
-    public int Speed { get; set; }
-    public int Health { get; set; }
-    public int HealthMaximum { get; set; }
-    public int Attack { get; set; }
-    public int Shield { get; set; }
-    public int ArmedShield { get; set; }
-    public float HealthStealth  { get; set; }
-    public float Dodge { get; set; }
-    public float Critical { get; set; }
-    public float CriticalDamage { get; set; }
-    public Dictionary<BuffType, BuffData> Buff { get; set; } = new Dictionary<BuffType, BuffData>();
+    public int speedAdditional;
+    public int health;
+    public int healthMaximumAdditional;
+    public int attackAdditional;
+    public int shieldAdditional;
+    public int armedShield;
+    public float healthStealthAdditional;
+    public float dodgeAdditional;
+    public float criticalAdditional;
+    public float criticalDamageAdditional;
+    public Dictionary<BuffType, BuffData> Buff = new Dictionary<BuffType, BuffData>();
+
+    public int SpeedCalculated => speed + speedAdditional;
+    public int Health => health;
+    public int HealthMaximumCalculated => healthMaximum + healthMaximumAdditional;
+    public int AttackCalculated => attack + attackAdditional;
+    public int ShieldCalculated => shield + shieldAdditional;
+    public int ArmedShield => armedShield;
+    public float HealthStealthCalculated => healthStealth + healthStealthAdditional;
+    public float DodgeCalculated => dodge + dodgeAdditional;
+    public float CriticalCalculated => critical + criticalAdditional;
+    public float CriticalDamageCalculated => criticalDamage + criticalDamageAdditional;
     
     public ActorStatus() { }
 
     public ActorStatus(Status status) : base(status)
     { 
         Buff.Clear();
-        Speed = status.GetSpeed;
-        HealthMaximum = Health = status.GetHealthMaximum;
-        HealthStealth = status.GetHealthStealth;
-        Attack = status.GetAttack;
-        Shield = status.GetShield;
-        Dodge = status.GetDodge;
-        Critical = status.GetCritical;
-        CriticalDamage = status.GetCriticalDamage;
     }
 }
 
@@ -88,6 +90,24 @@ public struct UIDataSet
 
 [Serializable, LuaCallCSharp]
 public class BuffData
+{
+    public BuffType type;
+    public int duration;
+    public IActor source;
+    public int strength;
+}
+
+[Serializable, LuaCallCSharp]
+public class Item
+{
+    public BuffType type;
+    public int duration;
+    public IActor source;
+    public int strength;
+}
+
+[Serializable, LuaCallCSharp]
+public class Equipment
 {
     public BuffType type;
     public int duration;

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using RaindowStudio.DesignPattern;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class MergeGrid : SingletonUnity<MergeGrid>
 {
@@ -10,7 +11,8 @@ public class MergeGrid : SingletonUnity<MergeGrid>
     [Range(0, 0.1f)]
     public float anchorSpaceRatio = .01f;
 
-    public List<MergeSocketInfo> mergeSocketList = new List<MergeSocketInfo>();
+    // The data int is for gameObject's InstanceID.
+    public List<List<int>> mergeSockets = new List<List<int>>();
     
     [ContextMenu("Anchor Merge Tool Table Sockets")]
     public void AnchorMergeToolTableSockets()
