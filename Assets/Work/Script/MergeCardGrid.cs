@@ -1,18 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using RaindowStudio.DesignPattern;
 using UnityEngine;
 
-public class MergeCardGrid : MonoBehaviour
+public class MergeCardGrid : SingletonUnity<MergeCardGrid>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

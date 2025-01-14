@@ -35,3 +35,13 @@ public enum BuffTriggerType
     BeforeAction,   //
     AfterAction
 }*/
+
+[Serializable]
+public enum TargetingType
+{
+    Self,
+    AllAlly,
+    AllEnemy,
+    RandomSingleAlly,
+    RandomSingleEnemy,
+}

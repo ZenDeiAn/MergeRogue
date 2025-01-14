@@ -79,8 +79,7 @@ public struct ActorSkillData
     public string description;
     public Sprite icon;
     public GameObject effectPrefab;
-    public bool isEffectSpawnAtSelf;
-    public bool targetHostile;      // Enemy targeting or not
+    public TargetingType targetingType;
     public int strength;
     public float multiply;
     public BuffType buffType;
