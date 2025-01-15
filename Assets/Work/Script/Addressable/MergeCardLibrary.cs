@@ -8,18 +8,17 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(fileName = "MergeCardLibrary", menuName = "MergeCardLibrary")]
 public class MergeCardLibrary : ScriptableObject
 {
-    public List<MergeCardData> CommonMergeCards;
-    public List<MergeCardData> CharacterMergeCards;
+    public List<MergeCardData> MergeCards;
 }
 
 [Serializable]
 public class MergeCardData
 {
-    public string ID;
-    public string CardSpriteID;
-    public int Level;
+    public string Name;
+    public string Description;
+    public MergeCardType type;
     public Sprite Icon;
-    public Sprite CardBlock;
+    public List<float> MultiplyByLevel;
     public MergeCardShapeData CardShape;
 }
 

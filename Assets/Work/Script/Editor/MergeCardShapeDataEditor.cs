@@ -26,7 +26,7 @@ public class MergeCardShapeDataEditor : PropertyDrawer
         }
         if (_customHelpBoxStyle == null)
         {
-            _customHelpBoxStyle = new GUIStyle(EditorStyles.helpBox)
+            _customHelpBoxStyle = new GUIStyle()
             {
                 fontSize = 12,
                 fontStyle = FontStyle.Bold,
@@ -40,8 +40,8 @@ public class MergeCardShapeDataEditor : PropertyDrawer
         }
         
         // Get properties :
-        SerializedProperty _shapeProperty = property.FindPropertyRelative("ShapeGrid");
-        SerializedProperty _gridSizeProperty = property.FindPropertyRelative("GridSize");
+        SerializedProperty shapeProperty = property.FindPropertyRelative("ShapeGrid");
+        SerializedProperty gridSizeProperty = property.FindPropertyRelative("GridSize");
         MergeCardShapeData data;
         string key = property.serializedObject.targetObject.GetInstanceID() + "_" + property.propertyPath;
         if (!_dummyShapeDataDict.TryGetValue(key, out var value))
@@ -49,33 +49,35 @@ public class MergeCardShapeDataEditor : PropertyDrawer
             _dummyShapeDataDict[key] = new MergeCardShapeData();
             data = InitializeDummyData(property);
 
-            data.GridSize = _gridSizeProperty.vector2IntValue;
+            data.GridSize = gridSizeProperty.vector2IntValue;
         }
         else
         {
             data = value;
         }
         
-        // Get height
-        float lineHeight = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-
+        // Get size
+        float lineSpace = EditorGUIUtility.standardVerticalSpacing;
+        float singleLineHeight = EditorGUIUtility.singleLineHeight;
+        float lineHeight = singleLineHeight + lineSpace;
+        
         // Begin draw property!!!!!!!!!!
         EditorGUI.BeginProperty(position, label, property);
         // BG
         EditorGUI.HelpBox(position, string.Empty, MessageType.None);
         // Label
-        EditorGUI.LabelField(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight), 
+        EditorGUI.DropShadowLabel(new Rect(position.x, position.y, position.width, singleLineHeight), 
             $"MergeCardShape {data.GridSize}",
             _customHelpBoxStyle);
         // Modify button function
         bool modifyingThis = string.CompareOrdinal(_currentModifyingKey, key) == 0;
         if (GUI.Button(
-                new Rect(position.x + EditorGUIUtility.standardVerticalSpacing,
+                new Rect(position.x + lineSpace,
                     position.y + lineHeight,
                     modifyingThis ?
-                        position.width / 3 - EditorGUIUtility.standardVerticalSpacing :
-                        position.width,
-                    EditorGUIUtility.singleLineHeight),
+                        position.width / 3 - lineSpace :
+                        position.width - lineSpace  * 2,
+                    singleLineHeight),
                 modifyingThis ? "Apply" : "Modify"))
         {
             if (!modifyingThis)
@@ -122,22 +124,21 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                 for (int i = 0; i < firstNonEmptyRow && i < data.ShapeGrid.Count; ++i)
                 {
                     data.ShapeGrid.RemoveAt(0);
-                    lastNonEmptyRow--;
                 }
                 
+                lastNonEmptyRow -= firstNonEmptyRow;
                 for (int i = data.ShapeGrid.Count - 1; i > lastNonEmptyRow; --i)
                 {
                     data.ShapeGrid.RemoveAt(data.ShapeGrid.Count - 1);
                 }
 
+                lastNonEmptyColumn -= firstNonEmptyColumn;
                 for (int i = 0; i < data.ShapeGrid.Count; ++i)
                 {
-                    int index = 0;
                     var row = data.ShapeGrid[i].Row;
                     for (int j = 0; j < firstNonEmptyColumn && j < row.Count; ++j)
                     {
                         row.RemoveAt(0);
-                        lastNonEmptyColumn--;
                     }
                     for (int j = row.Count - 1; j > lastNonEmptyColumn; --j)
                     {
@@ -146,12 +147,12 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                 }
                 
                 // Apply modification.
-                _shapeProperty.arraySize = 0;
+                shapeProperty.arraySize = 0;
                 for (int i = 0; i < data.ShapeGrid.Count; ++i)
                 {
-                    _shapeProperty.arraySize++;
+                    shapeProperty.arraySize++;
                     var row = data.ShapeGrid[i].Row;
-                    SerializedProperty innerList = _shapeProperty.GetArrayElementAtIndex(i).FindPropertyRelative("Row");
+                    SerializedProperty innerList = shapeProperty.GetArrayElementAtIndex(i).FindPropertyRelative("Row");
                     innerList.arraySize = 0;
                     for (int j = 0; j < row.Count; j++)
                     {
@@ -165,27 +166,27 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                 }
                 data.GridSize.y = data.ShapeGrid.Count;
 
-                _gridSizeProperty.vector2IntValue = data.GridSize;
+                gridSizeProperty.vector2IntValue = data.GridSize;
             }
         }
 
         if (modifyingThis)
         {
             // Clear button function
-            if (GUI.Button(new Rect(position.x + position.width / 3 + EditorGUIUtility.standardVerticalSpacing,
+            if (GUI.Button(new Rect(position.x + position.width / 3 + lineSpace,
                         position.y + lineHeight,
-                        position.width / 3 - EditorGUIUtility.standardVerticalSpacing * 2,
-                        EditorGUIUtility.singleLineHeight),
+                        position.width / 3 - lineSpace,
+                        singleLineHeight),
                     "Clear"))
             {
                 data.ShapeGrid.Clear();
                 data.GridSize = Vector2Int.zero;
             }
             // Cancel button function
-            if (GUI.Button(new Rect(position.x + position.width / 3 * 2 + EditorGUIUtility.standardVerticalSpacing,
+            if (GUI.Button(new Rect(position.x + position.width / 3 * 2 + lineSpace,
                         position.y + lineHeight,
-                        position.width / 3 - EditorGUIUtility.standardVerticalSpacing,
-                        EditorGUIUtility.singleLineHeight),
+                        position.width / 3 - lineSpace * 2,
+                        singleLineHeight),
                     "Cancel"))
             {
                 ClearDummyData();
@@ -195,8 +196,8 @@ public class MergeCardShapeDataEditor : PropertyDrawer
 
         // Draw
         Vector2 startPosition =
-            new Vector2((position.width - lineHeight * gridSize.x) / 2 + EditorGUIUtility.standardVerticalSpacing,
-                lineHeight * 2);
+            new Vector2(position.x + (position.width - lineHeight * gridSize.x) / 2 + lineSpace,
+                position.y + lineHeight * 2);
         if (modifyingThis)
         {
             data.GridSize.x = data.GridSize.y = 0;
@@ -207,8 +208,8 @@ public class MergeCardShapeDataEditor : PropertyDrawer
             {
                 Rect rect = new Rect(startPosition.x + j * lineHeight,
                     startPosition.y + i *  lineHeight,
-                    EditorGUIUtility.singleLineHeight,
-                    EditorGUIUtility.singleLineHeight);
+                    singleLineHeight,
+                    singleLineHeight);
                 bool activeBlock = false;
                 
                 if (data.ShapeGrid.Count > i)
@@ -245,7 +246,7 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                 {
                     if (activeBlock)
                     {
-                        float offset = EditorGUIUtility.standardVerticalSpacing / 2;
+                        float offset = lineSpace / 2;
                         rect.x -= offset;
                         rect.y -= offset;
                         rect.width += offset;

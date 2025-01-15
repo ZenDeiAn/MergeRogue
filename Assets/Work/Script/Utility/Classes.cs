@@ -11,18 +11,22 @@ public class Status
     [SerializeField] protected int healthMaximum;
     [SerializeField] protected int attack;
     [SerializeField] protected int shield;
-    [SerializeField] protected float healthStealth; 
+    [SerializeField] protected int comboMaximum;
+    [SerializeField] protected float comboChance;
+    [SerializeField, Range(0, 1)] protected float healthStealth;
     [SerializeField, Range(0, 1)] protected float dodge;
-    [SerializeField, Range(0, 1)] protected float critical;
+    [SerializeField, Range(0, 1)] protected float criticalChance;
     [SerializeField] protected float criticalDamage;
     
     public int SpeedRoot => speed;
     public int HealthMaximumRoot => healthMaximum;
-    public int AttackOriginalRoot => attack;
-    public int ShieldOriginalRoot => shield;
+    public int AttackRoot => attack;
+    public int ShieldRoot => shield;
+    public int ComboMaximumRoot => comboMaximum;
+    public float ComboChanceRoot => comboChance;
     public float HealthStealthRoot => healthStealth;
     public float DodgeRoot => dodge;
-    public float CriticalRoot => critical;
+    public float CriticalChanceRoot => criticalChance;
     public float CriticalDamageRoot => criticalDamage;
     
     public Status() { }
@@ -33,7 +37,7 @@ public class Status
         attack = status.attack;
         shield = status.shield;
         dodge = status.dodge;
-        critical = status.critical;
+        criticalChance = status.criticalChance;
         criticalDamage = status.criticalDamage;
     }
 }
@@ -47,9 +51,11 @@ public class ActorStatus : Status
     public int attackAdditional;
     public int shieldAdditional;
     public int armedShield;
+    public int comboMaximumAdditional;
+    public float comboChanceAdditional;
     public float healthStealthAdditional;
     public float dodgeAdditional;
-    public float criticalAdditional;
+    public float criticalChanceAdditional;
     public float criticalDamageAdditional;
     public Dictionary<BuffType, BuffData> Buff = new Dictionary<BuffType, BuffData>();
 
@@ -59,9 +65,11 @@ public class ActorStatus : Status
     public int AttackCalculated => attack + attackAdditional;
     public int ShieldCalculated => shield + shieldAdditional;
     public int ArmedShield => armedShield;
+    public int ComboMaximumCalculated => comboMaximum + comboMaximumAdditional;
+    public float ComboChanceCalculated => comboChance + comboChanceAdditional;
     public float HealthStealthCalculated => healthStealth + healthStealthAdditional;
     public float DodgeCalculated => dodge + dodgeAdditional;
-    public float CriticalCalculated => critical + criticalAdditional;
+    public float CriticalCalculated => criticalChance + criticalChanceAdditional;
     public float CriticalDamageCalculated => criticalDamage + criticalDamageAdditional;
     
     public ActorStatus() { }

@@ -12,36 +12,122 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1243cd9a8ac7e43a7b7b2c4f29c36b, type: 3}
   m_Name: MergeCardLibrary
   m_EditorClassIdentifier: 
-  CommonMergeCards:
-  - ID: AddSpeed
-    CardSpriteID: AddSpeed
-    Level: 1
-    Icon: {fileID: 0}
-    CardBlock: {fileID: 0}
+  MergeCards:
+  - Name: SpeedUp
+    Description: 'Add character''s speed : <value>.'
+    type: 0
+    Icon: {fileID: 21300000, guid: f2c251083844dd7458ceea3713d5ae7b, type: 3}
+    MultiplyByLevel:
+    - 2
+    - 5
+    - 10
     CardShape:
-      GridSize: {x: 2, y: 3}
+      GridSize: {x: 2, y: 2}
       ShapeGrid:
-      - Row: 0001
-      - Row: 01
-      - Row: 01
-  - ID: AddAttack
-    CardSpriteID: AddAttack
-    Level: 1
-    Icon: {fileID: 0}
-    CardBlock: {fileID: 0}
+      - Row: 0100
+      - Row: 0101
+  - Name: AttackUp
+    Description: 'Add character''s attack : <value>.'
+    type: 0
+    Icon: {fileID: 21300000, guid: 68813275acedb4983bdec002efa38bbe, type: 3}
+    MultiplyByLevel:
+    - 5
+    - 15
+    - 30
     CardShape:
       GridSize: {x: 2, y: 2}
       ShapeGrid:
       - Row: 0001
-      - Row: 01
-  CharacterMergeCards:
-  - ID: 
-    CardSpriteID: 
-    Level: 0
-    Icon: {fileID: 0}
-    CardBlock: {fileID: 0}
+      - Row: 0101
+  - Name: ArmShield
+    Description: 'Arm character''s shield for current turn: <value>.'
+    type: 0
+    Icon: {fileID: 21300000, guid: 8a8edec1e4b585a429ab07d6461777e1, type: 3}
+    MultiplyByLevel:
+    - 2
+    - 5
+    - 10
     CardShape:
       GridSize: {x: 2, y: 2}
       ShapeGrid:
+      - Row: 0101
+      - Row: 0100
+  - Name: HealthStealthUp
+    Description: 'Add character''s health stealth strength : <value>.'
+    type: 0
+    Icon: {fileID: 21300000, guid: a0a00f8314e647149b46ee48b120b723, type: 3}
+    MultiplyByLevel:
+    - 0.05
+    - 0.1
+    - 0.3
+    CardShape:
+      GridSize: {x: 2, y: 2}
+      ShapeGrid:
+      - Row: 0101
       - Row: 0001
+  - Name: DodgeUp
+    Description: 'Add character''s dodge chance : <value>.'
+    type: 0
+    Icon: {fileID: 21300000, guid: 541960bdad771574a998db26c8e75074, type: 3}
+    MultiplyByLevel:
+    - 0.05
+    - 0.1
+    - 0.2
+    CardShape:
+      GridSize: {x: 4, y: 1}
+      ShapeGrid:
+      - Row: 01010101
+  - Name: CriticalChanceUp
+    Description: 'Add character''s critical chance : <value>.'
+    type: 0
+    Icon: {fileID: 21300000, guid: 5734aeec17c43e947904031cfd20eb84, type: 3}
+    MultiplyByLevel:
+    - 0.05
+    - 0.15
+    - 0.4
+    CardShape:
+      GridSize: {x: 2, y: 1}
+      ShapeGrid:
+      - Row: 0101
+  - Name: CriticalDamageUp
+    Description: 'Add character''s critical damage : <value>.'
+    type: 0
+    Icon: {fileID: 21300000, guid: b6676bf1f1754ad49ad449707f0c8872, type: 3}
+    MultiplyByLevel:
+    - 10
+    - 30
+    - 100
+    CardShape:
+      GridSize: {x: 1, y: 4}
+      ShapeGrid:
+      - Row: 01
+      - Row: 01
+      - Row: 01
+      - Row: 01
+  - Name: ComboChanceUp
+    Description: 'Add character''s combo chance : <value>.'
+    type: 0
+    Icon: {fileID: 21300000, guid: 3fa500f44bcd1d148a57e9e8910c1123, type: 3}
+    MultiplyByLevel:
+    - 0.1
+    - 0.25
+    - 0.5
+    CardShape:
+      GridSize: {x: 1, y: 3}
+      ShapeGrid:
+      - Row: 01
+      - Row: 01
+      - Row: 01
+  - Name: ComboMaximumUp
+    Description: 'Add character''s maximum combo times : <value>.'
+    type: 0
+    Icon: {fileID: 21300000, guid: 91c201bc49a811e44aa6ecdef5a39609, type: 3}
+    MultiplyByLevel:
+    - 1
+    - 2
+    - 3
+    CardShape:
+      GridSize: {x: 2, y: 2}
+      ShapeGrid:
+      - Row: 0101
       - Row: 0101

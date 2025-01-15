@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _status:
     speed: 5
-    healthMaximum: 150
+    healthMaximum: 170
     attack: 15
     shield: 2
+    comboMaximum: 0
+    comboChance: 0
     healthStealth: 0
-    dodge: 0.01
-    critical: 0.05
+    dodge: 0.05
+    criticalChance: 0.1
     criticalDamage: 1.5
   _attackData:
     name: 
@@ -32,11 +34,12 @@ MonoBehaviour:
     description: 
     icon: {fileID: 0}
     effectPrefab: {fileID: 0}
-    targetHostile: 1
-    number: 0
+    targetingType: 0
+    strength: 0
     multiply: 0
     buffType: 0
-    buffRound: 0
+    buffDuration: 0
+    buffStrength: 0
   mesh: {fileID: 9093503826260832301, guid: 45c3848418decf7449815f900620c8c2, type: 3}
   material: {fileID: 2100000, guid: 5ec5815f62a0d37488d95601e3f0129f, type: 2}
   avatar: {fileID: 9000000, guid: 45c3848418decf7449815f900620c8c2, type: 3}

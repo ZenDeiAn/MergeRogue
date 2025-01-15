@@ -45,3 +45,12 @@ public enum TargetingType
     RandomSingleAlly,
     RandomSingleEnemy,
 }
+
+[Serializable]
+public enum MergeCardType
+{
+    Common,
+    Equipment,
+    Character,
+    Special
+}

@@ -66,7 +66,15 @@ public class TitleManager : Processor<TitleManager, TitleState>
         previousPatchOver = false;
         InitializePatchUI("UI Resources");
         am.LoadAssetsByLabel<UIData>(AddressableManager.LABEL_GLOBAL,
-            a => a.UIDataList.ForEach(ds => am.UI[ds.id] = ds.sprite),
+            a =>
+            {
+                a.UIDataList.ForEach(ds => am.UI[ds.id] = ds.sprite);
+                var enums = Enum.GetValues(typeof(MergeCardType));
+                foreach (var @enum in enums)
+                {
+                    am.UI[$"{nameof(a.MergedCardSprites)}_{@enum}"] = a.MergedCardSprites[(MergeCardType)@enum];
+                }
+            },
             d => sld_titlePatch.value = d.PercentComplete,
             _ => previousPatchOver = true);
         yield return new WaitUntil(() => previousPatchOver);

@@ -12,16 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b88e8628fe4cf4da7c1457fd1be9ae, type: 3}
   m_Name: Warrior
   m_EditorClassIdentifier: 
-  _id: Warrior
   _status:
     speed: 10
     healthMaximum: 120
     attack: 12
     shield: 5
-    healthSteal: 0
+    comboMaximum: 0
+    comboChance: 0
+    healthStealth: 0.1
     dodge: 0.1
-    critical: 0.2
-    criticalDamage: 120
+    criticalChance: 0.1
+    criticalDamage: 1.2
+  _attackData:
+    name: 
+    description: 
+    icon: {fileID: 0}
+    effectPrefab: {fileID: 0}
+    multiply: 1
+  _skillData:
+    name: 
+    description: 
+    icon: {fileID: 0}
+    effectPrefab: {fileID: 0}
+    targetingType: 0
+    strength: 0
+    multiply: 0
+    buffType: 0
+    buffDuration: 0
+    buffStrength: 0
   mesh: {fileID: 17106975043345648, guid: 45c3848418decf7449815f900620c8c2, type: 3}
   material: {fileID: 2100000, guid: 5ec5815f62a0d37488d95601e3f0129f, type: 2}
   avatar: {fileID: 9000000, guid: 45c3848418decf7449815f900620c8c2, type: 3}
