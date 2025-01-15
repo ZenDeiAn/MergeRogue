@@ -13,14 +13,27 @@ MonoBehaviour:
   m_Name: MergeCardLibrary
   m_EditorClassIdentifier: 
   CommonMergeCards:
-  - ID: Speed
-    CardSpriteID: 
-    Level: 0
+  - ID: AddSpeed
+    CardSpriteID: AddSpeed
+    Level: 1
     Icon: {fileID: 0}
     CardBlock: {fileID: 0}
     CardShape:
-      GridSize: {x: 0, y: 0}
-      ShapeGrid: []
+      GridSize: {x: 2, y: 3}
+      ShapeGrid:
+      - Row: 0001
+      - Row: 01
+      - Row: 01
+  - ID: AddAttack
+    CardSpriteID: AddAttack
+    Level: 1
+    Icon: {fileID: 0}
+    CardBlock: {fileID: 0}
+    CardShape:
+      GridSize: {x: 2, y: 2}
+      ShapeGrid:
+      - Row: 0001
+      - Row: 01
   CharacterMergeCards:
   - ID: 
     CardSpriteID: 

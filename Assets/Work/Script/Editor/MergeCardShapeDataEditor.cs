@@ -10,7 +10,7 @@ public class MergeCardShapeDataEditor : PropertyDrawer
     private readonly Vector2Int gridSize = new Vector2Int(4, 4);
     private readonly Dictionary<string, MergeCardShapeData> _dummyShapeDataDict = new();
     private MergeCardShapeData _dummyShapeData = null;
-    private string _curretModifyingkey = "";
+    private string _currentModifyingKey = "";
     
     private GUIStyle _customHelpBoxStyle;
     private Texture2D _backgroundTexture;
@@ -68,19 +68,21 @@ public class MergeCardShapeDataEditor : PropertyDrawer
             $"MergeCardShape {data.GridSize}",
             _customHelpBoxStyle);
         // Modify button function
-        bool modifying = String.CompareOrdinal(_curretModifyingkey, key) == 0;
+        bool modifyingThis = string.CompareOrdinal(_currentModifyingKey, key) == 0;
         if (GUI.Button(
                 new Rect(position.x + EditorGUIUtility.standardVerticalSpacing,
                     position.y + lineHeight,
-                    modifying ? position.width / 3 - EditorGUIUtility.standardVerticalSpacing : position.width,
+                    modifyingThis ?
+                        position.width / 3 - EditorGUIUtility.standardVerticalSpacing :
+                        position.width,
                     EditorGUIUtility.singleLineHeight),
-                modifying ? "Apply" : "Modify"))
+                modifyingThis ? "Apply" : "Modify"))
         {
-            if (!modifying)
+            if (!modifyingThis)
             {
                 if (_dummyShapeData != null)
                 {
-                    _dummyShapeDataDict[_curretModifyingkey] = _dummyShapeData;
+                    _dummyShapeDataDict[_currentModifyingKey] = _dummyShapeData;
                 }
                 _dummyShapeData = new MergeCardShapeData(_dummyShapeDataDict[key]);
             }
@@ -88,8 +90,9 @@ public class MergeCardShapeDataEditor : PropertyDrawer
             {
                 _dummyShapeData = null;
             }
-            _curretModifyingkey = modifying ? string.Empty : key;
-            if (!modifying)
+            _currentModifyingKey = modifyingThis ? string.Empty : key;
+            modifyingThis = string.CompareOrdinal(_currentModifyingKey, key) == 0;
+            if (!modifyingThis)
             {
                 data.GridSize = Vector2Int.zero;
                 // Check Blank.
@@ -119,8 +122,10 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                 for (int i = 0; i < firstNonEmptyRow && i < data.ShapeGrid.Count; ++i)
                 {
                     data.ShapeGrid.RemoveAt(0);
+                    lastNonEmptyRow--;
                 }
-                for (int i = data.ShapeGrid.Count; i > lastNonEmptyRow + 1; --i)
+                
+                for (int i = data.ShapeGrid.Count - 1; i > lastNonEmptyRow; --i)
                 {
                     data.ShapeGrid.RemoveAt(data.ShapeGrid.Count - 1);
                 }
@@ -132,8 +137,9 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                     for (int j = 0; j < firstNonEmptyColumn && j < row.Count; ++j)
                     {
                         row.RemoveAt(0);
+                        lastNonEmptyColumn--;
                     }
-                    for (int j = row.Count; j > lastNonEmptyColumn + 1; --j)
+                    for (int j = row.Count - 1; j > lastNonEmptyColumn; --j)
                     {
                         row.RemoveAt(row.Count - 1);
                     }
@@ -163,7 +169,7 @@ public class MergeCardShapeDataEditor : PropertyDrawer
             }
         }
 
-        if (modifying)
+        if (modifyingThis)
         {
             // Clear button function
             if (GUI.Button(new Rect(position.x + position.width / 3 + EditorGUIUtility.standardVerticalSpacing,
@@ -182,8 +188,7 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                         EditorGUIUtility.singleLineHeight),
                     "Cancel"))
             {
-                _curretModifyingkey = string.Empty;
-                _dummyShapeData = null;
+                ClearDummyData();
                 InitializeDummyData(property);
             }
         }
@@ -192,7 +197,7 @@ public class MergeCardShapeDataEditor : PropertyDrawer
         Vector2 startPosition =
             new Vector2((position.width - lineHeight * gridSize.x) / 2 + EditorGUIUtility.standardVerticalSpacing,
                 lineHeight * 2);
-        if (modifying)
+        if (modifyingThis)
         {
             data.GridSize.x = data.GridSize.y = 0;
         }
@@ -212,7 +217,7 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                     activeBlock = row.Count > j && row[j];
                 }
 
-                if (modifying)
+                if (modifyingThis)
                 {
                     if (GUI.Button(rect, activeBlock ? Texture2D.whiteTexture : Texture2D.blackTexture))
                     {
@@ -251,7 +256,7 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                 }
                 
                 // UpdateGridSize
-                if (modifying && activeBlock)
+                if (modifyingThis && activeBlock)
                 {
                     if (data.GridSize.x <= j)
                     {
@@ -275,12 +280,13 @@ public class MergeCardShapeDataEditor : PropertyDrawer
         return lineHeight;
     }
 
-    public MergeCardShapeData InitializeDummyData(SerializedProperty property)
+    private MergeCardShapeData InitializeDummyData(SerializedProperty property)
     {
         string key = property.serializedObject.targetObject.GetInstanceID() + "_" + property.propertyPath;
         var data = _dummyShapeDataDict[key];
-        var shapeProperty = property.serializedObject.FindProperty("ShapeGrid");
-        var gridSizeProperty = property.serializedObject.FindProperty("GridSize");
+        var shapeProperty = property.FindPropertyRelative("ShapeGrid");
+        var gridSizeProperty = property.FindPropertyRelative("GridSize");
+        data.ShapeGrid.Clear();
         for (int i = 0; i < shapeProperty.arraySize; ++i)
         {
             SerializedProperty innerList = shapeProperty.GetArrayElementAtIndex(i).FindPropertyRelative("Row");
@@ -294,5 +300,11 @@ public class MergeCardShapeDataEditor : PropertyDrawer
         data.GridSize = gridSizeProperty.vector2IntValue;
         
         return data;
+    }
+
+    private void ClearDummyData()
+    {
+        _currentModifyingKey = string.Empty;
+        _dummyShapeData = null;
     }
 }
