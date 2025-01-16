@@ -1,4 +1,5 @@
 using System;
+using XLua;
 
 [Serializable]
 public enum WeaponSocketType
@@ -47,10 +48,25 @@ public enum TargetingType
 }
 
 [Serializable]
+public enum ActorType
+{
+    Ally,
+    Enemy,
+    Peaceful
+}
+
+[Serializable]
 public enum MergeCardType
 {
     Common,
     Equipment,
     Character,
     Special
+}
+
+[Serializable, LuaCallCSharp]
+public enum ActionType
+{
+    Attack,
+    Skill
 }

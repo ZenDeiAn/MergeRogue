@@ -8,6 +8,7 @@ using RaindowStudio.Language;
 using RaindowStudio.Utility;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEngine.UI;
 using XLua;
@@ -97,7 +98,7 @@ public class TitleManager : Processor<TitleManager, TitleState>
         // Download Map Resources.
         previousPatchOver = false;
         InitializePatchUI("Map Resources");
-        am.LoadAssetsByLabel<MapData>(AddressableManager.LABEL_SCENE_MAP, a =>
+        am.LoadAssetsByLabel<MapData>(AddressableManager.LABEL_DATA, a =>
             {
                 am.MapBlockProbabilities = a.MapBlockProbabilities.OrderBy(t => t.deep)
                     .GroupBy(item => item.deep)
@@ -120,7 +121,7 @@ public class TitleManager : Processor<TitleManager, TitleState>
         InitializePatchUI("Monster Resources");
         am.MonsterProbabilities.Clear();
         am.LoadAssetsByLabel<MonsterProbability>(
-            AddressableManager.LABEL_SCENE_BATTLE, a =>
+            AddressableManager.LABEL_DATA, a =>
             {
                 if (Enum.TryParse(a.name, out MonsterType type))
                 {
@@ -131,18 +132,37 @@ public class TitleManager : Processor<TitleManager, TitleState>
         yield return new WaitUntil(() => previousPatchOver);
         
         // Download Lua Script Resources.
-        am.LuaEnv = new LuaEnv();
+        LuaManager.LuaEnv = new LuaEnv();
         previousPatchOver = false;
-        InitializePatchUI("Script Resources");
+        InitializePatchUI("Script(Lua) Resources");
+        List<TextAsset> luaTexts = new List<TextAsset>();
         am.LoadAssetsByLabel<TextAsset>(
-            AddressableManager.LABEL_SCENE_BATTLE,
+            AddressableManager.LABEL_LUA,
             a =>
             {
-                Debug.Log($"{a.name.Split('.')[0]} : {a}");
-                am.LuaEnv.DoString(a.ToString(), a.name.Split('.')[0]);
+                a.name = a.name.Replace(".lua", "");
+                // Load Global first.
+                if (a.name == AddressableManager.LABEL_GLOBAL)
+                {
+                    LuaManager.LuaEnv.DoString(a.text, a.name);
+                }
+                else
+                {
+                    luaTexts.Add(a);
+                }
             },
             d => sld_titlePatch.value = d.PercentComplete,
-            _ =>  previousPatchOver = true);
+            _ =>
+            {
+                // Load script.
+                foreach (var text in luaTexts)
+                {
+                    LuaManager.LuaEnv.DoString(text.text, text.name);
+                }
+                
+                LuaManager.Initialize();
+                previousPatchOver = true;
+            });
         yield return new WaitUntil(() => previousPatchOver);
         
         OnPatchOver();

@@ -1,18 +1,15 @@
-function Warrior(caster, targets)
-    local skillData = caster.SkillData;
-    local damage = skillData.strength + caster.InBattleStatus.Attack * skillData.multiply;
-    for _, target in ipairs(targets) do
-        target.InBattleStatus.Health = math.max(0, target.InBattleStatus.Health - damage)
-    end
-    print("LuaLibrary.Skill.Warrior")
-end
+FunctionLibrary.Skill = {
 
-function Warhammer(caster, targets)
-    local skillData = caster.SkillData;
-    local damage = skillData.strength + caster.InBattleStatus.Attack * skillData.multiply;
-    for _, target in ipairs(targets) do
-        target.InBattleStatus.Health = math.max(0, target.InBattleStatus.Health - damage)
-        CS.ActorUtility.AddBuffToActor(caster, targets, skillData.buffType, skillData.buffDuration, skillData.buffStrength);
+    Warrior = function(caster)
+        GetUnhealthestEnemy().Status.UpdateHealth(-caster.Status.Attack * 1.5 + 15)
+        print("LuaLibrary.Skill.Warrior")
     end
-    print("LuaLibrary.Skill.Warhammer")
-end
+    ,
+    Warhammer = function(caster)
+        local target = GetHealthestEnemy()
+        target.Status.UpdateHealth(caster.Status.Attack * 2.0)
+        BuffToActor(caster, target, BuffType.Stun, 1, 0)
+        print("LuaLibrary.Skill.Warhammer")
+    end
+
+}

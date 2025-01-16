@@ -51,42 +51,73 @@ MonoBehaviour:
     m_Address: Assets/Work/Addressable/MonsterProbability/Boss.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - BattleScene
+    - Data
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ac04759117040fc4f9c674e42a35d93f
     m_Address: Assets/Work/Addressable/MonsterProbability/Minion.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - BattleScene
+    - Data
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7dfd562c800dd244b9e149e9d6d0525a
     m_Address: Assets/Work/Addressable/MonsterProbability/Elite.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - BattleScene
+    - Data
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 13fc610c57bdacb4a9c6925d238bf637
     m_Address: MapData
     m_ReadOnly: 0
     m_SerializedLabels:
-    - MapScene
+    - Data
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5ec5815f62a0d37488d95601e3f0129f
     m_Address: Assets/PolygonMiniFantasyCharacters/Materials/PolygonMiniFantasyCharacters_01_A.mat
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Resource
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3f76d544293bfb2409727f608b1ff1db
-    m_Address: Assets/Work/Addressable/Lua/ActionLibrary.lua.txt
+  - m_GUID: 11d0ec60e4ac14f459c6ca1ff2ac7879
+    m_Address: Assets/Work/Addressable/Lua/BattleLibrary.lua.txt
     m_ReadOnly: 0
     m_SerializedLabels:
-    - BattleScene
+    - Lua
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 767a064f567e6fd41af5b4d049564346
+    m_Address: Assets/Work/Lua/Global.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lua
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d318852b25c75414aab15d8cb4d77259
+    m_Address: Assets/Work/Addressable/Lua/ItemLibrary.lua.txt
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lua
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25d68bbe695badb4cb7b9cdc1b30ecf8
+    m_Address: Assets/Work/Addressable/Lua/TestLibrary.lua.txt
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lua
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 211fd924df0b03f45b6d1e789dc9d633
     m_Address: Assets/Work/Addressable/Lua/SkillLibrary.lua.txt
     m_ReadOnly: 0
     m_SerializedLabels:
-    - BattleScene
+    - Lua
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6dbfe9b0d4a4dcc4fbd374d3af403b00
+    m_Address: Assets/Work/Addressable/Lua/Global.lua.txt
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lua
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8bd7eb891f889e498bd0e6582c3a829
+    m_Address: Assets/Work/Addressable/Lua/EquipmentLibrary.lua.txt
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lua
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d41d78f70b6c27546891ece3b0e453c3, type: 2}

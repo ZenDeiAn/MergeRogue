@@ -87,10 +87,10 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
-    - MapScene
-    - TitleScene
     - Global
-    - BattleScene
+    - Data
+    - Lua
+    - Resource
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: d432307675e01434889971a462edea14, type: 2}

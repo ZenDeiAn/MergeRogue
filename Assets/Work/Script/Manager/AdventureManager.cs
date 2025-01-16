@@ -1,16 +1,12 @@
 using System;
 using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 using RaindowStudio.DesignPattern;
 using RaindowStudio.Utility;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Newtonsoft.Json.Linq;
-using OpenCover.Framework.Model;
-using UnityEngine.Serialization;
 using File = System.IO.File;
 
 public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameStatusManager

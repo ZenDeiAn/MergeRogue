@@ -71,6 +71,16 @@ public class ActorStatus : Status
     public float DodgeCalculated => dodge + dodgeAdditional;
     public float CriticalCalculated => criticalChance + criticalChanceAdditional;
     public float CriticalDamageCalculated => criticalDamage + criticalDamageAdditional;
+
+    public void UpdateHealth(int variable)
+    {
+        health = Mathf.Clamp(health + variable, 0, HealthMaximumCalculated);
+    }
+
+    public void UpdateArmedShield(int variable)
+    {
+        armedShield = Mathf.Max(armedShield + variable, 0);
+    }
     
     public ActorStatus() { }
 

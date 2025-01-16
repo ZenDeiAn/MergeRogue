@@ -9,8 +9,8 @@ public class Monster : MonoBehaviour, IActor
     
     public MonsterDataSet DataSet { get; set; }
 
+    public ActorType ActorType => ActorType.Enemy;
     public ActorStatus Status { get; set; }
-    public ActorStatus InBattleStatus { get; set; }
     public ActorAttackData AttackData => DataSet.AttackData;
     public ActorSkillData SkillData => DataSet.SkillData;
     public ActionType CurrentAction { get; set; }

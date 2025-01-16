@@ -1,12 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
-using RaindowStudio.Attribute;
 using RaindowStudio.DesignPattern;
-using RaindowStudio.Utility;
 using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.Serialization;
 
 public class MapManager : Processor<MapManager, MapState>
 {
@@ -206,19 +202,6 @@ public class MapManager : Processor<MapManager, MapState>
         _gm = GameManager.Instance;
 
         State = MapState.Initialize;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            AdventureManager.Instance.SaveData();
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Debug.Log(AdventureManager.Instance.CheckLoadData());
-        }
     }
 }
 

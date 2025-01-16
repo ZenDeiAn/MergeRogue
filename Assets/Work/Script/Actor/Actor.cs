@@ -8,8 +8,8 @@ using XLua;
 [LuaCallCSharp]
 public interface IActor
 {
+    public ActorType ActorType { get; }
     public ActorStatus Status { get; set; }
-    public ActorStatus InBattleStatus { get; set; }
     public ActorAttackData AttackData { get; }
     public ActorSkillData SkillData { get; }
     public ActionType CurrentAction { get; set; }
@@ -18,13 +18,11 @@ public interface IActor
     public void Initialize();
 }
 
-[LuaCallCSharp]
 public static class ActorUtility
 {
     public static void InitializeStatus(this IActor self, Status status)
     {
         self.Status = new ActorStatus(status);
-        self.InBattleStatus = new ActorStatus(status);
     }
 
     public static void Act(this IActor self, List<IActor> target, ActionType type)
@@ -32,25 +30,6 @@ public static class ActorUtility
         self.CurrentAction = type;
         EventManager.Instance.ActorActing(self, target, type);
     }
-
-    public static void AddBuffToActor(IActor caster, IActor target, BuffType buffType, int duration, int strength)
-    {
-        BuffData buffData = new BuffData()
-        {
-            source = caster,
-            type = buffType,
-            duration = duration,
-            strength = strength
-        };
-        target.InBattleStatus.Buff[buffType] = buffData;
-    }
-}
-
-[Serializable, LuaCallCSharp]
-public enum ActionType
-{
-    Attack,
-    Skill
 }
 
 [LuaCallCSharp]
@@ -79,10 +58,4 @@ public struct ActorSkillData
     public string description;
     public Sprite icon;
     public GameObject effectPrefab;
-    public TargetingType targetingType;
-    public int strength;
-    public float multiply;
-    public BuffType buffType;
-    public int buffDuration;
-    public int buffStrength;
 }

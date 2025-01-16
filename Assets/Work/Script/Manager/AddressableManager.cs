@@ -1,26 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using RaindowStudio.Attribute;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using RaindowStudio.DesignPattern;
-using RaindowStudio.Utility;
-using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceLocations;
-using XLua;
 using Object = UnityEngine.Object;
 
 public class AddressableManager : SingletonUnityEternal<AddressableManager>
 {
     public const string LABEL_GLOBAL = "Global";
-    public const string LABEL_SCENE_TITLE = "TitleScene";
-    public const string LABEL_SCENE_MAP = "MapScene";
-    public const string LABEL_SCENE_BATTLE = "BattleScene";
-    public const string LABEL_LUA_BUFF = "BuffEffect";
-    public const string LABEL_LUA_SKILL = "SkillLibrary";
-    public const string LABEL_LUA_ACTION = "ActionLibrary";
+    public const string LABEL_DATA = "Data";
+    public const string LABEL_LUA = "Lua";
+    public const string LABEL_RESOURCE = "Resource";
     
     public Dictionary<string, CharacterDataSet> Character { get; set; }
     public Dictionary<string, Sprite> UI { get; set; }
@@ -30,8 +22,6 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
     
     private bool _initialized;
     
-    public LuaEnv LuaEnv { get; set; }
-
     public bool Initialized => _initialized;
     public CharacterDataSet CurrentCharacterData => Instance.Character[GameManager.Instance.CharacterID];
 

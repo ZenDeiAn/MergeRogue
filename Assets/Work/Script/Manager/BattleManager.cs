@@ -4,16 +4,13 @@ using RaindowStudio.DesignPattern;
 using UnityEngine;
 using XLua;
 
+[LuaCallCSharp]
 public class BattleManager : Processor<BattleManager, BattleState>
 {
     public List<Character> characters;
     public List<Monster> monsters;
     public List<Transform> monsterAnchors;
     public VirtualCameraRotateController vcrc;
-   
-    [CSharpCallLua] public delegate void BattleActionDelegate(IActor source, IActor target);
-    private BattleActionDelegate _calculateNormalDamage;
-    private BattleActionDelegate _checkActionLegalAndApplyBuff;
     
     void Activate_Intro()
     {
@@ -61,9 +58,9 @@ public class BattleManager : Processor<BattleManager, BattleState>
         }
     }
 
-    void DeActivate_Intro()
+    void Activate_Prepare()
     {
-        vcrc.enabled = true;
+        
     }
     
     void Activate_Over()
@@ -71,17 +68,14 @@ public class BattleManager : Processor<BattleManager, BattleState>
         vcrc.enabled = false;
     }
 
+    void DeActivate_Intro()
+    {
+        vcrc.enabled = true;
+    }
+
     protected override void Initialization()
     {
         base.Initialization();
-        
-        // Random seed initialize for lua.
-        AddressableManager.Instance.LuaEnv.DoString("math.randomseed(os.time())");
-        // Get Battle Action function.
-        _calculateNormalDamage = AddressableManager.Instance.LuaEnv.Global.
-            Get<BattleActionDelegate>("CalculateNormalDamage");
-        _checkActionLegalAndApplyBuff = AddressableManager.Instance.LuaEnv.Global.
-            Get<BattleActionDelegate>("CheckActionLegalAndApplyBuff");
         
         vcrc.enabled = false;
         State = BattleState.Intro;
