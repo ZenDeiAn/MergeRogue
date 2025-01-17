@@ -20,6 +20,9 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
     public Dictionary<Vector2Int, MapBlockData> MapData =
         new Dictionary<Vector2Int, MapBlockData>();
     public MapBlockData CurrentMapData => MapData[Position];
+    public List<string> MergeCardList = new List<string>();
+    
+    private AddressableManager _adm;
 
     public void SaveData()
     {
@@ -128,13 +131,14 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
 
     public void InitializeNewData()
     {
-        ItemList.Clear();
-        for (int i = 0; i < 3; ++i)
-        {
-            ItemList.Add(0);
-        }
+        // Random map.
         GenerateRandomAdventureMap();
+        // Init Player Status.
         PlayerStatus = new ActorStatus(AddressableManager.Instance.CurrentCharacterData.Status);
+        // Init Item count.
+        ItemList = new List<int>(3);
+        // Init merge card bag(only add Common category cards)
+        MergeCardList = new List<string>(_adm.MergeCardCategoryLibrary["Common"]);
     }
     
     private void GenerateRandomAdventureMap(int randomSeed = -1)
@@ -143,8 +147,7 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
         Random.InitState(RandomSeed);
 
         MapData.Clear();
-        AddressableManager am = AddressableManager.Instance;
-        var mapBlockProbabilities = am.MapBlockProbabilities;
+        var mapBlockProbabilities = _adm.MapBlockProbabilities;
         
         int totalDeep = mapBlockProbabilities[^1].deep;
         if (totalDeep % 2 == 1)     // Ensure the deep before boss is two blocks. Odd : 2, Even : 3
@@ -251,5 +254,12 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
                 }
             }
         }
+    }
+
+    protected override void Initialization()
+    {
+        base.Initialization();
+
+        _adm = AddressableManager.Instance;
     }
 }

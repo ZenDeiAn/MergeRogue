@@ -119,6 +119,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Lua
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a12de9223de0b3648a8fa585ab2911c1
+    m_Address: Assets/Work/Addressable/MergeCardLibrary.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Data
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d41d78f70b6c27546891ece3b0e453c3, type: 2}
   m_SchemaSet:

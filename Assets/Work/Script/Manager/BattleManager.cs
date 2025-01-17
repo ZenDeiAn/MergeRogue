@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using RaindowStudio.DesignPattern;
 using UnityEngine;
+using UnityEngine.UIElements;
 using XLua;
 
-[LuaCallCSharp]
 public class BattleManager : Processor<BattleManager, BattleState>
 {
+    public MonsterType TestMonsterType = MonsterType.None;
+    [LuaCallCSharp]
     public List<Character> characters;
+    [LuaCallCSharp]
     public List<Monster> monsters;
     public List<Transform> monsterAnchors;
     public VirtualCameraRotateController vcrc;
+
+    private AdventureManager _avm;
+    private AddressableManager _adm;
     
     void Activate_Intro()
     {
@@ -19,18 +25,19 @@ public class BattleManager : Processor<BattleManager, BattleState>
         {
             // TODO : Multi Player initialize.  
             character.gameObject.SetActive(index == 0);
-            Debug.Log(character.gameObject.activeSelf);
             character.Initialize();
             index++;
         }
 
         monsters = new List<Monster>();
-        if (AdventureManager.Instance.CurrentMapData.TryParseMonsterType(out MonsterType monsterType))
+
+        MonsterType monsterType = _avm.CurrentMapData.EventType.ToMonsterType();
+        if (monsterType != MonsterType.None)
         {
             List<MonsterGroup> monsterGroup = new List<MonsterGroup>();
-            foreach (var list in AddressableManager.Instance.MonsterProbabilities[monsterType])
+            foreach (var list in _adm.MonsterProbabilities[monsterType])
             {
-                if (list.deep > AdventureManager.Instance.Position.y)
+                if (list.deep > _avm.Position.y)
                 {
                     break;
                 }
@@ -77,8 +84,28 @@ public class BattleManager : Processor<BattleManager, BattleState>
     {
         base.Initialization();
         
+        _avm = AdventureManager.Instance;
+        _adm = AddressableManager.Instance;
+        
         vcrc.enabled = false;
-        State = BattleState.Intro;
+        if (TestMonsterType == MonsterType.None)
+        {
+            State = BattleState.Intro;
+        }
+        else
+        {
+            _adm.PatchAllAddressableAssets(null,
+                null,
+                null,
+                () =>
+                {
+                    GameManager.Instance.LoadSaveData();
+                    GameManager.Instance.NewGame();
+                    _avm.Position = new Vector2Int(0, _adm.MapBlockProbabilities[^1].deep - 1);
+                    _avm.CurrentMapData.EventType = TestMonsterType.ToMapBlockEventType();
+                    State = BattleState.Intro;
+                });
+        }
     }
 }
 

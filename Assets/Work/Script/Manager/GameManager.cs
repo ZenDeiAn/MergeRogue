@@ -33,6 +33,11 @@ public class GameManager : ProcessorEternal<GameManager, GameState>
         CharacterChangedEvent?.Invoke(_characterID);
     }
 
+    public void NewGame()
+    {
+        AdventureManager.Instance.InitializeNewData();
+    }
+
     void Activate_Adventure()
     {
         LoadingManager.Instance.LoadScene("Map");

@@ -23,6 +23,7 @@ public class MonsterDataSet : ScriptableObject, IActorData
 [Serializable]
 public enum MonsterType
 {
+    None,
     Minion,
     Elite,
     Boss

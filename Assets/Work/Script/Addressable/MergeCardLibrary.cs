@@ -14,8 +14,8 @@ public class MergeCardLibrary : ScriptableObject
 [Serializable]
 public class MergeCardData
 {
-    public string Name;
-    public string Description;
+    public string ID;
+    public string Category;
     public MergeCardType type;
     public Sprite Icon;
     public List<float> MultiplyByLevel;

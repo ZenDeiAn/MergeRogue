@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using RaindowStudio.DesignPattern;
+using RaindowStudio.Language;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using XLua;
 using Object = UnityEngine.Object;
 
 public class AddressableManager : SingletonUnityEternal<AddressableManager>
@@ -14,11 +17,13 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
     public const string LABEL_LUA = "Lua";
     public const string LABEL_RESOURCE = "Resource";
     
-    public Dictionary<string, CharacterDataSet> Character { get; set; }
-    public Dictionary<string, Sprite> UI { get; set; }
-    public Dictionary<MapBlockEventType, GameObject> MapBlockPrefabs { get; set; }
-    public List<MapBlockProbability> MapBlockProbabilities { get; set; }
-    public Dictionary<MonsterType, List<MonsterProbabilityData>> MonsterProbabilities { get; set; }
+    public Dictionary<string, CharacterDataSet> Character { get; private set; }
+    public Dictionary<string, Sprite> UI { get; private set; }
+    public Dictionary<MapBlockEventType, GameObject> MapBlockPrefabs { get; private set; }
+    public List<MapBlockProbability> MapBlockProbabilities { get; private set; }
+    public Dictionary<MonsterType, List<MonsterProbabilityData>> MonsterProbabilities { get; private set; }
+    public Dictionary<string, List<string>> MergeCardCategoryLibrary { get; private set; }
+    public Dictionary<string, MergeCardData> MergeCardDataLibrary { get; private set; }
     
     private bool _initialized;
     
@@ -38,6 +43,18 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
         Action<AsyncOperationHandle> completed = null)
     {
         return StartCoroutine(LoadAssetsByLabelIE<Object>(label, null, downloading, completed));
+    }
+    
+    public Coroutine PatchAllAddressableAssets(Action<string> singlePatchStart = null,
+        Action<string, float> singlePatchDownloading = null,
+        Action<string> singlePatchCompleted = null,
+        Action patchCompleted = null)
+    {
+        return StartCoroutine(PatchAllAddressableAssetsIE(
+            singlePatchStart,
+            singlePatchDownloading,
+            singlePatchCompleted,
+            patchCompleted));
     }
 
     private IEnumerator LoadAssetsByLabelIE<T>(string label,
@@ -87,6 +104,200 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
             completed?.Invoke(handle);
         }
     }
+
+    private IEnumerator PatchAllAddressableAssetsIE(Action<string> singlePatchStart,
+        Action<string, float> singlePatchDownloading,
+        Action<string> singlePatchCompleted,
+        Action patchCompleted)
+    {
+        // Wait for initialization over.
+        yield return new WaitUntil(() => Initialized);
+        bool previousPatchOver = false;
+        string patchingName = string.Empty;
+
+        // Download UI Resources.
+        singlePatchStart?.Invoke(patchingName = "UI Resources");
+        {
+            LoadAssetsByLabel<UIData>(LABEL_GLOBAL,
+                a =>
+                {
+                    a.UIDataList.ForEach(ds => UI[ds.id] = ds.sprite);
+                    var enums = Enum.GetValues(typeof(MergeCardType));
+                    foreach (var @enum in enums)
+                    {
+                        UI[$"{nameof(a.MergedCardSprites)}_{@enum}"] = a.MergedCardSprites[(MergeCardType)@enum];
+                    }
+                },
+                // ReSharper disable once AccessToModifiedClosure
+                d => singlePatchDownloading?.Invoke(patchingName, d.PercentComplete),
+                _ =>
+                {
+                    // ReSharper disable once AccessToModifiedClosure
+                    singlePatchCompleted?.Invoke(patchingName);
+                    previousPatchOver = true;
+                });
+        }
+        yield return new WaitUntil(() => previousPatchOver);
+        previousPatchOver = false;
+
+        // Download Language Resources.
+        singlePatchStart?.Invoke(patchingName = "Language Resources");
+        {
+            List<LanguageDataObject> languageDataObjects = new List<LanguageDataObject>();
+            LoadAssetsByLabel<LanguageDataObject>(LABEL_GLOBAL,
+                a => languageDataObjects.Add(a),
+                // ReSharper disable once AccessToModifiedClosure
+                d => singlePatchDownloading?.Invoke(patchingName, d.PercentComplete),
+                _ =>
+                {
+                    LanguageManager.ReloadResourceData(languageDataObjects.ToArray());
+                    LanguageManager.ChangeLanguage(LanguageManager.language);
+                    // ReSharper disable once AccessToModifiedClosure
+                    singlePatchCompleted?.Invoke(patchingName);
+                    previousPatchOver = true;
+                });
+        }
+        yield return new WaitUntil(() => previousPatchOver);
+        previousPatchOver = false;
+
+        // Character Resources
+        singlePatchStart?.Invoke(patchingName = "Character Resources");
+        {
+            LoadAssetsByLabel<CharacterDataSet>(LABEL_GLOBAL,
+                a => Character.Add(a.ID, a),
+                // ReSharper disable once AccessToModifiedClosure
+                d => singlePatchDownloading?.Invoke(patchingName, d.PercentComplete),
+                _ =>
+                {
+                    // ReSharper disable once AccessToModifiedClosure
+                    singlePatchCompleted?.Invoke(patchingName);
+                    previousPatchOver = true;
+                });
+        }
+        yield return new WaitUntil(() => previousPatchOver);
+        previousPatchOver = false;
+        
+        // Download Map Resources.
+        singlePatchStart?.Invoke(patchingName = "Map Resources");
+        {
+            LoadAssetsByLabel<MapData>(LABEL_DATA, a =>
+                {
+                    MapBlockProbabilities = a.MapBlockProbabilities.OrderBy(t => t.deep)
+                        .GroupBy(item => item.deep)
+                        .Select(group => group.First()).ToList();
+                    MapBlockPrefabs.Clear();
+                    foreach (var prefab in a.MapBlockPrefabs)
+                    {
+                        if (prefab.TryGetComponent(out MapBlock block))
+                        {
+                            MapBlockPrefabs[block.eventType] = prefab;
+                        }
+                    }
+                },
+                // ReSharper disable once AccessToModifiedClosure
+                d => singlePatchDownloading?.Invoke(patchingName, d.PercentComplete),
+                _ =>
+                {
+                    // ReSharper disable once AccessToModifiedClosure
+                    singlePatchCompleted?.Invoke(patchingName);
+                    previousPatchOver = true;
+                });
+        }
+        yield return new WaitUntil(() => previousPatchOver);
+        previousPatchOver = false;
+
+        // Download Monster Resources.
+        singlePatchStart?.Invoke(patchingName = "Monster Resources");
+        {
+            previousPatchOver = false;
+            MonsterProbabilities.Clear();
+            LoadAssetsByLabel<MonsterProbability>(
+                LABEL_DATA, a =>
+                {
+                    if (Enum.TryParse(a.name, out MonsterType type))
+                    {
+                        MonsterProbabilities[type] = a.MonsterProbabilities;
+                    }
+                },
+                // ReSharper disable once AccessToModifiedClosure
+                d => singlePatchDownloading?.Invoke(patchingName, d.PercentComplete),
+                _ =>
+                {
+                    // ReSharper disable once AccessToModifiedClosure
+                    singlePatchCompleted?.Invoke(patchingName);
+                    previousPatchOver = true;
+                });
+        }
+        yield return new WaitUntil(() => previousPatchOver);
+        previousPatchOver = false;
+
+        // Download MergeCard Resources.
+        singlePatchStart?.Invoke(patchingName = "Card Resources");
+        {
+            MergeCardDataLibrary.Clear();
+            LoadAssetsByLabel<MergeCardLibrary>(
+                LABEL_DATA, a =>
+                {
+                    foreach (var cardData in a.MergeCards)
+                    {
+                        MergeCardCategoryLibrary[a.name].Add(cardData.ID);
+                        MergeCardDataLibrary[cardData.ID] = cardData;
+                    }
+                },
+                // ReSharper disable once AccessToModifiedClosure
+                d => singlePatchDownloading?.Invoke(patchingName, d.PercentComplete),
+                _ =>
+                {
+                    // ReSharper disable once AccessToModifiedClosure
+                    singlePatchCompleted?.Invoke(patchingName);
+                    previousPatchOver = true;
+                });
+        }
+        yield return new WaitUntil(() => previousPatchOver);
+        previousPatchOver = false;
+
+        // Download Lua Script Resources.
+        singlePatchStart?.Invoke(patchingName = "Script @Lua Resources");
+        {
+            LuaManager.LuaEnv = new LuaEnv();
+            List<TextAsset> luaTexts = new List<TextAsset>();
+            LoadAssetsByLabel<TextAsset>(
+                LABEL_LUA,
+                a =>
+                {
+                    a.name = a.name.Replace(".lua", string.Empty);
+                    // Load Global first.
+                    if (a.name == LABEL_GLOBAL)
+                    {
+                        LuaManager.LuaEnv.DoString(a.text, a.name);
+                    }
+                    else
+                    {
+                        luaTexts.Add(a);
+                    }
+                },
+                // ReSharper disable once AccessToModifiedClosure
+                d => singlePatchDownloading?.Invoke(patchingName, d.PercentComplete),
+                _ =>
+                {
+                    // Load script.
+                    foreach (var text in luaTexts)
+                    {
+                        LuaManager.LuaEnv.DoString(text.text, text.name);
+                    }
+
+                    LuaManager.Initialize();
+
+                    // ReSharper disable once AccessToModifiedClosure
+                    singlePatchCompleted?.Invoke(patchingName);
+                    previousPatchOver = true;
+                });
+        }
+        yield return new WaitUntil(() => previousPatchOver);
+        previousPatchOver = false;
+
+        patchCompleted?.Invoke();
+    }
     
     private IEnumerator InitializeIE(Action<AsyncOperationHandle> completed = null)
     {
@@ -104,6 +315,8 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
         MapBlockProbabilities = new List<MapBlockProbability>();
         MapBlockPrefabs = new Dictionary<MapBlockEventType, GameObject>();
         MonsterProbabilities = new Dictionary<MonsterType, List<MonsterProbabilityData>>();
+        MergeCardDataLibrary = new Dictionary<string, MergeCardData>();
+        MergeCardCategoryLibrary = new Dictionary<string, List<string>>();
         StartCoroutine(InitializeIE(t => _initialized = true));
     }
 }

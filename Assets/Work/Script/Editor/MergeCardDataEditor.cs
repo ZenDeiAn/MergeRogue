@@ -13,7 +13,7 @@ public class MergeCardDataEditor : PropertyDrawer
         float lineHeight = EditorGUIUtility.singleLineHeight;
         
         // Get the "name" property
-        SerializedProperty nameProperty = property.FindPropertyRelative("Name");
+        SerializedProperty nameProperty = property.FindPropertyRelative("ID");
 
         // Use the "name" value as the foldout label
         label.text = !string.IsNullOrEmpty(nameProperty.stringValue) ? nameProperty.stringValue : "Unnamed Element";

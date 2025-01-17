@@ -115,10 +115,9 @@ function GetUnhealthestEnemy()
     local monsters = CS.BattleManager.Instance.monsters
     local target = monsters[1]
     for i = 2, monsters.Count do
-        if (target.Status.Health > monsters[i].Status.Health)
-        {
+        if (target.Status.Health > monsters[i].Status.Health) then
             target = monsters[i]
-        }
+        end
     end
     return target
 end
@@ -127,10 +126,9 @@ function GetHealthestEnemy()
     local monsters = CS.BattleManager.Instance.monsters
     local target = monsters[1]
     for i = 2, monsters.Count do
-        if (target.Status.Health < monsters[i].Status.Health)
-        {
+        if (target.Status.Health < monsters[i].Status.Health) then
             target = monsters[i]
-        }
+        end
     end
     return target
 end

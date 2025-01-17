@@ -141,28 +141,25 @@ public class MapBlockData
         EventType = eventType;
         State = state;
     }
+}
 
-    public bool TryParseMonsterType(out MonsterType type)
-    {
-        type = global::MonsterType.Minion;
-        switch (EventType)
+public static class MapBlockUtility
+{
+    public static MapBlockEventType ToMapBlockEventType(this MonsterType self) =>
+        self switch
         {
-            case MapBlockEventType.Minion:
-                type = global::MonsterType.Minion;
-                break;
-
-            case MapBlockEventType.Elite:
-                type = global::MonsterType.Elite;
-                break;
-            
-            case MapBlockEventType.Boss:
-                type = global::MonsterType.Boss;
-                break;
-            
-            default:
-                return false;
-        }
-
-        return true;
-    }
+            MonsterType.Minion => MapBlockEventType.Minion,
+            MonsterType.Elite => MapBlockEventType.Elite,
+            MonsterType.Boss => MapBlockEventType.Boss,
+            _ => MapBlockEventType.None
+        };
+    
+    public static MonsterType ToMonsterType(this MapBlockEventType self) =>
+        self switch
+        {
+            MapBlockEventType.Minion => MonsterType.Minion,
+            MapBlockEventType.Elite => MonsterType.Elite,
+            MapBlockEventType.Boss => MonsterType.Boss,
+            _ => MonsterType.None
+        };
 }
