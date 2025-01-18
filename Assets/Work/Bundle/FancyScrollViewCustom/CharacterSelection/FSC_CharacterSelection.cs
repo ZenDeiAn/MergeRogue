@@ -22,8 +22,8 @@ class FSC_CharacterSelection : FancyCell<FSD_CharacterSelection>
 
     public override void UpdateContent(FSD_CharacterSelection itemData)
     {
-        rank.sprite = AddressableManager.Instance.UI[$"CharacterRank_{itemData.characterData.rank}"];
-        icon.sprite = itemData.characterData.icon;
+        rank.sprite = AddressableManager.Instance.UILibrary[$"CharacterRank_{itemData.CharacterInfo.rank}"];
+        icon.sprite = itemData.CharacterInfo.icon;
     }
 
     public override void UpdatePosition(float position)

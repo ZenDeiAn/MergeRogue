@@ -125,6 +125,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Data
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6d20d4570e1ba2469bfff3ad1351220
+    m_Address: Assets/Work/Addressable/LanguageData/CardDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Global
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d41d78f70b6c27546891ece3b0e453c3, type: 2}
   m_SchemaSet:

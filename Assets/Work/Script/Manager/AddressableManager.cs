@@ -17,18 +17,18 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
     public const string LABEL_LUA = "Lua";
     public const string LABEL_RESOURCE = "Resource";
     
-    public Dictionary<string, CharacterDataSet> Character { get; private set; }
-    public Dictionary<string, Sprite> UI { get; private set; }
+    public Dictionary<string, CharacterInfo> Character { get; private set; }
+    public UILibrary UILibrary { get; private set; }
     public Dictionary<MapBlockEventType, GameObject> MapBlockPrefabs { get; private set; }
     public List<MapBlockProbability> MapBlockProbabilities { get; private set; }
     public Dictionary<MonsterType, List<MonsterProbabilityData>> MonsterProbabilities { get; private set; }
-    public Dictionary<string, List<string>> MergeCardCategoryLibrary { get; private set; }
+    public Dictionary<MergeCardType, List<string>> MergeCardLibraryByType { get; private set; }
     public Dictionary<string, MergeCardData> MergeCardDataLibrary { get; private set; }
     
     private bool _initialized;
     
     public bool Initialized => _initialized;
-    public CharacterDataSet CurrentCharacterData => Instance.Character[GameManager.Instance.CharacterID];
+    public CharacterInfo CurrentCharacter => Instance.Character[GameManager.Instance.CharacterID];
 
     public Coroutine LoadAssetsByLabel<T>(string label,
         Action<T> assetLoaded,
@@ -118,16 +118,8 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
         // Download UI Resources.
         singlePatchStart?.Invoke(patchingName = "UI Resources");
         {
-            LoadAssetsByLabel<UIData>(LABEL_GLOBAL,
-                a =>
-                {
-                    a.UIDataList.ForEach(ds => UI[ds.id] = ds.sprite);
-                    var enums = Enum.GetValues(typeof(MergeCardType));
-                    foreach (var @enum in enums)
-                    {
-                        UI[$"{nameof(a.MergedCardSprites)}_{@enum}"] = a.MergedCardSprites[(MergeCardType)@enum];
-                    }
-                },
+            LoadAssetsByLabel<UILibrary>(LABEL_GLOBAL,
+                a => UILibrary = a,
                 // ReSharper disable once AccessToModifiedClosure
                 d => singlePatchDownloading?.Invoke(patchingName, d.PercentComplete),
                 _ =>
@@ -163,7 +155,7 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
         // Character Resources
         singlePatchStart?.Invoke(patchingName = "Character Resources");
         {
-            LoadAssetsByLabel<CharacterDataSet>(LABEL_GLOBAL,
+            LoadAssetsByLabel<CharacterInfo>(LABEL_GLOBAL,
                 a => Character.Add(a.ID, a),
                 // ReSharper disable once AccessToModifiedClosure
                 d => singlePatchDownloading?.Invoke(patchingName, d.PercentComplete),
@@ -240,7 +232,9 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
                 {
                     foreach (var cardData in a.MergeCards)
                     {
-                        MergeCardCategoryLibrary[a.name].Add(cardData.ID);
+                        if (!MergeCardLibraryByType.ContainsKey(cardData.Type))
+                            MergeCardLibraryByType.Add(cardData.Type, new List<string>());
+                        MergeCardLibraryByType[cardData.Type].Add(cardData.ID);
                         MergeCardDataLibrary[cardData.ID] = cardData;
                     }
                 },
@@ -310,13 +304,12 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
     {
         base.Initialization();
 
-        Character = new Dictionary<string, CharacterDataSet>();
-        UI = new Dictionary<string, Sprite>();
+        Character = new Dictionary<string, CharacterInfo>();
         MapBlockProbabilities = new List<MapBlockProbability>();
         MapBlockPrefabs = new Dictionary<MapBlockEventType, GameObject>();
         MonsterProbabilities = new Dictionary<MonsterType, List<MonsterProbabilityData>>();
         MergeCardDataLibrary = new Dictionary<string, MergeCardData>();
-        MergeCardCategoryLibrary = new Dictionary<string, List<string>>();
+        MergeCardLibraryByType = new Dictionary<MergeCardType, List<string>>();
         StartCoroutine(InitializeIE(t => _initialized = true));
     }
 }

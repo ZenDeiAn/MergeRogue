@@ -1,0 +1,280 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2015207410, guid: b4f53cca559264c45a840238069c8ca6, type: 3}
+  m_Name: CardDescription
+  m_EditorClassIdentifier: 
+  defaultFont:
+  - {fileID: 11400000, guid: 88090f47cf6aa9c40a168b803985c64a, type: 2}
+  - {fileID: 11400000, guid: 55feab4512a803e4084f29d190d91d40, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  languageData:
+  - key: SpeedUp
+    dataType: 0
+    textData:
+    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+      font: {fileID: 0}
+    - text: Increase <m> Character's Speed
+      font: {fileID: 0}
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    spriteData: []
+  - key: AttackUp
+    dataType: 0
+    textData:
+    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+      font: {fileID: 0}
+    - text: Increase <m> Character's Speed
+      font: {fileID: 0}
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    spriteData: []
+  - key: ShieldUp
+    dataType: 0
+    textData:
+    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+      font: {fileID: 0}
+    - text: Increase <m> Character's Speed
+      font: {fileID: 0}
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    spriteData: []
+  - key: HealthStealthUp
+    dataType: 0
+    textData:
+    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+      font: {fileID: 0}
+    - text: Increase <m> Character's Speed
+      font: {fileID: 0}
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    spriteData: []
+  - key: DodgeUp
+    dataType: 0
+    textData:
+    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+      font: {fileID: 0}
+    - text: Increase <m> Character's Speed
+      font: {fileID: 0}
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    spriteData: []
+  - key: CriticalChanceUp
+    dataType: 0
+    textData:
+    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+      font: {fileID: 0}
+    - text: Increase <m> Character's Speed
+      font: {fileID: 0}
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    spriteData: []
+  - key: CriticalDamageUp
+    dataType: 0
+    textData:
+    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+      font: {fileID: 0}
+    - text: Increase <m> Character's Speed
+      font: {fileID: 0}
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    spriteData: []
+  - key: ComboChanceUp
+    dataType: 0
+    textData:
+    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+      font: {fileID: 0}
+    - text: Increase <m> Character's Speed
+      font: {fileID: 0}
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    spriteData: []
+  - key: ComboMaximumUp
+    dataType: 0
+    textData:
+    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+      font: {fileID: 0}
+    - text: Increase <m> Character's Speed
+      font: {fileID: 0}
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    - text: 
+      font: {fileID: 0}
+    spriteData: []

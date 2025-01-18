@@ -21,5 +21,5 @@ public struct MonsterProbabilityData
 [Serializable]
 public struct MonsterGroup
 {
-    public List<MonsterDataSet> monsters;
+    public List<MonsterInfo> monsters;
 }

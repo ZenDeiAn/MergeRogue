@@ -47,7 +47,7 @@ public class BattleManager : Processor<BattleManager, BattleState>
             if (monsterGroup.Count > 0)
             {
                 int randomGroupIndex = Random.Range(0, monsterGroup.Count);
-                List<MonsterDataSet> monsterDataSets = monsterGroup[randomGroupIndex].monsters;
+                List<MonsterInfo> monsterDataSets = monsterGroup[randomGroupIndex].monsters;
                 for (int i = 0; i < monsterDataSets.Count; ++i)
                 {
                     if (i >= monsterAnchors.Count)
@@ -57,7 +57,7 @@ public class BattleManager : Processor<BattleManager, BattleState>
                     monsterObject.transform.localPosition = Vector3.zero;
                     monsterObject.transform.localRotation = Quaternion.identity;
                     Monster monster = monsterObject.GetComponent<Monster>();
-                    monster.DataSet = monsterDataSets[i];
+                    monster.Info = monsterDataSets[i];
                     monster.Initialize();
                     monsters.Add(monster);
                 }
@@ -67,7 +67,7 @@ public class BattleManager : Processor<BattleManager, BattleState>
 
     void Activate_Prepare()
     {
-        
+        MergeCardHandler.Instance.DrawRandomCards();
     }
     
     void Activate_Over()

@@ -132,3 +132,32 @@ public class Equipment
     public IActor source;
     public int strength;
 }
+
+[Serializable]
+public class PlayerStatus
+{
+    public string CharacterID;
+    public ActorStatus CharacterStatus;
+    public List<int> ItemList = new List<int>();
+    public List<string> EquipmentList = new List<string>();
+    public Dictionary<string, float> MergeCardDeck = new Dictionary<string, float>();   // float is random weight
+    public int MergeCardHandlerSize;
+    public List<int> MergeCardLevelWeight  = new List<int>();
+
+    public void Initialize(CharacterInfo characterInfo, List<string> cardList)
+    {
+        CharacterID = characterInfo.ID;
+        // Init Player Status.
+        CharacterStatus = new ActorStatus(characterInfo.Status);
+        // Init Item count.
+        ItemList = new List<int>(3);
+        // Init merge card bag(only add Common category cards)
+        MergeCardDeck = new Dictionary<string, float>();
+        foreach (var t in cardList)
+        {
+            MergeCardDeck.Add(t, 1);
+        }
+        // TODO : HandAmountNeed by Ruin
+        MergeCardHandlerSize = 3;
+    }
+}

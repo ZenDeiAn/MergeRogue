@@ -7,12 +7,12 @@ public class Monster : MonoBehaviour, IActor
 {
     [SerializeField] private Animator animator;
     
-    public MonsterDataSet DataSet { get; set; }
+    public MonsterInfo Info { get; set; }
 
     public ActorType ActorType => ActorType.Enemy;
     public ActorStatus Status { get; set; }
-    public ActorAttackData AttackData => DataSet.AttackData;
-    public ActorSkillData SkillData => DataSet.SkillData;
+    public ActorAttackData AttackData => Info.AttackData;
+    public ActorSkillData SkillData => Info.SkillData;
     public ActionType CurrentAction { get; set; }
 
     public void Attack(List<IActor> target)
@@ -27,6 +27,6 @@ public class Monster : MonoBehaviour, IActor
 
     public void Initialize()
     {
-        this.InitializeStatus(DataSet.Status);
+        this.InitializeStatus(Info.Status);
     }
 }

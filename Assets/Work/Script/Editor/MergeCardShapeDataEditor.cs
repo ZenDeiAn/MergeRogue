@@ -104,45 +104,45 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                 int lastNonEmptyRow = 0;
                 for (int i = 0; i < data.ShapeGrid.Count; ++i)
                 {
-                    var row = data.ShapeGrid[i].Row;
-                    for (int j = 0; j < row.Count; ++j)
+                    var column = data.ShapeGrid[i].Column;
+                    for (int j = 0; j < column.Count; ++j)
                     {
-                        if (row[j])
+                        if (column[j])
                         {
-                            if (firstNonEmptyColumn > j)
-                                firstNonEmptyColumn = j;
-                            if (firstNonEmptyRow > i)
-                                firstNonEmptyRow = i;
-                            if (lastNonEmptyColumn < j)
-                                lastNonEmptyColumn = j;
-                            if (lastNonEmptyRow < i)
-                                lastNonEmptyRow = i;
+                            if (firstNonEmptyColumn > i)
+                                firstNonEmptyColumn = i;
+                            if (firstNonEmptyRow > j)
+                                firstNonEmptyRow = j;
+                            if (lastNonEmptyColumn < i)
+                                lastNonEmptyColumn = i;
+                            if (lastNonEmptyRow < j)
+                                lastNonEmptyRow = j;
                         }
                     }
                 }
                 // Remove blank
-                for (int i = 0; i < firstNonEmptyRow && i < data.ShapeGrid.Count; ++i)
+                for (int i = 0; i < firstNonEmptyColumn && i < data.ShapeGrid.Count; ++i)
                 {
                     data.ShapeGrid.RemoveAt(0);
                 }
                 
-                lastNonEmptyRow -= firstNonEmptyRow;
-                for (int i = data.ShapeGrid.Count - 1; i > lastNonEmptyRow; --i)
+                lastNonEmptyColumn -= firstNonEmptyColumn;
+                for (int i = data.ShapeGrid.Count - 1; i > lastNonEmptyColumn && i > -1; --i)
                 {
                     data.ShapeGrid.RemoveAt(data.ShapeGrid.Count - 1);
                 }
 
-                lastNonEmptyColumn -= firstNonEmptyColumn;
+                lastNonEmptyRow -= firstNonEmptyRow;
                 for (int i = 0; i < data.ShapeGrid.Count; ++i)
                 {
-                    var row = data.ShapeGrid[i].Row;
-                    for (int j = 0; j < firstNonEmptyColumn && j < row.Count; ++j)
+                    var column = data.ShapeGrid[i].Column;
+                    for (int j = 0; j < firstNonEmptyRow && j < column.Count; ++j)
                     {
-                        row.RemoveAt(0);
+                        column.RemoveAt(0);
                     }
-                    for (int j = row.Count - 1; j > lastNonEmptyColumn; --j)
+                    for (int j = column.Count - 1; j > lastNonEmptyRow && j  > -1; --j)
                     {
-                        row.RemoveAt(row.Count - 1);
+                        column.RemoveAt(column.Count - 1);
                     }
                 }
                 
@@ -151,8 +151,8 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                 for (int i = 0; i < data.ShapeGrid.Count; ++i)
                 {
                     shapeProperty.arraySize++;
-                    var row = data.ShapeGrid[i].Row;
-                    SerializedProperty innerList = shapeProperty.GetArrayElementAtIndex(i).FindPropertyRelative("Row");
+                    var row = data.ShapeGrid[i].Column;
+                    SerializedProperty innerList = shapeProperty.GetArrayElementAtIndex(i).FindPropertyRelative("Column");
                     innerList.arraySize = 0;
                     for (int j = 0; j < row.Count; j++)
                     {
@@ -214,7 +214,7 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                 
                 if (data.ShapeGrid.Count > i)
                 {
-                    var row = data.ShapeGrid[i].Row;
+                    var row = data.ShapeGrid[i].Column;
                     activeBlock = row.Count > j && row[j];
                 }
 
@@ -224,15 +224,15 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                     {
                         if (activeBlock)
                         {
-                            data.ShapeGrid[i].Row[j] = false;
+                            data.ShapeGrid[i].Column[j] = false;
                         }
                         else
                         {
                             for (int m = data.ShapeGrid.Count; m <= i; ++m)
                             {
-                                data.ShapeGrid.Add(new MergeCardShapeRow());   
+                                data.ShapeGrid.Add(new MergeCardShapeColumn());   
                             }
-                            var row = data.ShapeGrid[i].Row;
+                            var row = data.ShapeGrid[i].Column;
 
                             for (int m = row.Count; m <= j; ++m)
                             {
@@ -290,11 +290,11 @@ public class MergeCardShapeDataEditor : PropertyDrawer
         data.ShapeGrid.Clear();
         for (int i = 0; i < shapeProperty.arraySize; ++i)
         {
-            SerializedProperty innerList = shapeProperty.GetArrayElementAtIndex(i).FindPropertyRelative("Row");
-            data.ShapeGrid.Add(new MergeCardShapeRow());
+            SerializedProperty innerList = shapeProperty.GetArrayElementAtIndex(i).FindPropertyRelative("Column");
+            data.ShapeGrid.Add(new MergeCardShapeColumn());
             for (int j = 0; j < innerList.arraySize; ++j)
             {
-                data.ShapeGrid[i].Row.Add(innerList.GetArrayElementAtIndex(j).boolValue);
+                data.ShapeGrid[i].Column.Add(innerList.GetArrayElementAtIndex(j).boolValue);
             }
         }
 

@@ -6,10 +6,10 @@
 
 class FSD_CharacterSelection
 {
-    public readonly CharacterDataSet characterData;
+    public readonly CharacterInfo CharacterInfo;
 
-    public FSD_CharacterSelection(CharacterDataSet data)
+    public FSD_CharacterSelection(CharacterInfo info)
     {
-        characterData = data;
+        CharacterInfo = info;
     }
 }

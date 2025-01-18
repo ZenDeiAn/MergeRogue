@@ -19,15 +19,15 @@ public class CharacterPreview : MonoBehaviour, ICharacterDataInstance
     public EnumPairList<WeaponSocketType, MeshFilter> WeaponSockets => _weaponSockets;
     public Animator Animator => _animator;
     public SkinnedMeshRenderer MeshRenderer => _meshRenderer;
-    public CharacterDataSet DataSet { get; set; }
+    public CharacterInfo Info { get; set; }
 
     private Vector3 _initPosition = Vector3.zero;
     private Quaternion _initRotation;
     
     public void Initialize()
     {
-        this.InitializeCharacterData(AddressableManager.Instance.CurrentCharacterData);
-        Animator.runtimeAnimatorController = DataSet.rac_showcase;
+        this.InitializeCharacterData(AddressableManager.Instance.CurrentCharacter);
+        Animator.runtimeAnimatorController = Info.rac_showcase;
         
         if (_initPosition == Vector3.zero)
         {

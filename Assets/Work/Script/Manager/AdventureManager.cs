@@ -7,20 +7,18 @@ using RaindowStudio.Utility;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Newtonsoft.Json.Linq;
+using UnityEngine.Serialization;
 using File = System.IO.File;
 
 public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameStatusManager
 {
-    public string CharacterID;
     public int RandomSeed;
     public Vector2Int Position;
-    public ActorStatus PlayerStatus;
-    public List<int> ItemList = new List<int>();
-    public List<string> EquipmentList = new List<string>();
     public Dictionary<Vector2Int, MapBlockData> MapData =
         new Dictionary<Vector2Int, MapBlockData>();
+    public PlayerStatus PlayerStatus = new PlayerStatus();    
+    
     public MapBlockData CurrentMapData => MapData[Position];
-    public List<string> MergeCardList = new List<string>();
     
     private AddressableManager _adm;
 
@@ -31,25 +29,25 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
         {
             // CommonData
             [nameof(RandomSeed)] = RandomSeed,
-            [nameof(CharacterID)] = CharacterID,
+            [nameof(PlayerStatus.CharacterID)] = PlayerStatus.CharacterID,
             [nameof(Position)] = Position.ToString(),
-            // PlayerStatus
-            [nameof(PlayerStatus)] = new JObject()
+            // Player Character Status
+            [nameof(PlayerStatus.CharacterStatus)] = new JObject()
             {
-                [nameof(PlayerStatus.health)] = PlayerStatus.health,
-                [nameof(ItemList)] = new JArray(),
-                [nameof(EquipmentList)] = new JArray(),
+                [nameof(PlayerStatus.CharacterStatus.health)] = PlayerStatus.CharacterStatus.health,
+                [nameof(PlayerStatus.ItemList)] = new JArray(),
+                [nameof(PlayerStatus.EquipmentList)] = new JArray(),
             },
             // MapData
             [nameof(MapData)] = new JArray(),
         };
-        foreach (var item in ItemList)
+        foreach (var item in PlayerStatus.ItemList)
         {
-            (jObject[nameof(PlayerStatus)]?[nameof(ItemList)] as JArray)?.Add(item);
+            (jObject[nameof(PlayerStatus.CharacterStatus)]?[nameof(PlayerStatus.ItemList)] as JArray)?.Add(item);
         }
-        foreach (var equipment in EquipmentList)
+        foreach (var equipment in PlayerStatus.EquipmentList)
         {
-            (jObject[nameof(PlayerStatus)]?[nameof(EquipmentList)] as JArray)?.Add(equipment);
+            (jObject[nameof(PlayerStatus.CharacterStatus)]?[nameof(PlayerStatus.EquipmentList)] as JArray)?.Add(equipment);
         }
         foreach (var mapBlockData in MapData)
         {
@@ -70,8 +68,8 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
 
     public bool CheckLoadData()
     {
-        ItemList.Clear();
-        EquipmentList.Clear();
+        PlayerStatus.ItemList.Clear();
+        PlayerStatus.EquipmentList.Clear();
         MapData.Clear();
         string path = Path.Combine(Application.streamingAssetsPath, $"{name}.json");
         if (!File.Exists(path))
@@ -82,15 +80,15 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
         JArray jArray;
         // CommonData
         if (!jObject.TryApplyDataToProperty(nameof(RandomSeed), ref RandomSeed)) return false;
-        if (!jObject.TryApplyDataToProperty(nameof(CharacterID), ref CharacterID)) return false;
+        if (!jObject.TryApplyDataToProperty(nameof(PlayerStatus.CharacterID), ref PlayerStatus.CharacterID)) return false;
         if (!jObject.TryApplyDataToProperty(nameof(Position), ref Position)) return false;
         // PlayerStatus
-        if (!jObject.TryGetValue(nameof(PlayerStatus), out token))
+        if (!jObject.TryGetValue(nameof(PlayerStatus.CharacterStatus), out token))
             return false;
         {
-            if (!token.TryApplyDataToProperty(nameof(PlayerStatus.health), ref PlayerStatus.health)) return false;
-            if (!token.TryApplyDataToListProperty(nameof(ItemList), ref ItemList)) return false;
-            if (!token.TryApplyDataToListProperty(nameof(EquipmentList), ref EquipmentList)) return false;
+            if (!token.TryApplyDataToProperty(nameof(PlayerStatus.CharacterStatus.health), ref PlayerStatus.CharacterStatus.health)) return false;
+            if (!token.TryApplyDataToListProperty(nameof(PlayerStatus.ItemList), ref PlayerStatus.ItemList)) return false;
+            if (!token.TryApplyDataToListProperty(nameof(PlayerStatus.EquipmentList), ref PlayerStatus.EquipmentList)) return false;
         }
         // MapData
         if (!jObject.TryGetValue(nameof(MapData), out token))
@@ -133,12 +131,7 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
     {
         // Random map.
         GenerateRandomAdventureMap();
-        // Init Player Status.
-        PlayerStatus = new ActorStatus(AddressableManager.Instance.CurrentCharacterData.Status);
-        // Init Item count.
-        ItemList = new List<int>(3);
-        // Init merge card bag(only add Common category cards)
-        MergeCardList = new List<string>(_adm.MergeCardCategoryLibrary["Common"]);
+        PlayerStatus.Initialize(_adm.CurrentCharacter, _adm.MergeCardLibraryByType[MergeCardType.Common]);
     }
     
     private void GenerateRandomAdventureMap(int randomSeed = -1)
@@ -263,3 +256,4 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
         _adm = AddressableManager.Instance;
     }
 }
+

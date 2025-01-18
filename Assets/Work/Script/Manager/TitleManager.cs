@@ -34,6 +34,11 @@ public class TitleManager : Processor<TitleManager, TitleState>
         sld_titlePatch.value = 0;
     }
 
+    public void Btn_NewGame()
+    {
+        GameManager.Instance.NewGame();
+    }
+
     private void OnCharacterChangedEvent(string id)
     {
         characterPreview.Initialize();
@@ -64,8 +69,11 @@ public class TitleManager : Processor<TitleManager, TitleState>
         am.PatchAllAddressableAssets(InitializePatchUI,
             (_, p) => sld_titlePatch.value = p,
             null,
-            GameManager.Instance.LoadSaveData
-        );
+            () =>
+            {
+                GameManager.Instance.LoadSaveData();
+                OnPatchOver();
+            });
     }
 
     private void OnDestroy()

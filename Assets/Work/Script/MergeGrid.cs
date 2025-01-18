@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using RaindowStudio.DesignPattern;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 public class MergeGrid : SingletonUnity<MergeGrid>
 {
@@ -12,7 +10,7 @@ public class MergeGrid : SingletonUnity<MergeGrid>
     public float anchorSpaceRatio = .01f;
 
     // The data int is for gameObject's InstanceID.
-    public List<List<int>> mergeSockets = new List<List<int>>();
+    public List<List<string>> mergeSockets = new List<List<string>>();
     
     [ContextMenu("Anchor Merge Tool Table Sockets")]
     public void AnchorMergeToolTableSockets()
@@ -61,12 +59,42 @@ public class MergeGrid : SingletonUnity<MergeGrid>
 }
 
 [Serializable]
-public struct MergeSocketInfo
+public struct OnBoardCardInfo
 {
-    public int Index { get; set; }
-    public int Row { get; set; }
-    public int Column { get; set; }
-    public Rect Rect { get; set; }
+    public string ID;
+    public Vector2Int Position;
 
-    public bool Contains(Vector2 position) => Rect.Contains(position);
+    public bool CheckCardConflict(string cardID, Vector2Int position)
+    {
+        var cardLibrary = AddressableManager.Instance.MergeCardDataLibrary;
+        var shape = cardLibrary[ID].CardShape;
+        var checkShape = cardLibrary[cardID].CardShape; // Calculate the min and max points of the first rectangle
+        
+        // Calculate the bottom-right corners for both rectangles
+        Vector2Int bottomRight1 = Position + new Vector2Int(shape.GridSize.x, -shape.GridSize.y);
+        Vector2Int bottomRight2 = position + new Vector2Int(checkShape.GridSize.x, -checkShape.GridSize.y);
+        
+        // Determine the intersecting region
+        int overlapLeft = Mathf.Max(Position.x, position.x);
+        int overlapTop = Mathf.Min(Position.y, position.y);
+        int overlapRight = Mathf.Min(bottomRight1.x, bottomRight2.x);
+        int overlapBottom = Mathf.Max(bottomRight1.y, bottomRight2.y);
+
+        // Check if there is an actual overlap
+        if (overlapLeft < overlapRight && overlapBottom < overlapTop)
+        {
+            for (int x = overlapLeft; x < overlapRight; x++)
+            {
+                for (int y = overlapBottom; y < overlapTop; y++)
+                {
+                    if (shape[x - Position.x, y - Position.y] &&
+                        checkShape[x - position.x, y - position.y])
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

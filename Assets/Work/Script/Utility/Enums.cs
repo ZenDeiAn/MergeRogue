@@ -70,3 +70,12 @@ public enum ActionType
     Attack,
     Skill
 }
+
+[Serializable]
+public enum MergeLevel
+{
+    One,
+    Two,
+    Three,
+    Ultimate
+}

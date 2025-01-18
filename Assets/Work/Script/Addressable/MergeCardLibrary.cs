@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using RaindowStudio.Attribute;
+using RaindowStudio.Utility;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,14 +13,13 @@ public class MergeCardLibrary : ScriptableObject
     public List<MergeCardData> MergeCards;
 }
 
-[Serializable]
+[Serializable, DrawWithUnity]
 public class MergeCardData
 {
     public string ID;
-    public string Category;
-    public MergeCardType type;
+    public MergeCardType Type;
     public Sprite Icon;
-    public List<float> MultiplyByLevel;
+    public EnumPairList<MergeLevel, float> Multiplies;
     public MergeCardShapeData CardShape;
 }
 
@@ -26,19 +27,25 @@ public class MergeCardData
 public class MergeCardShapeData
 {
     public Vector2Int GridSize;
-    public List<MergeCardShapeRow> ShapeGrid = new List<MergeCardShapeRow>();
+    public List<MergeCardShapeColumn> ShapeGrid = new List<MergeCardShapeColumn>();
 
     public MergeCardShapeData() { }
 
     public MergeCardShapeData(MergeCardShapeData mergeCardShapeData)
     {
         GridSize = mergeCardShapeData.GridSize;
-        ShapeGrid = new List<MergeCardShapeRow>(mergeCardShapeData.ShapeGrid);
+        ShapeGrid = new List<MergeCardShapeColumn>(mergeCardShapeData.ShapeGrid);
     }
+
+    public MergeCardShapeColumn this[int x] => ShapeGrid[x];
+    public bool this[int x, int y] => ShapeGrid[x].Column[y];
+    public bool this[Vector2Int position] => ShapeGrid[position.x].Column[position.y];
 }
 
 [Serializable]
-public class MergeCardShapeRow
+public class MergeCardShapeColumn
 {
-    public List<bool> Row = new List<bool>();
+    [FormerlySerializedAs("Row")] public List<bool> Column = new List<bool>();
+    public int Count => Column.Count;
+    public bool this[int y] => Column[y]; 
 }
