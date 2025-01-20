@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using RaindowStudio.DesignPattern;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MergeCardHandler : SingletonUnity<MergeCardHandler>
 {
     [SerializeField] private ObjectPool obp_hand;
-    
+
+    public RectTransform MergeCardInformationSocket;
+    public Canvas Canvas;
     public List<MergeCard> HandMergeCards = new List<MergeCard>();
-    public List<float> mergeCardPositionX = new List<float>(); 
+    public List<float> MergeCardPositionX = new List<float>();
+    public float MergeCardSize = 1;
 
     private AdventureManager _avm;
     private RectTransform _rectTransform;
@@ -22,11 +26,10 @@ public class MergeCardHandler : SingletonUnity<MergeCardHandler>
         for (int i = 0; i < randomCards.Count; ++i)
         {
             MergeCard card = obp_hand.GetObject().GetComponent<MergeCard>();
-            card.Initialize(randomCards[i]);
             HandMergeCards.Add(card);
+            UpdateCardPositions();
+            card.Initialize(randomCards[i]);
         }
-
-        UpdateCardPositions();
     }
 
     public List<string> GetRandomCardsFromDeck(int amount)
@@ -64,14 +67,13 @@ public class MergeCardHandler : SingletonUnity<MergeCardHandler>
 
     public void UpdateCardPositions()
     {
-        mergeCardPositionX.Clear();
+        MergeCardPositionX.Clear();
         float gap = _rectTransform.rect.width / HandMergeCards.Count;
         float start = _rectTransform.rect.x + gap / 2;
         for (int i = 0; i < HandMergeCards.Count; ++i)
         {
-            mergeCardPositionX.Add(start + gap * i);
+            MergeCardPositionX.Add(start + gap * i);
         }
-        Debug.Log($"{HandMergeCards.Count} : {mergeCardPositionX.Count}");
     }
 
     protected override void Initialization()
@@ -80,5 +82,6 @@ public class MergeCardHandler : SingletonUnity<MergeCardHandler>
         
         _avm = AdventureManager.Instance;        
         _rectTransform = GetComponent<RectTransform>();
+        MergeCardSize = _rectTransform.rect.width / 2.5f;
     }
 }

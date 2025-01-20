@@ -1336,6 +1336,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (20)
@@ -1358,6 +1366,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 381578350}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &381578352 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 381578350}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &386472217
 GameObject:
   m_ObjectHideFlags: 3
@@ -1648,6 +1667,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (4)
@@ -1670,6 +1697,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 410913981}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &410913983 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 410913981}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &413230163
 GameObject:
   m_ObjectHideFlags: 0
@@ -1754,7 +1792,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.85
+  m_fontSize: 67.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2638,6 +2676,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (17)
@@ -2660,6 +2706,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 652524531}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &652524533 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 652524531}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &654282301
 GameObject:
   m_ObjectHideFlags: 0
@@ -3702,6 +3759,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (8)
@@ -3724,6 +3789,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 890909597}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &890909599 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 890909597}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &898633073
 GameObject:
   m_ObjectHideFlags: 0
@@ -4207,6 +4283,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (15)
@@ -4229,6 +4313,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 970282361}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &970282363 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 970282361}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &997814093
 GameObject:
   m_ObjectHideFlags: 0
@@ -4344,7 +4439,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.85
+  m_fontSize: 67.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4515,6 +4610,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (9)
@@ -4537,6 +4640,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 1038267850}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1038267852 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 1038267850}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1039525853
 GameObject:
   m_ObjectHideFlags: 0
@@ -4793,6 +4907,41 @@ MonoBehaviour:
   minVerticalAngle: -30
   maxVerticalAngle: 60
   invertY: 0
+--- !u!1 &1068180014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1068180015}
+  m_Layer: 5
+  m_Name: MergeCardInformationSocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1068180015
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068180014}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1328502654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1083446666
 GameObject:
   m_ObjectHideFlags: 0
@@ -4953,6 +5102,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (7)
@@ -5063,6 +5220,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (2)
@@ -5085,6 +5250,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 1121882009}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1121882011 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 1121882009}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1130135133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5173,6 +5349,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (16)
@@ -5195,6 +5379,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 1130135133}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1130135135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 1130135133}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1131100148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5296,7 +5491,7 @@ GameObject:
   - component: {fileID: 1160205824}
   - component: {fileID: 1160205825}
   m_Layer: 5
-  m_Name: Pnl_MergeCards
+  m_Name: Pnl_MergeCardHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5334,8 +5529,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obp_hand: {fileID: 1160205825}
+  MergeCardInformationSocket: {fileID: 1068180015}
+  Canvas: {fileID: 1328502653}
   HandMergeCards: []
-  mergeCardPositionX: []
+  MergeCardPositionX: []
+  MergeCardSize: 1
 --- !u!114 &1160205825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5695,6 +5893,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (13)
@@ -5805,6 +6011,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (14)
@@ -5827,6 +6041,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 1321894374}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1321894376 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 1321894374}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1328502650
 GameObject:
   m_ObjectHideFlags: 0
@@ -5862,7 +6087,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 503
 --- !u!114 &1328502652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5928,6 +6153,7 @@ RectTransform:
   - {fileID: 924344951}
   - {fileID: 1621858555}
   - {fileID: 1160205823}
+  - {fileID: 1068180015}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6130,6 +6356,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (3)
@@ -6228,6 +6462,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398023334}
   m_CullTransparentMesh: 1
+--- !u!114 &1401134911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 1090588072}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1411770038
 GameObject:
   m_ObjectHideFlags: 0
@@ -6423,6 +6668,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (6)
@@ -6445,6 +6698,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 1417215448}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1417215450 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 1417215448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1429494670
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6533,6 +6797,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (18)
@@ -6555,6 +6827,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 1429494670}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1429494672 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 1429494670}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1437736067
 GameObject:
   m_ObjectHideFlags: 0
@@ -6639,7 +6922,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.85
+  m_fontSize: 67.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6869,6 +7152,7 @@ MonoBehaviour:
       criticalChanceAdditional: 0
       criticalDamageAdditional: 0
     ItemList: 
+    DicePrice: 0
     EquipmentList: []
     MergeCardHandlerSize: 0
     MergeCardLevelWeight: 
@@ -7327,6 +7611,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (1)
@@ -7349,6 +7641,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 1554998836}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1554998838 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 1554998836}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1562073507
 GameObject:
   m_ObjectHideFlags: 0
@@ -7894,8 +8197,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb36f741db810347adc7e35118abdcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rowColumn: 5
   anchorSpaceRatio: 0.025
+  OnBoardSockets:
+  - {fileID: 4404427165749366875}
+  - {fileID: 1554998838}
+  - {fileID: 1121882011}
+  - {fileID: 1632322152}
+  - {fileID: 410913983}
+  - {fileID: 2082229882}
+  - {fileID: 1417215450}
+  - {fileID: 1401134911}
+  - {fileID: 890909599}
+  - {fileID: 1038267852}
+  - {fileID: 1682846790}
+  - {fileID: 2123456451}
+  - {fileID: 1853372252}
+  - {fileID: 1711254795}
+  - {fileID: 1321894376}
+  - {fileID: 970282363}
+  - {fileID: 1130135135}
+  - {fileID: 652524533}
+  - {fileID: 1429494672}
+  - {fileID: 1731438625}
+  - {fileID: 381578352}
+  color_socketSettable: {r: 0.14285529, g: 1, b: 0, a: 0.5882353}
+  color_socketConflict: {r: 1, g: 0, b: 0, a: 0.5882353}
+  color_socketMergeable: {r: 1, g: 0.8873018, b: 0, a: 0.5882353}
+  color_socketJustOverlap: {r: 0, g: 0, b: 0, a: 0.5882353}
+  socketGridRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  socketSize: 0
+  socketSpacing: 0
+  OnBoardCards: []
+--- !u!114 &1632322152 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 1364930135}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1680882752
 GameObject:
   m_ObjectHideFlags: 0
@@ -8041,6 +8389,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (10)
@@ -8063,6 +8419,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 1682846788}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1682846790 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 1682846788}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1711254795 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 1307742447}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1722438626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8286,6 +8664,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (19)
@@ -8308,6 +8694,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 1731438623}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1731438625 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 1731438623}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1787700210
 GameObject:
   m_ObjectHideFlags: 0
@@ -8427,7 +8824,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 43.95
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8672,6 +9069,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (12)
@@ -8694,6 +9099,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 1845272986}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1853372252 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 1845272986}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1886417308
 GameObject:
   m_ObjectHideFlags: 0
@@ -9493,6 +9909,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (5)
@@ -9515,6 +9939,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 2082229880}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2082229882 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 2082229880}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2083149200
 GameObject:
   m_ObjectHideFlags: 0
@@ -9711,6 +10146,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket (11)
@@ -9733,6 +10176,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 2123456449}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2123456451 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 2123456449}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2136814865
 GameObject:
   m_ObjectHideFlags: 0
@@ -10012,6 +10466,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952647705060146534, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+      propertyPath: offset.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918526126056913228, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
       propertyPath: m_Name
       value: MergeSocket
@@ -10034,6 +10496,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 188892625136294981, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
   m_PrefabInstance: {fileID: 4404427165749366873}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4404427165749366875 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3106129004992257942, guid: 519b391ecf86e7e4983011cfc77941c7, type: 3}
+  m_PrefabInstance: {fileID: 4404427165749366873}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f1b5b666748543b34543074460f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &7603732234044232615
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -98,7 +98,6 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
             if (jArray == null)
                 return false;
             {
-                Vector2Int index = new Vector2Int();
                 foreach (var mapData in jArray)
                 {
                     string indexString = mapData["Index"]?.ToString();
@@ -111,8 +110,7 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
                             int.TryParse(strings[0].Trim(), out int x) &&
                             int.TryParse(strings[1].Trim(), out int y))
                         {
-                            index = new Vector2Int(x, y);
-                            mapBlockData = MapData[index] = new MapBlockData();
+                            mapBlockData = MapData[new Vector2Int(x, y)] = new MapBlockData();
                         }
                         else
                             return false;

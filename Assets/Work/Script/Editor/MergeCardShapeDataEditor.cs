@@ -7,7 +7,6 @@ using UnityEngine;
 [CustomPropertyDrawer(typeof(MergeCardShapeData))]
 public class MergeCardShapeDataEditor : PropertyDrawer
 {
-    private readonly Vector2Int gridSize = new Vector2Int(4, 4);
     private readonly Dictionary<string, MergeCardShapeData> _dummyShapeDataDict = new();
     private MergeCardShapeData _dummyShapeData = null;
     private string _currentModifyingKey = "";
@@ -48,7 +47,6 @@ public class MergeCardShapeDataEditor : PropertyDrawer
         {
             _dummyShapeDataDict[key] = new MergeCardShapeData();
             data = InitializeDummyData(property);
-
             data.GridSize = gridSizeProperty.vector2IntValue;
         }
         else
@@ -60,6 +58,7 @@ public class MergeCardShapeDataEditor : PropertyDrawer
         float lineSpace = EditorGUIUtility.standardVerticalSpacing;
         float singleLineHeight = EditorGUIUtility.singleLineHeight;
         float lineHeight = singleLineHeight + lineSpace;
+        int gridSize = MergeGrid.ROW_COLUMN_COUNT - 1;
         
         // Begin draw property!!!!!!!!!!
         EditorGUI.BeginProperty(position, label, property);
@@ -98,9 +97,9 @@ public class MergeCardShapeDataEditor : PropertyDrawer
             {
                 data.GridSize = Vector2Int.zero;
                 // Check Blank.
-                int firstNonEmptyColumn = gridSize.x;
+                int firstNonEmptyColumn = MergeGrid.ROW_COLUMN_COUNT;
                 int lastNonEmptyColumn = 0;
-                int firstNonEmptyRow = gridSize.y;
+                int firstNonEmptyRow = MergeGrid.ROW_COLUMN_COUNT;
                 int lastNonEmptyRow = 0;
                 for (int i = 0; i < data.ShapeGrid.Count; ++i)
                 {
@@ -196,15 +195,15 @@ public class MergeCardShapeDataEditor : PropertyDrawer
 
         // Draw
         Vector2 startPosition =
-            new Vector2(position.x + (position.width - lineHeight * gridSize.x) / 2 + lineSpace,
+            new Vector2(position.x + (position.width - lineHeight * gridSize) / 2 + lineSpace,
                 position.y + lineHeight * 2);
         if (modifyingThis)
         {
             data.GridSize.x = data.GridSize.y = 0;
         }
-        for (int i = 0; i < gridSize.y; ++i)
+        for (int i = 0; i < gridSize; ++i)
         {
-            for (int j = 0; j < gridSize.x; ++j)
+            for (int j = 0; j < gridSize; ++j)
             {
                 Rect rect = new Rect(startPosition.x + j * lineHeight,
                     startPosition.y + i *  lineHeight,
@@ -277,7 +276,7 @@ public class MergeCardShapeDataEditor : PropertyDrawer
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
         float lineHeight = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-        lineHeight += lineHeight * (gridSize.y + 1);
+        lineHeight += lineHeight * MergeGrid.ROW_COLUMN_COUNT;
         return lineHeight;
     }
 

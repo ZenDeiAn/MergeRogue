@@ -79,3 +79,13 @@ public enum MergeLevel
     Three,
     Ultimate
 }
+
+[Serializable]
+public enum MergeSocketOverlapType
+{
+    None,
+    Settable,
+    Conflict,
+    Mergeable,
+    JustOverlap
+}

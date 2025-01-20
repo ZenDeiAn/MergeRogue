@@ -16,6 +16,7 @@ MonoBehaviour:
   - ID: SpeedUp
     Type: 0
     Icon: {fileID: 21300000, guid: f2c251083844dd7458ceea3713d5ae7b, type: 3}
+    RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
       values:
@@ -31,6 +32,7 @@ MonoBehaviour:
   - ID: AttackUp
     Type: 0
     Icon: {fileID: 21300000, guid: 969ed678c784dd843acdbd4e7e1ca4a8, type: 3}
+    RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
       values:
@@ -46,6 +48,7 @@ MonoBehaviour:
   - ID: ShieldUp
     Type: 0
     Icon: {fileID: 21300000, guid: 8a8edec1e4b585a429ab07d6461777e1, type: 3}
+    RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
       values:
@@ -61,6 +64,7 @@ MonoBehaviour:
   - ID: HealthStealthUp
     Type: 0
     Icon: {fileID: 21300000, guid: a0a00f8314e647149b46ee48b120b723, type: 3}
+    RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
       values:
@@ -76,6 +80,7 @@ MonoBehaviour:
   - ID: DodgeUp
     Type: 0
     Icon: {fileID: 21300000, guid: 541960bdad771574a998db26c8e75074, type: 3}
+    RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
       values:
@@ -90,6 +95,7 @@ MonoBehaviour:
   - ID: CriticalChanceUp
     Type: 0
     Icon: {fileID: 21300000, guid: 5734aeec17c43e947904031cfd20eb84, type: 3}
+    RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
       values:
@@ -104,6 +110,7 @@ MonoBehaviour:
   - ID: CriticalDamageUp
     Type: 0
     Icon: {fileID: 21300000, guid: b6676bf1f1754ad49ad449707f0c8872, type: 3}
+    RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
       values:
@@ -121,6 +128,7 @@ MonoBehaviour:
   - ID: ComboChanceUp
     Type: 0
     Icon: {fileID: 21300000, guid: 3fa500f44bcd1d148a57e9e8910c1123, type: 3}
+    RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
       values:
@@ -137,6 +145,7 @@ MonoBehaviour:
   - ID: ComboMaximumUp
     Type: 0
     Icon: {fileID: 21300000, guid: 91c201bc49a811e44aa6ecdef5a39609, type: 3}
+    RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
       values:

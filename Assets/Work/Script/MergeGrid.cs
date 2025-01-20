@@ -1,33 +1,63 @@
 using System;
 using System.Collections.Generic;
+using RaindowStudio.Attribute;
 using RaindowStudio.DesignPattern;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class MergeGrid : SingletonUnity<MergeGrid>
 {
-    public int rowColumn = 5;
-    [Range(0, 0.1f)]
-    public float anchorSpaceRatio = .01f;
-
-    // The data int is for gameObject's InstanceID.
-    public List<List<string>> mergeSockets = new List<List<string>>();
+    public const int ROW_COLUMN_COUNT = 5;
     
+    [SerializeField, Range(0, 0.1f)] private float anchorSpaceRatio = .01f;
+    public List<MergeSocket> OnBoardSockets = new List<MergeSocket>();
+    [FormerlySerializedAs("color_socketAvailable")] public Color color_socketSettable;
+    public Color color_socketConflict;
+    public Color color_socketMergeable;
+    [FormerlySerializedAs("color_socketOverlap")] public Color color_socketJustOverlap;
+
+    [UneditableField] public Rect socketGridRect;
+    [UneditableField] public float socketSize; 
+    [UneditableField] public float socketSpacing; 
+    [UneditableField] public List<OnBoardCardInfo> OnBoardCards = new List<OnBoardCardInfo>();
+
+    public void AddCardToBoard(OnBoardCardInfo cardInfo)
+    {
+        
+    }
+    
+    public void RemoveCardFromBoard(OnBoardCardInfo cardInfo)
+    {
+        
+    }
+
+    public void UpdateGridCards()
+    {
+        foreach (var cardInfo in OnBoardCards)
+        {
+            
+        }
+    }
+
     [ContextMenu("Anchor Merge Tool Table Sockets")]
     public void AnchorMergeToolTableSockets()
     {
         Rect rect = GetComponent<RectTransform>().rect;
         float gridLength = Mathf.Min(rect.width, rect.height);
-        float anchorSpace = gridLength * anchorSpaceRatio;
-        float anchorSize = (gridLength - (rowColumn - 1) * anchorSpace) / rowColumn;
+        socketSpacing = gridLength * anchorSpaceRatio;
+        socketSize = (gridLength - (ROW_COLUMN_COUNT - 1) * socketSpacing) / ROW_COLUMN_COUNT;
         Vector2 originalPosition = Vector2.one * -gridLength / 2;
+        socketGridRect.size = Vector2.one * (socketSize * gridLength + socketSpacing * (gridLength - 1));
+        socketGridRect.position = new Vector2(originalPosition.x, originalPosition.y + socketGridRect.size.y);
         int indexOffset = 0;
-        for (int i = 0; i < rowColumn; ++i)
+        for (int i = 0; i < ROW_COLUMN_COUNT; ++i)
         {
-            for (int j = 0; j < rowColumn; ++j)
+            for (int j = 0; j < ROW_COLUMN_COUNT; ++j)
             {
-                int index = i * rowColumn + j;
-                int final = rowColumn - 1;
-                if (index - indexOffset >= transform.childCount)
+                int index = i * ROW_COLUMN_COUNT + j;
+                int final = ROW_COLUMN_COUNT - 1;
+                if (index - indexOffset >= OnBoardSockets.Count)
                     break;
 
                 if (index == 0 ||
@@ -37,17 +67,13 @@ public class MergeGrid : SingletonUnity<MergeGrid>
                     indexOffset++;
                     continue;
                 }
-                if (transform.GetChild(index - indexOffset).TryGetComponent(out RectTransform rectTransform))
-                {
-                    rectTransform.sizeDelta = Vector2.one * anchorSize;
-                    rectTransform.anchoredPosition =
-                        new Vector2(originalPosition.x + anchorSize / 2 + j * anchorSize + j * anchorSpace,
-                            originalPosition.y + anchorSize / 2 + i * anchorSize + i * anchorSpace);
-                }
-                else
-                {
-                    break;
-                }
+                
+                RectTransform rectTransform = OnBoardSockets[index - indexOffset].rectTransform;
+                rectTransform.sizeDelta = Vector2.one * socketSize;
+                rectTransform.anchoredPosition =
+                    new Vector2(originalPosition.x + socketSize / 2 + j * socketSize + j * socketSpacing,
+                        originalPosition.y + socketSize / 2 + i * socketSize + i * socketSpacing);
+                OnBoardSockets[index - indexOffset].Initialize();
             }
         }
     }
@@ -64,7 +90,7 @@ public struct OnBoardCardInfo
     public string ID;
     public Vector2Int Position;
 
-    public bool CheckCardConflict(string cardID, Vector2Int position)
+    public bool CheckCardOverlap(string cardID, Vector2Int position)
     {
         var cardLibrary = AddressableManager.Instance.MergeCardDataLibrary;
         var shape = cardLibrary[ID].CardShape;

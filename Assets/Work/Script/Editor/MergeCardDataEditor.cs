@@ -1,7 +1,5 @@
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEditor;
-
 
 [CustomPropertyDrawer(typeof(MergeCardData))]
 public class MergeCardDataEditor : PropertyDrawer

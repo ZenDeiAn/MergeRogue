@@ -4,6 +4,25 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using XLua;
 
+public static class UtilityFunctions
+{
+    
+    public static int GetFibonacciNumber(int n)
+    {
+        if (n <= 0) return 0;
+        if (n == 1) return 1;
+
+        int a = 0, b = 1;
+        for (int i = 2; i <= n; i++)
+        {
+            int temp = a + b;
+            a = b;
+            b = temp;
+        }
+        return b;
+    }
+}
+
 [Serializable, LuaCallCSharp]
 public class Status
 {
@@ -139,6 +158,7 @@ public class PlayerStatus
     public string CharacterID;
     public ActorStatus CharacterStatus;
     public List<int> ItemList = new List<int>();
+    public int DicePrice;
     public List<string> EquipmentList = new List<string>();
     public Dictionary<string, float> MergeCardDeck = new Dictionary<string, float>();   // float is random weight
     public int MergeCardHandlerSize;
@@ -146,6 +166,8 @@ public class PlayerStatus
 
     public void Initialize(CharacterInfo characterInfo, List<string> cardList)
     {
+        var cardLibrary = AddressableManager.Instance.MergeCardDataLibrary;
+        
         CharacterID = characterInfo.ID;
         // Init Player Status.
         CharacterStatus = new ActorStatus(characterInfo.Status);
@@ -155,9 +177,11 @@ public class PlayerStatus
         MergeCardDeck = new Dictionary<string, float>();
         foreach (var t in cardList)
         {
-            MergeCardDeck.Add(t, 1);
+            MergeCardDeck.Add(t, cardLibrary[t].RandomWeight);
         }
-        // TODO : HandAmountNeed by Ruin
+        
+        // TODO : Data need by Ruin
         MergeCardHandlerSize = 3;
+        DicePrice = UtilityFunctions.GetFibonacciNumber(2);
     }
 }
