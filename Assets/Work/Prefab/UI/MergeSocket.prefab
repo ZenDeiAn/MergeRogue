@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 2994259392617095337}
   - component: {fileID: 6670430387828264059}
   - component: {fileID: 3106129004992257942}
+  - component: {fileID: 4523315497005581301}
   m_Layer: 5
   m_Name: MergeSocket
   m_TagString: Untagged
@@ -352,16 +353,30 @@ MonoBehaviour:
   preState: 0
   rectTransform: {fileID: 188892625136294981}
   img_card: {fileID: 8516415338565287130}
+  canvasGroup: {fileID: 4523315497005581301}
   img_level: {fileID: 5351819886010830777}
   img_icon: {fileID: 1644439882548802463}
   img_overlap: {fileID: 8713694767360572661}
   CardID: 
+  Level: 0
   WorldRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 0
     height: 0
+--- !u!225 &4523315497005581301
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4918526126056913228}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8500438906366642299
 GameObject:
   m_ObjectHideFlags: 0

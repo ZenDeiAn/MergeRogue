@@ -47,7 +47,7 @@ public class MergeCardShapeData
 [Serializable]
 public class MergeCardShapeColumn
 {
-    [FormerlySerializedAs("Row")] public List<bool> Column = new List<bool>();
+    public List<bool> Column = new List<bool>();
     public int Count => Column.Count;
     public bool this[int y] => Column[y]; 
 }

@@ -29,7 +29,7 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
     [SerializeField] private ObjectPool obp_mergeCardShapeGrid;
     [SerializeField] private TextMeshProUGUI txt_description;
     [SerializeField] private ParticleSystem ptc_change;
-    [SerializeField] private PoolObject poolObject;
+    [SerializeField] public PoolObject poolObject;
 
     [UneditableField] public string CardID; 
     [UneditableField] public MergeLevel Level; 
@@ -37,8 +37,9 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
     private MergeCardHandler handler;
     private MergeGrid mergeGrid;
     private MergeCardShapeData shapeData;
-    private RectTransform dragRootShapeElement;
     private List<int> overlappingSockets = new List<int>();
+    private List<MergeCardShapeElement> shapeElements = new List<MergeCardShapeElement>();
+    private int onGridIndex = -1;
     
     public bool Interacting => _interactingCard == gameObject.GetInstanceID();
 
@@ -73,6 +74,7 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
         }
         
         GridObjectPoolShape(obp_shapeGrid, cardData);
+        shapeElements.Clear();
         GridObjectPoolShape(obp_mergeCardShapeGrid,
             cardData,
             true,
@@ -83,10 +85,7 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
                 mcse.Initialize(adm.UILibrary.MergedCardShapeLibrary[cardData.Type],
                     adm.UILibrary.MergedCardShapeLevelLibrary[Level],
                     cardData.Icon);
-                if (x == 0 && y == shapeData[x].Count - 1)
-                {
-                    dragRootShapeElement = mcse.GetComponent<RectTransform>();
-                }
+                shapeElements.Add(mcse);
             });
         
         State = MergeCardInteractState.None;
@@ -94,25 +93,26 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
 
     public void GridObjectPoolShape(ObjectPool objectPool,
         MergeCardData cardData,
-        bool startFromLeftBottomGap = false,
+        bool startFromBottomGap = false,
         float specifySize = 0,
         Action<int, int, GameObject> elementAction = null)
     {
+        objectPool.RecycleAll();
         var shape = cardData.CardShape;
         RectTransform obpRectTransform = objectPool.GetComponent<RectTransform>();
-        float shapeGridSize = specifySize == 0 ? 
+        specifySize = specifySize == 0 ? 
             Mathf.Min(obpRectTransform.rect.width, obpRectTransform.rect.height) / (MergeGrid.ROW_COLUMN_COUNT - 1) : 
             specifySize;
         Vector2 startPosition = shape.GridSize / 2;
-        if (startFromLeftBottomGap)
+        if (startFromBottomGap)
         {
-            startPosition.y += shapeGridSize * shape.GridSize.y;
+            startPosition.y += specifySize * shape.GridSize.y;
         }
         else
         {
-            startPosition = -shapeGridSize * startPosition + startPosition;
-            startPosition.x += shape.GridSize.x % 2 == 0 ? shapeGridSize / 2 : 0;
-            startPosition.y = -startPosition.y - (shape.GridSize.y % 2 == 0 ? shapeGridSize / 2 : 0);
+            startPosition = -specifySize * startPosition + startPosition;
+            startPosition.x += shape.GridSize.x % 2 == 0 ? specifySize / 2 : 0;
+            startPosition.y = -startPosition.y - (shape.GridSize.y % 2 == 0 ? specifySize / 2 : 0);
         }
         for (int i = 0; i < shape.ShapeGrid.Count; ++i)
         {
@@ -123,8 +123,8 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
                 {
                     RectTransform rectTrans = objectPool.GetObject().GetComponent<RectTransform>();
                     rectTrans.anchoredPosition =
-                        new Vector2(startPosition.x + shapeGridSize * j, startPosition.y - shapeGridSize * i);
-                    rectTrans.sizeDelta = new Vector2(shapeGridSize, shapeGridSize);
+                        new Vector2(startPosition.x + specifySize * i, startPosition.y - specifySize * j);
+                    rectTrans.sizeDelta = new Vector2(specifySize, specifySize);
                     elementAction?.Invoke(i, j, rectTrans.gameObject);
                 }
             }
@@ -153,7 +153,11 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
         if (Interacting)
         {
             _interactingCard = -1;
-            // TODO : Condition need change to be check could set to table. 
+            if (onGridIndex != -1)
+            {
+                mergeGrid.AddCardToBoard(onGridIndex, CardID, Level, overlappingSockets);
+                handler.RemoveCard(this);
+            }
             State = MergeCardInteractState.None;
         }
     }
@@ -177,7 +181,10 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
         card.gameObject.SetActive(true);
         obp_mergeCardShapeGrid.gameObject.SetActive(false);
         rectTransform.localScale = Vector3.one;
-        StartCoroutine(MoveToHand());
+        if (gameObject.activeSelf)
+        {
+            StartCoroutine(MoveToHand());
+        }
     }
 
     void Activate_ShowInformation()
@@ -209,78 +216,82 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
             out Vector2 movePos);
 
         rectTransform.position = handler.Canvas.transform.TransformPoint(movePos);
-        // Check board.
-        if (mergeGrid.WorldRect.Overlaps(dragRootShapeElement.GetWorldRect()))
+        // Check shapeElement is all in Rect or not.
+        int overlapCount = 0;
+        foreach (var shapeElement in shapeElements)
         {
-            var sockets = mergeGrid.OnBoardSockets;
-            int conflictCount = 0;
-            foreach (var ele in obp_mergeCardShapeGrid.ActivedObjects)
+            if (mergeGrid.WorldRect.Contains(shapeElement.rectTransform.position))
             {
-                RectTransform rectTrans = ele.GetComponent<RectTransform>();
-                if (mergeGrid.WorldRect.Contains(rectTrans.position))
-                {
-                    for (int i = 0; i < sockets.Count; i++)
-                    {
-                        if (sockets[i].WorldRect.Contains(rectTrans.position))
-                        {
-                            if (overlappingSockets.Contains(i))
-                            {
-                                overlappingSockets.Remove(i);
-                            }
-                            overlappingSockets.Insert(0, i);
-                            conflictCount++;
-                            break;
-                        }
-                    }
-                }
+                overlapCount++;
             }
-            
-            // New overlapping
+        }
 
-            for (int i = 0; i < overlappingSockets.Count; ++i)
+        Vector3 position = shapeElements[0].rectTransform.position;
+        var sockets = mergeGrid.Sockets;
+        List<int> overlappedSockets = new List<int>();
+        if (overlapCount == shapeElements.Count)
+        {
+            onGridIndex = -1;
+            for (int i = 0; i < sockets.Count; ++i)
             {
-                int index = overlappingSockets[i];
-                var socket = mergeGrid.OnBoardSockets[index];
-
-                MergeSocketOverlapType overlapType;
-                
-                if (i >= conflictCount)
+                if (!sockets[i].WorldRect.Contains(position))
                 {
-                    overlapType = MergeSocketOverlapType.None;
-                    overlappingSockets.RemoveAt(i);
+                    continue;
                 }
-                else if (string.IsNullOrWhiteSpace(socket.CardID))
+
+                if (!sockets[i].Active)
                 {
-                    if (conflictCount == obp_shapeGrid.ActivedObjects.Count)
+                    break;
+                }
+                
+                onGridIndex = i;
+                break;
+            }
+
+            if (onGridIndex > -1 && 
+                mergeGrid.GetOverlapSockets(onGridIndex, shapeData, out overlappedSockets))
+            {
+                foreach (int index in overlappedSockets)
+                {
+                    MergeSocketOverlapType overlapType;
+                    MergeSocket socket = sockets[index];
+                    if (string.IsNullOrWhiteSpace(socket.CardID))
                     {
                         overlapType = MergeSocketOverlapType.Settable;
                     }
                     else
                     {
-                        overlapType = MergeSocketOverlapType.JustOverlap;
+                        overlapType = socket.CardID == CardID && onGridIndex == socket.StartIndex ?
+                            MergeSocketOverlapType.Mergeable : 
+                            MergeSocketOverlapType.Conflict;
+                    }
+
+                    socket.SetOverlap(overlapType);
+
+                    if (overlappingSockets.Contains(index))
+                    {
+                        overlappingSockets.Remove(index);
                     }
                 }
-                else
-                {
-                    overlapType = socket.CardID == CardID ?
-                        MergeSocketOverlapType.Mergeable : 
-                        MergeSocketOverlapType.Conflict;
-                }
-
-                socket.SetOverlap(overlapType);
+            }
+            else
+            {
+                onGridIndex = -1;
             }
         }
-        else
+
+        foreach (var index in overlappingSockets)
         {
-            // Release previous
-            overlappingSockets.ForEach(index => mergeGrid.OnBoardSockets[index].SetOverlap(MergeSocketOverlapType.None));
+            sockets[index].SetOverlap(MergeSocketOverlapType.None);
         }
+
+        overlappingSockets = overlappedSockets;
     }
 
     void DeActivate_Dragging()
     {
         // Release previous
-        overlappingSockets.ForEach(index => mergeGrid.OnBoardSockets[index].SetOverlap(MergeSocketOverlapType.None));
+        overlappingSockets.ForEach(index => mergeGrid.Sockets[index].SetOverlap(MergeSocketOverlapType.None));
         overlappingSockets.Clear();
     }
 }

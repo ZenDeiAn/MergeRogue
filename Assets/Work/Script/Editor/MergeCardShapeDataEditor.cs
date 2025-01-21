@@ -150,20 +150,20 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                 for (int i = 0; i < data.ShapeGrid.Count; ++i)
                 {
                     shapeProperty.arraySize++;
-                    var row = data.ShapeGrid[i].Column;
+                    var column = data.ShapeGrid[i].Column;
                     SerializedProperty innerList = shapeProperty.GetArrayElementAtIndex(i).FindPropertyRelative("Column");
                     innerList.arraySize = 0;
-                    for (int j = 0; j < row.Count; j++)
+                    for (int j = 0; j < column.Count; j++)
                     {
                         innerList.arraySize++;
-                        innerList.GetArrayElementAtIndex(j).boolValue = row[j];
-                        if (data.GridSize.x <= j)
+                        innerList.GetArrayElementAtIndex(j).boolValue = column[j];
+                        if (data.GridSize.y <= j)
                         {
-                            data.GridSize.x = j + 1;
+                            data.GridSize.y = j + 1;
                         }
                     }
                 }
-                data.GridSize.y = data.ShapeGrid.Count;
+                data.GridSize.x = data.ShapeGrid.Count;
 
                 gridSizeProperty.vector2IntValue = data.GridSize;
             }
@@ -205,16 +205,16 @@ public class MergeCardShapeDataEditor : PropertyDrawer
         {
             for (int j = 0; j < gridSize; ++j)
             {
-                Rect rect = new Rect(startPosition.x + j * lineHeight,
-                    startPosition.y + i *  lineHeight,
+                Rect rect = new Rect(startPosition.x + i * lineHeight,
+                    startPosition.y + j *  lineHeight,
                     singleLineHeight,
                     singleLineHeight);
                 bool activeBlock = false;
                 
                 if (data.ShapeGrid.Count > i)
                 {
-                    var row = data.ShapeGrid[i].Column;
-                    activeBlock = row.Count > j && row[j];
+                    var column = data.ShapeGrid[i].Column;
+                    activeBlock = column.Count > j && column[j];
                 }
 
                 if (modifyingThis)
@@ -252,20 +252,20 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                         rect.height += offset;
                     }
                     GUI.DrawTexture(rect, activeBlock ? Texture2D.whiteTexture :
-                        j < data.GridSize.x && i <data.GridSize.y ? Texture2D.grayTexture : _backgroundTexture);
+                        i < data.GridSize.x && j < data.GridSize.y ? Texture2D.grayTexture : _backgroundTexture);
                 }
                 
                 // UpdateGridSize
                 if (modifyingThis && activeBlock)
                 {
-                    if (data.GridSize.x <= j)
+                    if (data.GridSize.x <= i)
                     {
-                        data.GridSize.x = j + 1;
+                        data.GridSize.x = i + 1;
                     }
 
-                    if (data.GridSize.y <= i)
+                    if (data.GridSize.y <= j)
                     {
-                        data.GridSize.y = i + 1;
+                        data.GridSize.y = j + 1;
                     }
                 }
             }

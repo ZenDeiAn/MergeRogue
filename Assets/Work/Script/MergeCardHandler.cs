@@ -17,20 +17,35 @@ public class MergeCardHandler : SingletonUnity<MergeCardHandler>
 
     private AdventureManager _avm;
     private RectTransform _rectTransform;
+
+    public void RemoveCard(MergeCard card)
+    {
+        if (card.gameObject.activeSelf && HandMergeCards.Contains(card))
+        {
+            HandMergeCards.Remove(card);
+            card.poolObject.Recycle();
+        }
+    }
+    
+    public void DrawCard(string cardID, MergeLevel level)
+    {
+        MergeCard card = obp_hand.GetObject().GetComponent<MergeCard>();
+        HandMergeCards.Add(card);
+        UpdateCardPositions();
+        card.Initialize(cardID, level);
+    }
     
     public void DrawRandomCards()
     {
         var randomCards = GetRandomCardsFromDeck(_avm.PlayerStatus.MergeCardHandlerSize);
        
         obp_hand.RecycleAll();
-        for (int i = 0; i < randomCards.Count; ++i)
+        DrawCard("AttackUp", MergeLevel.Two);
+        /*for (int i = 0; i < randomCards.Count; ++i)
         {
-            MergeCard card = obp_hand.GetObject().GetComponent<MergeCard>();
-            HandMergeCards.Add(card);
-            UpdateCardPositions();
             // TODO : Random Level?
-            card.Initialize(randomCards[i], MergeLevel.One);
-        }
+            DrawCard(randomCards[i], MergeLevel.One);
+        }*/
     }
 
     public List<string> GetRandomCardsFromDeck(int amount)
@@ -69,6 +84,10 @@ public class MergeCardHandler : SingletonUnity<MergeCardHandler>
     public void UpdateCardPositions()
     {
         MergeCardPositionX.Clear();
+        foreach (var card in obp_hand.ActivedObjects)
+        {
+            card.transform.SetAsFirstSibling();
+        }
         float gap = _rectTransform.rect.width / HandMergeCards.Count;
         float start = _rectTransform.rect.x + gap / 2;
         for (int i = 0; i < HandMergeCards.Count; ++i)
