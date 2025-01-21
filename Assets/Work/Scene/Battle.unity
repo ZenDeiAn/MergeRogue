@@ -8223,14 +8223,14 @@ MonoBehaviour:
   color_socketSettable: {r: 0.14285529, g: 1, b: 0, a: 0.5882353}
   color_socketConflict: {r: 1, g: 0, b: 0, a: 0.5882353}
   color_socketMergeable: {r: 1, g: 0.8873018, b: 0, a: 0.5882353}
-  color_socketJustOverlap: {r: 0, g: 0, b: 0, a: 0.5882353}
-  socketGridRect:
+  color_socketJustOverlap: {r: 0, g: 0, b: 0, a: 0}
+  socketSize: 0
+  WorldRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 0
     height: 0
-  socketSize: 0
   socketSpacing: 0
   OnBoardCards: []
 --- !u!114 &1632322152 stripped
@@ -10621,6 +10621,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1680882754}
   - {fileID: 671225000}
+  - {fileID: 1787700211}
   - {fileID: 1469936687}
   - {fileID: 2054496742}
   - {fileID: 1984208412}
@@ -10628,4 +10629,3 @@ SceneRoots:
   - {fileID: 795373985}
   - {fileID: 1034559055}
   - {fileID: 11100963}
-  - {fileID: 1787700211}

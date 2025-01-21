@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Globalization;
+using System.Linq;
 using DG.Tweening;
+using RaindowStudio.Attribute;
 using RaindowStudio.DesignPattern;
 using RaindowStudio.Language;
 using RaindowStudio.Utility;
@@ -15,7 +18,6 @@ using Image = UnityEngine.UI.Image;
 public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     private static int _interactingCard = -1;
-    private static float _shapeOffsetY = -1;
     
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private GameObject card;
@@ -27,45 +29,46 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
     [SerializeField] private ObjectPool obp_mergeCardShapeGrid;
     [SerializeField] private TextMeshProUGUI txt_description;
     [SerializeField] private ParticleSystem ptc_change;
+    [SerializeField] private PoolObject poolObject;
 
-    public MergeCardInstanceData data;
-    
+    [UneditableField] public string CardID; 
+    [UneditableField] public MergeLevel Level; 
+
     private MergeCardHandler handler;
     private MergeGrid mergeGrid;
     private MergeCardShapeData shapeData;
+    private RectTransform dragRootShapeElement;
+    private List<int> overlappingSockets = new List<int>();
     
     public bool Interacting => _interactingCard == gameObject.GetInstanceID();
 
-    public void Initialize(string cardID)
+    public void Initialize(string cardID, MergeLevel level)
     {
+        CardID = cardID;
+        Level = level;
+
         handler = MergeCardHandler.Instance;
         mergeGrid = MergeGrid.Instance;
         AddressableManager adm = AddressableManager.Instance;
         
         rectTransform.sizeDelta = Vector2.one * handler.MergeCardSize;
 
-        data = new MergeCardInstanceData()
-        {
-            CardID = cardID,
-            Level = MergeLevel.One,
-            Root = Vector2Int.zero
-        };
         var cardData = AddressableManager.Instance.MergeCardDataLibrary[cardID];
         shapeData = cardData.CardShape;
         img_card.sprite = adm.UILibrary.MergedCardLibrary[cardData.Type];
         img_cardIcon.sprite = cardData.Icon;
-        img_level.sprite = adm.UILibrary.MergedLevelLibrary[data.Level];
+        img_level.sprite = adm.UILibrary.MergedLevelLibrary[Level];
         var mergeLevels = Enum.GetValues(typeof(MergeLevel));
         for (int i = 0; i < levelIcons.Length; ++i)
         {
-            levelIcons[i].SetActive(data.Level >= (MergeLevel)mergeLevels.GetValue(i));
+            levelIcons[i].SetActive(Level >= (MergeLevel)mergeLevels.GetValue(i));
         }
         
         string description = (LanguageManager.GetLanguageData("CardDescription", cardID) as LanguageTextData)?.text;
         if (description != null)
         {
             description = description.Replace("<m>",
-                $"<u><color=red>{cardData.Multiplies[data.Level].ToString(CultureInfo.InvariantCulture)}</u></color>");
+                $"<u><color=red>{cardData.Multiplies[Level].ToString(CultureInfo.InvariantCulture)}</u></color>");
             txt_description.SetText(description);
         }
         
@@ -74,11 +77,16 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
             cardData,
             true,
             MergeGrid.Instance.socketSize + MergeGrid.Instance.socketSpacing,
-            (_, _, g) =>
+            (x, y, g) =>
             {
-                g.GetComponent<MergeCardShapeElement>().Initialize(adm.UILibrary.MergedCardShapeLibrary[cardData.Type],
-                    adm.UILibrary.MergedCardShapeLevelLibrary[data.Level],
+                MergeCardShapeElement mcse = g.GetComponent<MergeCardShapeElement>();
+                mcse.Initialize(adm.UILibrary.MergedCardShapeLibrary[cardData.Type],
+                    adm.UILibrary.MergedCardShapeLevelLibrary[Level],
                     cardData.Icon);
+                if (x == 0 && y == shapeData[x].Count - 1)
+                {
+                    dragRootShapeElement = mcse.GetComponent<RectTransform>();
+                }
             });
         
         State = MergeCardInteractState.None;
@@ -99,7 +107,6 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
         if (startFromLeftBottomGap)
         {
             startPosition.y += shapeGridSize * shape.GridSize.y;
-            _shapeOffsetY = startPosition.y;
         }
         else
         {
@@ -201,45 +208,61 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
             Input.mousePosition, handler.Canvas.worldCamera,
             out Vector2 movePos);
 
-        transform.position = handler.Canvas.transform.TransformPoint(movePos);
-        
+        rectTransform.position = handler.Canvas.transform.TransformPoint(movePos);
         // Check board.
-        Debug.Log($"{movePos} : {mergeGrid.socketSize} ({movePos.y + mergeGrid.socketSize}) : {mergeGrid.socketGridRect}");
-        if (movePos.y + mergeGrid.socketSize < mergeGrid.socketGridRect.y)
+        if (mergeGrid.WorldRect.Overlaps(dragRootShapeElement.GetWorldRect()))
         {
             var sockets = mergeGrid.OnBoardSockets;
-            List<int> conflictIndex = new List<int>();
+            int conflictCount = 0;
             foreach (var ele in obp_mergeCardShapeGrid.ActivedObjects)
             {
                 RectTransform rectTrans = ele.GetComponent<RectTransform>();
-                if (rectTrans.anchoredPosition.y < mergeGrid.socketGridRect.y)
+                if (mergeGrid.WorldRect.Contains(rectTrans.position))
                 {
                     for (int i = 0; i < sockets.Count; i++)
                     {
-                        Debug.Log(Vector2.Distance(rectTrans.anchoredPosition, sockets[i].rectTransform.anchoredPosition)
-                                  < mergeGrid.socketSize);
-
-                        if (Vector2.Distance(rectTrans.anchoredPosition, sockets[i].rectTransform.anchoredPosition)
-                            < mergeGrid.socketSize)
+                        if (sockets[i].WorldRect.Contains(rectTrans.position))
                         {
-                            conflictIndex.Add(i);
+                            if (overlappingSockets.Contains(i))
+                            {
+                                overlappingSockets.Remove(i);
+                            }
+                            overlappingSockets.Insert(0, i);
+                            conflictCount++;
+                            break;
                         }
                     }
                 }
             }
+            
+            // New overlapping
 
-            MergeSocketOverlapType overlapType = MergeSocketOverlapType.JustOverlap;
-            if (conflictIndex.Count == obp_shapeGrid.ActivedObjects.Count)
+            for (int i = 0; i < overlappingSockets.Count; ++i)
             {
-                overlapType = MergeSocketOverlapType.Settable;
-            }
-
-            foreach (var index in conflictIndex)
-            {
+                int index = overlappingSockets[i];
                 var socket = mergeGrid.OnBoardSockets[index];
-                if (!string.IsNullOrWhiteSpace(socket.CardID))
+
+                MergeSocketOverlapType overlapType;
+                
+                if (i >= conflictCount)
                 {
-                    overlapType = socket.CardID == data.CardID ?
+                    overlapType = MergeSocketOverlapType.None;
+                    overlappingSockets.RemoveAt(i);
+                }
+                else if (string.IsNullOrWhiteSpace(socket.CardID))
+                {
+                    if (conflictCount == obp_shapeGrid.ActivedObjects.Count)
+                    {
+                        overlapType = MergeSocketOverlapType.Settable;
+                    }
+                    else
+                    {
+                        overlapType = MergeSocketOverlapType.JustOverlap;
+                    }
+                }
+                else
+                {
+                    overlapType = socket.CardID == CardID ?
                         MergeSocketOverlapType.Mergeable : 
                         MergeSocketOverlapType.Conflict;
                 }
@@ -247,14 +270,19 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
                 socket.SetOverlap(overlapType);
             }
         }
+        else
+        {
+            // Release previous
+            overlappingSockets.ForEach(index => mergeGrid.OnBoardSockets[index].SetOverlap(MergeSocketOverlapType.None));
+        }
     }
-}
 
-public class MergeCardInstanceData
-{
-    public string CardID;
-    public MergeLevel Level;
-    public Vector2Int Root = Vector2Int.zero;
+    void DeActivate_Dragging()
+    {
+        // Release previous
+        overlappingSockets.ForEach(index => mergeGrid.OnBoardSockets[index].SetOverlap(MergeSocketOverlapType.None));
+        overlappingSockets.Clear();
+    }
 }
 
 public enum MergeCardInteractState

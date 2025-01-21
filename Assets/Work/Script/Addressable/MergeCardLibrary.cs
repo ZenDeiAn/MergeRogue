@@ -38,6 +38,7 @@ public class MergeCardShapeData
         ShapeGrid = new List<MergeCardShapeColumn>(mergeCardShapeData.ShapeGrid);
     }
 
+    public int Count => ShapeGrid.Count;
     public MergeCardShapeColumn this[int x] => ShapeGrid[x];
     public bool this[int x, int y] => ShapeGrid[x].Column[y];
     public bool this[Vector2Int position] => ShapeGrid[position.x].Column[position.y];

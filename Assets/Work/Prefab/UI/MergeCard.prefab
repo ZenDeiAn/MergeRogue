@@ -608,6 +608,7 @@ GameObject:
   - component: {fileID: 572165904758511467}
   - component: {fileID: 6237920306704335647}
   - component: {fileID: 5255803027943853295}
+  - component: {fileID: -1415998749622381631}
   m_Layer: 5
   m_Name: MergeCard
   m_TagString: Untagged
@@ -673,6 +674,19 @@ MonoBehaviour:
   obp_mergeCardShapeGrid: {fileID: 1680845281114566771}
   txt_description: {fileID: 6246000217083736613}
   ptc_change: {fileID: 8718330580915155162}
+  poolObject: {fileID: -1415998749622381631}
+--- !u!114 &-1415998749622381631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5291674837319985660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1511633552, guid: b4f53cca559264c45a840238069c8ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5950094124375718611
 GameObject:
   m_ObjectHideFlags: 0

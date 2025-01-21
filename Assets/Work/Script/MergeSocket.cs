@@ -15,12 +15,22 @@ public class MergeSocket : Processor<MergeSocketOverlapType>
     [SerializeField] private Image img_overlap;
 
     [UneditableField] public string CardID = string.Empty;
+    [UneditableField] public MergeLevel Level;
+    [UneditableField] public Rect WorldRect;
     
-    public void ChangeCard(string cardID)
+    public void SetCard(string cardID, MergeLevel level = MergeLevel.One)
     {
+        Level = level;
+        var uiLibrary = AddressableManager.Instance.UILibrary;
+        MergeCardData data = AddressableManager.Instance.MergeCardDataLibrary[cardID];
         CardID = cardID;
+        State = MergeSocketOverlapType.None;
+        img_card.sprite = uiLibrary.MergedCardShapeLibrary[data.Type];
+        img_level.sprite = uiLibrary.MergedCardShapeLevelLibrary[level];
+        img_icon.sprite = data.Icon;
+        img_card.gameObject.SetActive(false);
     }
-
+    
     public void RemoveCard()
     {
         CardID = string.Empty;
@@ -31,23 +41,14 @@ public class MergeSocket : Processor<MergeSocketOverlapType>
         State = overlapType;
     }
     
-    public void Initialize()
+    public void Initialize(Vector2 anchoredPosition, Vector2 sizeDelta)
     {
         State = MergeSocketOverlapType.None;
         img_card.gameObject.SetActive(false);
         CardID = string.Empty;
-    }
-    
-    public void Initialize(string cardID, MergeLevel level)
-    {
-        var uiLibrary = AddressableManager.Instance.UILibrary;
-        MergeCardData data = AddressableManager.Instance.MergeCardDataLibrary[cardID];
-        CardID = cardID;
-        State = MergeSocketOverlapType.None;
-        img_card.sprite = uiLibrary.MergedCardShapeLibrary[data.Type];
-        img_level.sprite = uiLibrary.MergedCardShapeLevelLibrary[level];
-        img_icon.sprite = data.Icon;
-        img_card.gameObject.SetActive(false);
+        rectTransform.sizeDelta = sizeDelta;
+        rectTransform.anchoredPosition = anchoredPosition;
+        WorldRect = rectTransform.GetWorldRect();
     }
 
     void Activate_None()
@@ -77,5 +78,13 @@ public class MergeSocket : Processor<MergeSocketOverlapType>
     {
         img_overlap.gameObject.SetActive(true);
         img_overlap.color = MergeGrid.Instance.color_socketJustOverlap;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Debug.LogError($"{name} : {rectTransform.rect}");
+        }
     }
 }

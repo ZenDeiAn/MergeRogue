@@ -12,13 +12,13 @@ public class MergeGrid : SingletonUnity<MergeGrid>
     
     [SerializeField, Range(0, 0.1f)] private float anchorSpaceRatio = .01f;
     public List<MergeSocket> OnBoardSockets = new List<MergeSocket>();
-    [FormerlySerializedAs("color_socketAvailable")] public Color color_socketSettable;
+    public Color color_socketSettable;
     public Color color_socketConflict;
     public Color color_socketMergeable;
-    [FormerlySerializedAs("color_socketOverlap")] public Color color_socketJustOverlap;
+    public Color color_socketJustOverlap;
 
-    [UneditableField] public Rect socketGridRect;
-    [UneditableField] public float socketSize; 
+    [UneditableField] public float socketSize;
+    [UneditableField] public Rect WorldRect; 
     [UneditableField] public float socketSpacing; 
     [UneditableField] public List<OnBoardCardInfo> OnBoardCards = new List<OnBoardCardInfo>();
 
@@ -43,13 +43,12 @@ public class MergeGrid : SingletonUnity<MergeGrid>
     [ContextMenu("Anchor Merge Tool Table Sockets")]
     public void AnchorMergeToolTableSockets()
     {
-        Rect rect = GetComponent<RectTransform>().rect;
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        Rect rect = rectTransform.rect;
         float gridLength = Mathf.Min(rect.width, rect.height);
         socketSpacing = gridLength * anchorSpaceRatio;
         socketSize = (gridLength - (ROW_COLUMN_COUNT - 1) * socketSpacing) / ROW_COLUMN_COUNT;
         Vector2 originalPosition = Vector2.one * -gridLength / 2;
-        socketGridRect.size = Vector2.one * (socketSize * gridLength + socketSpacing * (gridLength - 1));
-        socketGridRect.position = new Vector2(originalPosition.x, originalPosition.y + socketGridRect.size.y);
         int indexOffset = 0;
         for (int i = 0; i < ROW_COLUMN_COUNT; ++i)
         {
@@ -67,14 +66,13 @@ public class MergeGrid : SingletonUnity<MergeGrid>
                     indexOffset++;
                     continue;
                 }
-                
-                RectTransform rectTransform = OnBoardSockets[index - indexOffset].rectTransform;
-                rectTransform.sizeDelta = Vector2.one * socketSize;
-                rectTransform.anchoredPosition =
+                OnBoardSockets[index - indexOffset].Initialize(
                     new Vector2(originalPosition.x + socketSize / 2 + j * socketSize + j * socketSpacing,
-                        originalPosition.y + socketSize / 2 + i * socketSize + i * socketSpacing);
-                OnBoardSockets[index - indexOffset].Initialize();
+                    originalPosition.y + socketSize / 2 + i * socketSize + i * socketSpacing),
+                    Vector2.one * socketSize);
             }
+
+            WorldRect = rectTransform.GetWorldRect();
         }
     }
 

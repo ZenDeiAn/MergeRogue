@@ -6,7 +6,16 @@ using XLua;
 
 public static class UtilityFunctions
 {
-    
+    public static Rect GetWorldRect(this RectTransform rectTransform)
+    {
+        Vector3[] corners = new Vector3[4];
+        rectTransform.GetWorldCorners(corners);
+
+        Vector3 bottomLeft = corners[0];
+        Vector3 topRight = corners[2];
+
+        return new Rect(bottomLeft, topRight - bottomLeft);
+    }
     public static int GetFibonacciNumber(int n)
     {
         if (n <= 0) return 0;

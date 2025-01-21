@@ -28,7 +28,8 @@ public class MergeCardHandler : SingletonUnity<MergeCardHandler>
             MergeCard card = obp_hand.GetObject().GetComponent<MergeCard>();
             HandMergeCards.Add(card);
             UpdateCardPositions();
-            card.Initialize(randomCards[i]);
+            // TODO : Random Level?
+            card.Initialize(randomCards[i], MergeLevel.One);
         }
     }
 
