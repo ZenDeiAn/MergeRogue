@@ -27,27 +27,17 @@ public class MergeCardData
 [Serializable]
 public class MergeCardShapeData
 {
-    public Vector2Int GridSize;
-    public List<MergeCardShapeColumn> ShapeGrid = new List<MergeCardShapeColumn>();
+    [FormerlySerializedAs("GridSize")] public Vector2Int Size;
+    public List<Vector2Int> Points = new List<Vector2Int>();
 
     public MergeCardShapeData() { }
 
     public MergeCardShapeData(MergeCardShapeData mergeCardShapeData)
     {
-        GridSize = mergeCardShapeData.GridSize;
-        ShapeGrid = new List<MergeCardShapeColumn>(mergeCardShapeData.ShapeGrid);
+        Size = mergeCardShapeData.Size;
+        Points = new List<Vector2Int>(mergeCardShapeData.Points);
     }
 
-    public int Count => ShapeGrid.Count;
-    public MergeCardShapeColumn this[int x] => ShapeGrid[x];
-    public bool this[int x, int y] => ShapeGrid[x].Column[y];
-    public bool this[Vector2Int position] => ShapeGrid[position.x].Column[position.y];
-}
-
-[Serializable]
-public class MergeCardShapeColumn
-{
-    public List<bool> Column = new List<bool>();
-    public int Count => Column.Count;
-    public bool this[int y] => Column[y]; 
+    public int Count => Points.Count;
+    public Vector2Int this[int index] => Points[index];
 }

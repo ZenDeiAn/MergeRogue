@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using RaindowStudio.Attribute;
 using RaindowStudio.DesignPattern;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MergeSocket : Processor<MergeSocketOverlapType>
+public class MergeSocket : Processor<MergeSocketOverlapType>, IPointerDownHandler
 {
-    
     public RectTransform rectTransform;
     [SerializeField] private Image img_card;
     [SerializeField] private CanvasGroup canvasGroup;
@@ -16,37 +16,44 @@ public class MergeSocket : Processor<MergeSocketOverlapType>
     [SerializeField] private Image img_icon;
     [SerializeField] private Image img_overlap;
 
+    [UneditableField] public MergeSocketData Data;
     [UneditableField] public bool Active;
-    [UneditableField] public int StartIndex;
-    [UneditableField] public string CardID = string.Empty;
-    [UneditableField] public MergeLevel Level;
     [UneditableField] public Rect WorldRect;
-    
-    public void SetCard(int startIndex, string cardID, MergeLevel level = MergeLevel.One)
+
+    public void SetCard(MergeSocketData card)
     {
-        StartIndex = startIndex;
-        CardID = cardID;
-        Level = level;
+        Data.StartIndex = card.StartIndex;
+        Data.CardID = card.CardID;
+        Data.Level = card.Level;
         var uiLibrary = AddressableManager.Instance.UILibrary;
-        MergeCardData data = AddressableManager.Instance.MergeCardDataLibrary[cardID];
+        MergeCardData data = AddressableManager.Instance.MergeCardDataLibrary[card.CardID];
         State = MergeSocketOverlapType.None;
         img_card.sprite = uiLibrary.MergedCardShapeLibrary[data.Type];
-        img_level.sprite = uiLibrary.MergedCardShapeLevelLibrary[Level];
+        img_level.sprite = uiLibrary.MergedCardShapeLevelLibrary[Data.Level];
         img_icon.sprite = data.Icon;
         img_card.gameObject.SetActive(true);
     }
     
     public void RemoveCard()
     {
-        StartIndex = -1;
-        CardID = string.Empty;
-        Level = MergeLevel.One;
+        Data.StartIndex = -1;
+        Data.CardID = string.Empty;
+        Data.Level = MergeLevel.One;
         img_card.gameObject.SetActive(false);
     }
 
     public void SetOverlap(MergeSocketOverlapType overlapType)
     {
         State = overlapType;
+    }
+    
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (string.IsNullOrWhiteSpace(Data.CardID))
+            return;
+        MergeCard card = MergeCardHandler.Instance.DrawCard(Data.CardID, Data.Level);
+        card.ForceFocus(Data.StartIndex);
+        MergeGrid.Instance.TryRemoveCardFromGrid(Data.StartIndex);
     }
     
     public void Initialize(Vector2 anchoredPosition, Vector2 sizeDelta, bool active = true)
@@ -56,7 +63,6 @@ public class MergeSocket : Processor<MergeSocketOverlapType>
         State = MergeSocketOverlapType.None;
         
         canvasGroup.alpha = active ? 1 : 0;
-        canvasGroup.interactable = active;
         img_card.gameObject.SetActive(false);
         rectTransform.sizeDelta = sizeDelta;
         rectTransform.anchoredPosition = anchoredPosition;
@@ -90,5 +96,28 @@ public class MergeSocket : Processor<MergeSocketOverlapType>
     {
         img_overlap.gameObject.SetActive(true);
         img_overlap.color = MergeGrid.Instance.color_socketJustOverlap;
+    }
+}
+
+[Serializable]
+public struct MergeSocketData : IEquatable<MergeSocketData>
+{
+    public int StartIndex;
+    public string CardID;
+    public MergeLevel Level;
+
+    public bool Equals(MergeSocketData other)
+    {
+        return StartIndex == other.StartIndex && CardID == other.CardID && Level == other.Level;
+    }
+
+    public override bool Equals(object obj)
+    {
+        return obj is MergeSocketData other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(StartIndex, CardID, (int)Level);
     }
 }

@@ -20,77 +20,87 @@ public class MergeGrid : SingletonUnity<MergeGrid>
     [UneditableField] public Rect WorldRect; 
     [UneditableField] public float socketSpacing; 
     [UneditableField] public List<MergeSocket> Sockets = new List<MergeSocket>();
-    public Dictionary<int, string> OnBoardCards = new Dictionary<int, string>();
 
+    private AdventureManager _avm;
+    
     public bool GetOverlapSockets(int startIndex, MergeCardShapeData shapeData, out List<int> overlappedSocketIndexes)
     {
         overlappedSocketIndexes = new List<int>();
-        Vector2Int startElement = -Vector2Int.one;
-        for (int i = 0; i < shapeData.ShapeGrid.Count; ++i)
+        Vector2Int startElement = shapeData.Points[0];
+        for (int i = 0; i < shapeData.Points.Count; ++i)
         {
-            for (int j = 0; j < shapeData.ShapeGrid[i].Count; ++j)
+            Vector2Int inGridPosition =
+                new Vector2Int(startIndex % ROW_COLUMN_COUNT, startIndex / ROW_COLUMN_COUNT) + 
+                shapeData.Points[i] - startElement;
+
+            if (inGridPosition.x is > -1 and < ROW_COLUMN_COUNT &&
+                inGridPosition.y is > -1 and < ROW_COLUMN_COUNT)
             {
-                // Get not null first index at first line.
-                if (shapeData[i, j])
+                int index = inGridPosition.y * ROW_COLUMN_COUNT + inGridPosition.x;
+                if (Sockets[index].Active)
                 {
-                    if (j == 0 && startElement.x == -1)
-                    {
-                        startElement = new Vector2Int(i, j);
-                    }
-
-                    Vector2Int inGridPosition = new Vector2Int(startIndex % ROW_COLUMN_COUNT, startIndex / ROW_COLUMN_COUNT) + 
-                        new Vector2Int(i, j) - startElement;
-
-                    if (inGridPosition.x is > -1 and < ROW_COLUMN_COUNT &&
-                        inGridPosition.y is > -1 and < ROW_COLUMN_COUNT)
-                    {
-                        int index = inGridPosition.y * ROW_COLUMN_COUNT + inGridPosition.x;
-                        if (Sockets[index].Active)
-                        {
-                            overlappedSocketIndexes.Add(index);
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    overlappedSocketIndexes.Add(index);
                 }
-            }            
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
         return true;
     }
-    
-    public void AddCardToBoard(int startIndex, string cardID, MergeLevel level, List<int> overlappedSocketIndexes)
+
+    public bool Mergeable(MergeSocketData card, MergeSocketData socket)
     {
-        TryRemoveCardFromBoard(startIndex);
-        OnBoardCards[startIndex] = cardID;
-        foreach (var index in overlappedSocketIndexes)
-        {
-            if (Sockets[index].StartIndex > -1)
-            {
-                TryRemoveCardFromBoard(Sockets[index].StartIndex);
-            }
-            Sockets[index].SetCard(startIndex, cardID, level);
-        }
+        if (!card.Equals(socket)) return false;
+        return card.Level < MergeLevel.Ultimate;
     }
     
-    public bool TryRemoveCardFromBoard(int startIndex)
+    public void MergeCardToGrid(MergeSocketData card, List<int> overlappedSocketIndexes)
     {
-        if (OnBoardCards.ContainsKey(startIndex))
+        // Merge
+        bool merge = false;
+        if (_avm.Data.MergeGridSockets.ContainsKey(card.StartIndex) &&
+            _avm.Data.MergeGridSockets[card.StartIndex].CardID == card.CardID)
+        {
+            if (Mergeable(card, _avm.Data.MergeGridSockets[card.StartIndex]))
+            {
+                merge = true;
+                card.Level++;
+            }
+        }
+        foreach (var index in overlappedSocketIndexes)
+        {
+            if (!merge)
+            {
+                var si = Sockets[index].Data.StartIndex;
+                if (si > -1)
+                {
+                    MergeCardHandler.Instance.DrawCard(_avm.Data.MergeGridSockets[si].CardID, Sockets[index].Data.Level);
+                    TryRemoveCardFromGrid(si);
+                }
+            }
+
+            Sockets[index].SetCard(card);
+        }
+        _avm.Data.MergeGridSockets[card.StartIndex] = card;
+    }
+    
+    public bool TryRemoveCardFromGrid(int startIndex)
+    {
+        if (_avm.Data.MergeGridSockets.ContainsKey(startIndex))
         {
             var cardLibrary = AddressableManager.Instance.MergeCardDataLibrary;
-            GetOverlapSockets(startIndex, cardLibrary[OnBoardCards[startIndex]].CardShape, out var tempList);
-            MergeLevel level = Sockets[tempList[0]].Level;
+            GetOverlapSockets(startIndex, cardLibrary[_avm.Data.MergeGridSockets[startIndex].CardID].CardShape, out var tempList);
             foreach (var index in tempList)
             {
                 Sockets[index].RemoveCard();
             }
-            MergeCardHandler.Instance.DrawCard(OnBoardCards[startIndex], level);
-            OnBoardCards.Remove(startIndex);
+            _avm.Data.MergeGridSockets.Remove(startIndex);
             return true;
         }
 
@@ -135,5 +145,12 @@ public class MergeGrid : SingletonUnity<MergeGrid>
     private void OnEnable()
     {
         AnchorMergeToolTableSockets();
+    }
+
+    protected override void Initialization()
+    {
+        base.Initialization();
+        
+        _avm = AdventureManager.Instance;
     }
 }

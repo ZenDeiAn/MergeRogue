@@ -50,7 +50,7 @@ public class MapBlock : MonoBehaviour
         if (State != MapBlockState.Selectable)
             return;
         
-        AdventureManager.Instance.Position = index;
+        AdventureManager.Instance.Data.Position = index;
         State = MapBlockState.Interacted;
         _particle.Play();
 

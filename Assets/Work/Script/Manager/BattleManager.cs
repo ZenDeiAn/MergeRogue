@@ -37,7 +37,7 @@ public class BattleManager : Processor<BattleManager, BattleState>
             List<MonsterGroup> monsterGroup = new List<MonsterGroup>();
             foreach (var list in _adm.MonsterProbabilities[monsterType])
             {
-                if (list.deep > _avm.Position.y)
+                if (list.deep > _avm.Data.Position.y)
                 {
                     break;
                 }
@@ -101,7 +101,7 @@ public class BattleManager : Processor<BattleManager, BattleState>
                 {
                     GameManager.Instance.LoadSaveData();
                     GameManager.Instance.NewGame();
-                    _avm.Position = new Vector2Int(0, _adm.MapBlockProbabilities[^1].deep - 1);
+                    _avm.Data.Position = new Vector2Int(0, _adm.MapBlockProbabilities[^1].deep - 1);
                     _avm.CurrentMapData.EventType = TestMonsterType.ToMapBlockEventType();
                     State = BattleState.Intro;
                 });

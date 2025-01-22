@@ -24,35 +24,36 @@ public class MergeCardHandler : SingletonUnity<MergeCardHandler>
         {
             HandMergeCards.Remove(card);
             card.poolObject.Recycle();
+            UpdateCardPositions();
         }
     }
     
-    public void DrawCard(string cardID, MergeLevel level)
+    public MergeCard DrawCard(string cardID, MergeLevel level)
     {
         MergeCard card = obp_hand.GetObject().GetComponent<MergeCard>();
         HandMergeCards.Add(card);
         UpdateCardPositions();
         card.Initialize(cardID, level);
+        return card;
     }
     
     public void DrawRandomCards()
     {
-        var randomCards = GetRandomCardsFromDeck(_avm.PlayerStatus.MergeCardHandlerSize);
-       
         obp_hand.RecycleAll();
-        DrawCard("AttackUp", MergeLevel.Two);
-        /*for (int i = 0; i < randomCards.Count; ++i)
+        /*DrawCard("AttackUp", MergeLevel.Two);
+        DrawCard("AttackUp", MergeLevel.Two);*/
+        foreach (var card in GetRandomCardsFromDeck(_avm.Data.PlayerStatus.MergeCardHandlerSize))
         {
             // TODO : Random Level?
-            DrawCard(randomCards[i], MergeLevel.One);
-        }*/
+            DrawCard(card, MergeLevel.One);
+        }
     }
 
     public List<string> GetRandomCardsFromDeck(int amount)
     {
         List<string> cards = new List<string>();
-        var weightList = new List<float>(_avm.PlayerStatus.MergeCardDeck.Values.ToList());
-        var cardList = _avm.PlayerStatus.MergeCardDeck.Keys.ToList();
+        var weightList = new List<float>(_avm.Data.PlayerStatus.MergeCardDeck.Values.ToList());
+        var cardList = _avm.Data.PlayerStatus.MergeCardDeck.Keys.ToList();
         float totalWeight = 0;
         for (int i = 0; i < weightList.Count; ++i)
         {

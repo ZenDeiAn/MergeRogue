@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 1023371714808204}
   - component: {fileID: 7749705741154244191}
   - component: {fileID: 5351819886010830777}
+  - component: {fileID: 9058118497934693567}
   m_Layer: 5
   m_Name: Level
   m_TagString: Untagged
@@ -241,7 +242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.88235295}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -258,6 +259,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9058118497934693567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3089830715885097515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  algorithm: 0
+  size: 30
+  spread: 0.6
+  useGlobalAngle: 0
+  offsetAngle: 90
+  offsetDistance: 0
+  offset: {x: 0, y: -0}
+  color: {r: 0, g: 0, b: 0, a: 0.5686275}
+  inset: 1
+  blendMode: 0
+  useCasterAlpha: 1
+  ignoreCasterColor: 0
+  colorBleedMode: 0
+  disableFitCompensation: 0
+  shadowAsSibling: 0
+  cutout: 0
+  baked: 0
+  modifiedFromInspector: 0
+  bakedShadows: []
 --- !u!1 &4918526126056913228
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,8 +389,11 @@ MonoBehaviour:
   img_level: {fileID: 5351819886010830777}
   img_icon: {fileID: 1644439882548802463}
   img_overlap: {fileID: 8713694767360572661}
-  CardID: 
-  Level: 0
+  Data:
+    StartIndex: 0
+    CardID: 
+    Level: 0
+  Active: 0
   WorldRect:
     serializedVersion: 2
     x: 0

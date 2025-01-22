@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using RaindowStudio.DesignPattern;
 using RaindowStudio.Utility;
 using UnityEngine;
@@ -12,115 +13,34 @@ using File = System.IO.File;
 
 public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameStatusManager
 {
-    public int RandomSeed;
-    public Vector2Int Position;
-    public Dictionary<Vector2Int, MapBlockData> MapData =
-        new Dictionary<Vector2Int, MapBlockData>();
-    public PlayerStatus PlayerStatus = new PlayerStatus();    
+    public AdventureManagerData Data = new AdventureManagerData();
+    public MapBlockData CurrentMapData => Data.MapData[Data.Position];
     
-    public MapBlockData CurrentMapData => MapData[Position];
-    
+    [JsonIgnore]
     private AddressableManager _adm;
 
     public void SaveData()
     {
         string path = Path.Combine(Application.streamingAssetsPath, $"{name}.json");
-        JObject jObject = new JObject
-        {
-            // CommonData
-            [nameof(RandomSeed)] = RandomSeed,
-            [nameof(PlayerStatus.CharacterID)] = PlayerStatus.CharacterID,
-            [nameof(Position)] = Position.ToString(),
-            // Player Character Status
-            [nameof(PlayerStatus.CharacterStatus)] = new JObject()
-            {
-                [nameof(PlayerStatus.CharacterStatus.health)] = PlayerStatus.CharacterStatus.health,
-                [nameof(PlayerStatus.ItemList)] = new JArray(),
-                [nameof(PlayerStatus.EquipmentList)] = new JArray(),
-            },
-            // MapData
-            [nameof(MapData)] = new JArray(),
-        };
-        foreach (var item in PlayerStatus.ItemList)
-        {
-            (jObject[nameof(PlayerStatus.CharacterStatus)]?[nameof(PlayerStatus.ItemList)] as JArray)?.Add(item);
-        }
-        foreach (var equipment in PlayerStatus.EquipmentList)
-        {
-            (jObject[nameof(PlayerStatus.CharacterStatus)]?[nameof(PlayerStatus.EquipmentList)] as JArray)?.Add(equipment);
-        }
-        foreach (var mapBlockData in MapData)
-        {
-            (jObject[nameof(MapData)] as JArray)?.Add(new JObject()
-            {
-                ["Index"] = mapBlockData.Key.ToString(),
-                [nameof(mapBlockData.Value.EventType)] = new JValue(mapBlockData.Value.EventType),
-                [nameof(mapBlockData.Value.State)] = new JValue(mapBlockData.Value.State),
-            });
-        }
+        
 
         if (!Directory.Exists(Path.GetDirectoryName(path)))
         {
             Directory.CreateDirectory(Path.GetDirectoryName(path) ?? string.Empty);
         }
-        File.WriteAllText(path, jObject.ToString());
+        File.WriteAllText(path, JsonConvert.SerializeObject(Data));
     }
 
     public bool CheckLoadData()
     {
-        PlayerStatus.ItemList.Clear();
-        PlayerStatus.EquipmentList.Clear();
-        MapData.Clear();
+        Data.PlayerStatus.ItemList.Clear();
+        Data.PlayerStatus.EquipmentList.Clear();
+        Data.MapData.Clear();
         string path = Path.Combine(Application.streamingAssetsPath, $"{name}.json");
         if (!File.Exists(path))
             return false;
         
-        JObject jObject = JObject.Parse(File.ReadAllText(path));
-        JToken token;
-        JArray jArray;
-        // CommonData
-        if (!jObject.TryApplyDataToProperty(nameof(RandomSeed), ref RandomSeed)) return false;
-        if (!jObject.TryApplyDataToProperty(nameof(PlayerStatus.CharacterID), ref PlayerStatus.CharacterID)) return false;
-        if (!jObject.TryApplyDataToProperty(nameof(Position), ref Position)) return false;
-        // PlayerStatus
-        if (!jObject.TryGetValue(nameof(PlayerStatus.CharacterStatus), out token))
-            return false;
-        {
-            if (!token.TryApplyDataToProperty(nameof(PlayerStatus.CharacterStatus.health), ref PlayerStatus.CharacterStatus.health)) return false;
-            if (!token.TryApplyDataToListProperty(nameof(PlayerStatus.ItemList), ref PlayerStatus.ItemList)) return false;
-            if (!token.TryApplyDataToListProperty(nameof(PlayerStatus.EquipmentList), ref PlayerStatus.EquipmentList)) return false;
-        }
-        // MapData
-        if (!jObject.TryGetValue(nameof(MapData), out token))
-            return false;
-        {
-            jArray = token as JArray;
-            if (jArray == null)
-                return false;
-            {
-                foreach (var mapData in jArray)
-                {
-                    string indexString = mapData["Index"]?.ToString();
-                    if (indexString == null)
-                        return false;
-                    {
-                        string[] strings = indexString.Remove(indexString.Length - 1, 1).Remove(0, 1).Split(',');
-                        MapBlockData mapBlockData;
-                        if (strings.Length == 2 &&
-                            int.TryParse(strings[0].Trim(), out int x) &&
-                            int.TryParse(strings[1].Trim(), out int y))
-                        {
-                            mapBlockData = MapData[new Vector2Int(x, y)] = new MapBlockData();
-                        }
-                        else
-                            return false;
-
-                        if (!mapData.TryApplyDataToProperty(nameof(mapBlockData.EventType), ref mapBlockData.EventType)) return false;
-                        if (!mapData.TryApplyDataToProperty(nameof(mapBlockData.State), ref mapBlockData.State)) return false;
-                    }
-                }
-            }
-        }
+        Data = JsonConvert.DeserializeObject<AdventureManagerData>(File.ReadAllText(path));
         
         return true;
     }
@@ -129,15 +49,15 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
     {
         // Random map.
         GenerateRandomAdventureMap();
-        PlayerStatus.Initialize(_adm.CurrentCharacter, _adm.MergeCardLibraryByType[MergeCardType.Common]);
+        Data.PlayerStatus.Initialize(_adm.CurrentCharacter, _adm.MergeCardLibraryByType[MergeCardType.Common]);
     }
     
     private void GenerateRandomAdventureMap(int randomSeed = -1)
     {
-        RandomSeed = randomSeed == -1 ? Guid.NewGuid().GetHashCode() : randomSeed;
-        Random.InitState(RandomSeed);
+        Data.RandomSeed = randomSeed == -1 ? Guid.NewGuid().GetHashCode() : randomSeed;
+        Random.InitState(Data.RandomSeed);
 
-        MapData.Clear();
+        Data.MapData.Clear();
         var mapBlockProbabilities = _adm.MapBlockProbabilities;
         
         int totalDeep = mapBlockProbabilities[^1].deep;
@@ -233,7 +153,7 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
                         break;
                 }
 
-                MapData[new Vector2Int(spawnAmount, deep)] = new MapBlockData(randomEventType, blockState);
+                Data.MapData[new Vector2Int(spawnAmount, deep)] = new MapBlockData(randomEventType, blockState);
                 
                 // Update limit random list.
                 randomEventCount.TryAdd(randomEventType, 0);
@@ -253,5 +173,14 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
 
         _adm = AddressableManager.Instance;
     }
+}
+
+public class AdventureManagerData
+{
+    public int RandomSeed;
+    public Vector2Int Position;
+    public Dictionary<Vector2Int, MapBlockData> MapData = new Dictionary<Vector2Int, MapBlockData>();
+    public Dictionary<int, MergeSocketData> MergeGridSockets = new Dictionary<int, MergeSocketData>();
+    public PlayerStatus PlayerStatus = new PlayerStatus();  
 }
 

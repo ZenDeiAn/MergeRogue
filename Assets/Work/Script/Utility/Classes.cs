@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Serialization;
 using XLua;
@@ -73,18 +74,31 @@ public class Status
 [Serializable, LuaCallCSharp]
 public class ActorStatus : Status
 {
+    [JsonIgnore]
     public int speedAdditional;
+    [JsonProperty]
     public int health;
+    [JsonIgnore]
     public int healthMaximumAdditional;
+    [JsonIgnore]
     public int attackAdditional;
+    [JsonIgnore]
     public int shieldAdditional;
+    [JsonIgnore]
     public int armedShield;
+    [JsonIgnore]
     public int comboMaximumAdditional;
+    [JsonIgnore]
     public float comboChanceAdditional;
+    [JsonIgnore]
     public float healthStealthAdditional;
+    [JsonIgnore]
     public float dodgeAdditional;
+    [JsonIgnore]
     public float criticalChanceAdditional;
+    [JsonIgnore]
     public float criticalDamageAdditional;
+    [JsonIgnore]
     public Dictionary<BuffType, BuffData> Buff = new Dictionary<BuffType, BuffData>();
 
     public int SpeedCalculated => speed + speedAdditional;
@@ -167,7 +181,6 @@ public class PlayerStatus
     public string CharacterID;
     public ActorStatus CharacterStatus;
     public List<int> ItemList = new List<int>();
-    public int DicePrice;
     public List<string> EquipmentList = new List<string>();
     public Dictionary<string, float> MergeCardDeck = new Dictionary<string, float>();   // float is random weight
     public int MergeCardHandlerSize;
@@ -191,6 +204,5 @@ public class PlayerStatus
         
         // TODO : Data need by Ruin
         MergeCardHandlerSize = 3;
-        DicePrice = UtilityFunctions.GetFibonacciNumber(2);
     }
 }

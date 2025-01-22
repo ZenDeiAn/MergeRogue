@@ -23,6 +23,7 @@ public class MapManager : Processor<MapManager, MapState>
     
     private GameManager _gm;
     private AddressableManager _am;
+    private AdventureManager _avm;
     
     public static List<Vector2Int> GetNextDeepNearestBlockIndexes(Vector2Int index)
     {
@@ -102,7 +103,7 @@ public class MapManager : Processor<MapManager, MapState>
 
     void Activate_Event()
     {
-        MapBlock block = MapBlocks[AdventureManager.Instance.Position];
+        MapBlock block = MapBlocks[_avm.Data.Position];
         Debug.Log($"Active Event : {block.eventType}");
         switch (block.eventType)
         {
@@ -126,7 +127,7 @@ public class MapManager : Processor<MapManager, MapState>
     void Activate_Move()
     {
         _locateMark.DOKill();
-        Vector3 position = MapBlocks[AdventureManager.Instance.Position].transform.position;
+        Vector3 position = MapBlocks[_avm.Data.Position].transform.position;
         position.y = LOCATE_MARK_POSITION_Y;
         _locateMark.transform.DOMove(position, 2.5f).SetEase(Ease.InOutQuint).OnComplete(() =>
         {
@@ -137,7 +138,7 @@ public class MapManager : Processor<MapManager, MapState>
     
     void Activate_Select()
     {
-        List<MapBlock> nextBlocks = GetNextDeepNearestBlocks(AdventureManager.Instance.Position);
+        List<MapBlock> nextBlocks = GetNextDeepNearestBlocks(_avm.Data.Position);
         foreach (var block in nextBlocks)
         {
             block.State = MapBlockState.Selectable;
@@ -159,7 +160,7 @@ public class MapManager : Processor<MapManager, MapState>
                     {
                         if (block.State == MapBlockState.Selectable)
                         {
-                            MapBlocks[AdventureManager.Instance.Position].State = MapBlockState.Interacted;
+                            MapBlocks[_avm.Data.Position].State = MapBlockState.Interacted;
                             block.Interact();
                         }
                     }
@@ -181,10 +182,10 @@ public class MapManager : Processor<MapManager, MapState>
 
     void Activate_Initialize()
     {
-        InitializeMap(AdventureManager.Instance.MapData);
+        InitializeMap(_avm.Data.MapData);
         
         // Set locate mark init position.
-        MapBlock block = MapBlocks[AdventureManager.Instance.Position];
+        MapBlock block = MapBlocks[_avm.Data.Position];
         block.transform.DOLocalMoveY(2f, 2f).SetEase(Ease.InOutQuart);
         Vector3 position = block.transform.position;
         position.y = LOCATE_MARK_POSITION_Y;
@@ -198,6 +199,7 @@ public class MapManager : Processor<MapManager, MapState>
         base.Initialization();
         
         _am = AddressableManager.Instance;
+        _avm = AdventureManager.Instance;
         _gm = GameManager.Instance;
 
         State = MapState.Initialize;

@@ -39,15 +39,15 @@ public class MergeCardShapeDataEditor : PropertyDrawer
         }
         
         // Get properties :
-        SerializedProperty shapeProperty = property.FindPropertyRelative("ShapeGrid");
-        SerializedProperty gridSizeProperty = property.FindPropertyRelative("GridSize");
+        SerializedProperty pointsProperty = property.FindPropertyRelative("Points");
+        SerializedProperty gridSizeProperty = property.FindPropertyRelative("Size");
         MergeCardShapeData data;
         string key = property.serializedObject.targetObject.GetInstanceID() + "_" + property.propertyPath;
         if (!_dummyShapeDataDict.TryGetValue(key, out var value))
         {
             _dummyShapeDataDict[key] = new MergeCardShapeData();
             data = InitializeDummyData(property);
-            data.GridSize = gridSizeProperty.vector2IntValue;
+            data.Size = gridSizeProperty.vector2IntValue;
         }
         else
         {
@@ -66,7 +66,7 @@ public class MergeCardShapeDataEditor : PropertyDrawer
         EditorGUI.HelpBox(position, string.Empty, MessageType.None);
         // Label
         EditorGUI.DropShadowLabel(new Rect(position.x, position.y, position.width, singleLineHeight), 
-            $"MergeCardShape {data.GridSize}",
+            $"MergeCardShape {data.Size}",
             _customHelpBoxStyle);
         // Modify button function
         bool modifyingThis = string.CompareOrdinal(_currentModifyingKey, key) == 0;
@@ -95,77 +95,31 @@ public class MergeCardShapeDataEditor : PropertyDrawer
             modifyingThis = string.CompareOrdinal(_currentModifyingKey, key) == 0;
             if (!modifyingThis)
             {
-                data.GridSize = Vector2Int.zero;
-                // Check Blank.
-                int firstNonEmptyColumn = MergeGrid.ROW_COLUMN_COUNT;
-                int lastNonEmptyColumn = 0;
-                int firstNonEmptyRow = MergeGrid.ROW_COLUMN_COUNT;
-                int lastNonEmptyRow = 0;
-                for (int i = 0; i < data.ShapeGrid.Count; ++i)
+                data.Size = Vector2Int.zero;
+                // Check bound size
+                Vector2Int boundMin = Vector2Int.one * MergeGrid.ROW_COLUMN_COUNT;
+                Vector2Int boundMax = -Vector2Int.one;
+                foreach (var t in data.Points)
                 {
-                    var column = data.ShapeGrid[i].Column;
-                    for (int j = 0; j < column.Count; ++j)
-                    {
-                        if (column[j])
-                        {
-                            if (firstNonEmptyColumn > i)
-                                firstNonEmptyColumn = i;
-                            if (firstNonEmptyRow > j)
-                                firstNonEmptyRow = j;
-                            if (lastNonEmptyColumn < i)
-                                lastNonEmptyColumn = i;
-                            if (lastNonEmptyRow < j)
-                                lastNonEmptyRow = j;
-                        }
-                    }
+                    if (boundMin.x > t.x)
+                        boundMin.x = t.x;
+                    if (boundMin.y > t.y)
+                        boundMin.y = t.y;
+                    if (boundMax.x < t.x)
+                        boundMax.x = t.x;
+                    if (boundMax.y < t.y)
+                        boundMax.y = t.y;
                 }
+                pointsProperty.arraySize = data.Points.Count;
                 // Remove blank
-                for (int i = 0; i < firstNonEmptyColumn && i < data.ShapeGrid.Count; ++i)
+                for (int i = 0; i < data.Points.Count; ++i)
                 {
-                    data.ShapeGrid.RemoveAt(0);
-                }
-                
-                lastNonEmptyColumn -= firstNonEmptyColumn;
-                for (int i = data.ShapeGrid.Count - 1; i > lastNonEmptyColumn && i > -1; --i)
-                {
-                    data.ShapeGrid.RemoveAt(data.ShapeGrid.Count - 1);
+                    data.Points[i] -= new Vector2Int(boundMin.x, boundMin.y);
+                    pointsProperty.GetArrayElementAtIndex(i).vector2IntValue = data.Points[i];
                 }
 
-                lastNonEmptyRow -= firstNonEmptyRow;
-                for (int i = 0; i < data.ShapeGrid.Count; ++i)
-                {
-                    var column = data.ShapeGrid[i].Column;
-                    for (int j = 0; j < firstNonEmptyRow && j < column.Count; ++j)
-                    {
-                        column.RemoveAt(0);
-                    }
-                    for (int j = column.Count - 1; j > lastNonEmptyRow && j  > -1; --j)
-                    {
-                        column.RemoveAt(column.Count - 1);
-                    }
-                }
-                
-                // Apply modification.
-                shapeProperty.arraySize = 0;
-                for (int i = 0; i < data.ShapeGrid.Count; ++i)
-                {
-                    shapeProperty.arraySize++;
-                    var column = data.ShapeGrid[i].Column;
-                    SerializedProperty innerList = shapeProperty.GetArrayElementAtIndex(i).FindPropertyRelative("Column");
-                    innerList.arraySize = 0;
-                    for (int j = 0; j < column.Count; j++)
-                    {
-                        innerList.arraySize++;
-                        innerList.GetArrayElementAtIndex(j).boolValue = column[j];
-                        if (data.GridSize.y <= j)
-                        {
-                            data.GridSize.y = j + 1;
-                        }
-                    }
-                }
-                data.GridSize.x = data.ShapeGrid.Count;
-
-                gridSizeProperty.vector2IntValue = data.GridSize;
+                data.Size = boundMax - boundMin + Vector2Int.one;
+                gridSizeProperty.vector2IntValue = data.Size;
             }
         }
 
@@ -178,8 +132,8 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                         singleLineHeight),
                     "Clear"))
             {
-                data.ShapeGrid.Clear();
-                data.GridSize = Vector2Int.zero;
+                data.Points.Clear();
+                data.Size = Vector2Int.zero;
             }
             // Cancel button function
             if (GUI.Button(new Rect(position.x + position.width / 3 * 2 + lineSpace,
@@ -199,7 +153,7 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                 position.y + lineHeight * 2);
         if (modifyingThis)
         {
-            data.GridSize.x = data.GridSize.y = 0;
+            data.Size.x = data.Size.y = 0;
         }
         for (int i = 0; i < gridSize; ++i)
         {
@@ -209,35 +163,19 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                     startPosition.y + j *  lineHeight,
                     singleLineHeight,
                     singleLineHeight);
-                bool activeBlock = false;
-                
-                if (data.ShapeGrid.Count > i)
-                {
-                    var column = data.ShapeGrid[i].Column;
-                    activeBlock = column.Count > j && column[j];
-                }
 
+                bool activeBlock = data.Points.Contains(new Vector2Int(i, j));
                 if (modifyingThis)
                 {
                     if (GUI.Button(rect, activeBlock ? Texture2D.whiteTexture : Texture2D.blackTexture))
                     {
                         if (activeBlock)
                         {
-                            data.ShapeGrid[i].Column[j] = false;
+                            data.Points.Remove(new Vector2Int(i, j));
                         }
                         else
                         {
-                            for (int m = data.ShapeGrid.Count; m <= i; ++m)
-                            {
-                                data.ShapeGrid.Add(new MergeCardShapeColumn());   
-                            }
-                            var row = data.ShapeGrid[i].Column;
-
-                            for (int m = row.Count; m <= j; ++m)
-                            {
-                                row.Add(false);
-                            }
-                            row[j] = true;
+                            data.Points.Add(new Vector2Int(i, j));
                         }
                     }
                 }
@@ -251,21 +189,22 @@ public class MergeCardShapeDataEditor : PropertyDrawer
                         rect.width += offset;
                         rect.height += offset;
                     }
+                    
                     GUI.DrawTexture(rect, activeBlock ? Texture2D.whiteTexture :
-                        i < data.GridSize.x && j < data.GridSize.y ? Texture2D.grayTexture : _backgroundTexture);
+                        i < data.Size.x && j < data.Size.y ? Texture2D.grayTexture : _backgroundTexture);
                 }
                 
                 // UpdateGridSize
                 if (modifyingThis && activeBlock)
                 {
-                    if (data.GridSize.x <= i)
+                    if (data.Size.x <= i)
                     {
-                        data.GridSize.x = i + 1;
+                        data.Size.x = i + 1;
                     }
 
-                    if (data.GridSize.y <= j)
+                    if (data.Size.y <= j)
                     {
-                        data.GridSize.y = j + 1;
+                        data.Size.y = j + 1;
                     }
                 }
             }
@@ -284,20 +223,15 @@ public class MergeCardShapeDataEditor : PropertyDrawer
     {
         string key = property.serializedObject.targetObject.GetInstanceID() + "_" + property.propertyPath;
         var data = _dummyShapeDataDict[key];
-        var shapeProperty = property.FindPropertyRelative("ShapeGrid");
-        var gridSizeProperty = property.FindPropertyRelative("GridSize");
-        data.ShapeGrid.Clear();
+        var shapeProperty = property.FindPropertyRelative("Points");
+        var gridSizeProperty = property.FindPropertyRelative("Size");
+        data.Points.Clear();
         for (int i = 0; i < shapeProperty.arraySize; ++i)
         {
-            SerializedProperty innerList = shapeProperty.GetArrayElementAtIndex(i).FindPropertyRelative("Column");
-            data.ShapeGrid.Add(new MergeCardShapeColumn());
-            for (int j = 0; j < innerList.arraySize; ++j)
-            {
-                data.ShapeGrid[i].Column.Add(innerList.GetArrayElementAtIndex(j).boolValue);
-            }
+            data.Points.Add(shapeProperty.GetArrayElementAtIndex(i).vector2IntValue);
         }
 
-        data.GridSize = gridSizeProperty.vector2IntValue;
+        data.Size = gridSizeProperty.vector2IntValue;
         
         return data;
     }
