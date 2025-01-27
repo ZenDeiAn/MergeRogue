@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
-using UnityEngine.Serialization;
-using XLua;
 
 public static class UtilityFunctions
 {
@@ -33,7 +31,7 @@ public static class UtilityFunctions
     }
 }
 
-[Serializable, LuaCallCSharp]
+[Serializable]
 public class Status
 {
     [SerializeField] protected int speed;
@@ -71,7 +69,7 @@ public class Status
     }
 }
 
-[Serializable, LuaCallCSharp]
+[Serializable]
 public class ActorStatus : Status
 {
     [JsonIgnore]
@@ -148,7 +146,7 @@ public struct UIDataSet
     public Sprite sprite;
 }
 
-[Serializable, LuaCallCSharp]
+[Serializable]
 public class BuffData
 {
     public BuffType type;
@@ -157,7 +155,7 @@ public class BuffData
     public int strength;
 }
 
-[Serializable, LuaCallCSharp]
+[Serializable]
 public class Item
 {
     public BuffType type;
@@ -166,7 +164,7 @@ public class Item
     public int strength;
 }
 
-[Serializable, LuaCallCSharp]
+[Serializable]
 public class Equipment
 {
     public BuffType type;

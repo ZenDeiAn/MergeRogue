@@ -1,5 +1,4 @@
 using System;
-using XLua;
 
 [Serializable]
 public enum WeaponSocketType
@@ -64,7 +63,7 @@ public enum MergeCardType
     Special
 }
 
-[Serializable, LuaCallCSharp]
+[Serializable]
 public enum ActionType
 {
     Attack,

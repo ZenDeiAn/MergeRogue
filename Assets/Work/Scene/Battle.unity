@@ -1534,7 +1534,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.65
+  m_fontSize: 67.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3794,7 +3794,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.65
+  m_fontSize: 67.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5138,7 +5138,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.65
+  m_fontSize: 67.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5340,38 +5340,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c6bce9dfe1c004ab998f9b030f39c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RandomSeed: 0
-  Position: {x: 0, y: 0}
-  PlayerStatus:
-    CharacterID: 
-    CharacterStatus:
-      speed: 0
-      healthMaximum: 0
-      attack: 0
-      shield: 0
-      comboMaximum: 0
-      comboChance: 0
-      healthStealth: 0
-      dodge: 0
-      criticalChance: 0
-      criticalDamage: 0
-      speedAdditional: 0
-      health: 0
-      healthMaximumAdditional: 0
-      attackAdditional: 0
-      shieldAdditional: 0
-      armedShield: 0
-      comboMaximumAdditional: 0
-      comboChanceAdditional: 0
-      healthStealthAdditional: 0
-      dodgeAdditional: 0
-      criticalChanceAdditional: 0
-      criticalDamageAdditional: 0
-    ItemList: 
-    DicePrice: 0
-    EquipmentList: []
-    MergeCardHandlerSize: 0
-    MergeCardLevelWeight: 
 --- !u!1 &1469936686
 GameObject:
   m_ObjectHideFlags: 0
@@ -6604,7 +6572,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 65.95
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

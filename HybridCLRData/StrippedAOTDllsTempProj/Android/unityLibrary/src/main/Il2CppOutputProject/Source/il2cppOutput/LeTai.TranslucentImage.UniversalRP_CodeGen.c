@@ -1,0 +1,133 @@
+﻿#include "pch-c.h"
+#ifndef _MSC_VER
+# include <alloca.h>
+#else
+# include <malloc.h>
+#endif
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_m3C04A3DE3C63E4DCD928793297A1109B913B5834 (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_m7CD2A15833FBB142F23C9C3909159D92205EBDA1 (void);
+extern void TranslucentImageBlurRenderPass_get_PreviewMaterial_mA8C8D06D362BB22A8A153E4B0EEF1665DDE4726B (void);
+extern void TranslucentImageBlurRenderPass__ctor_mF1CF2ACA7D816F1092B7445BA824A43EB544B712 (void);
+extern void TranslucentImageBlurRenderPass_Finalize_m3597FD52173080DDCDDDFE1F635EEDB13C6AA42E (void);
+extern void TranslucentImageBlurRenderPass_SetupSRP_m4F988D71257B18A9E21998E7C5E565D2A9FAEC5D (void);
+extern void TranslucentImageBlurRenderPass_Setup_mD8EBD81DF45519692E1C9816357041AD2E02D519 (void);
+extern void TranslucentImageBlurRenderPass_Execute_mB4364A29DF7E6713386EA8DC524DA0531B9D1704 (void);
+extern void TranslucentImageBlurRenderPass_ExecutePreview_mD94D18477A4CCDB39E6FF8E0AC0E1B6356CC86AD (void);
+extern void TranslucentImageBlurRenderPass_RenderGraphInit_m50ABB3AF0ABACBFED22363C4373E06CB73612210 (void);
+extern void TranslucentImageBlurRenderPass_RenderGraphDispose_m895B83A3E74365B21A8FBCFB6D5100FE3A9C72B9 (void);
+extern void PreviewExecutionData__ctor_m68D65DC1BEC5C642478D04C9FCF665F7E48F110F (void);
+extern void URPRendererInternal_CacheRenderer_mD2DD6596FC45C4446DAFB840D3997F40FEAAD782 (void);
+extern void URPRendererInternal_GetBackBuffer_m6D3BEDD8A9A9A97321C1649FE030BC3B463B6E7F (void);
+extern void URPRendererInternal_GetAfterPostColor_m830730D1E186976EC59C1E7E9AB6DF2039F3F3D5 (void);
+extern void URPRendererInternal__ctor_m71FA596CB42375602BC2AC68116AD4D389923BE4 (void);
+extern void URPRendererInternal_U3CCacheRendererU3Eg__CacheBackBufferGetterU7C3_0_m2C27D87415A80E089A5196ED8DFF28E646DB49CB (void);
+extern void U3CU3Ec__cctor_m4BA10A1E851659511DFD957337F8172058BBC70E (void);
+extern void U3CU3Ec__ctor_m91CA0128A06F3C58CF0BF483A63334076408A4EA (void);
+extern void U3CU3Ec_U3CCacheRendererU3Eb__3_1_m0E02B598F6E3A74FEFE89C24D4B052AF8491D4F3 (void);
+extern void TranslucentImageBlurSource_RegisterSource_m7498C40EF84BDEC2D2D277A7D938AC115FDD3129 (void);
+extern void TranslucentImageBlurSource_Create_m601154B2031A20BB9CF7BB920AAE168C81BC3BC7 (void);
+extern void TranslucentImageBlurSource_SetupSRP_m320062900FE6CC5C8D4FC4D010820845AFBFA3B9 (void);
+extern void TranslucentImageBlurSource_SetupRenderPasses_mE99FA6A8043762D2FCD9C5D95E08E3CECC752329 (void);
+extern void TranslucentImageBlurSource_AddRenderPasses_mE172589F6CDC0BA3010780E632921EE8EEE9BB82 (void);
+extern void TranslucentImageBlurSource_GetBlurSource_mEB8E93DC8B8CA9959DCFD08205448E52E4724FF2 (void);
+extern void TranslucentImageBlurSource_GetBaseCamera_m53B357208A121A4AB020D4CD19AEE8B99A56DD9D (void);
+extern void TranslucentImageBlurSource_GetPixelSize_mD1FCF48C1B5484E4310F9D6FC79CB667AD534989 (void);
+extern void TranslucentImageBlurSource__ctor_m9649F50B4FA24F3A29BDF58ADCE72599178DD86C (void);
+static Il2CppMethodPointer s_methodPointers[29] = 
+{
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_m3C04A3DE3C63E4DCD928793297A1109B913B5834,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_m7CD2A15833FBB142F23C9C3909159D92205EBDA1,
+	TranslucentImageBlurRenderPass_get_PreviewMaterial_mA8C8D06D362BB22A8A153E4B0EEF1665DDE4726B,
+	TranslucentImageBlurRenderPass__ctor_mF1CF2ACA7D816F1092B7445BA824A43EB544B712,
+	TranslucentImageBlurRenderPass_Finalize_m3597FD52173080DDCDDDFE1F635EEDB13C6AA42E,
+	TranslucentImageBlurRenderPass_SetupSRP_m4F988D71257B18A9E21998E7C5E565D2A9FAEC5D,
+	TranslucentImageBlurRenderPass_Setup_mD8EBD81DF45519692E1C9816357041AD2E02D519,
+	TranslucentImageBlurRenderPass_Execute_mB4364A29DF7E6713386EA8DC524DA0531B9D1704,
+	TranslucentImageBlurRenderPass_ExecutePreview_mD94D18477A4CCDB39E6FF8E0AC0E1B6356CC86AD,
+	TranslucentImageBlurRenderPass_RenderGraphInit_m50ABB3AF0ABACBFED22363C4373E06CB73612210,
+	TranslucentImageBlurRenderPass_RenderGraphDispose_m895B83A3E74365B21A8FBCFB6D5100FE3A9C72B9,
+	PreviewExecutionData__ctor_m68D65DC1BEC5C642478D04C9FCF665F7E48F110F,
+	URPRendererInternal_CacheRenderer_mD2DD6596FC45C4446DAFB840D3997F40FEAAD782,
+	URPRendererInternal_GetBackBuffer_m6D3BEDD8A9A9A97321C1649FE030BC3B463B6E7F,
+	URPRendererInternal_GetAfterPostColor_m830730D1E186976EC59C1E7E9AB6DF2039F3F3D5,
+	URPRendererInternal__ctor_m71FA596CB42375602BC2AC68116AD4D389923BE4,
+	URPRendererInternal_U3CCacheRendererU3Eg__CacheBackBufferGetterU7C3_0_m2C27D87415A80E089A5196ED8DFF28E646DB49CB,
+	U3CU3Ec__cctor_m4BA10A1E851659511DFD957337F8172058BBC70E,
+	U3CU3Ec__ctor_m91CA0128A06F3C58CF0BF483A63334076408A4EA,
+	U3CU3Ec_U3CCacheRendererU3Eb__3_1_m0E02B598F6E3A74FEFE89C24D4B052AF8491D4F3,
+	TranslucentImageBlurSource_RegisterSource_m7498C40EF84BDEC2D2D277A7D938AC115FDD3129,
+	TranslucentImageBlurSource_Create_m601154B2031A20BB9CF7BB920AAE168C81BC3BC7,
+	TranslucentImageBlurSource_SetupSRP_m320062900FE6CC5C8D4FC4D010820845AFBFA3B9,
+	TranslucentImageBlurSource_SetupRenderPasses_mE99FA6A8043762D2FCD9C5D95E08E3CECC752329,
+	TranslucentImageBlurSource_AddRenderPasses_mE172589F6CDC0BA3010780E632921EE8EEE9BB82,
+	TranslucentImageBlurSource_GetBlurSource_mEB8E93DC8B8CA9959DCFD08205448E52E4724FF2,
+	TranslucentImageBlurSource_GetBaseCamera_m53B357208A121A4AB020D4CD19AEE8B99A56DD9D,
+	TranslucentImageBlurSource_GetPixelSize_mD1FCF48C1B5484E4310F9D6FC79CB667AD534989,
+	TranslucentImageBlurSource__ctor_m9649F50B4FA24F3A29BDF58ADCE72599178DD86C,
+};
+extern void PreviewExecutionData__ctor_m68D65DC1BEC5C642478D04C9FCF665F7E48F110F_AdjustorThunk (void);
+static Il2CppTokenAdjustorThunkPair s_adjustorThunks[1] = 
+{
+	{ 0x0600000C, PreviewExecutionData__ctor_m68D65DC1BEC5C642478D04C9FCF665F7E48F110F_AdjustorThunk },
+};
+static const int32_t s_InvokerIndices[29] = 
+{
+	21997,
+	12340,
+	12130,
+	9793,
+	12340,
+	10242,
+	10241,
+	5657,
+	18934,
+	12340,
+	12340,
+	2983,
+	9793,
+	12190,
+	12190,
+	12340,
+	9793,
+	21945,
+	12340,
+	7053,
+	9793,
+	12340,
+	9793,
+	5566,
+	5566,
+	8696,
+	8696,
+	8793,
+	12340,
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_LeTai_TranslucentImage_UniversalRP_CodeGenModule;
+const Il2CppCodeGenModule g_LeTai_TranslucentImage_UniversalRP_CodeGenModule = 
+{
+	"LeTai.TranslucentImage.UniversalRP.dll",
+	29,
+	s_methodPointers,
+	1,
+	s_adjustorThunks,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+};

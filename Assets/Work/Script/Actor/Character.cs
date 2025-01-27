@@ -21,7 +21,6 @@ public class Character : MonoBehaviour, ICharacterDataInstance, IActor
     public ActorStatus Status { get; set; }
     public ActorAttackData AttackData => Info.AttackData;
     public ActorSkillData SkillData => Info.SkillData;
-    public ActionType CurrentAction { get; set; }
 
     public void Attack(List<IActor> target)
     {

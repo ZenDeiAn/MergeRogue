@@ -1,20 +1,21 @@
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using RaindowStudio.DesignPattern;
 using RaindowStudio.Language;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using XLua;
 using Object = UnityEngine.Object;
 
 public class AddressableManager : SingletonUnityEternal<AddressableManager>
 {
     public const string LABEL_GLOBAL = "Global";
     public const string LABEL_DATA = "Data";
-    public const string LABEL_LUA = "Lua";
+    public const string LABEL_SCRIPT = "Script";
     public const string LABEL_RESOURCE = "Resource";
     
     public Dictionary<string, CharacterInfo> Character { get; private set; }
@@ -24,6 +25,7 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
     public Dictionary<MonsterType, List<MonsterProbabilityData>> MonsterProbabilities { get; private set; }
     public Dictionary<MergeCardType, List<string>> MergeCardLibraryByType { get; private set; }
     public Dictionary<string, MergeCardData> MergeCardDataLibrary { get; private set; }
+    public Assembly HotUpdateAssembly { get; private set; }
     
     private bool _initialized;
     
@@ -250,42 +252,27 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
         yield return new WaitUntil(() => previousPatchOver);
         previousPatchOver = false;
 
-        // Download Lua Script Resources.
-        singlePatchStart?.Invoke(patchingName = "Script @Lua Resources");
+        // Download HotUpdate script Resources.
+        singlePatchStart?.Invoke(patchingName = "Script Resources");
         {
-            LuaManager.LuaEnv = new LuaEnv();
-            List<TextAsset> luaTexts = new List<TextAsset>();
             LoadAssetsByLabel<TextAsset>(
-                LABEL_LUA,
-                a =>
+                LABEL_SCRIPT, a =>
                 {
-                    a.name = a.name.Replace(".lua", string.Empty);
-                    // Load Global first.
-                    if (a.name == LABEL_GLOBAL)
-                    {
-                        LuaManager.LuaEnv.DoString(a.text, a.name);
-                    }
-                    else
-                    {
-                        luaTexts.Add(a);
-                    }
+#if !UNITY_EDITOR
+                    HotUpdateAssembly = Assembly.Load(a.bytes);
+#endif
                 },
                 // ReSharper disable once AccessToModifiedClosure
                 d => singlePatchDownloading?.Invoke(patchingName, d.PercentComplete),
                 _ =>
                 {
-                    // Load script.
-                    foreach (var text in luaTexts)
-                    {
-                        LuaManager.LuaEnv.DoString(text.text, text.name);
-                    }
-
-                    LuaManager.Initialize();
-
                     // ReSharper disable once AccessToModifiedClosure
                     singlePatchCompleted?.Invoke(patchingName);
                     previousPatchOver = true;
                 });
+#if UNITY_EDITOR
+            HotUpdateAssembly = AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == "HotUpdate");
+#endif
         }
         yield return new WaitUntil(() => previousPatchOver);
         previousPatchOver = false;

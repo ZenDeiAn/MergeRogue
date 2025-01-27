@@ -1,0 +1,133 @@
+﻿#include "pch-c.h"
+#ifndef _MSC_VER
+# include <alloca.h>
+#else
+# include <malloc.h>
+#endif
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_m9BDA300611288442D75CDCBAADD94759D3564E6A (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mB46642E4CFCD6236E765DD90E23DA0CD0BC9AB49 (void);
+extern void DefaultEffectsExample_Awake_mD59E6CD5CD2A3ACC9308CD37929476A68B39172A (void);
+extern void DefaultEffectsExample_Start_mAAC7095FFD277CB6669D02285E5B36CE33F6031A (void);
+extern void DefaultEffectsExample__ctor_m2E455B5DE415CB62ED7A33A8CA3EA64BF6EC17F0 (void);
+extern void ExampleEvents_Start_m4FAA8CAFDB1994C0F7B05A670B2D89A65675A7C9 (void);
+extern void ExampleEvents_OnDestroy_m8772B9A750D88492EF0519D2A690F6D38DE97DA7 (void);
+extern void ExampleEvents_TryGetInt_m89C47082FC0E64617125F73E31D176486617F7F2 (void);
+extern void ExampleEvents_OnMessage_m2673190C19E2EB2D16EDFAB30066F548EFDD5127 (void);
+extern void ExampleEvents_get_CurrentLineShown_m990D7FA63F6AF79467CB31F81194FA91AE2C00E7 (void);
+extern void ExampleEvents_set_CurrentLineShown_mDB1951670CEE77111724EE7C258FB42E9061BF1C (void);
+extern void ExampleEvents_Awake_mC523D51EE5A27665BC6556F0B6C12929B1374DDB (void);
+extern void ExampleEvents_ContinueSequence_mF6784C8F145D663CC0C19DE3AD62AC12B6E465E3 (void);
+extern void ExampleEvents_Update_m42BE93193F8B37F3A84BA11C36EDD68AC944B433 (void);
+extern void ExampleEvents_AnimateCrate_mC91E9EBB2BB533E30092C372F2F2B55881F5D646 (void);
+extern void ExampleEvents__ctor_m4D808A2E0FA84CCFF01D80A3DBCCC7281A0D5C7F (void);
+extern void ExampleEvents_U3CAwakeU3Eb__17_0_m5966C756E50B7DD2C4DA877CB1008EEE63F07407 (void);
+extern void U3CAnimateCrateU3Ed__20__ctor_m00D893E7C4F0A61008FD82CE93FEF1C0A138DD4C (void);
+extern void U3CAnimateCrateU3Ed__20_System_IDisposable_Dispose_mE52F95345268E8FF40ADC62848B0850F29537E00 (void);
+extern void U3CAnimateCrateU3Ed__20_MoveNext_mD278A602DF479F7888C92D1732DD0FE45B9DDF97 (void);
+extern void U3CAnimateCrateU3Ed__20_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_m1BDAEE5372248D5B8D67C64425B6088B4535B5F4 (void);
+extern void U3CAnimateCrateU3Ed__20_System_Collections_IEnumerator_Reset_mD135A071F9DC4407446C96D359DAD7DE1A87CE8E (void);
+extern void U3CAnimateCrateU3Ed__20_System_Collections_IEnumerator_get_Current_mEDCE46445638260E8D1340D38E170C372E7D757B (void);
+extern void UsageExample_Awake_m99FDB3D253D507B96358716220262C7AC9634C19 (void);
+extern void UsageExample_Start_mF8771D312755AC948CE575F9BA41D75A5B95E7A2 (void);
+extern void UsageExample_ShowText_m5341A3A8B15BB5731395051087E66C4D21CF59D3 (void);
+extern void UsageExample__ctor_mDF0424A43ED8603DCE988D17D53CF2009361B81A (void);
+static Il2CppMethodPointer s_methodPointers[28] = 
+{
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_m9BDA300611288442D75CDCBAADD94759D3564E6A,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mB46642E4CFCD6236E765DD90E23DA0CD0BC9AB49,
+	DefaultEffectsExample_Awake_mD59E6CD5CD2A3ACC9308CD37929476A68B39172A,
+	NULL,
+	DefaultEffectsExample_Start_mAAC7095FFD277CB6669D02285E5B36CE33F6031A,
+	DefaultEffectsExample__ctor_m2E455B5DE415CB62ED7A33A8CA3EA64BF6EC17F0,
+	ExampleEvents_Start_m4FAA8CAFDB1994C0F7B05A670B2D89A65675A7C9,
+	ExampleEvents_OnDestroy_m8772B9A750D88492EF0519D2A690F6D38DE97DA7,
+	ExampleEvents_TryGetInt_m89C47082FC0E64617125F73E31D176486617F7F2,
+	ExampleEvents_OnMessage_m2673190C19E2EB2D16EDFAB30066F548EFDD5127,
+	ExampleEvents_get_CurrentLineShown_m990D7FA63F6AF79467CB31F81194FA91AE2C00E7,
+	ExampleEvents_set_CurrentLineShown_mDB1951670CEE77111724EE7C258FB42E9061BF1C,
+	ExampleEvents_Awake_mC523D51EE5A27665BC6556F0B6C12929B1374DDB,
+	ExampleEvents_ContinueSequence_mF6784C8F145D663CC0C19DE3AD62AC12B6E465E3,
+	ExampleEvents_Update_m42BE93193F8B37F3A84BA11C36EDD68AC944B433,
+	ExampleEvents_AnimateCrate_mC91E9EBB2BB533E30092C372F2F2B55881F5D646,
+	ExampleEvents__ctor_m4D808A2E0FA84CCFF01D80A3DBCCC7281A0D5C7F,
+	ExampleEvents_U3CAwakeU3Eb__17_0_m5966C756E50B7DD2C4DA877CB1008EEE63F07407,
+	U3CAnimateCrateU3Ed__20__ctor_m00D893E7C4F0A61008FD82CE93FEF1C0A138DD4C,
+	U3CAnimateCrateU3Ed__20_System_IDisposable_Dispose_mE52F95345268E8FF40ADC62848B0850F29537E00,
+	U3CAnimateCrateU3Ed__20_MoveNext_mD278A602DF479F7888C92D1732DD0FE45B9DDF97,
+	U3CAnimateCrateU3Ed__20_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_m1BDAEE5372248D5B8D67C64425B6088B4535B5F4,
+	U3CAnimateCrateU3Ed__20_System_Collections_IEnumerator_Reset_mD135A071F9DC4407446C96D359DAD7DE1A87CE8E,
+	U3CAnimateCrateU3Ed__20_System_Collections_IEnumerator_get_Current_mEDCE46445638260E8D1340D38E170C372E7D757B,
+	UsageExample_Awake_m99FDB3D253D507B96358716220262C7AC9634C19,
+	UsageExample_Start_mF8771D312755AC948CE575F9BA41D75A5B95E7A2,
+	UsageExample_ShowText_m5341A3A8B15BB5731395051087E66C4D21CF59D3,
+	UsageExample__ctor_mDF0424A43ED8603DCE988D17D53CF2009361B81A,
+};
+static const int32_t s_InvokerIndices[28] = 
+{
+	21991,
+	12340,
+	12340,
+	0,
+	12340,
+	12340,
+	12340,
+	12340,
+	3518,
+	9793,
+	11936,
+	9600,
+	12340,
+	12340,
+	12340,
+	8689,
+	12340,
+	12340,
+	9725,
+	12340,
+	11936,
+	12130,
+	12340,
+	12130,
+	12340,
+	12340,
+	12340,
+	12340,
+};
+static const Il2CppTokenRangePair s_rgctxIndices[1] = 
+{
+	{ 0x06000004, { 0, 1 } },
+};
+extern const uint32_t g_rgctx_Category_1_tFB777B1873554CEB50E4C6323230FDDE2A7F702C;
+static const Il2CppRGCTXDefinition s_rgctxValues[1] = 
+{
+	{ (Il2CppRGCTXDataType)2, (const void *)&g_rgctx_Category_1_tFB777B1873554CEB50E4C6323230FDDE2A7F702C },
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_Febucci_TextAnimator_Demo_Runtime_CodeGenModule;
+const Il2CppCodeGenModule g_Febucci_TextAnimator_Demo_Runtime_CodeGenModule = 
+{
+	"Febucci.TextAnimator.Demo.Runtime.dll",
+	28,
+	s_methodPointers,
+	0,
+	NULL,
+	s_InvokerIndices,
+	0,
+	NULL,
+	1,
+	s_rgctxIndices,
+	1,
+	s_rgctxValues,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+};

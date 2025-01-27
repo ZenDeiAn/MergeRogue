@@ -77,48 +77,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Resource
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 11d0ec60e4ac14f459c6ca1ff2ac7879
-    m_Address: Assets/Work/Addressable/Lua/BattleLibrary.lua.txt
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lua
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 767a064f567e6fd41af5b4d049564346
-    m_Address: Assets/Work/Lua/Global.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lua
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d318852b25c75414aab15d8cb4d77259
-    m_Address: Assets/Work/Addressable/Lua/ItemLibrary.lua.txt
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lua
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 25d68bbe695badb4cb7b9cdc1b30ecf8
-    m_Address: Assets/Work/Addressable/Lua/TestLibrary.lua.txt
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lua
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 211fd924df0b03f45b6d1e789dc9d633
-    m_Address: Assets/Work/Addressable/Lua/SkillLibrary.lua.txt
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lua
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6dbfe9b0d4a4dcc4fbd374d3af403b00
-    m_Address: Assets/Work/Addressable/Lua/Global.lua.txt
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lua
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c8bd7eb891f889e498bd0e6582c3a829
-    m_Address: Assets/Work/Addressable/Lua/EquipmentLibrary.lua.txt
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lua
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a12de9223de0b3648a8fa585ab2911c1
     m_Address: Assets/Work/Addressable/MergeCardLibrary.asset
     m_ReadOnly: 0
@@ -130,6 +88,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Global
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 18a9977082d9e3b4da8caeec98584dab
+    m_Address: Assets/Work/Addressable/HotUpdate.dll.bytes
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Script
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d41d78f70b6c27546891ece3b0e453c3, type: 2}

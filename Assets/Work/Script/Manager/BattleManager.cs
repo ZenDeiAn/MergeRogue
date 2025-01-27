@@ -1,16 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using RaindowStudio.DesignPattern;
 using UnityEngine;
-using UnityEngine.UIElements;
-using XLua;
 
 public class BattleManager : Processor<BattleManager, BattleState>
 {
     public MonsterType TestMonsterType = MonsterType.None;
-    [LuaCallCSharp]
     public List<Character> characters;
-    [LuaCallCSharp]
     public List<Monster> monsters;
     public List<Transform> monsterAnchors;
     public VirtualCameraRotateController vcrc;

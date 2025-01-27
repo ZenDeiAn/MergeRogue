@@ -42,11 +42,6 @@ public class GameManager : ProcessorEternal<GameManager, GameState>
     {
         LoadingManager.Instance.LoadScene("Map");
     }
-
-    private void OnDestroy()
-    {
-        LuaManager.LuaEnv.Dispose();
-    }
 }
 
 [Serializable]

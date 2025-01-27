@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using DG.Tweening;
 using RaindowStudio.DesignPattern;
 using UnityEngine;
@@ -22,7 +24,7 @@ public class MapManager : Processor<MapManager, MapState>
     public readonly Dictionary<Vector2Int, MapBlock> MapBlocks = new Dictionary<Vector2Int, MapBlock>();
     
     private GameManager _gm;
-    private AddressableManager _am;
+    private AddressableManager _adm;
     private AdventureManager _avm;
     
     public static List<Vector2Int> GetNextDeepNearestBlockIndexes(Vector2Int index)
@@ -63,7 +65,7 @@ public class MapManager : Processor<MapManager, MapState>
     {
         MapBlocks.Clear();
         
-        var mapBlockPrefabs = _am.MapBlockPrefabs;
+        var mapBlockPrefabs = _adm.MapBlockPrefabs;
         
         // Calculate the hexagon position spacing.
         Vector3 boundSize = mapBlockPrefabs[0].GetComponent<MeshRenderer>().bounds.size;
@@ -198,7 +200,7 @@ public class MapManager : Processor<MapManager, MapState>
     {
         base.Initialization();
         
-        _am = AddressableManager.Instance;
+        _adm = AddressableManager.Instance;
         _avm = AdventureManager.Instance;
         _gm = GameManager.Instance;
 
