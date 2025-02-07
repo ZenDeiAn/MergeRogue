@@ -1,0 +1,16 @@
+{
+    "name": "RaindowStudioEditor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b9f0c1962e7072345ba46b19b22d1e5a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
