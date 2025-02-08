@@ -102,28 +102,6 @@ public class MapBlock : MonoBehaviour
 }
 
 [Serializable]
-public enum MapBlockEventType
-{
-    None,   // Not reachable.
-    Minion,
-    Elite,
-    RandomEvent,
-    Rest,
-    Store,
-    Treasure,
-    Boss
-}
-
-[Serializable]
-public enum MapBlockState
-{
-    Idle,
-    Selectable,
-    Interacted,
-    Abandoned
-}
-
-[Serializable]
 public class MapBlockData
 {
     public MapBlockEventType EventType;

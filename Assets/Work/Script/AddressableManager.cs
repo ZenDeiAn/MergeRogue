@@ -3,48 +3,44 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
+using RaindowStudio.DesignPattern;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using RaindowStudio.DesignPattern;
 using RaindowStudio.Language;
+using RaindowStudio.Utility;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.TextCore.Text;
 using Object = UnityEngine.Object;
+using TextAsset = UnityEngine.TextAsset;
 
-public class AddressableManager : SingletonUnityEternal<AddressableManager>
+public class AddressableManager : IAddressableManager
 {
     public const string LABEL_GLOBAL = "Global";
     public const string LABEL_DATA = "Data";
     public const string LABEL_SCRIPT = "Script";
     public const string LABEL_RESOURCE = "Resource";
     
-    public Dictionary<string, CharacterInfo> Character { get; private set; }
-    public UILibrary UILibrary { get; private set; }
-    public Dictionary<MapBlockEventType, GameObject> MapBlockPrefabs { get; private set; }
-    public List<MapBlockProbability> MapBlockProbabilities { get; private set; }
-    public Dictionary<MonsterType, List<MonsterProbabilityData>> MonsterProbabilities { get; private set; }
-    public Dictionary<MergeCardType, List<string>> MergeCardLibraryByType { get; private set; }
-    public Dictionary<string, MergeCardData> MergeCardDataLibrary { get; private set; }
-    public Assembly HotUpdateAssembly { get; private set; }
-    
-    private bool _initialized;
-    
-    public bool Initialized => _initialized;
-    public CharacterInfo CurrentCharacter => Instance.Character[GameManager.Instance.CharacterID];
+    private Dictionary<string, object> _assetsDictionary = new Dictionary<string, object>();
+    private readonly Main _main;
+    private bool _initialized = false;
+    private bool _assetsLoaded = false;
 
+    public bool Initialized => _initialized;
+    public bool AssetsLoaded => _assetsLoaded;
+    
     public Coroutine LoadAssetsByLabel<T>(string label,
         Action<T> assetLoaded,
         Action<AsyncOperationHandle> downloading = null,
         Action<AsyncOperationHandle> completed = null)
     {
-        return StartCoroutine(LoadAssetsByLabelIE(label, assetLoaded, downloading, completed));
+        return _main.StartCoroutine(LoadAssetsByLabelIE(label, assetLoaded, downloading, completed));
     }
     
     public Coroutine LoadAssetsByLabel(string label,
         Action<AsyncOperationHandle> downloading = null,
         Action<AsyncOperationHandle> completed = null)
     {
-        return StartCoroutine(LoadAssetsByLabelIE<Object>(label, null, downloading, completed));
+        return _main.StartCoroutine(LoadAssetsByLabelIE<Object>(label, null, downloading, completed));
     }
     
     public Coroutine PatchAllAddressableAssets(Action<string> singlePatchStart = null,
@@ -52,7 +48,7 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
         Action<string> singlePatchCompleted = null,
         Action patchCompleted = null)
     {
-        return StartCoroutine(PatchAllAddressableAssetsIE(
+        return _main.StartCoroutine(PatchAllAddressableAssetsIE(
             singlePatchStart,
             singlePatchDownloading,
             singlePatchCompleted,
@@ -121,7 +117,7 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
         singlePatchStart?.Invoke(patchingName = "UI Resources");
         {
             LoadAssetsByLabel<UILibrary>(LABEL_GLOBAL,
-                a => UILibrary = a,
+                a => _assetsDictionary[nameof(UILibrary)] = a,
                 // ReSharper disable once AccessToModifiedClosure
                 d => singlePatchDownloading?.Invoke(patchingName, d.PercentComplete),
                 _ =>
@@ -158,7 +154,7 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
         singlePatchStart?.Invoke(patchingName = "Character Resources");
         {
             LoadAssetsByLabel<CharacterInfo>(LABEL_GLOBAL,
-                a => Character.Add(a.ID, a),
+                a => _assetsDictionary["Character"] = a,
                 // ReSharper disable once AccessToModifiedClosure
                 d => singlePatchDownloading?.Invoke(patchingName, d.PercentComplete),
                 _ =>
@@ -271,7 +267,7 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
                     previousPatchOver = true;
                 });
 #if UNITY_EDITOR
-            HotUpdateAssembly = AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == "HotUpdate");
+            AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == "HotUpdate");
 #endif
         }
         yield return new WaitUntil(() => previousPatchOver);
@@ -287,16 +283,9 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
         completed?.Invoke(handle);
     }
     
-    protected override void Initialization()
+    public AddressableManager()
     {
-        base.Initialization();
-
-        Character = new Dictionary<string, CharacterInfo>();
-        MapBlockProbabilities = new List<MapBlockProbability>();
-        MapBlockPrefabs = new Dictionary<MapBlockEventType, GameObject>();
-        MonsterProbabilities = new Dictionary<MonsterType, List<MonsterProbabilityData>>();
-        MergeCardDataLibrary = new Dictionary<string, MergeCardData>();
-        MergeCardLibraryByType = new Dictionary<MergeCardType, List<string>>();
-        StartCoroutine(InitializeIE(t => _initialized = true));
+        _main = Main.Instance;
+        _main.StartCoroutine(InitializeIE(_ => _initialized = true));
     }
 }

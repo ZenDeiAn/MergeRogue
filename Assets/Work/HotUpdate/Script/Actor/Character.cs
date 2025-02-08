@@ -78,10 +78,3 @@ public static class CharacterUtility
         }
     }
 }
-
-[Serializable]
-public enum CharacterRank
-{
-    A,
-    S
-}

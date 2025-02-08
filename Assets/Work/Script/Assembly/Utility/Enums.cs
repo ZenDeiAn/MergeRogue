@@ -88,3 +88,32 @@ public enum MergeSocketOverlapType
     Mergeable,
     JustOverlap
 }
+
+[Serializable]
+public enum MapBlockEventType
+{
+    None,   // Not reachable.
+    Minion,
+    Elite,
+    RandomEvent,
+    Rest,
+    Store,
+    Treasure,
+    Boss
+}
+
+[Serializable]
+public enum MapBlockState
+{
+    Idle,
+    Selectable,
+    Interacted,
+    Abandoned
+}
+
+[Serializable]
+public enum CharacterRank
+{
+    A,
+    S
+}
