@@ -14,6 +14,7 @@ Right now still working on it...
 > - - Map Block interaction.  
 > - - Monster data structure.  
 > - - Skill data structure.
+> - - Battle Card Merge System with Data and effect in Code.
 
 > - Progressing :
 > - - Game Battle Logic.
