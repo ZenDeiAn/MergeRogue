@@ -262,6 +262,7 @@ struct AddingNewEventHandler_tD9BAC60F604446ED14967643F63A83CE2A5C3701;
 struct ArgumentException_tAD90411542A20A9C72D5CDA3A84181D8B947A263;
 struct ArgumentNullException_t327031E412FAB2351B0022DD5DAD47E67E597129;
 struct ArgumentOutOfRangeException_tEA2822DAF62B10EEED00E0E3A341D4BAF78CF85F;
+struct AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C;
 struct Attribute_tFDA8EFEFB0711976D22474794576DAF28F7440AA;
 struct AttributeCollection_tD55D3E17234E299E07B6071F31FEEB993C9AD8CA;
 struct Base64Encoder_t70348F0C1F3E24616D01828E151D7E559CE8AC57;
@@ -285,6 +286,7 @@ struct Exception_t;
 struct Expression_t70AA908ECBD33E94249BF235E4EBB0F831AD8785;
 struct GetMemberBinder_t8D02CC2255370A525D6657487C0A7EB1DDD225B3;
 struct Hashtable_tEFC3B6496E6747787D8BB761B51F2AE3A8CFFE2D;
+struct IAsyncResult_t7B9B5A0ECB35DCEC31B8A8122C37D687369253B5;
 struct IAsyncStateMachine_t0680C7F905C553076B552D5A1A6E39E2F0F36AA2;
 struct IComparer_tE7497C3BE3F68A5A2DCEBF0DAD7D13D738FE7BAD;
 struct IContractResolver_t7EC502F5FCA86DD95579A92A1E0116BE32D6340B;
@@ -7960,7 +7962,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void JContainer_ValidateContent_m4D476F518DA9
 		L_3 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_2, NULL);
 		NullCheck(L_1);
 		bool L_4;
-		L_4 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_1, L_3);
+		L_4 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_1, L_3);
 		if (!L_4)
 		{
 			goto IL_0018;
@@ -26777,7 +26779,7 @@ IL_0014:
 		RuntimeObject* L_7 = __this->____annotations;
 		NullCheck(L_6);
 		bool L_8;
-		L_8 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(117, L_6, L_7);
+		L_8 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(157, L_6, L_7);
 		if (!L_8)
 		{
 			goto IL_0060;
@@ -26813,7 +26815,7 @@ IL_0044:
 		RuntimeObject* L_16 = V_2;
 		NullCheck(L_15);
 		bool L_17;
-		L_17 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(117, L_15, L_16);
+		L_17 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(157, L_15, L_16);
 		if (!L_17)
 		{
 			goto IL_0056;
@@ -26920,7 +26922,7 @@ IL_0014:
 		RuntimeObject* L_7 = __this->____annotations;
 		NullCheck(L_6);
 		bool L_8;
-		L_8 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(117, L_6, L_7);
+		L_8 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(157, L_6, L_7);
 		if (!L_8)
 		{
 			goto IL_0082;
@@ -26958,7 +26960,7 @@ IL_0047:
 		RuntimeObject* L_15 = V_3;
 		NullCheck(L_14);
 		bool L_16;
-		L_16 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(117, L_14, L_15);
+		L_16 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(157, L_14, L_15);
 		if (L_16)
 		{
 			goto IL_005f;
@@ -27513,7 +27515,7 @@ IL_0070:
 		RuntimeObject* L_18 = V_3;
 		NullCheck(L_17);
 		bool L_19;
-		L_19 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(117, L_17, L_18);
+		L_19 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(157, L_17, L_18);
 		if (!L_19)
 		{
 			goto IL_00a6;
@@ -27564,7 +27566,7 @@ IL_00ca:
 		RuntimeObject* L_27 = L_26->____annotations;
 		NullCheck(L_25);
 		bool L_28;
-		L_28 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(117, L_25, L_27);
+		L_28 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(157, L_25, L_27);
 		if (L_28)
 		{
 			goto IL_00df;

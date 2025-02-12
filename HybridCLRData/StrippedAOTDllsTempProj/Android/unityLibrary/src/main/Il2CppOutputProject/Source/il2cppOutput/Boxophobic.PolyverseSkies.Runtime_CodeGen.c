@@ -27,11 +27,11 @@ static Il2CppMethodPointer s_methodPointers[5] =
 };
 static const int32_t s_InvokerIndices[5] = 
 {
-	21976,
-	12340,
-	12340,
-	12340,
-	12340,
+	22908,
+	12969,
+	12969,
+	12969,
+	12969,
 };
 IL2CPP_EXTERN_C const Il2CppCodeGenModule g_Boxophobic_PolyverseSkies_Runtime_CodeGenModule;
 const Il2CppCodeGenModule g_Boxophobic_PolyverseSkies_Runtime_CodeGenModule = 

@@ -259,6 +259,7 @@ IL2CPP_EXTERN_C RuntimeClass* Double_tE150EF3D1D43DEE85D533810AB4C742307EEDE5F_i
 IL2CPP_EXTERN_C RuntimeClass* Exception_t_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* FormatException_tCD210E92627903FFEDAAA706C08FB6222B4D012B_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* Func_4_t714EA7575BC4411791EB413BE56D4DD1F8C570B9_il2cpp_TypeInfo_var;
+IL2CPP_EXTERN_C RuntimeClass* Guid_t_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* IConvertible_tC7F4E6F8CAA007182834D242AEDB0F0E09C09515_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* Int16_tB8EF286A9C33492FA6E6D6E67320BE93E794A175_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* Int32U5BU5D_t19C97395396A72ECAF310612F0760F165060314C_il2cpp_TypeInfo_var;
@@ -14252,7 +14253,14 @@ IL2CPP_EXTERN_C  void SqlGuid__ctor_mA10249C3D03D11CDB5DF6B445E412C77A87DCF85_Ad
 }
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SqlGuid__ctor_m203851BB4B52CCF77049A3E0A78796F5060E454E (SqlGuid_t93C33E370E5D3A344A15F9EFD9A2D4177576DED7* __this, Guid_t ___0_g, const RuntimeMethod* method) 
 {
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
 	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Guid_t_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		il2cpp_codegen_runtime_class_init_inline(Guid_t_il2cpp_TypeInfo_var);
 		ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031* L_0;
 		L_0 = Guid_ToByteArray_m6EBFB2F42D3760D9143050A3A8ED03F085F3AFE9((&___0_g), NULL);
 		__this->___m_value = L_0;
@@ -14339,6 +14347,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* SqlGuid_ToString_m66DC8C92F5C08B609
 	static bool s_Il2CppMethodInitialized;
 	if (!s_Il2CppMethodInitialized)
 	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Guid_t_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&SqlGuid_t93C33E370E5D3A344A15F9EFD9A2D4177576DED7_il2cpp_TypeInfo_var);
 		s_Il2CppMethodInitialized = true;
 	}
@@ -14362,6 +14371,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* SqlGuid_ToString_m66DC8C92F5C08B609
 IL_000e:
 	{
 		ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031* L_2 = __this->___m_value;
+		il2cpp_codegen_runtime_class_init_inline(Guid_t_il2cpp_TypeInfo_var);
 		Guid__ctor_m9BEFD9FC285BE9ACEC2EB97FC76C0E35E14D725C((&V_0), L_2, NULL);
 		String_t* L_3;
 		L_3 = Guid_ToString_m2BFFD5FA726E03FA707AAFCCF065896C46D5290C((&V_0), NULL);
@@ -14850,6 +14860,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SqlGuid_GetHashCode_mE95B5A1A98BAB172
 	static bool s_Il2CppMethodInitialized;
 	if (!s_Il2CppMethodInitialized)
 	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Guid_t_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&SqlGuid_t93C33E370E5D3A344A15F9EFD9A2D4177576DED7_il2cpp_TypeInfo_var);
 		s_Il2CppMethodInitialized = true;
 	}
@@ -14869,6 +14880,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SqlGuid_GetHashCode_mE95B5A1A98BAB172
 		Guid_t L_1;
 		L_1 = SqlGuid_get_Value_mC7D89D14DAA3F1B4A63E2C5F016D0760DFE3B6BE(__this, NULL);
 		V_0 = L_1;
+		il2cpp_codegen_runtime_class_init_inline(Guid_t_il2cpp_TypeInfo_var);
 		int32_t L_2;
 		L_2 = Guid_GetHashCode_m239B7679BB9ED5A207B3D2F858B5F30FFC455408((&V_0), NULL);
 		return L_2;
@@ -14908,6 +14920,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SqlGuid_System_Xml_Serialization_IXmlSer
 	static bool s_Il2CppMethodInitialized;
 	if (!s_Il2CppMethodInitialized)
 	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Guid_t_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&XmlConvert_t5D100AFD62FF717BD4F8A6CABA9EDF7A5DF719EA_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral2CAB73EF57D40E8B63A7CA91D057C0B68DB59100);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral7C014955313A7D33D5D04696B884B25325E6393C);
@@ -14958,6 +14971,7 @@ IL_002b:
 		memset((&L_9), 0, sizeof(L_9));
 		Guid__ctor_mAE66BA1C43B4194F4F7991E2E30370E36CBBF830((&L_9), L_8, NULL);
 		V_1 = L_9;
+		il2cpp_codegen_runtime_class_init_inline(Guid_t_il2cpp_TypeInfo_var);
 		ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031* L_10;
 		L_10 = Guid_ToByteArray_m6EBFB2F42D3760D9143050A3A8ED03F085F3AFE9((&V_1), NULL);
 		__this->___m_value = L_10;
@@ -22753,7 +22767,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SqlString__ctor_m71563B8F8403DD354B74928
 		L_1 = CultureInfo_get_CurrentCulture_m8A4580F49DDD7E9DB34C699965423DB8E3BBA9A5(NULL);
 		NullCheck(L_1);
 		int32_t L_2;
-		L_2 = VirtualFuncInvoker0< int32_t >::Invoke(6, L_1);
+		L_2 = VirtualFuncInvoker0< int32_t >::Invoke(7, L_1);
 		il2cpp_codegen_runtime_class_init_inline(SqlString_t49F9D31E7FD7F45509E26DEFEB61F006965D588D_il2cpp_TypeInfo_var);
 		int32_t L_3 = ((SqlString_t49F9D31E7FD7F45509E26DEFEB61F006965D588D_StaticFields*)il2cpp_codegen_static_fields_for(SqlString_t49F9D31E7FD7F45509E26DEFEB61F006965D588D_il2cpp_TypeInfo_var))->___s_iDefaultFlag;
 		SqlString__ctor_m0ACCE6D6F9BE327FA1FEF0E8E69F8771CC968429(__this, L_0, L_2, L_3, NULL);
@@ -22893,7 +22907,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SqlString_SetCompareInfo_m1BE59E2C319079
 		L_2 = CultureInfo_GetCultureInfo_m7B3C1F8F350401E2FE485E2D1693BA2A0B7BEB6D(L_1, NULL);
 		NullCheck(L_2);
 		CompareInfo_t1B1A6AC3486B570C76ABA52149C9BD4CD82F9E57* L_3;
-		L_3 = VirtualFuncInvoker0< CompareInfo_t1B1A6AC3486B570C76ABA52149C9BD4CD82F9E57* >::Invoke(12, L_2);
+		L_3 = VirtualFuncInvoker0< CompareInfo_t1B1A6AC3486B570C76ABA52149C9BD4CD82F9E57* >::Invoke(18, L_2);
 		__this->___m_cmpInfo = L_3;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___m_cmpInfo), (void*)L_3);
 	}
@@ -24380,7 +24394,7 @@ CATCH_0046:
 		L_10 = CultureInfo_get_InvariantCulture_mD1E96DC845E34B10F78CB744B0CB5D7D63CEB1E6(NULL);
 		NullCheck(L_10);
 		CompareInfo_t1B1A6AC3486B570C76ABA52149C9BD4CD82F9E57* L_11;
-		L_11 = VirtualFuncInvoker0< CompareInfo_t1B1A6AC3486B570C76ABA52149C9BD4CD82F9E57* >::Invoke(12, L_10);
+		L_11 = VirtualFuncInvoker0< CompareInfo_t1B1A6AC3486B570C76ABA52149C9BD4CD82F9E57* >::Invoke(18, L_10);
 		V_1 = L_11;
 		V_2 = 0;
 		IL2CPP_POP_ACTIVE_EXCEPTION(Exception_t*);
@@ -25254,7 +25268,7 @@ IL_002a:
 		String_t* L_12;
 		L_12 = VirtualFuncInvoker0< String_t* >::Invoke(48, L_11);
 		NullCheck(L_10);
-		VirtualActionInvoker1< String_t* >::Invoke(16, L_10, L_12);
+		VirtualActionInvoker1< String_t* >::Invoke(17, L_10, L_12);
 		NullCheck(L_10);
 		VirtualActionInvoker0::Invoke(10, L_10);
 		Stream_tF844051B786E8F7F4244DBD218D74E8617B9A2DE* L_13 = __this->____stream;
@@ -26557,7 +26571,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool ADP_IsCatchableExceptionType_mF95C2785B0
 		Type_t* L_18 = V_0;
 		NullCheck(L_17);
 		bool L_19;
-		L_19 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(22, L_17, L_18);
+		L_19 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(28, L_17, L_18);
 		return (bool)((((int32_t)L_19) == ((int32_t)0))? 1 : 0);
 	}
 

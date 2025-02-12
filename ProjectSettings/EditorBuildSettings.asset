@@ -9,16 +9,16 @@ EditorBuildSettings:
     path: Assets/Work/Scene/Main.unity
     guid: 573912425d68d464b907e0d48ee81d1e
   - enabled: 1
-    path: Assets/Work/Scene/Title.unity
-    guid: fb74221c9b37fd0438e2979f6e414f02
-  - enabled: 1
-    path: Assets/Work/Scene/Map.unity
-    guid: 3cb7f296e30db7f48aaa1c1311332d28
-  - enabled: 1
-    path: Assets/Work/Scene/Battle.unity
-    guid: 0a392b791c11d3d48b6862a4eeb8ae76
-  - enabled: 1
     path: Assets/Work/Scene/Loading.unity
     guid: 95aa8f93b791f374ebbab40e4b2f4a9b
+  - enabled: 0
+    path: Assets/Work/Scene/Title.unity
+    guid: fb74221c9b37fd0438e2979f6e414f02
+  - enabled: 0
+    path: Assets/Work/Scene/Map.unity
+    guid: 3cb7f296e30db7f48aaa1c1311332d28
+  - enabled: 0
+    path: Assets/Work/Scene/Battle.unity
+    guid: 0a392b791c11d3d48b6862a4eeb8ae76
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 948ea9d381990db48a725165959cd8e6, type: 2}

@@ -112,7 +112,7 @@ public class MapManager : Processor<MapManager, MapState>
             case MapBlockEventType.Minion:
             case MapBlockEventType.Elite:
             case MapBlockEventType.Boss:
-                LoadingManager.Instance.LoadScene("Battle");
+                SceneLoader.Instance.LoadScene("Battle");
                 break;
 
             case MapBlockEventType.Rest:

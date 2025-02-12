@@ -3,14 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using EPOOutline;
-using RaindowStudio.Attribute;
 using RaindowStudio.Utility;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class MapBlock : MonoBehaviour
 {
-    [UneditableField] public Vector2Int index;
+    public Vector2Int index;
     
     public MapBlockEventType eventType;
     
@@ -18,8 +17,8 @@ public class MapBlock : MonoBehaviour
     [SerializeField] private Outlinable outlineInteracted;
     [SerializeField] private ParticleSystem _particle;
 
-    [SerializeField, UneditableField] private bool _interactable;
-    [SerializeField, UneditableField] private bool _interacted;
+    [SerializeField] private bool _interactable;
+    [SerializeField] private bool _interacted;
     
     private MapBlockState _state;
 

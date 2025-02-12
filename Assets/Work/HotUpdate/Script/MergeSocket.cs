@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using RaindowStudio.Attribute;
 using RaindowStudio.DesignPattern;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,9 +13,9 @@ public class MergeSocket : Processor<MergeSocketOverlapType>, IPointerDownHandle
     [SerializeField] private Image img_icon;
     [SerializeField] private Image img_overlap;
 
-    [UneditableField] public MergeSocketData Data;
-    [UneditableField] public bool Active;
-    [UneditableField] public Rect WorldRect;
+    public MergeSocketData Data;
+    public bool Active;
+    public Rect WorldRect;
 
     public void SetCard(MergeSocketData card)
     {

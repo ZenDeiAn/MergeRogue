@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using RaindowStudio.DesignPattern;
 using RaindowStudio.Utility;
@@ -54,15 +55,13 @@ public class TitleManager : Processor<TitleManager, TitleState>
     protected override void Initialization()
     {
         base.Initialization();
-        
+
         State = TitleState.Intro;
         GameManager.CharacterChangedEvent += OnCharacterChangedEvent;
         
         // Start patching for basic data.
         am = AddressableManager.Instance;
-        am.PatchAllAddressableAssets(InitializePatchUI,
-            (_, p) => sld_titlePatch.value = p,
-            null,
+        am.LoadAllAddressableAssets(p => sld_titlePatch.value = p,
             () =>
             {
                 GameManager.Instance.LoadSaveData();

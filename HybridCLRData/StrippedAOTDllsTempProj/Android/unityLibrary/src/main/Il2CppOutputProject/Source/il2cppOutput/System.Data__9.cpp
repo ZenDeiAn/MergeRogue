@@ -132,6 +132,7 @@ struct UInt64U5BU5D_tAB1A62450AC0899188486EDB9FC066B8BEED9299;
 struct NamespaceU5BU5D_tF0F2AD10B1537EBB0F35B1611FD7D89D48FA9E93;
 struct StateU5BU5D_t41A58B7031FABDC61B34059A1FB722121203D858;
 struct TagInfoU5BU5D_tC6FBAFF4593190EF8F7EEBAB8913C4E17D645776;
+struct AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C;
 struct AutoIncrementValue_tB454D864DCB48A3C8EB2F806BD0AB284BB735BCE;
 struct Binder_t91BFCE95A7057FADF4D8A1A342AFE52872246235;
 struct BitArray_tFD42FDEB4A51DD2D6C20DC8E220B1EBE999F2616;
@@ -158,6 +159,7 @@ struct EventHandlerList_t057D7531265C1DF014C8C83AF251E908D1A0B1C8;
 struct Exception_t;
 struct FieldInfo_t;
 struct Hashtable_tEFC3B6496E6747787D8BB761B51F2AE3A8CFFE2D;
+struct IAsyncResult_t7B9B5A0ECB35DCEC31B8A8122C37D687369253B5;
 struct IDictionary_t6D03155AF1FA9083817AA5B6AD7DEEACC26AB220;
 struct IFormatProvider_tC202922D43BFF3525109ABF3FB79625F5646AB52;
 struct ISite_t4BB2A7E2B477FC6B1AF9D0554FF8B07204356E93;
@@ -14239,7 +14241,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SqlUdtStorage__ctor_m94619A62207B20278BC
 		Type_t* L_6 = ___1_type;
 		NullCheck(L_5);
 		bool L_7;
-		L_7 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(22, L_5, L_6);
+		L_7 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(28, L_5, L_6);
 		Type_t* L_8 = ___1_type;
 		il2cpp_codegen_runtime_class_init_inline(DataStorage_t862E6C556F9F1FB0BA5A4F51D926C40944A1EC7A_il2cpp_TypeInfo_var);
 		int32_t L_9;
@@ -14251,7 +14253,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SqlUdtStorage__ctor_m94619A62207B20278BC
 		Type_t* L_12 = ___1_type;
 		NullCheck(L_11);
 		bool L_13;
-		L_13 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(22, L_11, L_12);
+		L_13 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(28, L_11, L_12);
 		__this->____implementsIXmlSerializable = L_13;
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_14 = { reinterpret_cast<intptr_t> (IComparable_t4D82A120347A28A1042C1563720033B8DA6E5C21_0_0_0_var) };
 		Type_t* L_15;
@@ -14259,7 +14261,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SqlUdtStorage__ctor_m94619A62207B20278BC
 		Type_t* L_16 = ___1_type;
 		NullCheck(L_15);
 		bool L_17;
-		L_17 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(22, L_15, L_16);
+		L_17 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(28, L_15, L_16);
 		__this->____implementsIComparable = L_17;
 		return;
 	}
@@ -14426,7 +14428,7 @@ IL_004d:
 		Type_t* L_17 = ((DataStorage_t862E6C556F9F1FB0BA5A4F51D926C40944A1EC7A*)__this)->____dataType;
 		NullCheck(L_17);
 		String_t* L_18;
-		L_18 = VirtualFuncInvoker0< String_t* >::Invoke(25, L_17);
+		L_18 = VirtualFuncInvoker0< String_t* >::Invoke(31, L_17);
 		Exception_t* L_19;
 		L_19 = ExceptionBuilder_IComparableNotImplemented_m41968A228CBFEA81BC50C2F85E81CAB29CB11831(L_18, NULL);
 		IL2CPP_RAISE_MANAGED_EXCEPTION(L_19, ((RuntimeMethod*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&SqlUdtStorage_CompareValueTo_m6FE681BA37983850EC12613E6FB61BAFE747CCFA_RuntimeMethod_var)));
@@ -14531,7 +14533,7 @@ IL_0047:
 		RuntimeObject* L_14 = ___1_value;
 		NullCheck(L_13);
 		bool L_15;
-		L_15 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(117, L_13, L_14);
+		L_15 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(157, L_13, L_14);
 		if (L_15)
 		{
 			goto IL_005b;
@@ -14755,7 +14757,7 @@ IL2CPP_EXTERN_C IL2CPP_NO_INLINE IL2CPP_METHOD_ATTR RuntimeObject* SqlUdtStorage
 		L_8 = XSDSchema_XsdtoClr_m56B7AD7BAF9F6E0A70068CA8087844089DA5E059(L_7, NULL);
 		NullCheck(L_8);
 		String_t* L_9;
-		L_9 = VirtualFuncInvoker0< String_t* >::Invoke(26, L_8);
+		L_9 = VirtualFuncInvoker0< String_t* >::Invoke(32, L_8);
 		V_0 = L_9;
 	}
 
@@ -15068,7 +15070,7 @@ IL_0025:
 		Type_t* L_6 = __this->___type;
 		NullCheck(L_6);
 		FieldInfo_t* L_7;
-		L_7 = VirtualFuncInvoker2< FieldInfo_t*, String_t*, int32_t >::Invoke(87, L_6, _stringLiteralDA4BE0F963380DB493604E9CA0B0B54F040F58C9, ((int32_t)24));
+		L_7 = VirtualFuncInvoker2< FieldInfo_t*, String_t*, int32_t >::Invoke(113, L_6, _stringLiteralDA4BE0F963380DB493604E9CA0B0B54F040F58C9, ((int32_t)24));
 		V_1 = L_7;
 		FieldInfo_t* L_8 = V_1;
 		bool L_9;
@@ -15091,7 +15093,7 @@ IL_0049:
 		Type_t* L_12 = __this->___type;
 		NullCheck(L_12);
 		String_t* L_13;
-		L_13 = VirtualFuncInvoker0< String_t* >::Invoke(25, L_12);
+		L_13 = VirtualFuncInvoker0< String_t* >::Invoke(31, L_12);
 		Exception_t* L_14;
 		L_14 = ExceptionBuilder_INullableUDTwithoutStaticNull_m12D68CA24E4358382D62FBBCB35B7290CC3B0EAD(L_13, NULL);
 		IL2CPP_RAISE_MANAGED_EXCEPTION(L_14, ((RuntimeMethod*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&U3CU3Ec__DisplayClass6_0_U3CGetStaticNullForUdtTypeU3Eb__0_mA477120577648521172AF2A0786AAAA96563FA76_RuntimeMethod_var)));

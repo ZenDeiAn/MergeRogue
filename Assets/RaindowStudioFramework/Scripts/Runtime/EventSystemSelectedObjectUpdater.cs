@@ -1,4 +1,3 @@
-using RaindowStudio.Attribute;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,7 +5,7 @@ using UnityEngine.UI;
 public class EventSystemSelectedObjectUpdater : MonoBehaviour
 {
     public static GameObject initialSelected;
-    [UneditableField] public GameObject previousSelected;
+    public GameObject previousSelected;
     
     [SerializeField] private GameObject firstSelected;
 

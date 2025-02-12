@@ -40,7 +40,7 @@ public class GameManager : ProcessorEternal<GameManager, GameState>
 
     void Activate_Adventure()
     {
-        LoadingManager.Instance.LoadScene("Map");
+        SceneLoader.Instance.LoadScene("Map");
     }
 }
 

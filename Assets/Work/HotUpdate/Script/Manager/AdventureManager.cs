@@ -60,6 +60,7 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
         Data.MapData.Clear();
         var mapBlockProbabilities = _adm.MapBlockProbabilities;
         
+        // ReSharper disable once UseIndexFromEndExpression
         int totalDeep = mapBlockProbabilities[^1].deep;
         if (totalDeep % 2 == 1)     // Ensure the deep before boss is two blocks. Odd : 2, Even : 3
             totalDeep++;
@@ -88,6 +89,7 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
             {
                 probability[eventType] = 0;
             }
+
             foreach (var key in randomEventCount.Keys)
             {
                 if (probability[key] > 0)
@@ -96,6 +98,7 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
                         Mathf.Clamp(probability[key] - randomEventCount[key], 1, probability[key]);
                 }
             }
+
             // Reset before list. 
             previousRandomEvents.Clear();
             
@@ -158,7 +161,7 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
                 // Update limit random list.
                 randomEventCount.TryAdd(randomEventType, 0);
                 randomEventCount[randomEventType] += MapManager.DISCONTINUE_ADD_AMOUNT;
-                
+
                 if (MapManager.DISCONTINUE_MAP_BLOCK_EVENT.Contains(randomEventType))
                 {
                     previousRandomEvents.Add(randomEventType);

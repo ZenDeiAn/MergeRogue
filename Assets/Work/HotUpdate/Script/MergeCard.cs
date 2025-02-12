@@ -5,7 +5,6 @@ using System.Data.Common;
 using System.Globalization;
 using System.Linq;
 using DG.Tweening;
-using RaindowStudio.Attribute;
 using RaindowStudio.DesignPattern;
 using RaindowStudio.Language;
 using RaindowStudio.Utility;
@@ -31,8 +30,8 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
     [SerializeField] private ParticleSystem ptc_change;
     [SerializeField] public PoolObject poolObject;
 
-    [UneditableField] public string CardID; 
-    [UneditableField] public MergeLevel Level; 
+    public string CardID; 
+    public MergeLevel Level; 
 
     private MergeCardHandler handler;
     private MergeGrid mergeGrid;

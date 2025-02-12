@@ -4500,7 +4500,7 @@ IL_0059:
 		L_18 = DataTable_get_Locale_m7EE8F498C60742FFF844B132B3CC6054FBD5FB9F_inline(L_17, NULL);
 		NullCheck(L_18);
 		int32_t L_19;
-		L_19 = VirtualFuncInvoker0< int32_t >::Invoke(6, L_18);
+		L_19 = VirtualFuncInvoker0< int32_t >::Invoke(7, L_18);
 		DataRelation_tCB36A11AB39874353B080F3CD6432C4F9828C656* L_20 = ___0_relation;
 		NullCheck(L_20);
 		DataTable_t9240A0D6726299C55832BF4EE085C864A1CCBB07* L_21;
@@ -4510,7 +4510,7 @@ IL_0059:
 		L_22 = DataTable_get_Locale_m7EE8F498C60742FFF844B132B3CC6054FBD5FB9F_inline(L_21, NULL);
 		NullCheck(L_22);
 		int32_t L_23;
-		L_23 = VirtualFuncInvoker0< int32_t >::Invoke(6, L_22);
+		L_23 = VirtualFuncInvoker0< int32_t >::Invoke(7, L_22);
 		if ((!(((uint32_t)L_19) == ((uint32_t)L_23))))
 		{
 			goto IL_0093;
@@ -10008,7 +10008,7 @@ IL_007b_1:
 				L_28 = DataColumn_get_DataType_mD6633BF8B7F6470C96791128AA8B1D7F736EBD0E_inline(L_27, NULL);
 				NullCheck(L_28);
 				String_t* L_29;
-				L_29 = VirtualFuncInvoker0< String_t* >::Invoke(25, L_28);
+				L_29 = VirtualFuncInvoker0< String_t* >::Invoke(31, L_28);
 				Exception_t* L_30;
 				L_30 = ExceptionBuilder_UDTImplementsIChangeTrackingButnotIRevertible_mDE241276E2311C5B24DFB91F77DA0254E5136FC8(L_29, NULL);
 				IL2CPP_RAISE_MANAGED_EXCEPTION(L_30, ((RuntimeMethod*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&DataRow_RejectChanges_m43BF31E837F1E95DF56BF7938CE77F18F2A039D0_RuntimeMethod_var)));
@@ -13254,7 +13254,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DataSet_SerializeDataSetProperties_m2132
 		L_9 = DataSet_get_Locale_m826EBC4F080455722FF05B1529410F281E9D4264_inline(__this, NULL);
 		NullCheck(L_9);
 		int32_t L_10;
-		L_10 = VirtualFuncInvoker0< int32_t >::Invoke(6, L_9);
+		L_10 = VirtualFuncInvoker0< int32_t >::Invoke(7, L_9);
 		NullCheck(L_8);
 		SerializationInfo_AddValue_m9D6ADD10966D1FE8D19050F3A269747C23FE9FC4(L_8, _stringLiteral8171FF291D0911913A10223E967D60BC40899C5D, L_10, NULL);
 		SerializationInfo_t3C47F63E24BEB9FCE2DC6309E027F238DC5C5E37* L_11 = ___0_info;
@@ -15931,7 +15931,7 @@ IL_01c5_1:
 				PropertyCollection_t531D3CA9714C3D7818C1B1C139A9C4F04B73EE7C* L_94 = __this->____extendedProperties;
 				NullCheck(L_94);
 				RuntimeObject* L_95;
-				L_95 = VirtualFuncInvoker0< RuntimeObject* >::Invoke(37, L_94);
+				L_95 = VirtualFuncInvoker0< RuntimeObject* >::Invoke(38, L_94);
 				NullCheck(L_95);
 				RuntimeObject* L_96;
 				L_96 = InterfaceFuncInvoker0< RuntimeObject* >::Invoke(0, IEnumerable_t6331596D5DD37C462B1B8D49CF6B319B00AB7131_il2cpp_TypeInfo_var, L_95);
@@ -15986,9 +15986,9 @@ IL_01eb_2:
 						RuntimeObject* L_106 = V_13;
 						NullCheck(L_105);
 						RuntimeObject* L_107;
-						L_107 = VirtualFuncInvoker1< RuntimeObject*, RuntimeObject* >::Invoke(29, L_105, L_106);
+						L_107 = VirtualFuncInvoker1< RuntimeObject*, RuntimeObject* >::Invoke(30, L_105, L_106);
 						NullCheck(L_103);
-						VirtualActionInvoker2< RuntimeObject*, RuntimeObject* >::Invoke(30, L_103, L_104, L_107);
+						VirtualActionInvoker2< RuntimeObject*, RuntimeObject* >::Invoke(31, L_103, L_104, L_107);
 					}
 
 IL_020e_2:
@@ -21889,7 +21889,7 @@ IL_001d_1:
 				L_10 = DataTable_get_Locale_m7EE8F498C60742FFF844B132B3CC6054FBD5FB9F_inline(L_9, NULL);
 				NullCheck(L_10);
 				int32_t L_11;
-				L_11 = VirtualFuncInvoker0< int32_t >::Invoke(6, L_10);
+				L_11 = VirtualFuncInvoker0< int32_t >::Invoke(7, L_10);
 				DataRelation_tCB36A11AB39874353B080F3CD6432C4F9828C656* L_12 = V_1;
 				NullCheck(L_12);
 				DataTable_t9240A0D6726299C55832BF4EE085C864A1CCBB07* L_13;
@@ -21899,7 +21899,7 @@ IL_001d_1:
 				L_14 = DataTable_get_Locale_m7EE8F498C60742FFF844B132B3CC6054FBD5FB9F_inline(L_13, NULL);
 				NullCheck(L_14);
 				int32_t L_15;
-				L_15 = VirtualFuncInvoker0< int32_t >::Invoke(6, L_14);
+				L_15 = VirtualFuncInvoker0< int32_t >::Invoke(7, L_14);
 				if ((((int32_t)L_11) == ((int32_t)L_15)))
 				{
 					goto IL_0055_1;
@@ -21980,7 +21980,7 @@ IL_008b_1:
 				L_32 = DataTable_get_Locale_m7EE8F498C60742FFF844B132B3CC6054FBD5FB9F_inline(L_31, NULL);
 				NullCheck(L_32);
 				int32_t L_33;
-				L_33 = VirtualFuncInvoker0< int32_t >::Invoke(6, L_32);
+				L_33 = VirtualFuncInvoker0< int32_t >::Invoke(7, L_32);
 				ForeignKeyConstraint_tBEE8801AF7B2F7F6C806B5347D18CEE1294A9062* L_34 = V_2;
 				NullCheck(L_34);
 				DataTable_t9240A0D6726299C55832BF4EE085C864A1CCBB07* L_35;
@@ -21990,7 +21990,7 @@ IL_008b_1:
 				L_36 = DataTable_get_Locale_m7EE8F498C60742FFF844B132B3CC6054FBD5FB9F_inline(L_35, NULL);
 				NullCheck(L_36);
 				int32_t L_37;
-				L_37 = VirtualFuncInvoker0< int32_t >::Invoke(6, L_36);
+				L_37 = VirtualFuncInvoker0< int32_t >::Invoke(7, L_36);
 				if ((((int32_t)L_33) == ((int32_t)L_37)))
 				{
 					goto IL_00cf_1;

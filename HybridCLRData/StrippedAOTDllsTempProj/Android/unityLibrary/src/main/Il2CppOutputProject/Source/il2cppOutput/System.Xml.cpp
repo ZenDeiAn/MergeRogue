@@ -269,6 +269,7 @@ IL2CPP_EXTERN_C RuntimeClass* Dictionary_2_t37B53432DE16D10368358F7550CC7F349FA2
 IL2CPP_EXTERN_C RuntimeClass* Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* ElemInfoU5BU5D_tC4C081494489517ABD5C5E1EE92F1336EAFC4BF3_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* EncoderExceptionFallback_tE328EFD8043C1EE5D3FB3FAC48621EE56B9058D8_il2cpp_TypeInfo_var;
+IL2CPP_EXTERN_C RuntimeClass* Guid_t_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* HtmlEncodedRawTextWriter_t452DCE7E1E6FBDF73AA28D611C4682E50A82E8C2_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* HtmlTernaryTree_t5AF490C7A18F017033F549D01B03CDEF170B5069_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* HtmlUtf8RawTextWriter_tBDA64D6572325D75C2E84DE787BC2D7C9A0AE850_il2cpp_TypeInfo_var;
@@ -16170,6 +16171,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* XmlSqlBinaryReader_ValueAsString_mB
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&BinXmlSqlDecimal_tAE38AB8C2A9EBEA48A007B99301DCFD36993BD06_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Convert_t7097FF336D592F7C06D88A98349A44646F91EFFC_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&CultureInfo_t9BA817D41AD55AC8BD07480DD8AC22F8FFA378E0_il2cpp_TypeInfo_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Guid_t_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&XmlConvert_t5D100AFD62FF717BD4F8A6CABA9EDF7A5DF719EA_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral77D38C0623F92B292B925F6E72CF5CF99A20D4EB);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral876C4B39B6E4D0187090400768899C71D99DE90D);
@@ -16543,6 +16545,7 @@ IL_0171_1:
 			NullCheck(L_59);
 			int32_t L_61 = ((int32_t)il2cpp_codegen_add(L_60, ((int32_t)15)));
 			uint8_t L_62 = (L_59)->GetAt(static_cast<il2cpp_array_size_t>(L_61));
+			il2cpp_codegen_runtime_class_init_inline(Guid_t_il2cpp_TypeInfo_var);
 			Guid__ctor_mC52E0191E06C110F9F6E0A417BCA4437D79CC130((&V_7), L_28, L_29, L_30, L_34, L_38, L_42, L_46, L_50, L_54, L_58, L_62, NULL);
 			String_t* L_63;
 			L_63 = Guid_ToString_m2BFFD5FA726E03FA707AAFCCF065896C46D5290C((&V_7), NULL);

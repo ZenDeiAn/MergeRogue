@@ -199,6 +199,7 @@ struct UInt64U5BU5D_tAB1A62450AC0899188486EDB9FC066B8BEED9299;
 struct NamespaceU5BU5D_tF0F2AD10B1537EBB0F35B1611FD7D89D48FA9E93;
 struct StateU5BU5D_t41A58B7031FABDC61B34059A1FB722121203D858;
 struct TagInfoU5BU5D_tC6FBAFF4593190EF8F7EEBAB8913C4E17D645776;
+struct AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C;
 struct AutoIncrementValue_tB454D864DCB48A3C8EB2F806BD0AB284BB735BCE;
 struct BigIntegerStorage_t94814F0D7616BD78EFFC472C9B6608DB05B5D64B;
 struct Binder_t91BFCE95A7057FADF4D8A1A342AFE52872246235;
@@ -235,6 +236,7 @@ struct Encoding_t65CDEF28CF20A7B8C92E85A4E808920C2465F095;
 struct EventHandlerList_t057D7531265C1DF014C8C83AF251E908D1A0B1C8;
 struct Exception_t;
 struct Hashtable_tEFC3B6496E6747787D8BB761B51F2AE3A8CFFE2D;
+struct IAsyncResult_t7B9B5A0ECB35DCEC31B8A8122C37D687369253B5;
 struct IDictionary_t6D03155AF1FA9083817AA5B6AD7DEEACC26AB220;
 struct IFormatProvider_tC202922D43BFF3525109ABF3FB79625F5646AB52;
 struct ISite_t4BB2A7E2B477FC6B1AF9D0554FF8B07204356E93;
@@ -5588,7 +5590,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR DataStorage_t862E6C556F9F1FB0BA5A4F51D926C409
 		Type_t* L_5 = ___1_dataType;
 		NullCheck(L_4);
 		bool L_6;
-		L_6 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(22, L_4, L_5);
+		L_6 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(28, L_4, L_5);
 		if (!L_6)
 		{
 			goto IL_0026;
@@ -6634,28 +6636,28 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Tuple_4_tCCB1D209C4895384DEF8914A1BC34DD94A51
 		Type_t* L_2 = ___0_dataType;
 		NullCheck(L_1);
 		bool L_3;
-		L_3 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(22, L_1, L_2);
+		L_3 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(28, L_1, L_2);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_4 = { reinterpret_cast<intptr_t> (IChangeTracking_tDF3C3F7FF615347537BD39D21123AE8B0B8A0321_0_0_0_var) };
 		Type_t* L_5;
 		L_5 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_4, NULL);
 		Type_t* L_6 = ___0_dataType;
 		NullCheck(L_5);
 		bool L_7;
-		L_7 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(22, L_5, L_6);
+		L_7 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(28, L_5, L_6);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_8 = { reinterpret_cast<intptr_t> (IRevertibleChangeTracking_t809305ECE531830DBE2DC722351427CA6BA855E2_0_0_0_var) };
 		Type_t* L_9;
 		L_9 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_8, NULL);
 		Type_t* L_10 = ___0_dataType;
 		NullCheck(L_9);
 		bool L_11;
-		L_11 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(22, L_9, L_10);
+		L_11 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(28, L_9, L_10);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_12 = { reinterpret_cast<intptr_t> (IXmlSerializable_tE36AB1894460107283308E142C1106C4AB31A526_0_0_0_var) };
 		Type_t* L_13;
 		L_13 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_12, NULL);
 		Type_t* L_14 = ___0_dataType;
 		NullCheck(L_13);
 		bool L_15;
-		L_15 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(22, L_13, L_14);
+		L_15 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(28, L_13, L_14);
 		Tuple_4_tCCB1D209C4895384DEF8914A1BC34DD94A511D36* L_16 = (Tuple_4_tCCB1D209C4895384DEF8914A1BC34DD94A511D36*)il2cpp_codegen_object_new(Tuple_4_tCCB1D209C4895384DEF8914A1BC34DD94A511D36_il2cpp_TypeInfo_var);
 		Tuple_4__ctor_mE5B339B8A59B760C62DAD75519BFFCCF6A2DD69D(L_16, L_3, L_7, L_11, L_15, Tuple_4__ctor_mE5B339B8A59B760C62DAD75519BFFCCF6A2DD69D_RuntimeMethod_var);
 		return L_16;
@@ -6681,7 +6683,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool DataStorage_ImplementsINullableValue_mF7
 		Type_t* L_1 = ___1_dataType;
 		NullCheck(L_1);
 		bool L_2;
-		L_2 = VirtualFuncInvoker0< bool >::Invoke(40, L_1);
+		L_2 = VirtualFuncInvoker0< bool >::Invoke(48, L_1);
 		if (!L_2)
 		{
 			goto IL_0021;
@@ -6691,7 +6693,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool DataStorage_ImplementsINullableValue_mF7
 		Type_t* L_3 = ___1_dataType;
 		NullCheck(L_3);
 		Type_t* L_4;
-		L_4 = VirtualFuncInvoker0< Type_t* >::Invoke(48, L_3);
+		L_4 = VirtualFuncInvoker0< Type_t* >::Invoke(57, L_3);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_5 = { reinterpret_cast<intptr_t> (Nullable_1_tCC12E6AC31BF7E862A033EBEFF48D5000D6291E6_0_0_0_var) };
 		il2cpp_codegen_runtime_class_init_inline(Type_t_il2cpp_TypeInfo_var);
 		Type_t* L_6;
@@ -6882,7 +6884,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* DataStorage_GetQualifiedName_m8DDD3
 		Type_t* L_1 = ___0_type;
 		NullCheck(L_1);
 		String_t* L_2;
-		L_2 = VirtualFuncInvoker0< String_t* >::Invoke(25, L_1);
+		L_2 = VirtualFuncInvoker0< String_t* >::Invoke(31, L_1);
 		return L_2;
 	}
 }
@@ -14891,7 +14893,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObjectStorage__ctor_m80728F02804D5F80A21
 		Type_t* L_6 = ___1_type;
 		NullCheck(L_5);
 		bool L_7;
-		L_7 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(22, L_5, L_6);
+		L_7 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(28, L_5, L_6);
 		Type_t* L_8 = ___1_type;
 		il2cpp_codegen_runtime_class_init_inline(DataStorage_t862E6C556F9F1FB0BA5A4F51D926C40944A1EC7A_il2cpp_TypeInfo_var);
 		int32_t L_9;
@@ -14903,7 +14905,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObjectStorage__ctor_m80728F02804D5F80A21
 		Type_t* L_12 = ___1_type;
 		NullCheck(L_11);
 		bool L_13;
-		L_13 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(22, L_11, L_12);
+		L_13 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(28, L_11, L_12);
 		__this->____implementsIXmlSerializable = L_13;
 		return;
 	}
@@ -15875,7 +15877,7 @@ IL_0013:
 		RuntimeObject* L_9 = ___1_value;
 		NullCheck(L_8);
 		bool L_10;
-		L_10 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(117, L_8, L_9);
+		L_10 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(157, L_8, L_9);
 		if (!L_10)
 		{
 			goto IL_0042;
@@ -17018,7 +17020,7 @@ IL_007d:
 		RuntimeObject* L_25 = ___0_value;
 		NullCheck(((Type_t*)CastclassClass((RuntimeObject*)L_25, Type_t_il2cpp_TypeInfo_var)));
 		String_t* L_26;
-		L_26 = VirtualFuncInvoker0< String_t* >::Invoke(25, ((Type_t*)CastclassClass((RuntimeObject*)L_25, Type_t_il2cpp_TypeInfo_var)));
+		L_26 = VirtualFuncInvoker0< String_t* >::Invoke(31, ((Type_t*)CastclassClass((RuntimeObject*)L_25, Type_t_il2cpp_TypeInfo_var)));
 		return L_26;
 	}
 
@@ -17402,7 +17404,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObjectStorage_VerifyIDynamicMetaObjectPr
 		Type_t* L_2 = ___0_type;
 		NullCheck(L_1);
 		bool L_3;
-		L_3 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(22, L_1, L_2);
+		L_3 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(28, L_1, L_2);
 		if (!L_3)
 		{
 			goto IL_002f;
@@ -17416,7 +17418,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObjectStorage_VerifyIDynamicMetaObjectPr
 		Type_t* L_6 = ___0_type;
 		NullCheck(L_5);
 		bool L_7;
-		L_7 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(22, L_5, L_6);
+		L_7 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(28, L_5, L_6);
 		if (L_7)
 		{
 			goto IL_002f;

@@ -3958,7 +3958,7 @@ IL_000e:
 		DataTable_t9240A0D6726299C55832BF4EE085C864A1CCBB07* L_3 = ___0_table;
 		NullCheck(L_2);
 		RuntimeObject* L_4;
-		L_4 = VirtualFuncInvoker1< RuntimeObject*, RuntimeObject* >::Invoke(29, L_2, L_3);
+		L_4 = VirtualFuncInvoker1< RuntimeObject*, RuntimeObject* >::Invoke(30, L_2, L_3);
 		V_0 = ((DataViewSetting_tB99FD9B965F9FD3E9BDB703E1A0B851FC8357601*)CastclassClass((RuntimeObject*)L_4, DataViewSetting_tB99FD9B965F9FD3E9BDB703E1A0B851FC8357601_il2cpp_TypeInfo_var));
 		DataViewSetting_tB99FD9B965F9FD3E9BDB703E1A0B851FC8357601* L_5 = V_0;
 		if (L_5)
@@ -4010,7 +4010,7 @@ IL_000e:
 		DataTable_t9240A0D6726299C55832BF4EE085C864A1CCBB07* L_7 = ___0_table;
 		DataViewSetting_tB99FD9B965F9FD3E9BDB703E1A0B851FC8357601* L_8 = ___1_value;
 		NullCheck(L_6);
-		VirtualActionInvoker2< RuntimeObject*, RuntimeObject* >::Invoke(30, L_6, L_7, L_8);
+		VirtualActionInvoker2< RuntimeObject*, RuntimeObject* >::Invoke(31, L_6, L_7, L_8);
 		return;
 	}
 }
@@ -4020,7 +4020,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DataViewSettingCollection_Remove_m0544BA
 		Hashtable_tEFC3B6496E6747787D8BB761B51F2AE3A8CFFE2D* L_0 = __this->____list;
 		DataTable_t9240A0D6726299C55832BF4EE085C864A1CCBB07* L_1 = ___0_table;
 		NullCheck(L_0);
-		VirtualActionInvoker1< RuntimeObject* >::Invoke(39, L_0, L_1);
+		VirtualActionInvoker1< RuntimeObject* >::Invoke(40, L_0, L_1);
 		return;
 	}
 }
@@ -5843,6 +5843,7 @@ IL_018f_1:
 			RuntimeObject* L_57 = ___0_vLeft;
 			V_5 = ((*(Guid_t*)((Guid_t*)(Guid_t*)UnBox(L_57, Guid_t_il2cpp_TypeInfo_var))));
 			RuntimeObject* L_58 = ___1_vRight;
+			il2cpp_codegen_runtime_class_init_inline(Guid_t_il2cpp_TypeInfo_var);
 			int32_t L_59;
 			L_59 = Guid_CompareTo_mC22A00A14BBCCBF55F303C89A567FCA43925B586((&V_5), ((*(Guid_t*)((Guid_t*)(Guid_t*)UnBox(L_58, Guid_t_il2cpp_TypeInfo_var)))), NULL);
 			V_1 = L_59;
@@ -18286,7 +18287,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ExpressionParser_ScanReserved_mD3C734C95
 		L_11 = CultureInfo_get_InvariantCulture_mD1E96DC845E34B10F78CB744B0CB5D7D63CEB1E6(NULL);
 		NullCheck(L_11);
 		CompareInfo_t1B1A6AC3486B570C76ABA52149C9BD4CD82F9E57* L_12;
-		L_12 = VirtualFuncInvoker0< CompareInfo_t1B1A6AC3486B570C76ABA52149C9BD4CD82F9E57* >::Invoke(12, L_11);
+		L_12 = VirtualFuncInvoker0< CompareInfo_t1B1A6AC3486B570C76ABA52149C9BD4CD82F9E57* >::Invoke(18, L_11);
 		V_2 = L_12;
 		V_3 = 0;
 		il2cpp_codegen_runtime_class_init_inline(ExpressionParser_tF1402BCC536E58E0FC153624C9FF367A3179A311_il2cpp_TypeInfo_var);
@@ -20490,7 +20491,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Exception_t* ExprException_UnsupportedDataTyp
 		Type_t* L_0 = ___0_type;
 		NullCheck(L_0);
 		String_t* L_1;
-		L_1 = VirtualFuncInvoker0< String_t* >::Invoke(26, L_0);
+		L_1 = VirtualFuncInvoker0< String_t* >::Invoke(32, L_0);
 		String_t* L_2;
 		L_2 = SR_Format_m96CC1849D4162E4D28B2E9488B0EFE01565619D5(_stringLiteral53FB575532D4623697A8C3283BC4036B39B79202, L_1, NULL);
 		Exception_t* L_3;

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using RaindowStudio.DesignPattern;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class BattleManager : Processor<BattleManager, BattleState>
 {
@@ -9,6 +10,7 @@ public class BattleManager : Processor<BattleManager, BattleState>
     public List<Monster> monsters;
     public List<Transform> monsterAnchors;
     public VirtualCameraRotateController vcrc;
+    public PlayableDirector pd_intro;
 
     private AdventureManager _avm;
     private AddressableManager _adm;
@@ -58,6 +60,7 @@ public class BattleManager : Processor<BattleManager, BattleState>
                 }
             }
         }
+        pd_intro.Play();
     }
 
     void Activate_Prepare()
@@ -89,16 +92,19 @@ public class BattleManager : Processor<BattleManager, BattleState>
         }
         else
         {
-            _adm.PatchAllAddressableAssets(null,
-                null,
-                null,
+            HotUpdateManager.Instance.PatchAllAddressableAssets(null, null, null,
                 () =>
                 {
-                    GameManager.Instance.LoadSaveData();
-                    GameManager.Instance.NewGame();
-                    _avm.Data.Position = new Vector2Int(0, _adm.MapBlockProbabilities[^1].deep - 1);
-                    _avm.CurrentMapData.EventType = TestMonsterType.ToMapBlockEventType();
-                    State = BattleState.Intro;
+                    _adm.LoadAllAddressableAssets(null,
+                        () =>
+                        {
+                            GameManager.Instance.LoadSaveData();
+                            GameManager.Instance.NewGame();
+                            _avm.Data.Position = new Vector2Int(0, _adm.MapBlockProbabilities[^1].deep - 1);
+                            _avm.CurrentMapData.EventType = TestMonsterType.ToMapBlockEventType();
+                            Debug.Log("Load Addressable Assets");
+                            State = BattleState.Intro;
+                        });
                 });
         }
     }

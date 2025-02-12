@@ -8731,7 +8731,7 @@ IL_0216:
 		L_76 = Object_GetType_mE10A8FC1E57F3DF29972CCBC026C2DC3942263B3(L_75, NULL);
 		NullCheck(L_76);
 		String_t* L_77;
-		L_77 = VirtualFuncInvoker0< String_t* >::Invoke(26, L_76);
+		L_77 = VirtualFuncInvoker0< String_t* >::Invoke(32, L_76);
 		NullCheck(L_74);
 		ArrayElementTypeCheck (L_74, L_77);
 		(L_74)->SetAt(static_cast<il2cpp_array_size_t>(0), (RuntimeObject*)L_77);
@@ -22379,7 +22379,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Uri_InternalIsWellFormedOriginalString_m
 		L_3 = Object_GetType_mE10A8FC1E57F3DF29972CCBC026C2DC3942263B3(__this, NULL);
 		NullCheck(L_3);
 		String_t* L_4;
-		L_4 = VirtualFuncInvoker0< String_t* >::Invoke(26, L_3);
+		L_4 = VirtualFuncInvoker0< String_t* >::Invoke(32, L_3);
 		NullCheck(L_2);
 		ArrayElementTypeCheck (L_2, L_4);
 		(L_2)->SetAt(static_cast<il2cpp_array_size_t>(0), (RuntimeObject*)L_4);

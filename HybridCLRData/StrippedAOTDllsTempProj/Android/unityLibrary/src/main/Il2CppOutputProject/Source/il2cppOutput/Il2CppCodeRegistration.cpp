@@ -49,9 +49,11 @@ IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_LeTai_TrueShadow_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_LeTai_TrueShadow_Demo_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_MK_Toon_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_MK_Toon_Examples_CodeGenModule;
+IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_Main_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_Mono_Security_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_Newtonsoft_Json_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_RaindowStudioFramework_CodeGenModule;
+IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_RaindowStudio_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_Sirenix_OdinInspector_Modules_Unity_Addressables_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_System_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_System_Configuration_CodeGenModule;
@@ -131,9 +133,10 @@ IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_Unity_ResourceManager_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_Unity_TextMeshPro_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_Unity_Timeline_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g___Generated_CodeGenModule;
+IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_iStep_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_mscorlib_CodeGenModule;
 IL2CPP_EXTERN_C const Il2CppCodeGenModule* g_CodeGenModules[];
-const Il2CppCodeGenModule* g_CodeGenModules[112] = 
+const Il2CppCodeGenModule* g_CodeGenModules[115] = 
 {
 	(&g_AssemblyU2DCSharp_CodeGenModule),
 	(&g_Boxophobic_PolyverseSkies_Runtime_CodeGenModule),
@@ -164,9 +167,11 @@ const Il2CppCodeGenModule* g_CodeGenModules[112] =
 	(&g_LeTai_TrueShadow_Demo_CodeGenModule),
 	(&g_MK_Toon_CodeGenModule),
 	(&g_MK_Toon_Examples_CodeGenModule),
+	(&g_Main_CodeGenModule),
 	(&g_Mono_Security_CodeGenModule),
 	(&g_Newtonsoft_Json_CodeGenModule),
 	(&g_RaindowStudioFramework_CodeGenModule),
+	(&g_RaindowStudio_CodeGenModule),
 	(&g_Sirenix_OdinInspector_Modules_Unity_Addressables_CodeGenModule),
 	(&g_System_CodeGenModule),
 	(&g_System_Configuration_CodeGenModule),
@@ -246,6 +251,7 @@ const Il2CppCodeGenModule* g_CodeGenModules[112] =
 	(&g_Unity_TextMeshPro_CodeGenModule),
 	(&g_Unity_Timeline_CodeGenModule),
 	(&g___Generated_CodeGenModule),
+	(&g_iStep_CodeGenModule),
 	(&g_mscorlib_CodeGenModule),
 };
 IL2CPP_EXTERN_C const Il2CppCodeRegistration g_CodeRegistration;
@@ -253,20 +259,20 @@ const Il2CppCodeRegistration g_CodeRegistration =
 {
 	16,
 	g_ReversePInvokeWrapperPointers,
-	91957,
+	95659,
 	g_Il2CppGenericMethodPointers,
 	g_Il2CppGenericAdjustorThunks,
-	22017,
+	22952,
 	g_Il2CppInvokerPointers,
-	3556,
+	3503,
 	g_UnresolvedVirtualMethodPointers,
 	g_UnresolvedInstanceMethodPointers,
 	g_UnresolvedStaticMethodPointers,
-	935,
+	941,
 	g_Il2CppInteropData,
 	0,
 	NULL,
-	112,
+	115,
 	g_CodeGenModules,
 };
 IL2CPP_EXTERN_C_CONST Il2CppMetadataRegistration g_MetadataRegistration;

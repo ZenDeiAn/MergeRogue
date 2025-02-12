@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using RaindowStudio.Attribute;
 using RaindowStudio.DesignPattern;
 using UnityEngine;
 
@@ -16,10 +13,10 @@ public class MergeGrid : SingletonUnity<MergeGrid>
     public Color color_socketMergeable;
     public Color color_socketJustOverlap;
 
-    [UneditableField] public float socketSize;
-    [UneditableField] public Rect WorldRect; 
-    [UneditableField] public float socketSpacing; 
-    [UneditableField] public List<MergeSocket> Sockets = new List<MergeSocket>();
+    public float socketSize;
+    public Rect WorldRect; 
+    public float socketSpacing; 
+    public List<MergeSocket> Sockets = new List<MergeSocket>();
 
     private AdventureManager _avm;
     
