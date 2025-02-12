@@ -4,7 +4,7 @@ Right now still working on it...
 
 > - Target Platform : Android(Google App Store)
 > - Progress : 
-> - - Addressable bundle(CharacterData, MapData, UI) connect with Unity Cloud Content Delivery.
+> - - Addressable bundle(CharacterData, MapData, UI) connect with Unity Cloud Content Delivery.  
 //(Archived)> - - XLua script hotfix for buff, skill, damage calculate.
 > - - HybridCLR Assembly HotUpdate structure completed.
 > - - Multi Language supporting. 
