@@ -18,6 +18,7 @@ public class Character : MonoBehaviour, ICharacterDataInstance, IActor
     public CharacterInfo Info { get; set; }
 
     public ActorType ActorType => ActorType.Ally;
+    public ActorActingType ActingType { get; set; }
     public ActorStatus Status { get; set; }
     public ActorAttackData AttackData => Info.AttackData;
     public ActorSkillData SkillData => Info.SkillData;

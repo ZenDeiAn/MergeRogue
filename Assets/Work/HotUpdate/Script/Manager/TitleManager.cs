@@ -23,12 +23,6 @@ public class TitleManager : Processor<TitleManager, TitleState>
         GameManager.Instance.ChangeStateByString(state);
     }
 
-    public void InitializePatchUI(string text)
-    {
-        txt_titlePatch.SetText($"Downloading '{text}'...");
-        sld_titlePatch.value = 0;
-    }
-
     public void Btn_NewGame()
     {
         GameManager.Instance.NewGame();

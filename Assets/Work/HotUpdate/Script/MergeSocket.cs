@@ -49,7 +49,7 @@ public class MergeSocket : Processor<MergeSocketOverlapType>, IPointerDownHandle
         if (string.IsNullOrWhiteSpace(Data.CardID))
             return;
         MergeCard card = MergeCardHandler.Instance.DrawCard(Data.CardID, Data.Level);
-        card.ForceFocus(Data.StartIndex);
+        card.ShowInformation(rectTransform.position, Data.StartIndex);
         MergeGrid.Instance.TryRemoveCardFromGrid(Data.StartIndex);
     }
     

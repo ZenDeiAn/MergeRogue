@@ -13,6 +13,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using Image = UnityEngine.UI.Image;
+using Random = UnityEngine.Random;
 
 public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
@@ -123,36 +124,60 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
         }
     }
 
-    public void ForceFocus(int startIndex)
+    public void ShowInformation(Vector3 startPosition, int startIndex = -1)
     {
-        RectTransform socketTransform = MergeCardHandler.Instance.MergeCardInformationSocket;
-        rectTransform.position = socketTransform.position;
-        rectTransform.DOScale(socketTransform.localScale, .5f).SetRelative(false);
-        var pointerEventData = new PointerEventData(EventSystem.current)
+        if (_interactingCard == -1)
         {
-            pointerPress = gameObject,
-            pointerDrag = gameObject,
-            selectedObject = gameObject,
-            useDragThreshold = true,
-        };
-        ExecuteEvents.Execute(gameObject, pointerEventData, ExecuteEvents.pointerDownHandler);
-        onGridIndex = startIndex;
-        overlappingSockets.Clear();
-        mergeGrid.GetOverlapSockets(startIndex, shapeData, out overlappingSockets);
-        _interactingCard = gameObject.GetInstanceID();
+            rectTransform.position = startPosition;
+            /*var pointerEventData = new PointerEventData(EventSystem.current)
+            {
+                pointerPress = gameObject,
+                pointerDrag = gameObject,
+                selectedObject = gameObject,
+                useDragThreshold = true
+            };*/
+            onGridIndex = startIndex;
+            overlappingSockets.Clear();
+            mergeGrid.GetOverlapSockets(startIndex, shapeData, out overlappingSockets);
+            
+            _interactingCard = gameObject.GetInstanceID();
+            State = MergeCardInteractState.ShowInformation;
+        }
+    }
+
+    public void InteractEnd()
+    {
+        _interactingCard = -1;
+        if (onGridIndex != -1 && overlappingSockets.Count == shapeData.Count)
+        {
+            mergeGrid.MergeCardToGrid(new MergeSocketData
+            {
+                StartIndex = onGridIndex,
+                CardID = CardID,
+                Level = Level,
+            }, overlappingSockets);
+            handler.RemoveCard(this);
+        }
+        State = MergeCardInteractState.None;
     }
     
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (_interactingCard == -1)
+        if (State == MergeCardInteractState.None)
         {
-            _interactingCard = gameObject.GetInstanceID();
+            ShowInformation(rectTransform.position);
+        }
+        else if (State == MergeCardInteractState.ShowInformation)
+        {
             State = MergeCardInteractState.ShowInformation;
         }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (BattleManager.Instance.State != BattleState.Prepare)
+            return;
+
         if (Interacting && State != MergeCardInteractState.Dragging)
         {
             State = MergeCardInteractState.Dragging;
@@ -161,20 +186,13 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (Interacting)
+        if (Interacting && State == MergeCardInteractState.Dragging)
         {
-            _interactingCard = -1;
-            if (onGridIndex != -1 && overlappingSockets.Count == shapeData.Count)
-            {
-                mergeGrid.MergeCardToGrid(new MergeSocketData
-                {
-                    StartIndex = onGridIndex,
-                    CardID = CardID,
-                    Level = Level,
-                }, overlappingSockets);
-                handler.RemoveCard(this);
-            }
-            State = MergeCardInteractState.None;
+            InteractEnd();
+        }
+        else if (State == MergeCardInteractState.ShowInformation && PreState == MergeCardInteractState.ShowInformation)
+        {
+            InteractEnd();
         }
     }
 
@@ -205,7 +223,7 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
 
     void Activate_ShowInformation()
     {
-        if (Interacting)
+        if (PreState != MergeCardInteractState.ShowInformation && Interacting)
         {
             RectTransform socketTransform = MergeCardHandler.Instance.MergeCardInformationSocket;
             rectTransform.DOMove(socketTransform.position, .5f).SetRelative(false);

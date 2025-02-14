@@ -57,11 +57,11 @@ MonoBehaviour:
   - key: AttackUp
     dataType: 0
     textData:
-    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+    - text: "\uCE90\uB9AD\uD130 \uACF5\uACA9\uB825 <m> \uC99D\uAC00"
       font: {fileID: 0}
-    - text: Increase <m> Character's Speed
+    - text: Increase <m> Character's Attack
       font: {fileID: 0}
-    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u653B\u51FB\u529B"
       font: {fileID: 0}
     - text: 
       font: {fileID: 0}
@@ -85,11 +85,11 @@ MonoBehaviour:
   - key: ShieldUp
     dataType: 0
     textData:
-    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+    - text: "\uCE90\uB9AD\uD130 \uC2E4\uB4DC <m> \uC99D\uAC00"
       font: {fileID: 0}
-    - text: Increase <m> Character's Speed
+    - text: Increase <m> Character's Shield
       font: {fileID: 0}
-    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u62A4\u76FE\u503C"
       font: {fileID: 0}
     - text: 
       font: {fileID: 0}
@@ -113,11 +113,11 @@ MonoBehaviour:
   - key: HealthStealthUp
     dataType: 0
     textData:
-    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+    - text: "\uCE90\uB9AD\uD130 \uC0DD\uBA85 \uD761\uC218 <m> \uC99D\uAC00"
       font: {fileID: 0}
-    - text: Increase <m> Character's Speed
+    - text: Increase <m> Character's Health Stealth
       font: {fileID: 0}
-    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u5438\u8840\u91CF"
       font: {fileID: 0}
     - text: 
       font: {fileID: 0}
@@ -141,11 +141,11 @@ MonoBehaviour:
   - key: DodgeUp
     dataType: 0
     textData:
-    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+    - text: "\uCE90\uB9AD\uD130 \uD68C\uD53C\uC728 <m> \uC99D\uAC00"
       font: {fileID: 0}
-    - text: Increase <m> Character's Speed
+    - text: Increase <m> Character's Dodge Chance
       font: {fileID: 0}
-    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u56DE\u907F\u7387"
       font: {fileID: 0}
     - text: 
       font: {fileID: 0}
@@ -169,11 +169,11 @@ MonoBehaviour:
   - key: CriticalChanceUp
     dataType: 0
     textData:
-    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+    - text: "\uCE90\uB9AD\uD130 \uCE58\uBA85\uD0C0 \uD655 <m> \uC99D\uAC00"
       font: {fileID: 0}
-    - text: Increase <m> Character's Speed
+    - text: Increase <m> Character's Critical Chance
       font: {fileID: 0}
-    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u66B4\u51FB\u7387"
       font: {fileID: 0}
     - text: 
       font: {fileID: 0}
@@ -197,11 +197,11 @@ MonoBehaviour:
   - key: CriticalDamageUp
     dataType: 0
     textData:
-    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+    - text: "\uCE90\uB9AD\uD130 \uCE58\uBA85\uD0C0 \uB300\uBBF8\uC9C0 <m> \uC99D\uAC00"
       font: {fileID: 0}
-    - text: Increase <m> Character's Speed
+    - text: Increase <m> Character's Critical Damage
       font: {fileID: 0}
-    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u66B4\u51FB\u4F24\u5BB3"
       font: {fileID: 0}
     - text: 
       font: {fileID: 0}
@@ -225,11 +225,11 @@ MonoBehaviour:
   - key: ComboChanceUp
     dataType: 0
     textData:
-    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+    - text: "\uCE90\uB9AD\uD130 \uC7AC \uACF5\uACA9 \uD655\uB960 <m> \uC99D\uAC00"
       font: {fileID: 0}
-    - text: Increase <m> Character's Speed
+    - text: Increase <m> Character's Combo Chance
       font: {fileID: 0}
-    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u8FDE\u51FB\u7387"
       font: {fileID: 0}
     - text: 
       font: {fileID: 0}
@@ -253,11 +253,12 @@ MonoBehaviour:
   - key: ComboMaximumUp
     dataType: 0
     textData:
-    - text: "\uCE90\uB9AD\uD130 \uC18D\uB3C4 <m> \uC99D\uAC00"
+    - text: "\uCE90\uB9AD\uD130 \uC7AC \uACF5\uACA9 \uCD5C\uB300 \uAE30\uD68C <m>
+        \uC99D\uAC00"
       font: {fileID: 0}
-    - text: Increase <m> Character's Speed
+    - text: Increase <m> Character's Combo Maximum
       font: {fileID: 0}
-    - text: "\u589E\u52A0<m>\u89D2\u8272\u901F\u5EA6"
+    - text: "\u589E\u52A0<m>\u89D2\u8272\u8FDE\u51FB\u6700\u5927\u6B21\u6570"
       font: {fileID: 0}
     - text: 
       font: {fileID: 0}

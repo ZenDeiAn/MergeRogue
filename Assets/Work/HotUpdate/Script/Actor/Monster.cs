@@ -8,8 +8,8 @@ public class Monster : MonoBehaviour, IActor
     [SerializeField] private Animator animator;
     
     public MonsterInfo Info { get; set; }
-
     public ActorType ActorType => ActorType.Enemy;
+    public ActorActingType ActingType { get; set; }
     public ActorStatus Status { get; set; }
     public ActorAttackData AttackData => Info.AttackData;
     public ActorSkillData SkillData => Info.SkillData;

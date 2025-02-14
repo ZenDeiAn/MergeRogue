@@ -18,6 +18,14 @@ public class MergeCardHandler : SingletonUnity<MergeCardHandler>
     private AdventureManager _avm;
     private RectTransform _rectTransform;
 
+    public void ClearHandCards()
+    {
+        while (HandMergeCards.Count > 0)
+        {
+            RemoveCard(HandMergeCards[0]);
+        }
+    }
+
     public void RemoveCard(MergeCard card)
     {
         if (card.gameObject.activeSelf && HandMergeCards.Contains(card))
@@ -40,8 +48,6 @@ public class MergeCardHandler : SingletonUnity<MergeCardHandler>
     public void DrawRandomCards()
     {
         obp_hand.RecycleAll();
-        /*DrawCard("AttackUp", MergeLevel.Two);
-        DrawCard("AttackUp", MergeLevel.Two);*/
         foreach (var card in GetRandomCardsFromDeck(_avm.Data.PlayerStatus.MergeCardHandlerSize))
         {
             // TODO : Random Level?

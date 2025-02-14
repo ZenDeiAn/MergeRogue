@@ -1,19 +1,42 @@
 using System.Collections.Generic;
+using System.Linq;
+using Cinemachine;
 using RaindowStudio.DesignPattern;
+using RaindowStudio.Utility;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.UI;
 
 public class BattleManager : Processor<BattleManager, BattleState>
 {
     public MonsterType TestMonsterType = MonsterType.None;
+    public List <IActor> actors = new List<IActor>();
     public List<Character> characters;
     public List<Monster> monsters;
     public List<Transform> monsterAnchors;
-    public VirtualCameraRotateController vcrc;
-    public PlayableDirector pd_intro;
+    public CinemachineVirtualCamera cvc_perform;
+    public EnumPairList<BattleState, PlayableDirector> playableDirectors = new EnumPairList<BattleState, PlayableDirector>();
+    
+    [SerializeField] private Button btn_performStart;
+    [SerializeField] private Button btn_cardReload;
+    [SerializeField] private Vector3 viewMin;
+    [SerializeField] private Vector3 viewMax;
 
+    private CinemachineTransposer _cvcTransposer;
     private AdventureManager _avm;
     private AddressableManager _adm;
+    private Vector3 _originalShoulderOffset;
+    private PerformViewAction _performViewAction;
+    private float _originalZoom;
+    private float _originalShoulderOffsetZ;
+
+    public void Btn_BattlePerformStart()
+    {
+        if (State == BattleState.Prepare)
+        {
+            State = BattleState.PerformStart;
+        }
+    }
     
     void Activate_Intro()
     {
@@ -23,6 +46,7 @@ public class BattleManager : Processor<BattleManager, BattleState>
             // TODO : Multi Player initialize.  
             character.gameObject.SetActive(index == 0);
             character.Initialize();
+            actors.Add(character);
             index++;
         }
 
@@ -57,25 +81,97 @@ public class BattleManager : Processor<BattleManager, BattleState>
                     monster.Info = monsterDataSets[i];
                     monster.Initialize();
                     monsters.Add(monster);
+                    
+                    actors.Add(monster);
                 }
             }
         }
-        pd_intro.Play();
     }
 
     void Activate_Prepare()
     {
         MergeCardHandler.Instance.DrawRandomCards();
-    }
-    
-    void Activate_Over()
-    {
-        vcrc.enabled = false;
+        btn_performStart.interactable = true;
+        btn_cardReload.interactable = true;
     }
 
-    void DeActivate_Intro()
+    void Activate_PerformStart()
     {
-        vcrc.enabled = true;
+        btn_cardReload.interactable = false;
+        btn_performStart.interactable = false;
+        MergeCardHandler.Instance.ClearHandCards();
+    }
+
+    void Activate_TurnCalculate()
+    {
+        actors.OrderBy(a => a.Status.SpeedCalculated);
+    }
+
+    void Activate_TurnPerform()
+    {
+        
+    }
+    
+    protected override void Update()
+    {
+        base.Update();
+
+        // Perform Virtual Camera View Action.
+        if (State is BattleState.Intro or > BattleState.TurnPerform)
+            return;
+
+        if (Input.touchCount > 0)
+        {
+            bool viewDragging = true;
+            foreach (var touch in Input.touches)
+            {
+                if (touch.position.y < Screen.height / 2)
+                {
+                    viewDragging = false;
+                }
+            }
+
+            if (viewDragging)
+            {
+                if (Input.touchCount == 1 && _performViewAction != PerformViewAction.Move)
+                {
+                    _performViewAction = PerformViewAction.Move;
+                }
+                else if (Input.touchCount > 1 && _performViewAction != PerformViewAction.Zoom)
+                {
+                    _originalShoulderOffsetZ = _cvcTransposer.m_FollowOffset.z;
+                    _originalZoom = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
+                    _performViewAction = PerformViewAction.Zoom;
+                }
+
+                switch (_performViewAction)
+                {
+                    case PerformViewAction.Move:
+                        Vector3 offset = Input.touches[0].deltaPosition * Time.deltaTime;
+                        _cvcTransposer.m_FollowOffset -= offset;
+                        break;
+            
+                    case PerformViewAction.Zoom:
+                        _cvcTransposer.m_FollowOffset.z = _originalShoulderOffsetZ -
+                            (Vector2.Distance(Input.touches[0].position, Input.touches[1].position) - _originalZoom) * Time.deltaTime;
+                        break;
+                }
+                
+                _cvcTransposer.m_FollowOffset = new Vector3(
+                    Mathf.Clamp(_cvcTransposer.m_FollowOffset.x, viewMin.x, viewMax.x),
+                    Mathf.Clamp(_cvcTransposer.m_FollowOffset.y, viewMin.y, viewMax.y),
+                    Mathf.Clamp(_cvcTransposer.m_FollowOffset.z, viewMin.z, viewMax.z)
+                );
+            }
+            else
+            {
+                _performViewAction = PerformViewAction.None;
+            }
+        }
+        else
+        {
+            _performViewAction = PerformViewAction.None;
+        }
     }
 
     protected override void Initialization()
@@ -85,7 +181,23 @@ public class BattleManager : Processor<BattleManager, BattleState>
         _avm = AdventureManager.Instance;
         _adm = AddressableManager.Instance;
         
-        vcrc.enabled = false;
+        btn_performStart.interactable = false;
+        btn_cardReload.interactable = false;
+
+        StateTriggerEvent += (type, battleState) =>
+        {
+            if (type == ProcessorStateTriggerType.Activate)
+            {
+                if (playableDirectors[battleState] != null)
+                {
+                    playableDirectors[battleState].Play();
+                }
+            }
+        };
+
+        _cvcTransposer = cvc_perform.GetCinemachineComponent<CinemachineTransposer>();
+        _originalShoulderOffset = _cvcTransposer.m_FollowOffset;
+        
         if (TestMonsterType == MonsterType.None)
         {
             State = BattleState.Intro;
@@ -102,7 +214,6 @@ public class BattleManager : Processor<BattleManager, BattleState>
                             GameManager.Instance.NewGame();
                             _avm.Data.Position = new Vector2Int(0, _adm.MapBlockProbabilities[^1].deep - 1);
                             _avm.CurrentMapData.EventType = TestMonsterType.ToMapBlockEventType();
-                            Debug.Log("Load Addressable Assets");
                             State = BattleState.Intro;
                         });
                 });
@@ -114,6 +225,16 @@ public enum BattleState
 {
     Intro,
     Prepare,
-    Battle,
-    Over
+    PerformStart,
+    TurnCalculate,
+    TurnPerform,
+    Win,
+    GameOver,
+}
+
+public enum PerformViewAction
+{
+    None,
+    Move,
+    Zoom
 }

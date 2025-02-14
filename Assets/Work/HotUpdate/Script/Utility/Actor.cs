@@ -5,6 +5,7 @@ using UnityEngine;
 public interface IActor
 {
     public ActorType ActorType { get; }
+    public ActorActingType ActingType { get; set; }
     public ActorStatus Status { get; set; }
     public ActorAttackData AttackData { get; }
     public ActorSkillData SkillData { get; }
@@ -51,4 +52,11 @@ public struct ActorSkillData
     public string description;
     public Sprite icon;
     public GameObject effectPrefab;
+}
+
+[Serializable]
+public enum ActorActingType
+{
+    Idle,
+    Attack
 }
