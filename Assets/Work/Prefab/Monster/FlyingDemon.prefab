@@ -2561,10 +2561,6 @@ PrefabInstance:
       propertyPath: m_Avatar
       value: 
       objectReference: {fileID: 9000000, guid: 9ebb3345fd9e4df183a1c85d72a8af78, type: 3}
-    - target: {fileID: 3431565831385099221, guid: e7f3e002b63f81945ab7b0a7e5f596b3, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 98d31ab93cf50fe408286df7d460d836, type: 2}
     - target: {fileID: 5556480592786027429, guid: e7f3e002b63f81945ab7b0a7e5f596b3, type: 3}
       propertyPath: offset.x
       value: 0.00000071525585

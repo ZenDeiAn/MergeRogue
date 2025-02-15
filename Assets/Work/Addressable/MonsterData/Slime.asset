@@ -13,21 +13,27 @@ MonoBehaviour:
   m_Name: Slime
   m_EditorClassIdentifier: 
   prefab: {fileID: 489858457050510664, guid: 757e27379d412ab479898cb668a9d2e6, type: 3}
-  _type: 0
+  _type: 1
   _status:
     speed: 1
     healthMaximum: 50
     attack: 5
     shield: 0
-    healthSteal: 0
+    comboMaximum: 0
+    comboChance: 0
+    healthStealth: 0
     dodge: 0
-    critical: 0.01
+    criticalChance: 0
     criticalDamage: 1.2
+  _attackData:
+    name: 
+    description: 
+    icon: {fileID: 0}
+    effectPrefab: {fileID: 0}
+    multiply: 0
   _skillData:
     name: 
     description: 
-    targetHostile: 0
-    number: 0
-    multiply: 0
-    buffType: 0
-    buffRound: 0
+    icon: {fileID: 0}
+    effectPrefab: {fileID: 0}
+  animation: {fileID: 22100000, guid: 5590b3762293a5c498dbb6113821cda2, type: 2}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using RaindowStudio.Utility;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -9,6 +10,7 @@ public class CharacterInfo : ScriptableObject, IActorData
     [SerializeField] private Status _status;
     [SerializeField] private ActorAttackData _attackData;
     [SerializeField] private ActorSkillData _skillData;
+    public AnimatorOverrideController animation;
     
     public int InitialHandCardAmount;
     
@@ -17,8 +19,6 @@ public class CharacterInfo : ScriptableObject, IActorData
     public Avatar avatar;
     public Sprite icon;
     public CharacterRank rank;
-    public RuntimeAnimatorController rac_act;
-    public RuntimeAnimatorController rac_showcase;
     public List<WeaponData> weaponDataList;
     public string ID => name;
     public Status Status { get => _status; set => _status = value; }

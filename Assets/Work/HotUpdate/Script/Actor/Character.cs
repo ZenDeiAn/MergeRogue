@@ -18,25 +18,24 @@ public class Character : MonoBehaviour, ICharacterDataInstance, IActor
     public CharacterInfo Info { get; set; }
 
     public ActorType ActorType => ActorType.Ally;
-    public ActorActingType ActingType { get; set; }
+    public ActType ActingType { get; set; }
     public ActorStatus Status { get; set; }
     public ActorAttackData AttackData => Info.AttackData;
     public ActorSkillData SkillData => Info.SkillData;
 
     public void Attack(List<IActor> target)
     {
-        this.Act(target, ActionType.Attack);
+        this.Act(target, ActType.Attack);
     }
 
     public void Skill(List<IActor> target)
     {
-        this.Act(target, ActionType.Skill);
+        this.Act(target, ActType.Skill);
     }
 
     public void Initialize()
     {
         this.InitializeCharacterData(AddressableManager.Instance.CurrentCharacter);
-        Animator.runtimeAnimatorController = Info.rac_act;
         this.InitializeStatus(AdventureManager.Instance.Data.PlayerStatus.CharacterStatus);
     }
 }
@@ -57,7 +56,7 @@ public static class CharacterUtility
         self.Animator.avatar = info.avatar;
         self.MeshRenderer.sharedMesh = info.mesh;
         self.MeshRenderer.material = info.material;
-        //character.Animator.runtimeAnimatorController = data.rac_showcase;
+        self.Animator.runtimeAnimatorController = info.animation;
 
         List<WeaponSocketType> weaponSocketTypes = Enum.GetValues(typeof(WeaponSocketType)).Cast<WeaponSocketType>().ToList();
         for (int i = 0; i < weaponSocketTypes.Count; ++i)

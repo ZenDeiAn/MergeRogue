@@ -6,18 +6,19 @@ using UnityEngine;
 
 public class EventManager : SingletonUnityEternal<EventManager>
 {
-    public event Action<IActor, List<IActor>, ActionType> ActorActingEvent;
+    public event Action<IActor, List<IActor>, ActType> ActorActingEvent;
 
-    public void ActorActing(IActor source, List<IActor> target, ActionType type)
+    public void ActorActing(IActor source, List<IActor> target, ActType type)
     {
+        source.ActingType = type;
         switch (type)
         {
-            case ActionType.Attack:
-
+            case ActType.Attack:
+                
                 break;
             
-            case ActionType.Skill:
-
+            case ActType.Skill:
+                
                 break;
         }
 

@@ -28,15 +28,15 @@ MonoBehaviour:
     m_Address: Assets/Work/Addressable/CharacterData/Warrior.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - Character
     - Data
+    - Character
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cc4b62dfbe1092a4c861cc46f4168380
     m_Address: Assets/Work/Addressable/CharacterData/Warhammer.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - Character
     - Data
+    - Character
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6c6a121967e7e064f92145af92a06598
     m_Address: Assets/Work/Addressable/LanguageData/Title.asset
@@ -45,8 +45,8 @@ MonoBehaviour:
     - Global
     - Language
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d3e3b6765caafe6458aa2c0b5195f46f
-    m_Address: Assets/Work/Addressable/MonsterProbability/Boss.asset
+  - m_GUID: 7dfd562c800dd244b9e149e9d6d0525a
+    m_Address: Assets/Work/Addressable/MonsterProbability/Elite.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Data
@@ -59,8 +59,8 @@ MonoBehaviour:
     - Data
     - Monster
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7dfd562c800dd244b9e149e9d6d0525a
-    m_Address: Assets/Work/Addressable/MonsterProbability/Elite.asset
+  - m_GUID: d3e3b6765caafe6458aa2c0b5195f46f
+    m_Address: Assets/Work/Addressable/MonsterProbability/Boss.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Data

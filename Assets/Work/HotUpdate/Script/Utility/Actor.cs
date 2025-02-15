@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IActor
 {
     public ActorType ActorType { get; }
-    public ActorActingType ActingType { get; set; }
+    public ActType ActingType { get; set; }
     public ActorStatus Status { get; set; }
     public ActorAttackData AttackData { get; }
     public ActorSkillData SkillData { get; }
@@ -21,7 +21,7 @@ public static class ActorUtility
         self.Status = new ActorStatus(status);
     }
 
-    public static void Act(this IActor self, List<IActor> target, ActionType type)
+    public static void Act(this IActor self, List<IActor> target, ActType type)
     {
         EventManager.Instance.ActorActing(self, target, type);
     }
@@ -52,11 +52,4 @@ public struct ActorSkillData
     public string description;
     public Sprite icon;
     public GameObject effectPrefab;
-}
-
-[Serializable]
-public enum ActorActingType
-{
-    Idle,
-    Attack
 }

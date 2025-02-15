@@ -13,21 +13,27 @@ MonoBehaviour:
   m_Name: NagarWizard
   m_EditorClassIdentifier: 
   prefab: {fileID: 7159815797354461184, guid: 4dd4fc77815e82b459acf3032abf0ad9, type: 3}
-  _type: 1
+  _type: 2
   _status:
     speed: 5
     healthMaximum: 100
     attack: 10
     shield: 0
-    healthSteal: 0
+    comboMaximum: 0
+    comboChance: 0
+    healthStealth: 0
     dodge: 0
-    critical: 0.05
+    criticalChance: 0
     criticalDamage: 1.4
+  _attackData:
+    name: 
+    description: 
+    icon: {fileID: 0}
+    effectPrefab: {fileID: 0}
+    multiply: 0
   _skillData:
     name: 
     description: 
-    targetHostile: 0
-    number: 0
-    multiply: 0
-    buffType: 0
-    buffRound: 0
+    icon: {fileID: 0}
+    effectPrefab: {fileID: 0}
+  animation: {fileID: 22100000, guid: fb5b1bb9671954443a6018fcb2b8d9d7, type: 2}

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using RaindowStudio.Utility;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -12,6 +13,7 @@ public class MonsterInfo : ScriptableObject, IActorData
     [SerializeField] private Status _status;
     [SerializeField] private ActorAttackData _attackData;
     [SerializeField] private ActorSkillData _skillData;
+    public AnimatorOverrideController animation;
 
     public string ID => name;
     public Status Status { get => _status; set => _status = value; }

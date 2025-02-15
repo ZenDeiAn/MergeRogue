@@ -64,8 +64,9 @@ public enum MergeCardType
 }
 
 [Serializable]
-public enum ActionType
+public enum ActType
 {
+    Idle,
     Attack,
     Skill
 }

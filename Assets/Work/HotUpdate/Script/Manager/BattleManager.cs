@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
@@ -36,6 +37,12 @@ public class BattleManager : Processor<BattleManager, BattleState>
         {
             State = BattleState.PerformStart;
         }
+    }
+
+    private IEnumerator BattleTurnLoopIE()
+    {
+        //while()
+        yield return null;
     }
     
     void Activate_Intro()
@@ -109,7 +116,7 @@ public class BattleManager : Processor<BattleManager, BattleState>
 
     void Activate_TurnPerform()
     {
-        
+        StartCoroutine(BattleTurnLoopIE());
     }
     
     protected override void Update()

@@ -9,8 +9,9 @@ using UnityEngine.Serialization;
 
 public class CharacterPreview : MonoBehaviour, ICharacterDataInstance
 {
-    [FormerlySerializedAs("footIK")] [SerializeField] private FootIK _footIK;
-    [FormerlySerializedAs("characterPreviewTransform")] [SerializeField] private Transform _characterPreviewTransform;
+    private static readonly int Preview = Animator.StringToHash("Preview");
+    [SerializeField] private FootIK _footIK;
+    [SerializeField] private Transform _characterPreviewTransform;
     [SerializeField] private Animator _animator;
     [SerializeField] private SkinnedMeshRenderer _meshRenderer;
     [SerializeField] private EnumPairList<WeaponSocketType, MeshFilter> _weaponSockets =
@@ -26,8 +27,8 @@ public class CharacterPreview : MonoBehaviour, ICharacterDataInstance
     
     public void Initialize()
     {
+        _animator.SetBool(Preview, true);
         this.InitializeCharacterData(AddressableManager.Instance.CurrentCharacter);
-        Animator.runtimeAnimatorController = Info.rac_showcase;
         
         if (_initPosition == Vector3.zero)
         {

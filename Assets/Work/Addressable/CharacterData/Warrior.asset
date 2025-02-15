@@ -34,19 +34,13 @@ MonoBehaviour:
     description: 
     icon: {fileID: 0}
     effectPrefab: {fileID: 0}
-    targetingType: 0
-    strength: 0
-    multiply: 0
-    buffType: 0
-    buffDuration: 0
-    buffStrength: 0
+  animation: {fileID: 22100000, guid: ee82f379fe75b9b448bfac172556505f, type: 2}
+  InitialHandCardAmount: 0
   mesh: {fileID: 17106975043345648, guid: 45c3848418decf7449815f900620c8c2, type: 3}
   material: {fileID: 2100000, guid: 5ec5815f62a0d37488d95601e3f0129f, type: 2}
   avatar: {fileID: 9000000, guid: 45c3848418decf7449815f900620c8c2, type: 3}
   icon: {fileID: 21300000, guid: 96bfef6ab087d104abd91300244d66e5, type: 3}
   rank: 0
-  rac_act: {fileID: 9100000, guid: 676baee5d0d0c7344962d3733b81b021, type: 2}
-  rac_showcase: {fileID: 9100000, guid: ef09384fa5322b64fa0ed6fdd209c6a2, type: 2}
   weaponDataList:
   - socketType: 1
     mesh: {fileID: 4300000, guid: e6dbb48741371da40b628388e2f108d2, type: 3}
