@@ -16,7 +16,7 @@ Right now still working on it...
 > - - Skill data structure.
 > - - Battle Card Merge System with Data and effect in Code.
 
-> - Progressing :
+> - Progressing (Always with by Andoird build testing) :
 > - - Game Battle Logic.
 > - - Event and Item Data.
 
