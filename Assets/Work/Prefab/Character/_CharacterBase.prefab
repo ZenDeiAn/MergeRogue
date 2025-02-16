@@ -1569,6 +1569,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.25
       objectReference: {fileID: 0}
+    - target: {fileID: 2890696923350599351, guid: 5ee956b046d00cc4aad1b55508d964e6, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3687123731246267966, guid: 5ee956b046d00cc4aad1b55508d964e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1661,6 +1665,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3687123731246267966, guid: 5ee956b046d00cc4aad1b55508d964e6, type: 3}
   m_PrefabInstance: {fileID: 3836554949035780677}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3777977122331687524 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 94641885677260833, guid: 5ee956b046d00cc4aad1b55508d964e6, type: 3}
+  m_PrefabInstance: {fileID: 3836554949035780677}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392a6259c4f2b75449ec72b0b92f2744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6749553728464754263 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7535952902322748434, guid: 5ee956b046d00cc4aad1b55508d964e6, type: 3}
@@ -1680,6 +1695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7357276411832962131}
   meshRenderer: {fileID: 8958138923449831613}
+  canvasActor: {fileID: 3777977122331687524}
   _weaponSockets:
     keys: 000000000100000002000000
     values:

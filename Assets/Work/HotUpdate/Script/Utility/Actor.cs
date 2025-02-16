@@ -6,6 +6,7 @@ public abstract class Actor : MonoBehaviour, IActor
 {
     public Animator animator;
     public SkinnedMeshRenderer meshRenderer;
+    public CanvasActor canvasActor;
     public Action AnimationTriggerEvent;
     public abstract IActorData ActorData { get; }
     public abstract ActorType ActorType { get;}
@@ -43,6 +44,7 @@ public static class ActorUtility
         self.transform.localPosition = Vector3.zero;
         self.transform.localRotation = Quaternion.identity;
         self.transform.localScale = Vector3.one;
+        self.canvasActor.Initialize(self);
     }
 
     public static void Act(this Actor self, List<Actor> target, ActType type)

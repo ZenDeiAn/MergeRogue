@@ -196,6 +196,7 @@ public class BattleLogicLibrary : Singleton<BattleLogicLibrary>
             }
         
             target.Status.health = Mathf.Max(target.Status.Health - damage, 0);
+            target.canvasActor.UpdateCanvas();
             
             // Animation
             if (buffType == BuffType.None)
