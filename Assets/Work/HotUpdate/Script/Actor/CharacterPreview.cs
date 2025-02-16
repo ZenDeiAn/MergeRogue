@@ -10,6 +10,7 @@ using UnityEngine.Serialization;
 public class CharacterPreview : MonoBehaviour, ICharacterDataInstance
 {
     private static readonly int Preview = Animator.StringToHash("Preview");
+    private static readonly int PreviewReset = Animator.StringToHash("PreviewReset");
     [SerializeField] private FootIK _footIK;
     [SerializeField] private Transform _characterPreviewTransform;
     [SerializeField] private Animator _animator;
@@ -28,6 +29,8 @@ public class CharacterPreview : MonoBehaviour, ICharacterDataInstance
     public void Initialize()
     {
         _animator.SetBool(Preview, true);
+        _animator.ResetTrigger(PreviewReset);
+        _animator.SetTrigger(PreviewReset);
         this.InitializeCharacterData(AddressableManager.Instance.CurrentCharacter);
         
         if (_initPosition == Vector3.zero)

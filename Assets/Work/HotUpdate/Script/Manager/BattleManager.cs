@@ -11,12 +11,12 @@ using UnityEngine.UI;
 public class BattleManager : Processor<BattleManager, BattleState>
 {
     public MonsterType TestMonsterType = MonsterType.None;
-    public List <IActor> actors = new List<IActor>();
-    public List<Character> characters;
-    public List<Monster> monsters;
+    public List <Actor> actors = new List<Actor>();
     public List<Transform> monsterAnchors;
+    public List<Transform> characterAnchors;
     public CinemachineVirtualCamera cvc_perform;
     public EnumPairList<BattleState, PlayableDirector> playableDirectors = new EnumPairList<BattleState, PlayableDirector>();
+    public GameObject characterPrefab;
     
     [SerializeField] private Button btn_performStart;
     [SerializeField] private Button btn_cardReload;
@@ -38,27 +38,16 @@ public class BattleManager : Processor<BattleManager, BattleState>
             State = BattleState.PerformStart;
         }
     }
-
-    private IEnumerator BattleTurnLoopIE()
-    {
-        //while()
-        yield return null;
-    }
     
     void Activate_Intro()
     {
-        int index = 0;
-        foreach (var character in characters)
-        {
-            // TODO : Multi Player initialize.  
-            character.gameObject.SetActive(index == 0);
-            character.Initialize();
-            actors.Add(character);
-            index++;
-        }
-
-        monsters = new List<Monster>();
-
+        Transform transformCurrent = characterAnchors[0];
+        Actor character =
+            Instantiate(characterPrefab, transformCurrent).
+                GetComponent<Actor>();
+        character.Initialize(_adm.CurrentCharacter);
+        actors.Add(character);
+        
         MonsterType monsterType = _avm.CurrentMapData.EventType.ToMonsterType();
         if (monsterType != MonsterType.None)
         {
@@ -80,15 +69,12 @@ public class BattleManager : Processor<BattleManager, BattleState>
                 {
                     if (i >= monsterAnchors.Count)
                         break;
-                    
-                    GameObject monsterObject = Instantiate(monsterDataSets[i].prefab, monsterAnchors[i]);
-                    monsterObject.transform.localPosition = Vector3.zero;
-                    monsterObject.transform.localRotation = Quaternion.identity;
-                    Monster monster = monsterObject.GetComponent<Monster>();
-                    monster.Info = monsterDataSets[i];
-                    monster.Initialize();
-                    monsters.Add(monster);
-                    
+
+                    transformCurrent = monsterAnchors[i];
+                    Actor monster =
+                        Instantiate(monsterDataSets[i].prefab, transformCurrent).
+                            GetComponent<Actor>();
+                    monster.Initialize(monsterDataSets[i]);
                     actors.Add(monster);
                 }
             }
@@ -111,7 +97,41 @@ public class BattleManager : Processor<BattleManager, BattleState>
 
     void Activate_TurnCalculate()
     {
-        actors.OrderBy(a => a.Status.SpeedCalculated);
+        actors.OrderByDescending(a => a.Status.SpeedCalculated);
+        State = BattleState.TurnPerform;
+    }
+    
+    private IEnumerator BattleTurnLoopIE()
+    {
+        IEnumerable<Actor> allies = actors.Where(a => a.ActorType == ActorType.Ally);
+        IEnumerable<Actor> enemies = actors.Where(a => a.ActorType == ActorType.Enemy);
+        foreach (var actor in actors)
+        {
+            if (actor.Status.Health == 0)
+                continue;
+            
+            // Attack logic
+            actor.ActingType = ActType.Attack;
+            BattleLogicLibrary.Instance.ActorAttackLibrary[actor.ActorData.ID](actor, actors);
+            
+            // Waiting for acting logic end
+            var currentActor = actor;
+            yield return new WaitUntil(() => currentActor.ActingType == ActType.Idle);
+            // Check Result
+            if (allies.All(a => a.Status.Health == 0))
+            {
+                State = BattleState.GameOver;
+                yield break;
+            }
+
+            if (enemies.All(a => a.Status.Health == 0))
+            {
+                State = BattleState.Win;
+                yield break;
+            }
+        }
+        
+        State = BattleState.TurnCalculate;
     }
 
     void Activate_TurnPerform()

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e748c5f4441efde48a39150f9734c377, type: 3}
   m_Name: FlyingDemon
   m_EditorClassIdentifier: 
-  prefab: {fileID: 735867586582104709, guid: c31e61ba37f19934b9df35618d5ce2dc, type: 3}
+  prefab: {fileID: 4565327132052552830, guid: ddd09f64a2e4d5644b0aa22eedf548e8, type: 3}
   _type: 3
   _status:
     speed: 7
@@ -25,15 +25,3 @@ MonoBehaviour:
     dodge: 0
     criticalChance: 0
     criticalDamage: 1.7
-  _attackData:
-    name: 
-    description: 
-    icon: {fileID: 0}
-    effectPrefab: {fileID: 0}
-    multiply: 0
-  _skillData:
-    name: 
-    description: 
-    icon: {fileID: 0}
-    effectPrefab: {fileID: 0}
-  animation: {fileID: 22100000, guid: 803d0cd30b9778d41940b10f508bcf64, type: 2}

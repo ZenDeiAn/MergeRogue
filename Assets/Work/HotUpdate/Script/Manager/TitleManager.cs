@@ -30,6 +30,8 @@ public class TitleManager : Processor<TitleManager, TitleState>
 
     private void OnCharacterChangedEvent(string id)
     {
+        characterPreview.Animator.enabled = false;
+        characterPreview.Animator.enabled = true;
         characterPreview.Initialize();
     }
 

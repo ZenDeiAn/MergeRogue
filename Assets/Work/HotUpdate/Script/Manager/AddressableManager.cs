@@ -9,6 +9,7 @@ using UnityEngine.AddressableAssets;
 
 public class AddressableManager : SingletonUnityEternal<AddressableManager>
 {
+    
     public Dictionary<string, CharacterInfo> Character { get; private set; }
     public UILibrary UILibrary { get; private set; }
     public Dictionary<MapBlockEventType, GameObject> MapBlockPrefabs { get; private set; }
@@ -116,11 +117,16 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
     {
         base.Initialization();
 
+        if (!(_instance == this))
+            return;
+        
         Character = new Dictionary<string, CharacterInfo>();
         MapBlockProbabilities = new List<MapBlockProbability>();
         MapBlockPrefabs = new Dictionary<MapBlockEventType, GameObject>();
         MonsterProbabilities = new Dictionary<MonsterType, List<MonsterProbabilityData>>();
         MergeCardDataLibrary = new Dictionary<string, MergeCardData>();
         MergeCardLibraryByType = new Dictionary<MergeCardType, List<string>>();
+        
+        BattleLogicLibrary.Instance.Initialize();
     }
 }

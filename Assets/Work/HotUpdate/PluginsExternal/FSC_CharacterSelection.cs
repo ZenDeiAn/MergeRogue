@@ -7,13 +7,17 @@
 using UnityEngine;
 using UnityEngine.UI;
 using FancyScrollView;
-using UnityEngine.AddressableAssets;
 
-class FSC_CharacterSelection : FancyCell<FSD_CharacterSelection>
+class FSC_CharacterSelection : FancyCell<FSD_CharacterSelection, Context>
 {
     [SerializeField] Animator animator = default;
     [SerializeField] Image rank;
     [SerializeField] Image icon;
+
+    public void Btn_Select()
+    {
+        Context.OnCellClicked?.Invoke(Index);
+    }
     
     static class AnimatorHash
     {
@@ -37,7 +41,7 @@ class FSC_CharacterSelection : FancyCell<FSD_CharacterSelection>
 
         animator.speed = 0;
     }
-
+    
     float currentPosition = 0;
 
     void OnEnable() => UpdatePosition(currentPosition);

@@ -8,20 +8,20 @@ using UnityEngine.Serialization;
 public class CharacterInfo : ScriptableObject, IActorData
 {
     [SerializeField] private Status _status;
-    [SerializeField] private ActorAttackData _attackData;
-    [SerializeField] private ActorSkillData _skillData;
     public AnimatorOverrideController animation;
-    
-    public int InitialHandCardAmount;
-    
+
     public Mesh mesh;
     public Material material;
     public Avatar avatar;
     public Sprite icon;
     public CharacterRank rank;
     public List<WeaponData> weaponDataList;
+    
     public string ID => name;
-    public Status Status { get => _status; set => _status = value; }
-    public ActorAttackData AttackData => _attackData;
-    public ActorSkillData SkillData => _skillData;
+
+    public Status Status
+    {
+        get => _status;
+        set => _status = value;
+    }
 }

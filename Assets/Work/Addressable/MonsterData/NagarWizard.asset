@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e748c5f4441efde48a39150f9734c377, type: 3}
   m_Name: NagarWizard
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7159815797354461184, guid: 4dd4fc77815e82b459acf3032abf0ad9, type: 3}
+  prefab: {fileID: 2728518760291702651, guid: 83bdb91fb6de32a4f838ddb476db8af8, type: 3}
   _type: 2
   _status:
     speed: 5
@@ -25,15 +25,3 @@ MonoBehaviour:
     dodge: 0
     criticalChance: 0
     criticalDamage: 1.4
-  _attackData:
-    name: 
-    description: 
-    icon: {fileID: 0}
-    effectPrefab: {fileID: 0}
-    multiply: 0
-  _skillData:
-    name: 
-    description: 
-    icon: {fileID: 0}
-    effectPrefab: {fileID: 0}
-  animation: {fileID: 22100000, guid: fb5b1bb9671954443a6018fcb2b8d9d7, type: 2}

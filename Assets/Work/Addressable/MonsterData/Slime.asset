@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e748c5f4441efde48a39150f9734c377, type: 3}
   m_Name: Slime
   m_EditorClassIdentifier: 
-  prefab: {fileID: 489858457050510664, guid: 757e27379d412ab479898cb668a9d2e6, type: 3}
+  prefab: {fileID: 2728518760291702651, guid: d164685e1faa6954f8a047370a058c76, type: 3}
   _type: 1
   _status:
     speed: 1
@@ -25,15 +25,3 @@ MonoBehaviour:
     dodge: 0
     criticalChance: 0
     criticalDamage: 1.2
-  _attackData:
-    name: 
-    description: 
-    icon: {fileID: 0}
-    effectPrefab: {fileID: 0}
-    multiply: 0
-  _skillData:
-    name: 
-    description: 
-    icon: {fileID: 0}
-    effectPrefab: {fileID: 0}
-  animation: {fileID: 22100000, guid: 5590b3762293a5c498dbb6113821cda2, type: 2}

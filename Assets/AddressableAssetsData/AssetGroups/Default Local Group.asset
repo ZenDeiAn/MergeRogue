@@ -196,6 +196,12 @@ MonoBehaviour:
     - Assembly
     - Aot
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7633a2fd8a3bed44791c9e952ff86e5d
+    m_Address: Assets/_MK/MKToon/Shader/URP/Standard/StandardPBSOutline.shader
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Global
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d41d78f70b6c27546891ece3b0e453c3, type: 2}
   m_SchemaSet:

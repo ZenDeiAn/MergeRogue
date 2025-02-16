@@ -109,7 +109,7 @@ public class ActorStatus : Status
     public float ComboChanceCalculated => comboChance + comboChanceAdditional;
     public float HealthStealthCalculated => healthStealth + healthStealthAdditional;
     public float DodgeCalculated => dodge + dodgeAdditional;
-    public float CriticalCalculated => criticalChance + criticalChanceAdditional;
+    public float CriticalChanceCalculated => criticalChance + criticalChanceAdditional;
     public float CriticalDamageCalculated => criticalDamage + criticalDamageAdditional;
 
     public void UpdateHealth(int variable)
@@ -125,7 +125,9 @@ public class ActorStatus : Status
     public ActorStatus() { }
 
     public ActorStatus(Status status) : base(status)
-    { 
+    {
+        health = HealthMaximumRoot;
+        armedShield = 0;
         Buff.Clear();
     }
 }

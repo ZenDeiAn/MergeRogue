@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class EventManager : SingletonUnityEternal<EventManager>
 {
-    public event Action<IActor, List<IActor>, ActType> ActorActingEvent;
+    public event Action<Actor, List<Actor>, ActType> ActorActingEvent;
 
-    public void ActorActing(IActor source, List<IActor> target, ActType type)
+    public void ActorActing(Actor source, List<Actor> target, ActType type)
     {
         source.ActingType = type;
         switch (type)

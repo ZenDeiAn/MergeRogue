@@ -5,38 +5,27 @@ using System.Linq;
 using RaindowStudio.Utility;
 using UnityEngine;
 
-public class Character : MonoBehaviour, ICharacterDataInstance, IActor 
+public class Character : Actor, ICharacterDataInstance
 {
-    [SerializeField] private Animator _animator;
-    [SerializeField] private SkinnedMeshRenderer _meshRenderer;
     [SerializeField] private EnumPairList<WeaponSocketType, MeshFilter> _weaponSockets =
         new EnumPairList<WeaponSocketType, MeshFilter>();
+    
+    public bool IsSelf { get; set; }
 
     public EnumPairList<WeaponSocketType, MeshFilter> WeaponSockets => _weaponSockets;
-    public Animator Animator => _animator;
-    public SkinnedMeshRenderer MeshRenderer => _meshRenderer;
+    public Animator Animator => animator;
+    public SkinnedMeshRenderer MeshRenderer => meshRenderer;
     public CharacterInfo Info { get; set; }
 
-    public ActorType ActorType => ActorType.Ally;
-    public ActType ActingType { get; set; }
-    public ActorStatus Status { get; set; }
-    public ActorAttackData AttackData => Info.AttackData;
-    public ActorSkillData SkillData => Info.SkillData;
+    public override IActorData ActorData => Info;
+    public override ActorType ActorType => ActorType.Ally;
+    public override ActType ActingType { get; set; }
+    public override ActorStatus Status { get; set; }
 
-    public void Attack(List<IActor> target)
+    public override void Initialize(IActorData actorData)
     {
-        this.Act(target, ActType.Attack);
-    }
-
-    public void Skill(List<IActor> target)
-    {
-        this.Act(target, ActType.Skill);
-    }
-
-    public void Initialize()
-    {
-        this.InitializeCharacterData(AddressableManager.Instance.CurrentCharacter);
-        this.InitializeStatus(AdventureManager.Instance.Data.PlayerStatus.CharacterStatus);
+        this.InitializeCharacterData(actorData as CharacterInfo);
+        ActorUtility.Initialize(this, actorData);
     }
 }
 
