@@ -9,9 +9,10 @@ public class Character : Actor, ICharacterDataInstance
 {
     [SerializeField] private EnumPairList<WeaponSocketType, MeshFilter> _weaponSockets =
         new EnumPairList<WeaponSocketType, MeshFilter>();
-    
-    public bool IsSelf { get; set; }
 
+    private AdventureManager _avm;
+
+    public int Index { get; set; } = -1;
     public EnumPairList<WeaponSocketType, MeshFilter> WeaponSockets => _weaponSockets;
     public Animator Animator => animator;
     public SkinnedMeshRenderer MeshRenderer => meshRenderer;
@@ -20,12 +21,16 @@ public class Character : Actor, ICharacterDataInstance
     public override IActorData ActorData => Info;
     public override ActorType ActorType => ActorType.Ally;
     public override ActType ActingType { get; set; }
-    public override ActorStatus Status { get; set; }
+    public override ActorStatus Status { get => _avm.Data.PlayerStatus.characters[Index];
+        set => _avm.Data.PlayerStatus.characters[Index] =
+            new CharacterStatus(_avm.Data.PlayerStatus.characters[Index].ID, value); }
 
-    public override void Initialize(IActorData actorData)
+    public void Initialize(int index, CharacterStatus characterStatus)
     {
-        this.InitializeCharacterData(actorData as CharacterInfo);
-        ActorUtility.Initialize(this, actorData);
+        _avm = AdventureManager.Instance;
+        Index = index; 
+        this.InitializeCharacterData(AddressableManager.Instance.Character[characterStatus.ID]);
+        this.Initialize(characterStatus);
     }
 }
 

@@ -50,7 +50,10 @@ public class MergeSocket : Processor<MergeSocketOverlapType>, IPointerDownHandle
             return;
         MergeCard card = MergeCardHandler.Instance.DrawCard(Data.CardID, Data.Level);
         card.ShowInformation(rectTransform.position, Data.StartIndex);
-        MergeGrid.Instance.TryRemoveCardFromGrid(Data.StartIndex);
+        if (BattleManager.Instance.State == BattleState.Prepare)
+        {
+            MergeGrid.Instance.TryRemoveCardFromGrid(Data.StartIndex);
+        }
     }
     
     public void Initialize(Vector2 anchoredPosition, Vector2 sizeDelta, bool active = true)

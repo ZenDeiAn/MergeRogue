@@ -130,6 +130,40 @@ public class ActorStatus : Status
         armedShield = 0;
         Buff.Clear();
     }
+
+    public ActorStatus(ActorStatus status) : base(status)
+    {
+        speedAdditional = status.speedAdditional;
+        health = status.health;
+        healthMaximumAdditional = status.healthMaximumAdditional;
+        attackAdditional = status.attackAdditional;
+        shieldAdditional = status.shieldAdditional;
+        armedShield = status.armedShield;
+        comboMaximumAdditional = status.comboMaximumAdditional;
+        comboChanceAdditional = status.comboChanceAdditional;
+        healthStealthAdditional = status.healthStealthAdditional;
+        dodgeAdditional = status.dodgeAdditional;
+        criticalChanceAdditional = status.criticalChanceAdditional;
+        criticalDamageAdditional = status.criticalDamageAdditional;
+        Buff = status.Buff;
+    }
+
+    public override string ToString()
+    {
+        return $"speed : {speed}(+{speedAdditional})\n" + 
+               $"health : {health}\n" +
+               $"health maximum : {healthMaximum}(+{healthMaximumAdditional})\n" +
+               $"attack : {attack}(+{attackAdditional})\n" +
+               $"shield : {shield}(+{shieldAdditional})\n" +
+               $"armed shield : {armedShield}\n" + 
+               $"combo maximum: {comboMaximum}(+{comboMaximumAdditional})\n" +
+               $"combo chance : {comboChance}(+{comboChanceAdditional})\n" +
+               $"health stealth : {healthStealth}(+{healthStealthAdditional})\n" +
+               $"dodge : {dodge}(+{dodgeAdditional})\n" + 
+               $"critical chance : {criticalChance}(+{criticalChanceAdditional})\n" +
+               $"critical damage : {criticalDamage}\n" + 
+               $"buff : {Buff.Count}";
+    }
 }
 
 [Serializable]
@@ -178,8 +212,7 @@ public class Equipment
 [Serializable]
 public class PlayerStatus
 {
-    public string CharacterID;
-    public ActorStatus CharacterStatus;
+    public List<CharacterStatus> characters = new List<CharacterStatus>();
     public List<int> ItemList = new List<int>();
     public List<string> EquipmentList = new List<string>();
     public Dictionary<string, float> MergeCardDeck = new Dictionary<string, float>();   // float is random weight
@@ -190,9 +223,8 @@ public class PlayerStatus
     {
         var cardLibrary = AddressableManager.Instance.MergeCardDataLibrary;
         
-        CharacterID = characterInfo.ID;
-        // Init Player Status.
-        CharacterStatus = new ActorStatus(characterInfo.Status);
+        characters.Add(new CharacterStatus(characterInfo));
+        
         // Init Item count.
         ItemList = new List<int>(3);
         // Init merge card bag(only add Common category cards)

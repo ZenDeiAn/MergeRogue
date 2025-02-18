@@ -150,12 +150,15 @@ public class MergeCard : Processor<MergeCardInteractState>, IPointerDownHandler,
         _interactingCard = -1;
         if (onGridIndex != -1 && overlappingSockets.Count == shapeData.Count)
         {
-            mergeGrid.MergeCardToGrid(new MergeSocketData
+            if (BattleManager.Instance.State == BattleState.Prepare)
             {
-                StartIndex = onGridIndex,
-                CardID = CardID,
-                Level = Level,
-            }, overlappingSockets);
+                mergeGrid.MergeCardToGrid(new MergeSocketData
+                {
+                    StartIndex = onGridIndex,
+                    CardID = CardID,
+                    Level = Level,
+                }, overlappingSockets);
+            }
             handler.RemoveCard(this);
         }
         State = MergeCardInteractState.None;

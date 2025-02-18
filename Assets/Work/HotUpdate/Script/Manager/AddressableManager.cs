@@ -9,7 +9,6 @@ using UnityEngine.AddressableAssets;
 
 public class AddressableManager : SingletonUnityEternal<AddressableManager>
 {
-    
     public Dictionary<string, CharacterInfo> Character { get; private set; }
     public UILibrary UILibrary { get; private set; }
     public Dictionary<MapBlockEventType, GameObject> MapBlockPrefabs { get; private set; }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using RaindowStudio.Utility;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class BattleManager : Processor<BattleManager, BattleState>
 {
@@ -26,7 +28,6 @@ public class BattleManager : Processor<BattleManager, BattleState>
     private CinemachineTransposer _cvcTransposer;
     private AdventureManager _avm;
     private AddressableManager _adm;
-    private Vector3 _originalShoulderOffset;
     private PerformViewAction _performViewAction;
     private float _originalZoom;
     private float _originalShoulderOffsetZ;
@@ -41,12 +42,15 @@ public class BattleManager : Processor<BattleManager, BattleState>
     
     void Activate_Intro()
     {
-        Transform transformCurrent = characterAnchors[0];
-        Actor character =
-            Instantiate(characterPrefab, transformCurrent).
-                GetComponent<Actor>();
-        character.Initialize(_adm.CurrentCharacter);
-        actors.Add(character);
+        var playerCharacters = _avm.Data.PlayerStatus.characters;
+        for (int i = 0; i < playerCharacters.Count; ++i)
+        {
+            Character character =
+                Instantiate(characterPrefab, characterAnchors[i]).
+                    GetComponent<Character>();
+            character.Initialize(i, playerCharacters[i]);
+            actors.Add(character);
+        }
         
         MonsterType monsterType = _avm.CurrentMapData.EventType.ToMonsterType();
         if (monsterType != MonsterType.None)
@@ -70,10 +74,9 @@ public class BattleManager : Processor<BattleManager, BattleState>
                     if (i >= monsterAnchors.Count)
                         break;
 
-                    transformCurrent = monsterAnchors[i];
-                    Actor monster =
-                        Instantiate(monsterDataSets[i].prefab, transformCurrent).
-                            GetComponent<Actor>();
+                    Monster monster =
+                        Instantiate(monsterDataSets[i].prefab, monsterAnchors[i]).
+                            GetComponent<Monster>();
                     monster.Initialize(monsterDataSets[i]);
                     actors.Add(monster);
                 }
@@ -223,7 +226,6 @@ public class BattleManager : Processor<BattleManager, BattleState>
         };
 
         _cvcTransposer = cvc_perform.GetCinemachineComponent<CinemachineTransposer>();
-        _originalShoulderOffset = _cvcTransposer.m_FollowOffset;
         
         if (TestMonsterType == MonsterType.None)
         {
@@ -246,6 +248,18 @@ public class BattleManager : Processor<BattleManager, BattleState>
                 });
         }
     }
+
+#if UNITY_EDITOR
+    private void OnGUI()
+    {
+        if (AdventureManager.Instance.Data.PlayerStatus.characters.Count == 0 && !Input.GetKey(KeyCode.BackQuote))
+            return;
+        
+        GUI.skin.label.fontSize = (int)(Screen.width * 0.03f);
+        GUI.Label(new Rect(10, 10, Screen.width, Screen.height / 2),
+            AdventureManager.Instance.Data.PlayerStatus.characters[0].ToString());
+    }
+#endif
 }
 
 public enum BattleState

@@ -11,7 +11,7 @@ public class Monster : Actor
     public override ActType ActingType { get; set; }
     public override ActorStatus Status { get; set; }
 
-    public override void Initialize(IActorData actorData)
+    public void Initialize(IActorData actorData)
     {
         Info = actorData as MonsterInfo;
         ActorUtility.Initialize(this, actorData);

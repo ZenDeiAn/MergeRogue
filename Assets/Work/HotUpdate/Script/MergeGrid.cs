@@ -53,7 +53,8 @@ public class MergeGrid : SingletonUnity<MergeGrid>
 
     public bool Mergeable(MergeSocketData card, MergeSocketData socket)
     {
-        if (!card.Equals(socket)) return false;
+        if (!card.Equals(socket))
+            return false;
         return card.Level < MergeLevel.Ultimate;
     }
     
@@ -84,7 +85,8 @@ public class MergeGrid : SingletonUnity<MergeGrid>
 
             Sockets[index].SetCard(card);
         }
-        _avm.Data.MergeGridSockets[card.StartIndex] = card;
+        
+        Observer.Trigger(merge ? ObserverMessage.MergeCardLevelUp : ObserverMessage.MergeCardToGrid, card);
     }
     
     public bool TryRemoveCardFromGrid(int startIndex)
@@ -97,7 +99,7 @@ public class MergeGrid : SingletonUnity<MergeGrid>
             {
                 Sockets[index].RemoveCard();
             }
-            _avm.Data.MergeGridSockets.Remove(startIndex);
+            Observer.Trigger(ObserverMessage.MergeCardRemove, startIndex);
             return true;
         }
 
@@ -139,6 +141,24 @@ public class MergeGrid : SingletonUnity<MergeGrid>
         }
     }
 
+    private void LoadMergeSocketData()
+    {
+        foreach (var socket in _avm.Data.MergeGridSockets.Values)
+        {
+            GetOverlapSockets(socket.StartIndex,
+                AddressableManager.Instance.MergeCardDataLibrary[socket.CardID].CardShape, out var list);
+            foreach (var index in list)
+            {
+                Sockets[index].SetCard(new MergeSocketData
+                {
+                    StartIndex = socket.StartIndex,
+                    Level = socket.Level,
+                    CardID = socket.CardID
+                });
+            }
+        }
+    }
+
     private void OnEnable()
     {
         AnchorMergeToolTableSockets();
@@ -149,5 +169,6 @@ public class MergeGrid : SingletonUnity<MergeGrid>
         base.Initialization();
         
         _avm = AdventureManager.Instance;
+        LoadMergeSocketData();
     }
 }

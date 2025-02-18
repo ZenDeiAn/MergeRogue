@@ -19,11 +19,43 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
     [JsonIgnore]
     private AddressableManager _adm;
 
+    #region Observer Events
+    private Action<object> MergeCardToGridMessage => o =>
+    {
+        MergeSocketData data = (MergeSocketData)o;
+        foreach (var character in Data.PlayerStatus.characters)
+        {
+            BattleLogicLibrary.Instance.MergeCardLibrary[data.CardID](character, data.Level, false);
+        }
+        Data.MergeGridSockets[data.StartIndex] = data;
+    };
+
+    private Action<object> MergeCardLevelUpMessage => o =>
+    {
+        MergeSocketData data = (MergeSocketData)o;
+        foreach (var character in Data.PlayerStatus.characters)
+        {
+            BattleLogicLibrary.Instance.MergeCardLibrary[data.CardID](character, data.Level - 1, true);
+            BattleLogicLibrary.Instance.MergeCardLibrary[data.CardID](character, data.Level, false);
+        }
+        Data.MergeGridSockets[data.StartIndex] = data;
+    };
+
+    private Action<object> MergeCardRemoveMessage => o =>
+    {
+        var data = Data.MergeGridSockets[(int)o];
+        foreach (var character in Data.PlayerStatus.characters)
+        {
+            BattleLogicLibrary.Instance.MergeCardLibrary[data.CardID](character, data.Level, true);
+        }
+        Data.MergeGridSockets.Remove(data.StartIndex);
+    };
+    #endregion
+    
     public void SaveData()
     {
         string path = Path.Combine(Application.streamingAssetsPath, $"{name}.json");
         
-
         if (!Directory.Exists(Path.GetDirectoryName(path)))
         {
             Directory.CreateDirectory(Path.GetDirectoryName(path) ?? string.Empty);
@@ -175,6 +207,17 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
         base.Initialization();
 
         _adm = AddressableManager.Instance;
+        
+        Observer.Subscribe(ObserverMessage.MergeCardToGrid, MergeCardToGridMessage);
+        Observer.Subscribe(ObserverMessage.MergeCardRemove, MergeCardRemoveMessage);
+        Observer.Subscribe(ObserverMessage.MergeCardLevelUp, MergeCardLevelUpMessage);
+    }
+
+    private void OnDestroy()
+    {
+        Observer.Unsubscribe(ObserverMessage.MergeCardToGrid, MergeCardToGridMessage);
+        Observer.Unsubscribe(ObserverMessage.MergeCardRemove, MergeCardRemoveMessage);
+        Observer.Unsubscribe(ObserverMessage.MergeCardLevelUp, MergeCardLevelUpMessage);
     }
 }
 
@@ -187,3 +230,23 @@ public class AdventureManagerData
     public PlayerStatus PlayerStatus = new PlayerStatus();  
 }
 
+
+public class CharacterStatus : ActorStatus
+{
+    public readonly string ID;
+
+    public CharacterStatus(CharacterInfo characterInfo) : base(characterInfo.Status)
+    {
+        ID = characterInfo.ID;
+    }
+
+    public CharacterStatus(string id, ActorStatus status) : base(status)
+    {
+        ID = id;
+    }
+
+    public override string ToString()
+    {
+        return $"{ID}\n{base.ToString()}";
+    }
+}

@@ -7,16 +7,15 @@ public abstract class Actor : MonoBehaviour, IActor
     public Animator animator;
     public SkinnedMeshRenderer meshRenderer;
     public CanvasActor canvasActor;
-    public Action AnimationTriggerEvent;
+    public Action ActionTriggerEvent;
     public abstract IActorData ActorData { get; }
     public abstract ActorType ActorType { get;}
     public abstract ActType ActingType { get; set; }
     public abstract ActorStatus Status { get; set; }
-    public virtual void Initialize(IActorData actorData) { }
 
     public void TriggerAnimationEvent()
     {
-        AnimationTriggerEvent?.Invoke();
+        ActionTriggerEvent?.Invoke();
     }
 }
 
@@ -26,7 +25,6 @@ public interface IActor
     public ActorType ActorType { get; }
     public ActType ActingType { get; set; }
     public ActorStatus Status { get; set; }
-    public void Initialize(IActorData actorData);
 }
 
 public interface IActorData
@@ -41,6 +39,16 @@ public static class ActorUtility
     {
         self.gameObject.name = actorData.ID;
         self.Status = new ActorStatus(actorData.Status);
+        self.transform.localPosition = Vector3.zero;
+        self.transform.localRotation = Quaternion.identity;
+        self.transform.localScale = Vector3.one;
+        self.canvasActor.Initialize(self);
+    }
+    
+    public static void Initialize(this Actor self, CharacterStatus characterStatus)
+    {
+        self.gameObject.name = characterStatus.ID;
+        self.Status = new ActorStatus(characterStatus);
         self.transform.localPosition = Vector3.zero;
         self.transform.localRotation = Quaternion.identity;
         self.transform.localScale = Vector3.one;

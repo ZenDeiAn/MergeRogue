@@ -13,6 +13,24 @@ MonoBehaviour:
   m_Name: ProfileDataSourceSettings
   m_EditorClassIdentifier: 
   profileGroupTypes:
+  - m_GroupTypePrefix: Automatic
+    m_Variables:
+    - m_Suffix: CcdBucketName
+      m_Value: Android
+    - m_Suffix: CcdBucketId
+      m_Value: 59601614-baee-40b5-a105-3c2cde9be2a3
+    - m_Suffix: CcdBadgeName
+      m_Value: latest
+    - m_Suffix: PromoteOnly
+      m_Value: False
+    - m_Suffix: Environmentname
+      m_Value: production
+    - m_Suffix: Environmentid
+      m_Value: d1a92292-f140-4aaf-8c21-cd0cc8a9f03c
+    - m_Suffix: BuildPath
+      m_Value: CCDBuildData/d1a92292-f140-4aaf-8c21-cd0cc8a9f03c/59601614-baee-40b5-a105-3c2cde9be2a3/latest
+    - m_Suffix: LoadPath
+      m_Value: https://f530ad17-e82c-416b-8a37-1d23eab5c7e8.client-api.unity3dusercontent.com/client_api/v1/environments/production/buckets/59601614-baee-40b5-a105-3c2cde9be2a3/release_by_badge/latest/entry_by_path/content/?path=
   - m_GroupTypePrefix: Built-In
     m_Variables:
     - m_Suffix: BuildPath
