@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04870533, g: 0.018949639, b: 0.056190662, a: 1}
+  m_IndirectSpecularColor: {r: 0.049168997, g: 0.019414715, b: 0.056689832, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1032,7 +1032,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.95
+  m_fontSize: 44.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1877,7 +1877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   preState: 0
-  TestMonsterType: 1
+  TestMonsterType: 0
   actors: []
   monsterAnchors:
   - {fileID: 696291975}
@@ -2414,7 +2414,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.95
+  m_fontSize: 44.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2620,7 +2620,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060215200}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.028536504, y: -0.000000017232935, z: 4.9196797e-10, w: 0.9995928}
+  m_LocalRotation: {x: 0.028536525, y: 0.000000017232933, z: -4.919683e-10, w: 0.9995928}
   m_LocalPosition: {x: 0, y: 3, z: -12.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3361,7 +3361,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.95
+  m_fontSize: 44.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4121,7 +4121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600914836}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.028536504, y: -0.000000017232935, z: 4.9196797e-10, w: 0.9995928}
+  m_LocalRotation: {x: 0.028536525, y: 0.000000017232933, z: -4.919683e-10, w: 0.9995928}
   m_LocalPosition: {x: 0, y: 3, z: -12.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4433,7 +4433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1787700211
 Transform:
   m_ObjectHideFlags: 0
