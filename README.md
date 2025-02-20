@@ -1,5 +1,5 @@
 # Project : MergeRogue
-This is an indie game for mobile phone platform.
+This is a demo for mobile phone platform.
 Right now still working on it...
 
 > - Target Platform : Android(Google App Store)
