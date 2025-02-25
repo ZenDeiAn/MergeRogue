@@ -113,9 +113,26 @@ public class BattleManager : Processor<BattleManager, BattleState>
             if (actor.Status.Health == 0)
                 continue;
             
+            if (actor.Status.BuffAlive(BuffType.Stun))
+            {
+                actor.Status.BuffProcess(BuffType.Stun);
+                continue;
+            }
+            
+            // Skill logic
+            if (actor.Status.skillCharging >= 1)
+            {
+                actor.ActingType = ActType.Skill;
+                BattleLogicLibrary.Instance.ActorSkillLibrary[actor.ActorData.ID](actor, actors);
+                actor.Status.UpdateSkillCharging(true);
+            }
             // Attack logic
-            actor.ActingType = ActType.Attack;
-            BattleLogicLibrary.Instance.ActorAttackLibrary[actor.ActorData.ID](actor, actors);
+            else
+            {
+                actor.ActingType = ActType.Attack;
+                BattleLogicLibrary.Instance.ActorAttackLibrary[actor.ActorData.ID](actor, actors);
+                actor.Status.UpdateSkillCharging();
+            }
             
             // Waiting for acting logic end
             var currentActor = actor;

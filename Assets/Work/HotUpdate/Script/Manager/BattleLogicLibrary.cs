@@ -10,11 +10,7 @@ using Random = UnityEngine.Random;
 
 public class BattleLogicLibrary : Singleton<BattleLogicLibrary>
 {
-    private static readonly int Moving = Animator.StringToHash("Moving");
-    private static readonly int Attack = Animator.StringToHash("Attack");
-    private static readonly int Die = Animator.StringToHash("Die");
-    private static readonly int Hurt = Animator.StringToHash("Hurt");
-    private static readonly int Idle = Animator.StringToHash("Idle");
+    public float MELEE_DISTANCE_OFFSET = 0.25f;
 
     public Dictionary<string, Action<Actor, List<Actor>>> ActorAttackLibrary { get; private set; }
     public Dictionary<string, Action<Actor, List<Actor>>> ActorSkillLibrary { get; private set; }
@@ -22,6 +18,7 @@ public class BattleLogicLibrary : Singleton<BattleLogicLibrary>
     /// string = MergeCardID, bool = is action for remove card from grid.
     /// </summary>
     public Dictionary<string, Action<ActorStatus, MergeLevel, bool>> MergeCardLibrary { get; private set; }
+    public Dictionary<BuffType, Action<BuffData, ActorStatus>> BuffLibrary { get; private set; }
 
     public List<Actor> GetTargets(List<Actor> targets, SelectTargetsType type)
     {
@@ -98,15 +95,14 @@ public class BattleLogicLibrary : Singleton<BattleLogicLibrary>
         return targetList;
     }
     
-    public void ActorDamageToTargets(Actor source, List<Actor> targets, bool trueDamage = false, BuffType buffType = BuffType.None)
+    public void ActorDamageToTargets(Actor source, List<Actor> targets, float multiply = 1.0f, bool trueDamage = false, BuffData buffData = null)
     {
         foreach (var target in targets)
         {
             bool critical = Random.Range(0.0f, 1.0f) <= Mathf.Clamp(source.Status.CriticalChanceCalculated, 0, 1);
         
             int damage = source.Status.AttackCalculated;
-            damage = critical ? (int)(damage * source.Status.CriticalDamageCalculated) : damage;
-        
+            damage = (int)((critical ? damage * source.Status.CriticalDamageCalculated : damage) * multiply);
             if (!trueDamage)
             {
                 int damageTemp = Mathf.Max(damage - target.Status.armedShield, 0);
@@ -114,19 +110,15 @@ public class BattleLogicLibrary : Singleton<BattleLogicLibrary>
                 damage = damageTemp;
             }
         
-            target.Status.health = Mathf.Max(target.Status.Health - damage, 0);
-            target.canvasActor.UpdateCanvas();
+            target.Status.UpdateHealth(-damage);
             
             // Animation
-            if (buffType == BuffType.None)
+            target.animator.SetTrigger(target.Status.health == 0 ? AnimationHashKey.Die : AnimationHashKey.Hurt);
+            if (buffData != null && buffData.type != BuffType.None)
             {
-                target.animator.SetTrigger(target.Status.health == 0 ? Die : Hurt);
+                target.Status.AddBuff(buffData);
             }
-            else
-            {
-                target.animator.SetFloat(Idle, (int)buffType);
-            }
-            Debug.Log($"{source}->{target} : {critical} : {damage} : {source.Status.CriticalDamageCalculated}");
+            Debug.Log($"{source}->{target} : {critical} : {damage} : {multiply} : {source.Status.CriticalDamageCalculated}");
         }
     }
     
@@ -137,10 +129,11 @@ public class BattleLogicLibrary : Singleton<BattleLogicLibrary>
         Bounds bounds = skinnedMeshRenderer.bounds;
         Transform meshTransform = skinnedMeshRenderer.transform;
 
-        Vector3 worldSize = Vector3.Scale(bounds.size, meshTransform.lossyScale);
+        Vector3 worldSize = Vector3.Scale(bounds.extents, meshTransform.lossyScale);
 
         float forwardLength = Mathf.Abs(Vector3.Dot(worldSize, meshTransform.forward.normalized));
 
+        Debug.Log($"skinnedMeshRenderer: {skinnedMeshRenderer.name}, boundSize : {bounds.size}, meshTransform.lossyScale : {meshTransform.lossyScale}, worldSize : {worldSize}, forwardLength : {forwardLength}");
         return forwardLength;
     }
 
@@ -164,17 +157,17 @@ public class BattleLogicLibrary : Singleton<BattleLogicLibrary>
         Vector3 targetPosition = Vector3.zero;
         foreach (Actor target in targets)
         {
-            targetPosition.z = Mathf.Max(GetModelForwardLength(target.meshRenderer) / 2, targetPosition.z);
+            targetPosition.x = Mathf.Max(GetModelForwardLength(target.meshRenderer) / 2, targetPosition.x);
         }
-        targetPosition.z += GetModelForwardLength(actor.meshRenderer) / 2;
-        targetPosition = center + targets[0].transform.forward * targetPosition.z;
+        targetPosition.x += GetModelForwardLength(actor.meshRenderer) / 2;
+        targetPosition = center + targets[0].transform.forward * (targetPosition.x + MELEE_DISTANCE_OFFSET);
 
         // Start approach logic.
         // Animation
         float moving = 0;
-        actor.animator.SetFloat(Moving, moving);
+        actor.animator.SetFloat(AnimationHashKey.Moving, moving);
         Coroutine moveCoroutine = actor.LoopUntil(() => moving >= 1, () =>
-            actor.animator.SetFloat(Moving, moving = Mathf.Min(moving + Time.deltaTime * 5, 1)));
+            actor.animator.SetFloat(AnimationHashKey.Moving, moving = Mathf.Min(moving + Time.deltaTime * 5, 1)));
 
         // Transform move
         actor.transform.DOMove(targetPosition, 0.5f).SetEase(Ease.Linear).SetRelative(false).OnComplete(() =>
@@ -195,7 +188,7 @@ public class BattleLogicLibrary : Singleton<BattleLogicLibrary>
                         {
                             actor.StopCoroutine(moveCoroutine); 
                             moveCoroutine = actor.LoopUntil(() => moving <= -1, () =>
-                                actor.animator.SetFloat(Moving,
+                                actor.animator.SetFloat(AnimationHashKey.Moving,
                                     moving = Mathf.Max(moving - Time.deltaTime * 5, -1)));
 
                             actor.transform.DOMove(startPosition, 1f).SetEase(Ease.Linear).SetRelative(false)
@@ -203,7 +196,7 @@ public class BattleLogicLibrary : Singleton<BattleLogicLibrary>
                                 {
                                     actor.StopCoroutine(moveCoroutine); 
                                     actor.LoopUntil(() => moving >= 0, () =>
-                                        actor.animator.SetFloat(Moving,
+                                        actor.animator.SetFloat(AnimationHashKey.Moving,
                                             moving = Mathf.Clamp(moving + Time.deltaTime * 10, -1, 0)));
                                     completed?.Invoke();
                                 });
@@ -251,31 +244,31 @@ public class BattleLogicLibrary : Singleton<BattleLogicLibrary>
             { "Warrior", (source, targets) => {
                     var targetList = GetTargets(targets, SelectTargetsType.HighestHealthSingleEnemy);
                     source.ActionTriggerEvent = () => ActorDamageToTargets(source, targetList);
-                    source.StartCoroutine(CommonAttackLogic(source, targetList, Attack));
+                    source.StartCoroutine(CommonAttackLogic(source, targetList, AnimationHashKey.Attack));
                 }
             },
             { "Warhammer", (source, targets) => {
                     var targetList = GetTargets(targets, SelectTargetsType.LowestHealthSingleEnemy);
                     source.ActionTriggerEvent = () => ActorDamageToTargets(source, targetList);
-                    source.StartCoroutine(CommonAttackLogic(source, targetList, Attack));
+                    source.StartCoroutine(CommonAttackLogic(source, targetList, AnimationHashKey.Attack));
                 }
             },
             { "Slime", (source, targets) => {
                     var targetList = GetTargets(targets, SelectTargetsType.HighestHealthSingleAlly);
                     source.ActionTriggerEvent = () => ActorDamageToTargets(source, targetList);
-                    source.StartCoroutine(CommonAttackLogic(source, targetList, Attack));
+                    source.StartCoroutine(CommonAttackLogic(source, targetList, AnimationHashKey.Attack));
                 }
             },
-            { "NagaWizard", (source, targets) => {
+            { "NagarWizard", (source, targets) => {
                     var targetList = GetTargets(targets, SelectTargetsType.LowestHealthSingleAlly);
                     source.ActionTriggerEvent = () => ActorDamageToTargets(source, targetList);
-                    source.StartCoroutine(CommonAttackLogic(source, targetList, Attack));
+                    source.StartCoroutine(CommonAttackLogic(source, targetList, AnimationHashKey.Attack));
                 }
             },
             { "FlyingDemon", (source, targets) => {
                     var targetList = GetTargets(targets, SelectTargetsType.LowestHealthSingleAlly);
                     source.ActionTriggerEvent = () => ActorDamageToTargets(source, targetList);
-                    source.StartCoroutine(CommonAttackLogic(source, targetList, Attack));
+                    source.StartCoroutine(CommonAttackLogic(source, targetList, AnimationHashKey.Attack));
                 }
             },
         };
@@ -283,19 +276,43 @@ public class BattleLogicLibrary : Singleton<BattleLogicLibrary>
         ActorSkillLibrary = new Dictionary<string, Action<Actor, List<Actor>>>
         {
             { "Warrior", (source, targets) => {
-                
+                var targetList = GetTargets(targets, SelectTargetsType.HighestHealthSingleEnemy);
+                source.ActionTriggerEvent = () =>
+                {
+                    Debug.Log($"ActionTriggerEvent : {targetList.Count}");
+                    ActorDamageToTargets(source, targetList, 1.25f, false, new BuffData
+                    {
+                        type = BuffType.Stun,
+                        source = source,
+                        duration = 2
+                    });
+                    // Need add effect
+                };
+                source.StartCoroutine(CommonAttackLogic(source, targetList, AnimationHashKey.Skill));
             }},
             { "Warhammer", (source, targets) => {
-                
+                var targetList = GetTargets(targets, SelectTargetsType.AllEnemies);
+                source.ActionTriggerEvent = () =>
+                {
+                    ActorDamageToTargets(source, targetList);
+                    // Need add effect
+                };
+                source.StartCoroutine(CommonAttackLogic(source, targetList, AnimationHashKey.Skill));
             }},
             { "Slime", (source, targets) => {
-                
+                var targetList = GetTargets(targets, SelectTargetsType.HighestHealthSingleAlly);
+                source.ActionTriggerEvent = () => ActorDamageToTargets(source, targetList);
+                source.StartCoroutine(CommonAttackLogic(source, targetList, AnimationHashKey.Skill));
             }},
-            { "NagaWizard", (source, targets) => {
-                
+            { "NagarWizard", (source, targets) => {
+                var targetList = GetTargets(targets, SelectTargetsType.HighestHealthSingleAlly);
+                source.ActionTriggerEvent = () => ActorDamageToTargets(source, targetList);
+                source.StartCoroutine(CommonAttackLogic(source, targetList, AnimationHashKey.Skill));
             }},
             { "FlyingDemon", (source, targets) => {
-                
+                var targetList = GetTargets(targets, SelectTargetsType.HighestHealthSingleAlly);
+                source.ActionTriggerEvent = () => ActorDamageToTargets(source, targetList);
+                source.StartCoroutine(CommonAttackLogic(source, targetList, AnimationHashKey.Skill));
             }},
         };
 
@@ -337,6 +354,16 @@ public class BattleLogicLibrary : Singleton<BattleLogicLibrary>
             { "ComboMaximumUp", (a, m, remove) => {
                 int modifier = (int)AddressableManager.Instance.MergeCardDataLibrary["ComboMaximumUp"].Multiplies[m];
                 a.comboMaximumAdditional += remove? -modifier : modifier;
+            }},
+        };
+
+        BuffLibrary = new Dictionary<BuffType, Action<BuffData, ActorStatus>>
+        {
+            { BuffType.Regen, (b, a) => {
+                a.health += b.strength;
+            }},
+            { BuffType.DoT, (b, a) => {
+                a.health -= b.strength;
             }},
         };
     }

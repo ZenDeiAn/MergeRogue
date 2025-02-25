@@ -1,36 +1,61 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public abstract class Actor : MonoBehaviour, IActor
+public abstract class Actor : MonoBehaviour
 {
     public Animator animator;
     public SkinnedMeshRenderer meshRenderer;
     public CanvasActor canvasActor;
     public Action ActionTriggerEvent;
+    
     public abstract IActorData ActorData { get; }
     public abstract ActorType ActorType { get;}
     public abstract ActType ActingType { get; set; }
     public abstract ActorStatus Status { get; set; }
 
+    private void UpdateStatus(string property, float value)
+    {
+        switch (property)
+        {
+            case nameof(ActorStatus.buff):
+                int idle;
+                for (idle = (int)BuffType._SplitForAnimation; idle > 0; --idle)
+                {
+                    BuffType buffType = (BuffType)idle;
+                    if (Status.buff.ContainsKey(buffType))
+                    {
+                        if (Status.buff[buffType].duration > 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+                animator.SetFloat(AnimationHashKey.Idle, idle);
+                break;
+        }
+
+        canvasActor.UpdateCanvas();
+    }
+    
     public void TriggerAnimationEvent()
     {
         ActionTriggerEvent?.Invoke();
     }
-}
 
-public interface IActor
-{
-    public IActorData ActorData { get; }
-    public ActorType ActorType { get; }
-    public ActType ActingType { get; set; }
-    public ActorStatus Status { get; set; }
+    protected virtual void Initialize()
+    {
+        Status.UpdateStatus += UpdateStatus;
+        animator.SetFloat(AnimationHashKey.Idle, 0);
+    }
 }
 
 public interface IActorData
 {
     public string ID { get; }
     public Status Status { get; set; }
+    
 }
 
 public static class ActorUtility

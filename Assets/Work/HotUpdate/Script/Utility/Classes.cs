@@ -34,16 +34,17 @@ public static class UtilityFunctions
 [Serializable]
 public class Status
 {
-    [SerializeField] protected int speed;
-    [SerializeField] protected int healthMaximum;
-    [SerializeField] protected int attack;
-    [SerializeField] protected int shield;
-    [SerializeField] protected int comboMaximum;
-    [SerializeField] protected float comboChance;
-    [SerializeField, Range(0, 1)] protected float healthStealth;
-    [SerializeField, Range(0, 1)] protected float dodge;
-    [SerializeField, Range(0, 1)] protected float criticalChance;
-    [SerializeField] protected float criticalDamage;
+    [JsonIgnore, SerializeField] protected int speed;
+    [JsonIgnore, SerializeField] protected int healthMaximum;
+    [JsonIgnore, SerializeField] protected int attack;
+    [JsonIgnore, SerializeField] protected int shield;
+    [JsonIgnore, SerializeField] protected int comboMaximum;
+    [JsonIgnore, SerializeField] protected float comboChance;
+    [JsonIgnore, SerializeField, Range(0, 1)] protected float healthStealth;
+    [JsonIgnore, SerializeField, Range(0, 1)] protected float dodge;
+    [JsonIgnore, SerializeField, Range(0, 1)] protected float criticalChance;
+    [JsonIgnore, SerializeField, Range(0, 1)] protected float skillCharge = 0.25f;
+    [JsonIgnore, SerializeField] protected float criticalDamage;
     
     public int SpeedRoot => speed;
     public int HealthMaximumRoot => healthMaximum;
@@ -72,32 +73,37 @@ public class Status
 [Serializable]
 public class ActorStatus : Status
 {
-    [JsonIgnore]
+    [JsonProperty]
     public int speedAdditional;
     [JsonProperty]
     public int health;
-    [JsonIgnore]
+    [JsonProperty]
     public int healthMaximumAdditional;
-    [JsonIgnore]
+    [JsonProperty]
     public int attackAdditional;
-    [JsonIgnore]
+    [JsonProperty]
     public int shieldAdditional;
     [JsonIgnore]
     public int armedShield;
-    [JsonIgnore]
+    [JsonProperty]
     public int comboMaximumAdditional;
-    [JsonIgnore]
+    [JsonProperty]
     public float comboChanceAdditional;
-    [JsonIgnore]
+    [JsonProperty]
     public float healthStealthAdditional;
-    [JsonIgnore]
+    [JsonProperty]
     public float dodgeAdditional;
-    [JsonIgnore]
+    [JsonProperty]
     public float criticalChanceAdditional;
-    [JsonIgnore]
+    [JsonProperty]
     public float criticalDamageAdditional;
     [JsonIgnore]
-    public Dictionary<BuffType, BuffData> Buff = new Dictionary<BuffType, BuffData>();
+    public float skillCharging;
+    [JsonProperty]
+    public float skillChargeAdditional;
+    [JsonIgnore]
+    public Dictionary<BuffType, BuffData> buff = new Dictionary<BuffType, BuffData>();
+    public Action<string, float> UpdateStatus;
 
     public int SpeedCalculated => speed + speedAdditional;
     public int Health => health;
@@ -111,15 +117,49 @@ public class ActorStatus : Status
     public float DodgeCalculated => dodge + dodgeAdditional;
     public float CriticalChanceCalculated => criticalChance + criticalChanceAdditional;
     public float CriticalDamageCalculated => criticalDamage + criticalDamageAdditional;
+    public float SkillChargeCalculated => skillCharge + skillChargeAdditional;
 
+    public void AddBuff(BuffData buffData)
+    {
+        buff[buffData.type] = buffData;
+        UpdateStatus(nameof(buff), buffData.duration);
+    }
+    
+    public void BuffProcess(BuffType buffType)
+    {
+        if (!BuffAlive(buffType))
+            return;
+        
+        if (BattleLogicLibrary.Instance.BuffLibrary.ContainsKey(buffType))
+        {
+            BattleLogicLibrary.Instance.BuffLibrary[buffType](buff[buffType], this);
+        }
+
+        buff[buffType].duration -= 1;
+        UpdateStatus(nameof(buff), buff[buffType].duration);
+    }
+
+    public bool BuffAlive(BuffType buffType)
+    {
+        return buff.ContainsKey(buffType) && buff[buffType].duration > 0;
+    }
+    
     public void UpdateHealth(int variable)
     {
         health = Mathf.Clamp(health + variable, 0, HealthMaximumCalculated);
+        UpdateStatus(nameof(health), health);
     }
 
     public void UpdateArmedShield(int variable)
     {
         armedShield = Mathf.Max(armedShield + variable, 0);
+        UpdateStatus(nameof(armedShield), armedShield);
+    }
+
+    public void UpdateSkillCharging(bool clear = false)
+    {
+        skillCharging = Mathf.Clamp01(clear ? 0 : skillCharging + SkillChargeCalculated);
+        UpdateStatus(nameof(skillCharging), skillCharging);
     }
     
     public ActorStatus() { }
@@ -128,7 +168,8 @@ public class ActorStatus : Status
     {
         health = HealthMaximumRoot;
         armedShield = 0;
-        Buff.Clear();
+        buff.Clear();
+        skillCharging = 0;
     }
 
     public ActorStatus(ActorStatus status) : base(status)
@@ -145,7 +186,7 @@ public class ActorStatus : Status
         dodgeAdditional = status.dodgeAdditional;
         criticalChanceAdditional = status.criticalChanceAdditional;
         criticalDamageAdditional = status.criticalDamageAdditional;
-        Buff = status.Buff;
+        buff = status.buff;
     }
 
     public override string ToString()
@@ -162,7 +203,7 @@ public class ActorStatus : Status
                $"dodge : {dodge}(+{dodgeAdditional})\n" + 
                $"critical chance : {criticalChance}(+{criticalChanceAdditional})\n" +
                $"critical damage : {criticalDamage}\n" + 
-               $"buff : {Buff.Count}";
+               $"buff : {buff.Count}";
     }
 }
 
@@ -187,26 +228,15 @@ public class BuffData
 {
     public BuffType type;
     public int duration;
-    public IActor source;
+    public Actor source;
     public int strength;
 }
 
 [Serializable]
-public class Item
+public class Relic
 {
-    public BuffType type;
-    public int duration;
-    public IActor source;
-    public int strength;
-}
-
-[Serializable]
-public class Equipment
-{
-    public BuffType type;
-    public int duration;
-    public IActor source;
-    public int strength;
+    public string name;
+    public ObserverMessage triggerMessage;
 }
 
 [Serializable]
@@ -237,4 +267,14 @@ public class PlayerStatus
         // TODO : Data need by Ruin
         MergeCardHandlerSize = 3;
     }
+}
+
+public static class AnimationHashKey
+{
+    public static readonly int Idle = Animator.StringToHash("Idle");
+    public static readonly int Moving = Animator.StringToHash("Moving");
+    public static readonly int Attack = Animator.StringToHash("Attack");
+    public static readonly int Skill = Animator.StringToHash("Skill");
+    public static readonly int Die = Animator.StringToHash("Die");
+    public static readonly int Hurt = Animator.StringToHash("Hurt");
 }

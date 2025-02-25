@@ -21,6 +21,7 @@ public enum BuffType
 {
     None,
     Stun,
+    _SplitForAnimation,
     Freeze,     // Reduce speed.
     Silence,    // Skill charge clear.
     Exhaust,    // Reduce damage.

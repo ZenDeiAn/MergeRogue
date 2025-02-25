@@ -16,7 +16,7 @@ MonoBehaviour:
   _type: 1
   _status:
     speed: 1
-    healthMaximum: 50
+    healthMaximum: 75
     attack: 5
     shield: 0
     comboMaximum: 0
@@ -24,4 +24,5 @@ MonoBehaviour:
     healthStealth: 0
     dodge: 0
     criticalChance: 0
+    skillCharge: 0.1
     criticalDamage: 1.2

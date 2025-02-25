@@ -9,9 +9,10 @@ public class CanvasActor : MonoBehaviour
     public Actor actor;
     [SerializeField] private Slider sld_health;
     [SerializeField] private Slider sld_skill;
-    
+
     public void UpdateCanvas()
     {
+        sld_skill.value = actor.Status.skillCharging / 1.0f;
         sld_health.value = actor.Status.Health / (float)actor.Status.HealthMaximumCalculated;
     }
     

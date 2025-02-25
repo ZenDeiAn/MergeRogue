@@ -37,7 +37,12 @@ public static class Observer
 
 public enum ObserverMessage
 {
+    None,
     MergeCardToGrid,
     MergeCardLevelUp,
-    MergeCardRemove
+    MergeCardRemove,
+    CharacterAttack,
+    CharacterSkill,
+    MonsterAttack,
+    MonsterSkill,
 }

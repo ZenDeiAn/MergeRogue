@@ -31,6 +31,8 @@ public class Character : Actor, ICharacterDataInstance
         Index = index; 
         this.InitializeCharacterData(AddressableManager.Instance.Character[characterStatus.ID]);
         this.Initialize(characterStatus);
+        
+        base.Initialize();
     }
 }
 

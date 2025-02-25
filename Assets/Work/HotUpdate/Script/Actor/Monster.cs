@@ -15,5 +15,7 @@ public class Monster : Actor
     {
         Info = actorData as MonsterInfo;
         ActorUtility.Initialize(this, actorData);
+        
+        base.Initialize();
     }
 }
