@@ -51,7 +51,7 @@ public static class CharacterUtility
         self.Info = info;
         self.Animator.avatar = info.avatar;
         self.MeshRenderer.sharedMesh = info.mesh;
-        self.MeshRenderer.material = info.material;
+        //self.MeshRenderer.material = info.material;
         self.Animator.runtimeAnimatorController = info.animation;
 
         List<WeaponSocketType> weaponSocketTypes = Enum.GetValues(typeof(WeaponSocketType)).Cast<WeaponSocketType>().ToList();

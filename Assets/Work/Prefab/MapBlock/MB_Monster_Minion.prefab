@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 88ac576eea39f874ebc21cdaa7ccb006, type: 2}
+  - {fileID: 2100000, guid: 241ae926fabe9d74a982a43076cb42db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -144,7 +144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 88ac576eea39f874ebc21cdaa7ccb006, type: 2}
+  - {fileID: 2100000, guid: 241ae926fabe9d74a982a43076cb42db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -227,7 +227,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 88ac576eea39f874ebc21cdaa7ccb006, type: 2}
+  - {fileID: 2100000, guid: 241ae926fabe9d74a982a43076cb42db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -265,10 +265,18 @@ PrefabInstance:
       propertyPath: interactable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2492607186997512312, guid: c4b1dedb2aac7da47a96fae5fc35bda1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2854489932962808420, guid: c4b1dedb2aac7da47a96fae5fc35bda1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5e5e5d074d9229c44a2c557b7731d5ec, type: 2}
+      objectReference: {fileID: 2100000, guid: 241ae926fabe9d74a982a43076cb42db, type: 2}
+    - target: {fileID: 5758040653390702479, guid: c4b1dedb2aac7da47a96fae5fc35bda1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 241ae926fabe9d74a982a43076cb42db, type: 2}
     - target: {fileID: 5857259171911121780, guid: c4b1dedb2aac7da47a96fae5fc35bda1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -311,7 +319,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5941805312079148782, guid: c4b1dedb2aac7da47a96fae5fc35bda1, type: 3}
       propertyPath: m_Name
-      value: MB_Monster
+      value: MB_Monster_Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 7256506287759793050, guid: c4b1dedb2aac7da47a96fae5fc35bda1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7256506287761720666, guid: c4b1dedb2aac7da47a96fae5fc35bda1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 241ae926fabe9d74a982a43076cb42db, type: 2}
+    - target: {fileID: 9040259711023673953, guid: c4b1dedb2aac7da47a96fae5fc35bda1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

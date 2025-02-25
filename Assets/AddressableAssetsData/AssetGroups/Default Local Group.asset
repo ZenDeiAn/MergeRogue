@@ -45,8 +45,8 @@ MonoBehaviour:
     - Global
     - Language
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7dfd562c800dd244b9e149e9d6d0525a
-    m_Address: Assets/Work/Addressable/MonsterProbability/Elite.asset
+  - m_GUID: d3e3b6765caafe6458aa2c0b5195f46f
+    m_Address: Assets/Work/Addressable/MonsterProbability/Boss.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Data
@@ -59,8 +59,8 @@ MonoBehaviour:
     - Data
     - Monster
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d3e3b6765caafe6458aa2c0b5195f46f
-    m_Address: Assets/Work/Addressable/MonsterProbability/Boss.asset
+  - m_GUID: 7dfd562c800dd244b9e149e9d6d0525a
+    m_Address: Assets/Work/Addressable/MonsterProbability/Elite.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Data
@@ -100,14 +100,14 @@ MonoBehaviour:
     m_SerializedLabels:
     - Scene
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3cb7f296e30db7f48aaa1c1311332d28
-    m_Address: Map
+  - m_GUID: 0a392b791c11d3d48b6862a4eeb8ae76
+    m_Address: Battle
     m_ReadOnly: 0
     m_SerializedLabels:
     - Scene
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0a392b791c11d3d48b6862a4eeb8ae76
-    m_Address: Battle
+  - m_GUID: 3cb7f296e30db7f48aaa1c1311332d28
+    m_Address: Map
     m_ReadOnly: 0
     m_SerializedLabels:
     - Scene
@@ -195,12 +195,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Assembly
     - Aot
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7633a2fd8a3bed44791c9e952ff86e5d
-    m_Address: Assets/_MK/MKToon/Shader/URP/Standard/StandardPBSOutline.shader
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Global
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d41d78f70b6c27546891ece3b0e453c3, type: 2}

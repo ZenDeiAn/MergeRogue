@@ -14523,7 +14523,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 88ac576eea39f874ebc21cdaa7ccb006, type: 2}
+  - {fileID: 2100000, guid: 241ae926fabe9d74a982a43076cb42db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -28814,7 +28814,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 88ac576eea39f874ebc21cdaa7ccb006, type: 2}
+  - {fileID: 2100000, guid: 241ae926fabe9d74a982a43076cb42db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -28897,7 +28897,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 88ac576eea39f874ebc21cdaa7ccb006, type: 2}
+  - {fileID: 2100000, guid: 241ae926fabe9d74a982a43076cb42db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -28980,7 +28980,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 88ac576eea39f874ebc21cdaa7ccb006, type: 2}
+  - {fileID: 2100000, guid: 241ae926fabe9d74a982a43076cb42db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -33963,7 +33963,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 88ac576eea39f874ebc21cdaa7ccb006, type: 2}
+  - {fileID: 2100000, guid: 241ae926fabe9d74a982a43076cb42db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -34046,7 +34046,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 88ac576eea39f874ebc21cdaa7ccb006, type: 2}
+  - {fileID: 2100000, guid: 241ae926fabe9d74a982a43076cb42db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -34126,7 +34126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5941805312079148782, guid: c4b1dedb2aac7da47a96fae5fc35bda1, type: 3}
       propertyPath: m_Name
-      value: MB_Boss
+      value: MB_Monster_Boss
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

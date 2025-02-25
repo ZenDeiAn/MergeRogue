@@ -8,18 +8,23 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PolygonMinis_Fantasy_01 Variant
-  m_Shader: {fileID: 4800000, guid: 7633a2fd8a3bed44791c9e952ff86e5d, type: 3}
+  m_Shader: {fileID: 4800000, guid: f7e38193b7f064d7380403618fd8b69e, type: 3}
   m_Parent: {fileID: 2100000, guid: a16b7b85a356b7d469067849a165dcff, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _CELPRIMARYMODE_SINGLE
+  - _TEXTUREBLENDINGMODE_MULTIPLY
+  m_InvalidKeywords:
   - _MK_ALBEDO_MAP
   - _MK_ARTISTIC_ANIMATION_STUTTER
   - _MK_ARTISTIC_SKETCH
   - _MK_DETAIL_BLEND_MIX
-  - _MK_ENVIRONMENT_REFLECTIONS_ADVANCED
+  - _MK_DIFFUSE_OREN_NAYAR
+  - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
   - _MK_SPECULAR_ISOTROPIC
-  - _MK_VERTEX_ANIMATION_NOISE
-  m_InvalidKeywords: []
+  - _MK_WRAPPED_DIFFUSE
+  - _UNITYSHADOWMODE_NONE
+  - _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0

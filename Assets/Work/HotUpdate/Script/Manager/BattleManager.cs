@@ -194,13 +194,16 @@ public class BattleManager : Processor<BattleManager, BattleState>
                 switch (_performViewAction)
                 {
                     case PerformViewAction.Move:
-                        Vector3 offset = Input.touches[0].deltaPosition * Time.deltaTime;
-                        _cvcTransposer.m_FollowOffset -= offset;
+                        Vector3 offset = Input.touches[0].deltaPosition;
+                        _cvcTransposer.m_FollowOffset = Vector3.Lerp(_cvcTransposer.m_FollowOffset,
+                            _cvcTransposer.m_FollowOffset - offset,
+                            Time.deltaTime * 2);
                         break;
             
                     case PerformViewAction.Zoom:
-                        _cvcTransposer.m_FollowOffset.z = _originalShoulderOffsetZ -
-                            (Vector2.Distance(Input.touches[0].position, Input.touches[1].position) - _originalZoom) * Time.deltaTime;
+                        _cvcTransposer.m_FollowOffset.z = Mathf.Lerp(_cvcTransposer.m_FollowOffset.z,
+                            _originalShoulderOffsetZ + (Vector2.Distance(Input.touches[0].position, Input.touches[1].position) - _originalZoom),
+                            Time.deltaTime * 2);
                         break;
                 }
                 
