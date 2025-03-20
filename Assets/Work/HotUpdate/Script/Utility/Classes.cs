@@ -36,174 +36,42 @@ public class Status
 {
     [JsonIgnore, SerializeField] protected int speed;
     [JsonIgnore, SerializeField] protected int healthMaximum;
+    [JsonIgnore, SerializeField, Range(0, 100)] protected int dodge;
     [JsonIgnore, SerializeField] protected int attack;
     [JsonIgnore, SerializeField] protected int shield;
+    [JsonIgnore, SerializeField] protected int comboChance;
     [JsonIgnore, SerializeField] protected int comboMaximum;
-    [JsonIgnore, SerializeField] protected float comboChance;
-    [JsonIgnore, SerializeField, Range(0, 1)] protected float healthStealth;
-    [JsonIgnore, SerializeField, Range(0, 1)] protected float dodge;
-    [JsonIgnore, SerializeField, Range(0, 1)] protected float criticalChance;
-    [JsonIgnore, SerializeField, Range(0, 1)] protected float skillCharge = 0.25f;
-    [JsonIgnore, SerializeField] protected float criticalDamage;
+    [JsonIgnore, SerializeField, Range(0, 100)] protected int criticalChance;
+    [JsonIgnore, SerializeField] protected int criticalDamage;
+    [JsonIgnore, SerializeField, Range(0, 100)] protected int healthStealth;
+    [JsonIgnore, SerializeField, Range(0, 100)] protected int skillCharge = 25;
     
     public int SpeedRoot => speed;
     public int HealthMaximumRoot => healthMaximum;
     public int AttackRoot => attack;
     public int ShieldRoot => shield;
     public int ComboMaximumRoot => comboMaximum;
-    public float ComboChanceRoot => comboChance;
-    public float HealthStealthRoot => healthStealth;
-    public float DodgeRoot => dodge;
-    public float CriticalChanceRoot => criticalChance;
-    public float CriticalDamageRoot => criticalDamage;
+    public int ComboChanceRoot => comboChance;
+    public int HealthStealthRoot => healthStealth;
+    public int DodgeRoot => dodge;
+    public int CriticalChanceRoot => criticalChance;
+    public int CriticalDamageRoot => criticalDamage;
     
     public Status() { }
 
     public Status(Status status)
     {
+        speed = status.speed;
         healthMaximum = status.healthMaximum;
+        dodge = status.dodge;
         attack = status.attack;
         shield = status.shield;
-        dodge = status.dodge;
+        comboChance = status.comboChance;
+        comboMaximum = status.comboMaximum;
         criticalChance = status.criticalChance;
         criticalDamage = status.criticalDamage;
-    }
-}
-
-[Serializable]
-public class ActorStatus : Status
-{
-    [JsonProperty]
-    public int speedAdditional;
-    [JsonProperty]
-    public int health;
-    [JsonProperty]
-    public int healthMaximumAdditional;
-    [JsonProperty]
-    public int attackAdditional;
-    [JsonProperty]
-    public int shieldAdditional;
-    [JsonIgnore]
-    public int armedShield;
-    [JsonProperty]
-    public int comboMaximumAdditional;
-    [JsonProperty]
-    public float comboChanceAdditional;
-    [JsonProperty]
-    public float healthStealthAdditional;
-    [JsonProperty]
-    public float dodgeAdditional;
-    [JsonProperty]
-    public float criticalChanceAdditional;
-    [JsonProperty]
-    public float criticalDamageAdditional;
-    [JsonIgnore]
-    public float skillCharging;
-    [JsonProperty]
-    public float skillChargeAdditional;
-    [JsonIgnore]
-    public Dictionary<BuffType, BuffData> buff = new Dictionary<BuffType, BuffData>();
-    public Action<string, float> UpdateStatus;
-
-    public int SpeedCalculated => speed + speedAdditional;
-    public int Health => health;
-    public int HealthMaximumCalculated => healthMaximum + healthMaximumAdditional;
-    public int AttackCalculated => attack + attackAdditional;
-    public int ShieldCalculated => shield + shieldAdditional;
-    public int ArmedShield => armedShield;
-    public int ComboMaximumCalculated => comboMaximum + comboMaximumAdditional;
-    public float ComboChanceCalculated => comboChance + comboChanceAdditional;
-    public float HealthStealthCalculated => healthStealth + healthStealthAdditional;
-    public float DodgeCalculated => dodge + dodgeAdditional;
-    public float CriticalChanceCalculated => criticalChance + criticalChanceAdditional;
-    public float CriticalDamageCalculated => criticalDamage + criticalDamageAdditional;
-    public float SkillChargeCalculated => skillCharge + skillChargeAdditional;
-
-    public void AddBuff(BuffData buffData)
-    {
-        buff[buffData.type] = buffData;
-        UpdateStatus(nameof(buff), buffData.duration);
-    }
-    
-    public void BuffProcess(BuffType buffType)
-    {
-        if (!BuffAlive(buffType))
-            return;
-        
-        if (BattleLogicLibrary.Instance.BuffLibrary.ContainsKey(buffType))
-        {
-            BattleLogicLibrary.Instance.BuffLibrary[buffType](buff[buffType], this);
-        }
-
-        buff[buffType].duration -= 1;
-        UpdateStatus(nameof(buff), buff[buffType].duration);
-    }
-
-    public bool BuffAlive(BuffType buffType)
-    {
-        return buff.ContainsKey(buffType) && buff[buffType].duration > 0;
-    }
-    
-    public void UpdateHealth(int variable)
-    {
-        health = Mathf.Clamp(health + variable, 0, HealthMaximumCalculated);
-        UpdateStatus(nameof(health), health);
-    }
-
-    public void UpdateArmedShield(int variable)
-    {
-        armedShield = Mathf.Max(armedShield + variable, 0);
-        UpdateStatus(nameof(armedShield), armedShield);
-    }
-
-    public void UpdateSkillCharging(bool clear = false)
-    {
-        skillCharging = Mathf.Clamp01(clear ? 0 : skillCharging + SkillChargeCalculated);
-        UpdateStatus(nameof(skillCharging), skillCharging);
-    }
-    
-    public ActorStatus() { }
-
-    public ActorStatus(Status status) : base(status)
-    {
-        health = HealthMaximumRoot;
-        armedShield = 0;
-        buff.Clear();
-        skillCharging = 0;
-    }
-
-    public ActorStatus(ActorStatus status) : base(status)
-    {
-        speedAdditional = status.speedAdditional;
-        health = status.health;
-        healthMaximumAdditional = status.healthMaximumAdditional;
-        attackAdditional = status.attackAdditional;
-        shieldAdditional = status.shieldAdditional;
-        armedShield = status.armedShield;
-        comboMaximumAdditional = status.comboMaximumAdditional;
-        comboChanceAdditional = status.comboChanceAdditional;
-        healthStealthAdditional = status.healthStealthAdditional;
-        dodgeAdditional = status.dodgeAdditional;
-        criticalChanceAdditional = status.criticalChanceAdditional;
-        criticalDamageAdditional = status.criticalDamageAdditional;
-        buff = status.buff;
-    }
-
-    public override string ToString()
-    {
-        return $"speed : {speed}(+{speedAdditional})\n" + 
-               $"health : {health}\n" +
-               $"health maximum : {healthMaximum}(+{healthMaximumAdditional})\n" +
-               $"attack : {attack}(+{attackAdditional})\n" +
-               $"shield : {shield}(+{shieldAdditional})\n" +
-               $"armed shield : {armedShield}\n" + 
-               $"combo maximum: {comboMaximum}(+{comboMaximumAdditional})\n" +
-               $"combo chance : {comboChance}(+{comboChanceAdditional})\n" +
-               $"health stealth : {healthStealth}(+{healthStealthAdditional})\n" +
-               $"dodge : {dodge}(+{dodgeAdditional})\n" + 
-               $"critical chance : {criticalChance}(+{criticalChanceAdditional})\n" +
-               $"critical damage : {criticalDamage}\n" + 
-               $"buff : {buff.Count}";
+        healthStealth = status.healthStealth;
+        skillCharge = status.skillCharge;
     }
 }
 
@@ -224,19 +92,25 @@ public struct UIDataSet
 }
 
 [Serializable]
-public class BuffData
+public class BuffInstance
 {
     public BuffType type;
     public int duration;
     public Actor source;
-    public int strength;
+    public Actor target;
+    public float strength;
+    public object extra;
 }
 
-[Serializable]
-public class Relic
+[Serializable, Flags]
+public enum ActorActionType
 {
-    public string name;
-    public ObserverMessage triggerMessage;
+    None = 0,
+    Attack = 1 << 0,
+    Skill = 1 << 1,
+    Relic = 1 << 2,
+    Weapon = 1 << 3,
+    All = ~0
 }
 
 [Serializable]
@@ -253,7 +127,7 @@ public class PlayerStatus
     {
         var cardLibrary = AddressableManager.Instance.MergeCardDataLibrary;
         
-        characters.Add(new CharacterStatus(characterInfo));
+        characters.Add(new CharacterStatus(null, characterInfo));
         
         // Init Item count.
         ItemList = new List<int>(3);
@@ -277,4 +151,5 @@ public static class AnimationHashKey
     public static readonly int Skill = Animator.StringToHash("Skill");
     public static readonly int Die = Animator.StringToHash("Die");
     public static readonly int Hurt = Animator.StringToHash("Hurt");
+    public static readonly int Dodge = Animator.StringToHash("Dodge");
 }

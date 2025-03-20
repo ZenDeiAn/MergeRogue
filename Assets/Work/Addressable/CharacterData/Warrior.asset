@@ -15,27 +15,16 @@ MonoBehaviour:
   _status:
     speed: 10
     healthMaximum: 120
+    dodge: 100
     attack: 12
     shield: 5
-    comboMaximum: 0
     comboChance: 0
-    healthStealth: 0.1
-    dodge: 0.1
-    criticalChance: 0.1
-    criticalDamage: 1.2
-  _attackData:
-    name: 
-    description: 
-    icon: {fileID: 0}
-    effectPrefab: {fileID: 0}
-    multiply: 1
-  _skillData:
-    name: 
-    description: 
-    icon: {fileID: 0}
-    effectPrefab: {fileID: 0}
+    comboMaximum: 0
+    criticalChance: 20
+    criticalDamage: 120
+    healthStealth: 0
+    skillCharge: 25
   animation: {fileID: 22100000, guid: ee82f379fe75b9b448bfac172556505f, type: 2}
-  InitialHandCardAmount: 0
   mesh: {fileID: 17106975043345648, guid: 45c3848418decf7449815f900620c8c2, type: 3}
   material: {fileID: 2100000, guid: 5ec5815f62a0d37488d95601e3f0129f, type: 2}
   avatar: {fileID: 9000000, guid: 45c3848418decf7449815f900620c8c2, type: 3}

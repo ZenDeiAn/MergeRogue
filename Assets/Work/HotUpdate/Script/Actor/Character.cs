@@ -23,7 +23,7 @@ public class Character : Actor, ICharacterDataInstance
     public override ActType ActingType { get; set; }
     public override ActorStatus Status { get => _avm.Data.PlayerStatus.characters[Index];
         set => _avm.Data.PlayerStatus.characters[Index] =
-            new CharacterStatus(_avm.Data.PlayerStatus.characters[Index].ID, value); }
+            new CharacterStatus(this, value); }
 
     public void Initialize(int index, CharacterStatus characterStatus)
     {

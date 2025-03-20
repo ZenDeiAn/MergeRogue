@@ -16991,7 +16991,7 @@ IL_005e_1:
 					int32_t L_19 = V_1;
 					String_t* L_20 = ___1_message;
 					NullCheck(L_17);
-					VirtualActionInvoker5< TraceEventCache_t45E8BA27697FA8ABEC2199A264D502A35E6D41DF*, String_t*, int32_t, int32_t, String_t* >::Invoke(15, L_17, L_18, _stringLiteral02E50F2B5959EA8333729D48896BBD7054EF0408, L_19, 0, L_20);
+					VirtualActionInvoker5< TraceEventCache_t45E8BA27697FA8ABEC2199A264D502A35E6D41DF*, String_t*, int32_t, int32_t, String_t* >::Invoke(13, L_17, L_18, _stringLiteral02E50F2B5959EA8333729D48896BBD7054EF0408, L_19, 0, L_20);
 					goto IL_006e_1;
 				}
 				catch(Il2CppExceptionWrapper& e)
@@ -17007,7 +17007,7 @@ IL_005f_1:
 				int32_t L_23 = V_1;
 				String_t* L_24 = ___1_message;
 				NullCheck(L_21);
-				VirtualActionInvoker5< TraceEventCache_t45E8BA27697FA8ABEC2199A264D502A35E6D41DF*, String_t*, int32_t, int32_t, String_t* >::Invoke(15, L_21, L_22, _stringLiteral02E50F2B5959EA8333729D48896BBD7054EF0408, L_23, 0, L_24);
+				VirtualActionInvoker5< TraceEventCache_t45E8BA27697FA8ABEC2199A264D502A35E6D41DF*, String_t*, int32_t, int32_t, String_t* >::Invoke(13, L_21, L_22, _stringLiteral02E50F2B5959EA8333729D48896BBD7054EF0408, L_23, 0, L_24);
 			}
 
 IL_006e_1:

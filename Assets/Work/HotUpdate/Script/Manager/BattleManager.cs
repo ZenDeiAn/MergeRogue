@@ -40,6 +40,58 @@ public class BattleManager : Processor<BattleManager, BattleState>
         }
     }
     
+    private IEnumerator BattleTurnLoopIE()
+    {
+        IEnumerable<Actor> allies = actors.Where(a => a.ActorType == ActorType.Ally);
+        IEnumerable<Actor> enemies = actors.Where(a => a.ActorType == ActorType.Enemy);
+        foreach (var actor in actors)
+        {
+            if (actor.Status.Health == 0)
+                continue;
+            
+            if (actor.Status.BuffAlive(BuffType.Stun))
+            {
+                actor.Status.BuffProcess(BuffType.Stun);
+                continue;
+            }
+            
+            // Skill logic
+            if (actor.Status.skillCharging.ToPercentage() >= 1)
+            {
+                actor.ActingType = ActType.Skill;
+                BattleLogicLibrary.Instance.ActorSkillLibrary[actor.ActorData.ID](actor, actors);
+                actor.Status.UpdateSkillCharging(true);
+            }
+            // Attack logic
+            else
+            {
+                actor.ActingType = ActType.Attack;
+                BattleLogicLibrary.Instance.ActorAttackLibrary[actor.ActorData.ID](actor, actors);
+            }
+            
+            // Waiting for acting logic end
+            var currentActor = actor;
+            yield return new WaitUntil(() => currentActor.ActingType == ActType.Idle);
+            // Check Result
+            if (allies.All(a => a.Status.Health == 0))
+            {
+                State = BattleState.GameOver;
+                yield break;
+            }
+
+            if (enemies.All(a => a.Status.Health == 0))
+            {
+                State = BattleState.Win;
+                yield break;
+            }
+        }
+
+        if (State == BattleState.TurnPerform)
+        {
+            State = BattleState.TurnCalculate;
+        }
+    }
+    
     void Activate_Intro()
     {
         var playerCharacters = _avm.Data.PlayerStatus.characters;
@@ -103,60 +155,20 @@ public class BattleManager : Processor<BattleManager, BattleState>
         actors.OrderByDescending(a => a.Status.SpeedCalculated);
         State = BattleState.TurnPerform;
     }
-    
-    private IEnumerator BattleTurnLoopIE()
-    {
-        IEnumerable<Actor> allies = actors.Where(a => a.ActorType == ActorType.Ally);
-        IEnumerable<Actor> enemies = actors.Where(a => a.ActorType == ActorType.Enemy);
-        foreach (var actor in actors)
-        {
-            if (actor.Status.Health == 0)
-                continue;
-            
-            if (actor.Status.BuffAlive(BuffType.Stun))
-            {
-                actor.Status.BuffProcess(BuffType.Stun);
-                continue;
-            }
-            
-            // Skill logic
-            if (actor.Status.skillCharging >= 1)
-            {
-                actor.ActingType = ActType.Skill;
-                BattleLogicLibrary.Instance.ActorSkillLibrary[actor.ActorData.ID](actor, actors);
-                actor.Status.UpdateSkillCharging(true);
-            }
-            // Attack logic
-            else
-            {
-                actor.ActingType = ActType.Attack;
-                BattleLogicLibrary.Instance.ActorAttackLibrary[actor.ActorData.ID](actor, actors);
-                actor.Status.UpdateSkillCharging();
-            }
-            
-            // Waiting for acting logic end
-            var currentActor = actor;
-            yield return new WaitUntil(() => currentActor.ActingType == ActType.Idle);
-            // Check Result
-            if (allies.All(a => a.Status.Health == 0))
-            {
-                State = BattleState.GameOver;
-                yield break;
-            }
-
-            if (enemies.All(a => a.Status.Health == 0))
-            {
-                State = BattleState.Win;
-                yield break;
-            }
-        }
-        
-        State = BattleState.TurnCalculate;
-    }
 
     void Activate_TurnPerform()
     {
         StartCoroutine(BattleTurnLoopIE());
+    }
+
+    void Activate_Win()
+    {
+        
+    }
+
+    void Activate_GameOver()
+    {
+        
     }
     
     protected override void Update()

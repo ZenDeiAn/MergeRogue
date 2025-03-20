@@ -19,11 +19,7 @@ MonoBehaviour:
     RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
-      values:
-      - 2
-      - 5
-      - 10
-      - 30
+      values: 02000000050000000a0000001e000000
     CardShape:
       Size: {x: 2, y: 2}
       Points:
@@ -36,11 +32,7 @@ MonoBehaviour:
     RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
-      values:
-      - 5
-      - 15
-      - 30
-      - 100
+      values: 050000000f0000001e00000064000000
     CardShape:
       Size: {x: 2, y: 2}
       Points:
@@ -53,11 +45,7 @@ MonoBehaviour:
     RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
-      values:
-      - 2
-      - 5
-      - 10
-      - 30
+      values: 02000000050000000a0000001e000000
     CardShape:
       Size: {x: 2, y: 2}
       Points:
@@ -70,11 +58,7 @@ MonoBehaviour:
     RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
-      values:
-      - 0.05
-      - 0.15
-      - 0.4
-      - 1
+      values: 050000000f0000002800000064000000
     CardShape:
       Size: {x: 2, y: 2}
       Points:
@@ -87,11 +71,7 @@ MonoBehaviour:
     RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
-      values:
-      - 0.05
-      - 0.1
-      - 0.2
-      - 0.4
+      values: 050000000a0000001400000028000000
     CardShape:
       Size: {x: 1, y: 4}
       Points:
@@ -105,11 +85,7 @@ MonoBehaviour:
     RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
-      values:
-      - 0.05
-      - 0.2
-      - 0.5
-      - 1
+      values: 05000000140000003200000064000000
     CardShape:
       Size: {x: 1, y: 3}
       Points:
@@ -122,11 +98,7 @@ MonoBehaviour:
     RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
-      values:
-      - 0.1
-      - 0.3
-      - 0.7
-      - 1.2
+      values: 0a0000001e0000004600000078000000
     CardShape:
       Size: {x: 4, y: 1}
       Points:
@@ -140,11 +112,7 @@ MonoBehaviour:
     RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
-      values:
-      - 0.1
-      - 0.25
-      - 0.5
-      - 1
+      values: 0a000000190000003200000064000000
     CardShape:
       Size: {x: 3, y: 1}
       Points:
@@ -157,11 +125,7 @@ MonoBehaviour:
     RandomWeight: 1
     Multiplies:
       keys: 00000000010000000200000003000000
-      values:
-      - 1
-      - 2
-      - 3
-      - 4
+      values: 01000000020000000300000004000000
     CardShape:
       Size: {x: 2, y: 2}
       Points:

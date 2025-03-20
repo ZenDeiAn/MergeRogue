@@ -15,7 +15,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		"System.dll",
 		"Unity.ResourceManager.dll",
 		"UnityEngine.CoreModule.dll",
-		"UnityEngine.UI.dll",
 		"mscorlib.dll",
 	};
 	// }}
@@ -28,9 +27,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// DelegateList<UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationHandle>
 	// DelegateList<float>
 	// FancyScrollView.FancyCell<object,object>
-	// FancyScrollView.FancyCell<object>
 	// FancyScrollView.FancyScrollView<object,object>
-	// FancyScrollView.FancyScrollView<object>
 	// HotUpdateManager.<>c__DisplayClass4_0<object>
 	// HotUpdateManager.<LoadAssetsByLabelIE>d__4<object>
 	// Newtonsoft.Json.Linq.JEnumerable<object>
@@ -57,11 +54,11 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Action<float>
 	// System.Action<int,int>
 	// System.Action<int>
+	// System.Action<object,float>
+	// System.Action<object,int,byte>
 	// System.Action<object,object,int>
 	// System.Action<object,object>
 	// System.Action<object>
-	// System.ArraySegment.Enumerator<ushort>
-	// System.ArraySegment<ushort>
 	// System.ByReference<ushort>
 	// System.Collections.Generic.ArraySortHelper<MapBlockProbability>
 	// System.Collections.Generic.ArraySortHelper<MonsterGroup>
@@ -241,15 +238,18 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Func<System.Collections.Generic.KeyValuePair<UnityEngine.Vector2Int,object>,object>
 	// System.Func<UnityEngine.Vector2Int,byte>
 	// System.Func<UnityEngine.Vector2Int,object>
+	// System.Func<byte>
 	// System.Func<int,byte>
 	// System.Func<int,object>
 	// System.Func<object,MapBlockProbability>
 	// System.Func<object,byte>
+	// System.Func<object,int>
 	// System.Func<object,object,object>
 	// System.Func<object,object>
 	// System.Func<object>
 	// System.Func<ushort,byte>
 	// System.IEquatable<MergeSocketData>
+	// System.Lazy<object>
 	// System.Linq.Buffer<MapBlockProbability>
 	// System.Linq.Buffer<object>
 	// System.Linq.Enumerable.<CastIterator>d__99<int>
@@ -259,10 +259,12 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Linq.Enumerable.Iterator<int>
 	// System.Linq.Enumerable.Iterator<object>
 	// System.Linq.Enumerable.WhereArrayIterator<System.Collections.Generic.KeyValuePair<UnityEngine.Vector2Int,object>>
+	// System.Linq.Enumerable.WhereArrayIterator<object>
 	// System.Linq.Enumerable.WhereEnumerableIterator<MapBlockProbability>
 	// System.Linq.Enumerable.WhereEnumerableIterator<System.Collections.Generic.KeyValuePair<UnityEngine.Vector2Int,object>>
 	// System.Linq.Enumerable.WhereEnumerableIterator<object>
 	// System.Linq.Enumerable.WhereListIterator<System.Collections.Generic.KeyValuePair<UnityEngine.Vector2Int,object>>
+	// System.Linq.Enumerable.WhereListIterator<object>
 	// System.Linq.Enumerable.WhereSelectArrayIterator<System.Collections.Generic.KeyValuePair<UnityEngine.Vector2Int,object>,object>
 	// System.Linq.Enumerable.WhereSelectArrayIterator<UnityEngine.Vector2Int,object>
 	// System.Linq.Enumerable.WhereSelectArrayIterator<int,object>
@@ -277,6 +279,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Linq.Enumerable.WhereSelectListIterator<object,MapBlockProbability>
 	// System.Linq.EnumerableSorter<MapBlockProbability,int>
 	// System.Linq.EnumerableSorter<MapBlockProbability>
+	// System.Linq.EnumerableSorter<object,int>
+	// System.Linq.EnumerableSorter<object>
 	// System.Linq.GroupedEnumerable<MapBlockProbability,int,MapBlockProbability>
 	// System.Linq.IdentityFunction.<>c<MapBlockProbability>
 	// System.Linq.IdentityFunction<MapBlockProbability>
@@ -285,8 +289,11 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Linq.Lookup.Grouping<int,MapBlockProbability>
 	// System.Linq.Lookup<int,MapBlockProbability>
 	// System.Linq.OrderedEnumerable.<GetEnumerator>d__1<MapBlockProbability>
+	// System.Linq.OrderedEnumerable.<GetEnumerator>d__1<object>
 	// System.Linq.OrderedEnumerable<MapBlockProbability,int>
 	// System.Linq.OrderedEnumerable<MapBlockProbability>
+	// System.Linq.OrderedEnumerable<object,int>
+	// System.Linq.OrderedEnumerable<object>
 	// System.Predicate<MapBlockProbability>
 	// System.Predicate<MonsterGroup>
 	// System.Predicate<MonsterProbabilityData>
@@ -295,21 +302,16 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Predicate<float>
 	// System.Predicate<int>
 	// System.Predicate<object>
-	// System.ReadOnlySpan.Enumerator<ushort>
 	// System.ReadOnlySpan<ushort>
 	// System.Runtime.CompilerServices.ConfiguredTaskAwaitable.ConfiguredTaskAwaiter<object>
 	// System.Runtime.CompilerServices.ConfiguredTaskAwaitable<object>
 	// System.Runtime.CompilerServices.TaskAwaiter<object>
-	// System.Span.Enumerator<ushort>
 	// System.Span<ushort>
 	// System.Threading.Tasks.ContinuationTaskFromResultTask<object>
 	// System.Threading.Tasks.Task<object>
 	// System.Threading.Tasks.TaskCompletionSource<object>
 	// System.Threading.Tasks.TaskFactory.<>c__DisplayClass35_0<object>
 	// System.Threading.Tasks.TaskFactory<object>
-	// UnityEngine.EventSystems.ExecuteEvents.EventFunction<object>
-	// UnityEngine.Pool.CollectionPool.<>c<object,object>
-	// UnityEngine.Pool.CollectionPool<object,object>
 	// UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationBase.<>c__DisplayClass60_0<object>
 	// UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationBase.<>c__DisplayClass61_0<object>
 	// UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationBase<object>
@@ -335,14 +337,18 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// bool System.Enum.TryParse<int>(string,bool,int&)
 		// bool System.Enum.TryParse<int>(string,int&)
 		// int System.HashCode.Combine<int,object,int>(int,object,int)
+		// object System.Linq.Enumerable.Aggregate<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,object,object>)
+		// bool System.Linq.Enumerable.All<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
 		// System.Collections.Generic.IEnumerable<int> System.Linq.Enumerable.Cast<int>(System.Collections.IEnumerable)
 		// System.Collections.Generic.IEnumerable<int> System.Linq.Enumerable.CastIterator<int>(System.Collections.IEnumerable)
 		// bool System.Linq.Enumerable.Contains<int>(System.Collections.Generic.IEnumerable<int>,int)
 		// bool System.Linq.Enumerable.Contains<int>(System.Collections.Generic.IEnumerable<int>,int,System.Collections.Generic.IEqualityComparer<int>)
 		// int System.Linq.Enumerable.Count<object>(System.Collections.Generic.IEnumerable<object>)
 		// MapBlockProbability System.Linq.Enumerable.First<MapBlockProbability>(System.Collections.Generic.IEnumerable<MapBlockProbability>)
+		// object System.Linq.Enumerable.FirstOrDefault<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
 		// System.Collections.Generic.IEnumerable<System.Linq.IGrouping<int,MapBlockProbability>> System.Linq.Enumerable.GroupBy<MapBlockProbability,int>(System.Collections.Generic.IEnumerable<MapBlockProbability>,System.Func<MapBlockProbability,int>)
 		// System.Linq.IOrderedEnumerable<MapBlockProbability> System.Linq.Enumerable.OrderBy<MapBlockProbability,int>(System.Collections.Generic.IEnumerable<MapBlockProbability>,System.Func<MapBlockProbability,int>)
+		// System.Linq.IOrderedEnumerable<object> System.Linq.Enumerable.OrderByDescending<object,int>(System.Collections.Generic.IEnumerable<object>,System.Func<object,int>)
 		// System.Collections.Generic.IEnumerable<MapBlockProbability> System.Linq.Enumerable.Select<object,MapBlockProbability>(System.Collections.Generic.IEnumerable<object>,System.Func<object,MapBlockProbability>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Select<System.Collections.Generic.KeyValuePair<UnityEngine.Vector2Int,object>,object>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<UnityEngine.Vector2Int,object>>,System.Func<System.Collections.Generic.KeyValuePair<UnityEngine.Vector2Int,object>,object>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Select<UnityEngine.Vector2Int,object>(System.Collections.Generic.IEnumerable<UnityEngine.Vector2Int>,System.Func<UnityEngine.Vector2Int,object>)
@@ -353,6 +359,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Collections.Generic.List<int> System.Linq.Enumerable.ToList<int>(System.Collections.Generic.IEnumerable<int>)
 		// System.Collections.Generic.List<object> System.Linq.Enumerable.ToList<object>(System.Collections.Generic.IEnumerable<object>)
 		// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<UnityEngine.Vector2Int,object>> System.Linq.Enumerable.Where<System.Collections.Generic.KeyValuePair<UnityEngine.Vector2Int,object>>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<UnityEngine.Vector2Int,object>>,System.Func<System.Collections.Generic.KeyValuePair<UnityEngine.Vector2Int,object>,bool>)
+		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Where<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
 		// System.Collections.Generic.IEnumerable<MapBlockProbability> System.Linq.Enumerable.Iterator<object>.Select<MapBlockProbability>(System.Func<object,MapBlockProbability>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Iterator<System.Collections.Generic.KeyValuePair<UnityEngine.Vector2Int,object>>.Select<object>(System.Func<System.Collections.Generic.KeyValuePair<UnityEngine.Vector2Int,object>,object>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Iterator<UnityEngine.Vector2Int>.Select<object>(System.Func<UnityEngine.Vector2Int,object>)
@@ -361,11 +368,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void* System.Runtime.CompilerServices.Unsafe.AsPointer<object>(object&)
 		// object UnityEngine.Component.GetComponent<object>()
 		// bool UnityEngine.Component.TryGetComponent<object>(object&)
-		// bool UnityEngine.EventSystems.ExecuteEvents.Execute<object>(UnityEngine.GameObject,UnityEngine.EventSystems.BaseEventData,UnityEngine.EventSystems.ExecuteEvents.EventFunction<object>)
-		// System.Void UnityEngine.EventSystems.ExecuteEvents.GetEventList<object>(UnityEngine.GameObject,System.Collections.Generic.IList<UnityEngine.EventSystems.IEventSystemHandler>)
-		// bool UnityEngine.EventSystems.ExecuteEvents.ShouldSendToComponent<object>(UnityEngine.Component)
 		// object UnityEngine.GameObject.GetComponent<object>()
-		// System.Void UnityEngine.GameObject.GetComponents<object>(System.Collections.Generic.List<object>)
 		// bool UnityEngine.GameObject.TryGetComponent<object>(object&)
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Transform)
 		// object UnityEngine.Object.Instantiate<object>(object,UnityEngine.Transform,bool)

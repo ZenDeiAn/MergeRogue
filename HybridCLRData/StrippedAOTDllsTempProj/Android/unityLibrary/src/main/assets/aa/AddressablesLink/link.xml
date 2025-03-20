@@ -78,6 +78,7 @@
     <type fullname="AdventureManager" preserve="all" />
     <type fullname="AnimationEventFunction" preserve="all" />
     <type fullname="BattleManager" preserve="all" />
+    <type fullname="CanvasActor" preserve="all" />
     <type fullname="Character" preserve="all" />
     <type fullname="CharacterInfo" preserve="all" />
     <type fullname="CharacterPreview" preserve="all" />
@@ -99,12 +100,8 @@
     <type fullname="Monster" preserve="all" />
     <type fullname="MonsterInfo" preserve="all" />
     <type fullname="MonsterProbability" preserve="all" />
-    <type fullname="TEST" preserve="all" />
     <type fullname="TitleManager" preserve="all" />
     <type fullname="UILibrary" preserve="all" />
-    <type fullname="VirtualCameraRotateController" preserve="all" />
-    <type fullname="ActorAttackData" preserve="nothing" serialized="true" />
-    <type fullname="ActorSkillData" preserve="nothing" serialized="true" />
     <type fullname="CharacterRank" preserve="nothing" serialized="true" />
     <type fullname="MapBlockEventType" preserve="nothing" serialized="true" />
     <type fullname="MapBlockProbability" preserve="nothing" serialized="true" />
@@ -154,6 +151,7 @@
     <type fullname="RaindowStudio.Utility.EnumPairList`2[MergeLevel,System.Single]" preserve="nothing" serialized="true" />
     <type fullname="RaindowStudio.Utility.EnumPairList`2[MergeLevel,UnityEngine.Sprite]" preserve="nothing" serialized="true" />
     <type fullname="RaindowStudio.Language.LanguageType" preserve="nothing" serialized="true" />
+    <type fullname="RaindowStudio.Utility.EnumPairList`2[BattleState,UnityEngine.Playables.PlayableDirector]" preserve="nothing" serialized="true" />
     <type fullname="RaindowStudio.Utility.EnumPairList`2[WeaponSocketType,UnityEngine.MeshFilter]" preserve="nothing" serialized="true" />
     <type fullname="RaindowStudio.Language.LanguageComponentObjects" preserve="nothing" serialized="true" />
   </assembly>
@@ -227,6 +225,7 @@
   <assembly fullname="UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.AnimationClip" preserve="all" />
     <type fullname="UnityEngine.Animator" preserve="all" />
+    <type fullname="UnityEngine.AnimatorOverrideController" preserve="all" />
     <type fullname="UnityEngine.Avatar" preserve="all" />
     <type fullname="UnityEngine.RuntimeAnimatorController" preserve="all" />
   </assembly>
@@ -273,7 +272,6 @@
   </assembly>
   <assembly fullname="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.EventSystems.EventSystem" preserve="all" />
-    <type fullname="UnityEngine.EventSystems.EventTrigger" preserve="all" />
     <type fullname="UnityEngine.EventSystems.StandaloneInputModule" preserve="all" />
     <type fullname="UnityEngine.UI.Button" preserve="all" />
     <type fullname="UnityEngine.UI.CanvasScaler" preserve="all" />

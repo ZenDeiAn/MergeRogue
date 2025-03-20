@@ -12,7 +12,7 @@ public class CanvasActor : MonoBehaviour
 
     public void UpdateCanvas()
     {
-        sld_skill.value = actor.Status.skillCharging / 1.0f;
+        sld_skill.value = actor.Status.skillCharging.ToPercentage() / 1.0f;
         sld_health.value = actor.Status.Health / (float)actor.Status.HealthMaximumCalculated;
     }
     

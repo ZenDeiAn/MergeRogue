@@ -41,14 +41,13 @@ IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_Febucci_Attributes_Runtime_CodeGenMo
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_Febucci_TextAnimator_Demo_Runtime_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_Febucci_TextAnimator_Runtime_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_Febucci_TextAnimator_TMP_Runtime_CodeGenModule;
+IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_HybridCLR_Runtime_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_KinoBloom_Runtime_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_LeTai_TranslucentImage_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_LeTai_TranslucentImage_Demo_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_LeTai_TranslucentImage_UniversalRP_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_LeTai_TrueShadow_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_LeTai_TrueShadow_Demo_CodeGenModule;
-IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_MK_Toon_CodeGenModule;
-IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_MK_Toon_Examples_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_Main_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_Mono_Security_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_Newtonsoft_Json_CodeGenModule;
@@ -136,7 +135,7 @@ IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g___Generated_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_iStep_CodeGenModule;
 IL2CPP_EXTERN_C_CONST Il2CppCodeGenModule g_mscorlib_CodeGenModule;
 IL2CPP_EXTERN_C const Il2CppCodeGenModule* g_CodeGenModules[];
-const Il2CppCodeGenModule* g_CodeGenModules[115] = 
+const Il2CppCodeGenModule* g_CodeGenModules[114] = 
 {
 	(&g_AssemblyU2DCSharp_CodeGenModule),
 	(&g_Boxophobic_PolyverseSkies_Runtime_CodeGenModule),
@@ -159,14 +158,13 @@ const Il2CppCodeGenModule* g_CodeGenModules[115] =
 	(&g_Febucci_TextAnimator_Demo_Runtime_CodeGenModule),
 	(&g_Febucci_TextAnimator_Runtime_CodeGenModule),
 	(&g_Febucci_TextAnimator_TMP_Runtime_CodeGenModule),
+	(&g_HybridCLR_Runtime_CodeGenModule),
 	(&g_KinoBloom_Runtime_CodeGenModule),
 	(&g_LeTai_TranslucentImage_CodeGenModule),
 	(&g_LeTai_TranslucentImage_Demo_CodeGenModule),
 	(&g_LeTai_TranslucentImage_UniversalRP_CodeGenModule),
 	(&g_LeTai_TrueShadow_CodeGenModule),
 	(&g_LeTai_TrueShadow_Demo_CodeGenModule),
-	(&g_MK_Toon_CodeGenModule),
-	(&g_MK_Toon_Examples_CodeGenModule),
 	(&g_Main_CodeGenModule),
 	(&g_Mono_Security_CodeGenModule),
 	(&g_Newtonsoft_Json_CodeGenModule),
@@ -259,20 +257,20 @@ const Il2CppCodeRegistration g_CodeRegistration =
 {
 	16,
 	g_ReversePInvokeWrapperPointers,
-	95659,
+	95006,
 	g_Il2CppGenericMethodPointers,
 	g_Il2CppGenericAdjustorThunks,
-	22952,
+	22661,
 	g_Il2CppInvokerPointers,
-	3503,
+	3507,
 	g_UnresolvedVirtualMethodPointers,
 	g_UnresolvedInstanceMethodPointers,
 	g_UnresolvedStaticMethodPointers,
-	941,
+	932,
 	g_Il2CppInteropData,
 	0,
 	NULL,
-	115,
+	114,
 	g_CodeGenModules,
 };
 IL2CPP_EXTERN_C_CONST Il2CppMetadataRegistration g_MetadataRegistration;

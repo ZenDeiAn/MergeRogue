@@ -16,6 +16,8 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
     public Dictionary<MonsterType, List<MonsterProbabilityData>> MonsterProbabilities { get; private set; }
     public Dictionary<MergeCardType, List<string>> MergeCardLibraryByType { get; private set; }
     public Dictionary<string, MergeCardData> MergeCardDataLibrary { get; private set; }
+    public Dictionary<string, RelicData> RelicLibrary { get; private set; }
+    public Dictionary<string, BuffData> BuffLibrary { get; private set; }
     
     public CharacterInfo CurrentCharacter => Instance.Character[GameManager.Instance.CharacterID];
 
@@ -104,6 +106,42 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
 
         totalProgress += totalProgress == progress + 1 ? 1 : 0;
         patchProgress?.Invoke(++progress / (float)totalProgress);
+
+        // Download Relic Resources.
+        RelicLibrary.Clear();
+        yield return hum.LoadAssetsByLabel<RelicLibrary>("Relic",
+            a =>
+            {
+                foreach (var relic in a.Relics)
+                {
+                    if (!RelicLibrary.ContainsKey(relic.ID))
+                    {
+                        RelicLibrary.Add(relic.ID, relic);
+                    }
+                }
+            });
+
+        totalProgress += totalProgress == progress + 1 ? 1 : 0;
+        patchProgress?.Invoke(++progress / (float)totalProgress);
+        
+        // Download Buff Resources.
+        BuffLibrary.Clear();
+        yield return hum.LoadAssetsByLabel<BuffLibrary>("Buff",
+            a =>
+            {
+                foreach (var buff in a.Buffs)
+                {
+                    if (!BuffLibrary.ContainsKey(buff.ID))
+                    {
+                        BuffLibrary.Add(buff.ID, buff);
+                    }
+                }
+            });
+
+        totalProgress += totalProgress == progress + 1 ? 1 : 0;
+        patchProgress?.Invoke(++progress / (float)totalProgress);
+        
+        BattleLogicLibrary.Instance.Initialize();
         
         patchCompleted?.Invoke();
         
@@ -125,7 +163,7 @@ public class AddressableManager : SingletonUnityEternal<AddressableManager>
         MonsterProbabilities = new Dictionary<MonsterType, List<MonsterProbabilityData>>();
         MergeCardDataLibrary = new Dictionary<string, MergeCardData>();
         MergeCardLibraryByType = new Dictionary<MergeCardType, List<string>>();
-        
-        BattleLogicLibrary.Instance.Initialize();
+        RelicLibrary = new Dictionary<string, RelicData>();
+        BuffLibrary = new Dictionary<string, BuffData>();
     }
 }

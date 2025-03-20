@@ -20,6 +20,7 @@ public enum CardRank
 public enum BuffType
 {
     None,
+    // Normal Buff =================================
     Stun,
     _SplitForAnimation,
     Freeze,     // Reduce speed.
@@ -27,6 +28,8 @@ public enum BuffType
     Exhaust,    // Reduce damage.
     DoT,        // Poison, Burn and so on...
     Regen,      // Recover hp continuously.
+    // Special Buff ================================
+    BlackCatHead
 }
 
 /*[Serializable]

@@ -20,7 +20,7 @@ public class MergeCardData
     public MergeCardType Type;
     public Sprite Icon;
     public float RandomWeight = 1;
-    public EnumPairList<MergeLevel, float> Multiplies;
+    public EnumPairList<MergeLevel, int> Multiplies;
     public MergeCardShapeData CardShape;
 }
 

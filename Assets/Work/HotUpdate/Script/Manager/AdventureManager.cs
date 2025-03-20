@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 using UnityEngine.Serialization;
 using File = System.IO.File;
 
-public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameStatusManager
+public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameStatusManager, IObserverSubscriber
 {
     public AdventureManagerData Data = new AdventureManagerData();
     public MapBlockData CurrentMapData => Data.MapData[Data.Position];
@@ -20,36 +20,40 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
     private AddressableManager _adm;
 
     #region Observer Events
-    private Action<object> MergeCardToGridMessage => o =>
+
+    public List<ObserverSubscribeData> Subscriptions { get; } = new List<ObserverSubscribeData>()
     {
-        MergeSocketData data = (MergeSocketData)o;
-        foreach (var character in Data.PlayerStatus.characters)
+        new ObserverSubscribeData(ObserverMessage.MergeCardToGrid, o =>
         {
-            BattleLogicLibrary.Instance.MergeCardLibrary[data.CardID](character, data.Level, false);
-        }
-        Data.MergeGridSockets[data.StartIndex] = data;
+            MergeSocketData data = (MergeSocketData)o;
+            foreach (var character in Instance.Data.PlayerStatus.characters)
+            {
+                BattleLogicLibrary.Instance.MergeCardLibrary[data.CardID](character, data.Level, false);
+            }
+            Instance.Data.MergeGridSockets[data.StartIndex] = data;
+        }),
+        new ObserverSubscribeData(ObserverMessage.MergeCardLevelUp, o =>
+        {
+            MergeSocketData data = (MergeSocketData)o;
+            foreach (var character in Instance.Data.PlayerStatus.characters)
+            {
+                BattleLogicLibrary.Instance.MergeCardLibrary[data.CardID](character, data.Level - 1, true);
+                BattleLogicLibrary.Instance.MergeCardLibrary[data.CardID](character, data.Level, false);
+            }
+            Instance.Data.MergeGridSockets[data.StartIndex] = data;
+        }),
+        new ObserverSubscribeData(ObserverMessage.MergeCardRemove, o =>
+        {
+            var data = Instance.Data.MergeGridSockets[(int)o];
+            foreach (var character in Instance.Data.PlayerStatus.characters)
+            {
+                BattleLogicLibrary.Instance.MergeCardLibrary[data.CardID](character, data.Level, true);
+            }
+            Instance.Data.MergeGridSockets.Remove(data.StartIndex);
+        }),
+        
     };
 
-    private Action<object> MergeCardLevelUpMessage => o =>
-    {
-        MergeSocketData data = (MergeSocketData)o;
-        foreach (var character in Data.PlayerStatus.characters)
-        {
-            BattleLogicLibrary.Instance.MergeCardLibrary[data.CardID](character, data.Level - 1, true);
-            BattleLogicLibrary.Instance.MergeCardLibrary[data.CardID](character, data.Level, false);
-        }
-        Data.MergeGridSockets[data.StartIndex] = data;
-    };
-
-    private Action<object> MergeCardRemoveMessage => o =>
-    {
-        var data = Data.MergeGridSockets[(int)o];
-        foreach (var character in Data.PlayerStatus.characters)
-        {
-            BattleLogicLibrary.Instance.MergeCardLibrary[data.CardID](character, data.Level, true);
-        }
-        Data.MergeGridSockets.Remove(data.StartIndex);
-    };
     #endregion
     
     public void SaveData()
@@ -82,6 +86,16 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
         // Random map.
         GenerateRandomAdventureMap();
         Data.PlayerStatus.Initialize(_adm.CurrentCharacter, _adm.MergeCardLibraryByType[MergeCardType.Common]);
+    }
+
+    public void GenerateRandomReward_Battle()
+    {
+        
+    }
+
+    public void GenerateRandomReward_Event()
+    {
+        
     }
     
     private void GenerateRandomAdventureMap(int randomSeed = -1)
@@ -208,16 +222,12 @@ public class AdventureManager : SingletonUnityEternal<AdventureManager>, IGameSt
 
         _adm = AddressableManager.Instance;
         
-        Observer.Subscribe(ObserverMessage.MergeCardToGrid, MergeCardToGridMessage);
-        Observer.Subscribe(ObserverMessage.MergeCardRemove, MergeCardRemoveMessage);
-        Observer.Subscribe(ObserverMessage.MergeCardLevelUp, MergeCardLevelUpMessage);
+        this.SubscribeAll();
     }
 
     private void OnDestroy()
     {
-        Observer.Unsubscribe(ObserverMessage.MergeCardToGrid, MergeCardToGridMessage);
-        Observer.Unsubscribe(ObserverMessage.MergeCardRemove, MergeCardRemoveMessage);
-        Observer.Unsubscribe(ObserverMessage.MergeCardLevelUp, MergeCardLevelUpMessage);
+        this.UnsubscribeAll();
     }
 }
 
@@ -225,9 +235,9 @@ public class AdventureManagerData
 {
     public int RandomSeed;
     public Vector2Int Position;
-    public Dictionary<Vector2Int, MapBlockData> MapData = new Dictionary<Vector2Int, MapBlockData>();
-    public Dictionary<int, MergeSocketData> MergeGridSockets = new Dictionary<int, MergeSocketData>();
-    public PlayerStatus PlayerStatus = new PlayerStatus();  
+    public readonly Dictionary<Vector2Int, MapBlockData> MapData = new Dictionary<Vector2Int, MapBlockData>();
+    public readonly Dictionary<int, MergeSocketData> MergeGridSockets = new Dictionary<int, MergeSocketData>();
+    public readonly PlayerStatus PlayerStatus = new PlayerStatus();  
 }
 
 
@@ -235,18 +245,32 @@ public class CharacterStatus : ActorStatus
 {
     public readonly string ID;
 
-    public CharacterStatus(CharacterInfo characterInfo) : base(characterInfo.Status)
+    public CharacterStatus(Actor actor, CharacterInfo characterInfo) : base(actor, characterInfo.Status)
     {
         ID = characterInfo.ID;
     }
 
-    public CharacterStatus(string id, ActorStatus status) : base(status)
+    public CharacterStatus(Actor actor, ActorStatus status) : base(actor, status)
     {
-        ID = id;
+        ID = actor.ActorData.ID;
     }
 
     public override string ToString()
     {
         return $"{ID}\n{base.ToString()}";
+    }
+}
+
+public struct BattleRewardData
+{
+    public int gold;
+    public string relicID;
+    public List<string> cardIDs;
+
+    public BattleRewardData(int gold, string relicID, List<string> cardIDs)
+    {
+        this.gold = gold;
+        this.cardIDs = cardIDs;
+        this.relicID = relicID;
     }
 }

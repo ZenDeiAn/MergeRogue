@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <linker>
   <assembly fullname="Cinemachine">
-    <type fullname="Cinemachine.AxisState" preserve="all" />
-    <type fullname="Cinemachine.CinemachinePOV" preserve="all" />
+    <type fullname="Cinemachine.CinemachineTransposer" preserve="all" />
     <type fullname="Cinemachine.CinemachineVirtualCamera" preserve="all" />
   </assembly>
   <assembly fullname="DOTween">
@@ -27,11 +26,9 @@
     <type fullname="EPOOutline.Outlinable" preserve="all" />
   </assembly>
   <assembly fullname="FancyScrollView">
-    <type fullname="FancyScrollView.FancyCell`1" preserve="all" />
+    <type fullname="EasingCore.Ease" preserve="all" />
     <type fullname="FancyScrollView.FancyCell`2" preserve="all" />
-    <type fullname="FancyScrollView.FancyScrollView`1" preserve="all" />
     <type fullname="FancyScrollView.FancyScrollView`2" preserve="all" />
-    <type fullname="FancyScrollView.NullContext" preserve="all" />
     <type fullname="FancyScrollView.Scroller" preserve="all" />
   </assembly>
   <assembly fullname="Main">
@@ -54,10 +51,12 @@
     <type fullname="RaindowStudio.DesignPattern.ObjectPool" preserve="all" />
     <type fullname="RaindowStudio.DesignPattern.PoolObject" preserve="all" />
     <type fullname="RaindowStudio.DesignPattern.ProcessorEternal`2" preserve="all" />
+    <type fullname="RaindowStudio.DesignPattern.ProcessorStateTriggerType" preserve="all" />
     <type fullname="RaindowStudio.DesignPattern.Processor`1" preserve="all" />
     <type fullname="RaindowStudio.DesignPattern.Processor`2" preserve="all" />
     <type fullname="RaindowStudio.DesignPattern.SingletonUnityEternal`1" preserve="all" />
     <type fullname="RaindowStudio.DesignPattern.SingletonUnity`1" preserve="all" />
+    <type fullname="RaindowStudio.DesignPattern.Singleton`1" preserve="all" />
     <type fullname="RaindowStudio.Language.LanguageDataObject" preserve="all" />
     <type fullname="RaindowStudio.Language.LanguageManager" preserve="all" />
     <type fullname="RaindowStudio.Language.LanguageTextData" preserve="all" />
@@ -379,6 +378,7 @@
     <type fullname="UnityEngine.SceneManagement.SceneManager" preserve="all" />
     <type fullname="UnityEngine.SceneManagement.SceneManagerAPIInternal" preserve="all" />
     <type fullname="UnityEngine.SceneManagement.SceneUtility" preserve="all" />
+    <type fullname="UnityEngine.Screen" preserve="all" />
     <type fullname="UnityEngine.ScriptableObject" preserve="all" />
     <type fullname="UnityEngine.Scripting.GarbageCollector" preserve="all" />
     <type fullname="UnityEngine.ScriptingRuntime" preserve="all" />
@@ -424,6 +424,7 @@
     <type fullname="UnityEngine.WSA.Launcher" preserve="all" />
     <type fullname="UnityEngine.WSA.Tile" preserve="all" />
     <type fullname="UnityEngine.WSA.Toast" preserve="all" />
+    <type fullname="UnityEngine.WaitUntil" preserve="all" />
     <type fullname="UnityEngine.Windows.CrashReporting" preserve="all" />
     <type fullname="UnityEngine.Windows.Crypto" preserve="all" />
     <type fullname="UnityEngine.Windows.Directory" preserve="all" />
@@ -492,7 +493,6 @@
     <type fullname="UnityEngine.Internal.InputUnsafeUtility" preserve="all" />
     <type fullname="UnityEngine.LocationService" preserve="all" />
     <type fullname="UnityEngine.Touch" preserve="all" />
-    <type fullname="UnityEngine.TouchPhase" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.InputModule">
     <type fullname="UnityEngineInternal.Input.NativeInputSystem" preserve="all" />
@@ -652,17 +652,15 @@
     <type fullname="UnityEngine.Tilemaps.TilemapRenderer" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.UI">
-    <type fullname="UnityEngine.EventSystems.BaseEventData" preserve="all" />
-    <type fullname="UnityEngine.EventSystems.EventSystem" preserve="all" />
-    <type fullname="UnityEngine.EventSystems.ExecuteEvents" preserve="all" />
-    <type fullname="UnityEngine.EventSystems.ExecuteEvents/EventFunction`1" preserve="all" />
     <type fullname="UnityEngine.EventSystems.IDragHandler" preserve="all" />
     <type fullname="UnityEngine.EventSystems.IEventSystemHandler" preserve="all" />
     <type fullname="UnityEngine.EventSystems.IPointerDownHandler" preserve="all" />
     <type fullname="UnityEngine.EventSystems.IPointerUpHandler" preserve="all" />
     <type fullname="UnityEngine.EventSystems.PointerEventData" preserve="all" />
+    <type fullname="UnityEngine.UI.Button" preserve="all" />
     <type fullname="UnityEngine.UI.Graphic" preserve="all" />
     <type fullname="UnityEngine.UI.Image" preserve="all" />
+    <type fullname="UnityEngine.UI.Selectable" preserve="all" />
     <type fullname="UnityEngine.UI.Slider" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.UIElementsModule">
@@ -793,6 +791,7 @@
     <type fullname="System.Collections.Generic.Dictionary`2/KeyCollection" preserve="all" />
     <type fullname="System.Collections.Generic.Dictionary`2/KeyCollection/Enumerator" preserve="all" />
     <type fullname="System.Collections.Generic.Dictionary`2/ValueCollection" preserve="all" />
+    <type fullname="System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator" preserve="all" />
     <type fullname="System.Collections.Generic.ICollection`1" preserve="all" />
     <type fullname="System.Collections.Generic.IEnumerable`1" preserve="all" />
     <type fullname="System.Collections.Generic.IEnumerator`1" preserve="all" />
@@ -807,7 +806,9 @@
     <type fullname="System.Diagnostics.DebuggableAttribute/DebuggingModes" preserve="all" />
     <type fullname="System.Diagnostics.DebuggerHiddenAttribute" preserve="all" />
     <type fullname="System.Enum" preserve="all" />
+    <type fullname="System.Func`1" preserve="all" />
     <type fullname="System.Func`2" preserve="all" />
+    <type fullname="System.Func`3" preserve="all" />
     <type fullname="System.Globalization.CultureInfo" preserve="all" />
     <type fullname="System.Guid" preserve="all" />
     <type fullname="System.HashCode" preserve="all" />

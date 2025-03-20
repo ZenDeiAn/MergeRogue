@@ -196,6 +196,20 @@ MonoBehaviour:
     - Assembly
     - Aot
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4dd12d167082a21488f7c31c15487a89
+    m_Address: Assets/Work/Addressable/RelicLibrary.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Data
+    - Relic
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9e9351fb43a5354b8a6d92cb9aadfd9
+    m_Address: Assets/Work/Addressable/BuffLibrary.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Data
+    - Buff
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d41d78f70b6c27546891ece3b0e453c3, type: 2}
   m_SchemaSet:
